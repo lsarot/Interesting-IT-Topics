@@ -1,0 +1,346 @@
+﻿
+
+PROMISES (DEL CORREO)
+
+
+
+
+function promesa1(prop1, prop2, delay = 1500) {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve(`p1: ${prop1} ${prop2}`), delay);
+    });
+}
+
+function promesa2(prop1, prop2, delay = 2000) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => reject(`p2: !${prop1} ${prop2}`), delay);
+    });
+}
+
+function promesaRetardada(prop1, prop2, delay = 2500) {
+    return new Promise((resolve, reject) => setTimeout(() => resolve(`p3: ${prop1} ${prop2} (^_^ con retraso...)`), delay));
+}
+
+function ejemploPromesaSuccess() {
+    promesa1('hola', 'mundo').then((response) => console.log('promesa resuelta', response));
+}
+
+function ejemploPromesaFail() {
+    promesa2('hola', 'mundo')
+        .then((response) => console.log('promesa resuelta', response))
+        .catch((error) => console.log('promesa rechazada', error));
+}
+
+function ejemploPromesaSuccessAndFail() {
+    const success = (response) => console.log('promesa resuelta', response),
+        fail = (error) => console.log('promesa rechazada', error),
+        args = ['hola', 'mundo'];
+
+    promesa1(...args).then(success, fail);
+    promesa2(...args).then(success, fail);
+}
+
+
+function ejemploPromesaAllSuccess() {
+    const success = (response) => console.log('todas las promesas resueltas', response),
+        args = ['hola', 'mundo'];
+    Promise.all([promesa1(...args), promesaRetardada(...args)]).then(success);
+}
+
+function ejemploPromesaAllFail() {
+    const success = (response) => console.log('todas las promesas resueltas', response),
+        fail = (error) => console.log('alguna de las promesas ha sido rechazada', error),
+        args = ['hola', 'mundo'];
+    Promise.all([promesa1(...args), promesa2(...args)]).then(success, fail);
+}
+
+function ejemploPromesaRaceSuccess() {
+    const success = (response) => console.log('alguien ha llegado primero!!', response),
+        args = ['hola', 'mundo'],
+        prom1 = promesa1(...args),
+        prom2 = promesaRetardada(...args);
+    Promise.race([prom1, prom2]).then(success);
+}
+
+function ejemploPromesaRaceFail() {
+    const success = (response) => console.log('alguien ha llegado primero!!', response),
+        fail = (error) => console.log('alguien ha fallado primero', error),
+        args = ['hola', 'mundo'],
+        prom1 = promesa1(...[...args, 1000]),
+        prom2 = promesa2(...[...args, 2000]),
+        prom3 = promesaRetardada(...[...args, 3000]);
+    Promise.race([prom1, prom2, prom3]).then(success, fail);
+}
+
+
+
+
+
+
+function ejemploPromesaRaceFail2() {
+    const success = (response) => console.log('alguien ha llegado primero!!', response),
+        fail = (error) => console.log('alguien ha fallado primero', error),
+        args = ['hola', 'mundo'],
+        prom1 = promesa1(...[...args, 2000]),
+        prom2 = promesa2(...[...args, 1000]),
+        prom3 = promesaRetardada(...[...args, 3000]);
+    Promise.race([prom1, prom2, prom3]).then(success, fail);
+}
+
+function ejemploPromesaRaceSuccess1() {
+    const success = (response) => console.log('alguien ha llegado primero!!', response),
+        args = ['hola', 'mundo'],
+        prom1 = promesa1(...args).then(response => {
+           console.log('primera!', response);
+            return response;
+        }),
+        prom2 = promesaRetardada(...args).then(response => {
+            console.log('segunda!', response);
+            return response;
+        });
+    Promise.race([prom1, prom2]).then(success);
+}
+
+function ejemploPromesaNested() {
+    promesa1('hola', 'mundo')
+        .then(response => {
+            console.log('primer manejador:', response);
+            return `${response}. Gracias!`;
+        })
+        .then(response => {
+            console.log('segundo manejador:', response);
+            return response;
+        })
+}
+
+function ejemploPromesaNested1() {
+    promesa1('hola', 'mundo')
+        .then(response => {
+            console.log('primer manejador:', response);
+            return new Promise(resolve => {
+                setTimeout(() => resolve(`${response}. Gracias!`), 1000);
+            });
+        })
+        .then(response => {
+            console.log('segundo manejador:', response);
+            return response;
+        });
+}
+
+function ejemploPromesaNestedFail() {
+    promesa1('hola', 'mundo')
+        .then(response => {
+            console.log('primer manejador:', response);
+            return new Promise((resolve, reject) => {
+                setTimeout(() => reject(`${response}. Gracias!`), 1000);
+            });
+        })
+        .then(response => {
+            console.log('segundo manejador:', response);
+            return response;
+        })
+        .catch(error => console.log('fallo en el segundo manejador', error));
+}
+
+function ejemploPromesaNestedFail1() {
+    promesa1('hola', 'mundo')
+        .then(response => {
+            console.log('primer manejador:', response);
+            throw 'Error!';
+        })
+        .then(response => {
+            console.log('segundo manejador:', response);
+            return response;
+        })
+        .catch(error => console.log('fallo en el segundo manejador', error));
+}
+
+
+
+
+
+
+
+
+
+//------------------------------------------------------------------
+
+
+
+PROMISES (DEL TEST)
+
+
+
+
+export default function() {
+    ejemploPromesaAllSuccess()
+    ejemploPromesaAllFail()
+}
+
+
+
+
+function promesa1(prop1, prop2, delay = 1500) {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve(`p1: ${prop1} ${prop2}`), delay);
+    });
+}
+
+function promesa2(prop1, prop2, delay = 2000) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => reject(`p2: !${prop1} ${prop2}`), delay);
+    });
+}
+
+function promesaRetardada(prop1, prop2, delay = 2500) {
+    return new Promise((resolve, reject) => setTimeout(() => resolve(`p3: ${prop1} ${prop2} (^_^ con retraso...)`), delay));
+}
+
+function ejemploPromesaSuccess() {
+    promesa1('hola', 'mundo').then((response) => console.log('promesa resuelta', response));
+}
+
+function ejemploPromesaFail() {
+    promesa2('hola', 'mundo')
+        .then((response) => console.log('promesa resuelta', response))
+        .catch((error) => console.log('promesa rechazada', error));
+}
+
+function ejemploPromesaSuccessAndFail() {
+    const success = (response) => console.log('promesa resuelta', response),
+        fail = (error) => console.log('promesa rechazada', error),
+        args = ['hola', 'mundo'];
+
+    promesa1(...args).then(success, fail);
+    promesa2(...args).then(success, fail);
+}
+
+
+function ejemploPromesaAllSuccess() {
+    const success = (response) => console.log('todas las promesas resueltas', response),
+        args = ['hola', 'mundo'];
+    Promise.all([promesa1(...args), promesaRetardada(...args)]).then(success);
+}
+
+function ejemploPromesaAllFail() {
+    const success = (response) => console.log('todas las promesas resueltas', response),
+        fail = (error) => console.log('alguna de las promesas ha sido rechazada', error),
+        args = ['hola', 'mundo'];
+    Promise.all([promesa1(...args), promesa2(...args)]).then(success, fail);
+}
+
+
+
+
+ejemploPromesaAllSuccess()
+ejemploPromesaAllFail()
+
+
+
+
+
+
+
+
+
+function ejemploPromesaRaceSuccess() {
+    const success = (response) => console.log('alguien ha llegado primero!!', response),
+        args = ['hola', 'mundo'],
+        prom1 = promesa1(...args),
+        prom2 = promesaRetardada(...args);
+    Promise.race([prom1, prom2]).then(success);
+}
+
+function ejemploPromesaRaceFail() {
+    const success = (response) => console.log('alguien ha llegado primero!!', response),
+        fail = (error) => console.log('alguien ha fallado primero', error),
+        args = ['hola', 'mundo'],
+        prom1 = promesa1(...[...args, 1000]),
+        prom2 = promesa2(...[...args, 2000]),
+        prom3 = promesaRetardada(...[...args, 3000]);
+    Promise.race([prom1, prom2, prom3]).then(success, fail);
+}
+
+function ejemploPromesaRaceFail2() {
+    const success = (response) => console.log('alguien ha llegado primero!!', response),
+        fail = (error) => console.log('alguien ha fallado primero', error),
+        args = ['hola', 'mundo'],
+        prom1 = promesa1(...[...args, 2000]),
+        prom2 = promesa2(...[...args, 1000]),
+        prom3 = promesaRetardada(...[...args, 3000]);
+    Promise.race([prom1, prom2, prom3]).then(success, fail);
+}
+
+function ejemploPromesaRaceSuccess1() {
+    const success = (response) => console.log('alguien ha llegado primero!!', response),
+        args = ['hola', 'mundo'],
+        prom1 = promesa1(...args).then(response => {
+            console.log('primera!', response);
+            return response;
+        }),
+        prom2 = promesaRetardada(...args).then(response => {
+            console.log('segunda!', response);
+            return response;
+        });
+    Promise.race([prom1, prom2]).then(success);
+}
+
+function ejemploPromesaNested() {
+    promesa1('hola', 'mundo')
+        .then(response => {
+            console.log('primer manejador:', response);
+            return `${response}. Gracias!`;
+        })
+        .then(response => {
+            console.log('segundo manejador:', response);
+            return response;
+        })
+}
+
+function ejemploPromesaNested1() {
+    promesa1('hola', 'mundo')
+        .then(response => {
+            console.log('primer manejador:', response);
+            return new Promise(resolve => {
+                setTimeout(() => resolve(`${response}. Gracias!`), 1000);
+            });
+        })
+        .then(response => {
+            console.log('segundo manejador:', response);
+            return response;
+        });
+}
+
+function ejemploPromesaNestedFail() {
+    promesa1('hola', 'mundo')
+        .then(response => {
+            console.log('primer manejador:', response);
+            return new Promise((resolve, reject) => {
+                setTimeout(() => reject(`${response}. Gracias!`), 1000);
+            });
+        })
+        .then(response => {
+            console.log('segundo manejador:', response);
+            return response;
+        })
+        .catch(error => console.log('fallo en el segundo manejador', error));
+}
+
+function ejemploPromesaNestedFail1() {
+    promesa1('hola', 'mundo')
+        .then(response => {
+            console.log('primer manejador:', response);
+            throw 'Error!';
+        })
+        .then(response => {
+            console.log('segundo manejador:', response);
+            return response;
+        })
+        .catch(error => console.log('fallo en el segundo manejador', error));
+}
+
+
+
+
+
+

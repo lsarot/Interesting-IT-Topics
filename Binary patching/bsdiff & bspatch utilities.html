@@ -1,0 +1,70 @@
+<html><head><title>Binary diff</title></head><body>
+<h1>Binary diff/patch utility</h1>
+<div style="float: right; padding: 10px;" align="right">
+<script type="text/javascript"><!--
+google_ad_client = "pub-9038215384667844";
+google_alternate_ad_url = "http://www.daemonology.net/gg.html";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_color_border = "FFFFFF";
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<b>bsdiff</b> and <b>bspatch</b> are tools for building and applying patches 
+to binary files.  By using suffix sorting (specifically,
+<a href="http://www.cs.lth.se/Research/Algorithms/Papers/jesper5.ps">
+Larsson and Sadakane's qsufsort</a>) and taking advantage of how executable 
+files change, <b>bsdiff</b> routinely produces binary patches 50-80% smaller 
+than those produced by <a
+href="http://sourceforge.net/projects/xdelta/">Xdelta</a>, and 15% smaller 
+than those produced by <a 
+href="http://www.pocketsoft.com/products.html">.RTPatch</a> (a $2750/seat 
+commercial patch tool).
+<p>
+These programs were originally named <b>bdiff</b> and <b>bpatch</b>, but the 
+large number of other programs using those names lead to confusion; I'm not 
+sure if the "bs" in refers to "binary software" (because <b>bsdiff</b> 
+produces exceptionally small patches for executable files) or "bytewise 
+subtraction" (which is the key to how well it performs).  Feel free to offer 
+other suggestions.
+<p>
+<b>bsdiff</b> and <b>bspatch</b> use bzip2; by default they assume it is in 
+/usr/bin.
+<p>
+<b>bsdiff</b> is quite memory-hungry.  It requires <i>max(17*n,9*n+m)+O(1)</i> 
+bytes of memory, where <i>n</i> is the size of the old file and <i>m</i> is 
+the size of the new file.  <b>bspatch</b> requires <i>n+m+O(1)</i> bytes.
+<p>
+<b>bsdiff</b> runs in <i>O((n+m) log n)</i> time; on a 200MHz Pentium Pro, 
+building a binary patch for a 4MB file takes about 90 seconds. <b>bspatch</b> 
+runs in <i>O(n+m)</i> time; on the same machine, applying that patch takes 
+about two seconds.
+<p>
+Providing that <i>off_t</i> is defined properly, <b>bsdiff</b> and 
+<b>bspatch</b> support files of up to 2^61-1 = 2Ei-1 bytes.
+<p>
+Version 4.3 is available <a href="bsdiff-4.3.tar.gz">here</a> with MD5 
+hash <b>e6d812394f0e0ecc8d5df255aa1db22a</b>.  Version 4.2 is available 
+in the FreeBSD, NetBSD, and OpenBSD 
+ports trees as misc/bsdiff, in Darwinports as devel/bsdiff, and in gentoo 
+as dev-util/bsdiff.  It has also been made into a
+<a href="http://starship.python.net/crew/atuining/cx_bsdiff/index.html">Python
+extension module</a>, and there is a
+<a href="http://sites.inka.de/tesla/f_others.html#bsdiff">Windows 
+port</a> available.
+<p>
+The algorithm used by BSDiff 4 is described in my (unpublished) paper
+<a href="/papers/bsdiff.pdf">Naive differences of executable code</a>;
+please cite this in papers as
+<blockquote>
+Colin Percival, <i>Naive differences of executable code</i>, 
+<tt>http://www.daemonology.net/bsdiff/</tt>, 2003.
+</blockquote>
+<p>
+A far more sophisticated algorithm, which typically provides roughly 
+20% smaller patches, is described in my
+<a href="/papers/thesis.pdf">doctoral thesis</a>.
+</body></html>

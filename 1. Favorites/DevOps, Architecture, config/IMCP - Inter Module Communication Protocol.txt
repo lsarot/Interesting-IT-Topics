@@ -1,0 +1,277 @@
+
+INTER-MODULE COMMUNICATION PROTOCOL (IMCP)
+
+
+INTRODUCTION
+
+At the very beginning, every module was conceived to work in a monolithic arquitecture, being said, each of them would expose their own REST API, thus each of them will handle their request load, and configure a security layer and a logging (events) layer.
+
+To configure the logging framework was a tedious task, so we decided to move this responsility to another module instead of repeating the same configuration on each module. This separation of concerns would carry some pros and cons, the pros were that we focused the configuration on just one point, so 1 point of failure, and we can left this task to another module so we reserve compute resources to other things apart from logging events, the cons could be that we now needed a high throughput channel that satisfies the demand such as if it were happening locally in the same process or JVM.
+
+The solution at first sight was to try with a new protocol easy to configure and that promises good performance, better than common http request-response model, this one called RSockets, with 4 connection models available plus a server-to-client request with any of the 4 models and to choose TCP or websocket protocol behind. This models are Request-Response, Fire&Forget, Stream and Channel. We didn't manage a way to configure a stream or channel (bi-dir stream), without a reactive API, other than using an intervalFlux, that means to set an interval and a msg will be delivered each time, so for full throughput we test with a 1-10ns interval, meaning that the channel would not rest, consuming a lot of resources (CPU & ram), so we choose the Fire&Forget model.
+
+Later on, it comes the time to configure the security layer, on each module it would become a tedious task and more to keep maintenance, and a possible breach of information if it is not configured thoroughly, so we decided to separate this as a module for the security layer. Being said, all the requests would be made to the security module and then it needs to submit next steps to secondary modules. This would carry a centralized point for security and just one opened port for external requests, instead of a port for each module.
+
+
+THE PROBLEM ARRIVES
+
+With all this in mind, now we are not talking about logging simple msgs on files, NO-SQL database or any other destination, in an asynchronous way. We now need a full communication between sec-layer and secondary-modules, meaning a request with a response, a body, headers, params and http status, but without losing original throughput or just reducing it a little.
+
+Think if we decide to use an servlet request from mobile client to sec-module, then sec-module does an servlet request to other module, awaiting until that module resolves the task to respond to the mobile client, then using twice the threads needed before, one for sec-module, one for other module.
+
+What if we use Reactive Rest Api ?, but not all clients have a reactive implementation, maybe older Android versions do not have such an Api. But we were talking about communication between sec-module and other modules, so that could be a solution; it actually would reuse threads for different requests, thus reducing resource consumption, providing a higher throughput, lower latency, when system is overloaded.
+
+What if we use RSockets ?, with Req-Res model of course, its easy to configure, but it still being the classic http servlet req-res model behind, but easier to configure.
+
+What if we use WebSockets ?, web sockets is a well known full duplex communication channel, persistent connection, with low latency cause it is left opened and do not send headers on each msg, just the payload, since it doesn't have to do a sync-ack handshake more than just when opening the connection.
+So WebSockets is a winner between mentioned protocols by its low latency response (*), but web sockets are harder to configure, because it just receives a msg in String format or Byte array format, then there is no relation between a msg sent and another msg received, so we must implement our own logic here.
+
+(*) in simple tests sending a short msg for 10k, 100k and 1MM times, then using a thread pool to push even at higher pressure
+
+
+WEB-SOCKET DEFINITION
+
+WebSockets is a bi-directional, full-duplex, persistent connection between a web browser and a server. Once a WebSocket connection is established the connection stays open until the client or server decides to close this connection.
+
+To communicate with the WebSocket server, the client has to initiate the WebSocket connection by sending an HTTP request to a server with an Upgrade header set properly: Connection: Upgrade , Upgrade: websocket
+Please note that the WebSocket URLs use ws and wss schemes, the second one signifies secure WebSockets.
+The server responds back by sending the Upgrade header in the response if WebSockets support is enabled: Connection: Upgrade , Upgrade: websocket
+Once this process (also known as WebSocket handshake) is completed, the initial HTTP connection is replaced by WebSocket connection on top of same TCP/IP connection after which either parties can share data.
+
+WHAT IS STOMP ?: (not used here but FYI)
+
+Stream Text-Oriented Messaging Protocol (STOMP) is a simple, interoperable wire format that allows client and servers to communicate with almost all the message brokers.
+It is an alternative to AMQP (Advanced Message Queuing Protocol) and JMS (Java Messaging Service).
+STOMP defines a protocol for client/server to communicate using messaging semantics. The semantics are on top of the WebSockets and defines frames that are mapped onto WebSockets frames.
+Using STOMP gives us the flexibility to develop clients and servers in different programming languages.
+
+
+THE SOLUTION ? NEW PROTOCOL DESIGN
+
+We need to communicate a method from a Rest Api (sec-module) with another Rest Api method (other module), using web sockets as the mean for.
+
+We have designed a simple msg structure to being able to reutilize it for further scenarios, and designed a higher level layer over the basic web socket library that we have used, being able to handle communications in the form of a message broker, so clients get subscribed to a topic and server will deliver msgs from a topic to each subscribed client, like a chat solution.
+
+
+
+
+SERIALIZABLE STRUCTURE HIERARCHY
+ 
+class MessageBase implements Serializable { 
+	String requestId; 
+	String topic; 
+	String payload; 
+} 
+class SubscribeMsg extends MessageBase {} 
+class UnsubscribeMsg extends MessageBase {} 
+class WServiceWSocketWServiceResponse extends MessageBase {} 
+class WServiceWSocketWServiceRequest extends MessageBase { 
+	String urlPath; //List params extracted from url; 
+}
+
+
+
+
+* Once we register the intention of subscribing to a topic, it gets saved for later failure recovery process. 
+* We can also send msg to topics we have not been subscribed to, we can modify this behavior on serverside.  
+ 
+
+
+* We could have wrapped this code (and any send or broadcast call) using a thread pool to avoid repeating code, 
+* but consider most of the time is spent on creating the object to send, not on the send task properly. 
+* So, for async behavior remember to use a new thread (not necessary at all if who calls to send is already a separated thread) 
+* for sync just do in same thread. 
+
+
+ 
+
++++ INSIGHT: 
+* WE CAN DEPLOY A CLUSTER OF SERVERS THAT CONNECT TO THE SAME TOPIC, 
+* FOR INSTANCE, 3 CORE SERVERS, THEN INSTEAD OF BROADCASTING TO ALL 
+* JUST CHOOSE ONE RANDOMLY AND THAT WILL MANAGE THE REQUEST. 
+
+
+ 
+
+modulesConnService.subscribeToTopic(SecondaryModulesConnService.LINKED_TOPIC); 
+
+
+
+
+ 
+SERIALIZATION & ENCODING QUICK GUIDE
+
+- If object is serializable (implements Serializable) it can be converted to bytes 
+- If object is not serializable, we have to convert to json 
+- A String (ie. json) can be encoded to base64, to shorten length 
+- Bytes can be converted to base64 (string or bytes b64 representation) 
+- Bytes can be converted to hexadecimal representation (little slightly slower than base64, say nanoseconds, and larger output, say twice) 
+- Serializing is faster than encoding to base64 or hex, but not all objects are serializable. 
+- Serialization requires on both sides a class with same f.q.c.n, so we need to package classes in a lib. 
+- When we save an inner object in the structure, lets say the payload, not a library class, we wont have that object in a separate lib, so they will have diff f.q.c.n, so we use json for that payload. 
+- Consider when an object is converted to json it loses the class name, so a non primitive object is usually interpreted as a LinkedTreeMap of key-value pairs (at least with Gson library). (SEE EXAMPLE BELOW) 
+- So try to package in a lib, then serialize, the envelop (structure) of your msg, and what is unpredictable can be stored as json (ie. the payload). 
+- Sometimes a json converted object causes problems, so a workaround is to create our own dto that fulfills our needs. 
+ 
+HINT TO SERIALIZE WITHOUT STRUGGLING
+
+* TO USE SERIALIZATION/DESERIALIZATION OF CLASSES, THOSE CLASSES NEED TO HAVE THE SAME PACKAGE NAME. 
+* IF I PACKAGE MY CLASSES IN AN EXTERNAL LIB JAR, BUT USING THIS PROJECT'S SAME PACKAGE NAMES, THEN I WILL NEED TO USE THE F.Q.C.N TO FIND THAT .CLASS AS FOLLOWS: 
+* com.pulitsoft.coin.server.sec.model.persistence.dto.webservicemessages.WServiceWSocketWServiceRequest msg = new com.pulitsoft.coin.server.sec.model.persistence.dto.webservicemessages.WServiceWSocketWServiceRequest(...); 
+* SO I USE DIFF PACKAGE NAME, LIKE com.server.commons.dto.webservicemessages, THEN COMPILE THOSE CLASSES IN A FOLDER STRUCTURE THAT FOLLOWS THE PACKAGE NAMES, THEN BUILD THE ARTIFACT FROM THAT FOLDER AND IMPORT INTO MY PROJECTS AS EXTERNAL LIB. THEN I WILL BE ABLE TO USE import com.server.commons.dto.webservicemessages.MyClass. 
+* BUT RATHER I PREFER TO USE A FOLDER CALLED commons IN MY PROJECTS TO FORGOT OF EXTRACTING AN ARTIFACT (LIB), THEN COMPILING IT AND IMPORTING IT. 
+ 
+ 
+*** WHOLE MSG TO/FROM JSON: 
+LoginUser lu = new LoginUser("leo","psw"); 
+WServiceWSocketWServiceResponse msg = new WServiceWSocketWServiceResponse(UUID.randomUUID().toString(), ResponseEntity.ok(lu)); 
+String json = Utils.getJson(msg); 
+ 
++ we send the json, receive it, then convert to parent class 
+ 
+MessageBase mb = Utils.getFromJson(json, MessageBase.class); 
+String type = mb.getClazz(); 
+ 
++ we now know the class type, we again decode from json, cause we cannot cast from parent to son. 
+ 
+WServiceWSocketWServiceResponse wswswsres = Utils.getFromJson(json, WServiceWSocketWServiceResponse.class); 
+//ResponseEntity re = (ResponseEntity) wswswsres.getPayload(); EXCEPTION CASTING, se guardó cm Object y se pasó a Json como object 
+//Object o = wswswsres.getPayload();//com.google.gson.internal.LinkedTreeMap 
+//o.getClass().getName();//com.google.gson.internal.LinkedTreeMap 
+//ALL COMPLEX OBJECTS ARE LinkedTreeMap 
+LinkedTreeMap responseEntity = (LinkedTreeMap) wswswsres.getPayload(); 
+String status = (String) responseEntity.get("status"); 
+LinkedTreeMap headers = (LinkedTreeMap) responseEntity.get("headers"); 
+String h = (String) headers.get("header"); 
+LinkedTreeMap body = (LinkedTreeMap) responseEntity.get("body"); 
+ 
+ 
+
+
+
+*** NO UTILIZAR 'Servlet Blocking', MÁS BIEN 'Servlet with CompletableFuture (Apache Client)' y/o 'WebFlux Apache Client'|'WebFlux Spring Web Client'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SIMPLE TESTS RESULTS
+
+* In a separate test, F&F 15s 100k msgs, Req-Res 23s 100k msgs. 
+
+* Here we set a fire&forget model of rsockets 
+* we can also use streams, passing every 5s a batch of log messages for example 
+* 
+* We did a comparison between stream and fire&forget. 
+* Stream can take msgs from a list, on a set interval of nanos, and send an Optional. 
+* Logger would be client and other modules servers that send a flux of msgs. 
+* It took more memory as long as it sends Optional even if it has nothing to send. 
+* 
+* Consider changing to stream model, just if we know the demand of msgs.
+
+* Con RSocket F&F, envío secuencial de 100k logs, demora 10-12s, leve mejoría con tcp que con websocket. (crear el msg no causa la demora, es el canal de comunicación!) 
+* WebSocket directamente (sin RSocket) es más rápido. 
+* websocket 
+* puerto 8010: 12300 ms | puerto 7000: 12300 ms 
+* tcp 
+* puerto 8018: N/A ms | puerto 7000: 10500 ms 
+
+
+
++++ Enviando un simple String sin tratamiento al enviar o al recibir: 
+* - Con RSocket F&F, envío secuencial de 100k logs, demora 10-12s, leve mejoría con tcp que con websocket. 
+* rsocket con protocolo websocket: 
+* puerto 8010: 12300 ms | puerto 7000: 12300 ms 
+* rsocket con protocolo tcp: 
+* puerto 8018: N/A ms | puerto 7000: 10500 ms 
+* 
+* - WEBSOCKETS STOMP SPRING 6700 ms 100K msgs 
+* - WEBSOCKETS BASIC LIBRARY 1700 ms 100k msgs (1285 con threadpool) | 6318 ms 1MM msgs (con threadpool) 160k/seg 
+When encode/decode to/from json applies, it took 8700 ms 100k msgs (con threadpool), 
+just encode/decode took 2500 ms (1500 ms serialize/deserialize to/from bytes). 
+So bottleneck occurs because we need to process request with a threadpool and just enqueue msgs ?? 
+Using a threadpool did not enhance the performance, actually it got degraded. 
+ 
+* +++ Enviando un msg con mayor estructura que un String degradó mucho el rendimiento. 
+* Sólo probamos con RSocket F&F y WebSocket (basic library) 
+* - rsocket 30s 100k msgs 
+* - websocket 18s 100k msgs 
+* In a short test it took longer to encode/decode json than to serialize/deserialize object (using just a string msg) 
+* 1500ms (serialization) vs 2500ms (json) 
+* But when using a structure to wrap the msg it took similar time, about 18sec for 100k msgs sending through websocket. 
+ 
+ 
+ELAPSED TIME DETAILS: 
+COULD THE ISSUE OF LONG PROCESSING TIME BE DUE TO NOT USING A THREAD POOL WHEN RECEIVING MSG, AND NOT FOR SERIALIZING/DESERIALIZING ?? 
+ 
+SerializationUtils.roundtrip(msg); // 1560ms 
+Utils.getFromJson(Utils.getJson(msg), MessageBase.class); // 2530ms 
+* USING A THREAD POOL WHEN RECEIVING DEGRADED PERFORMANCE BY FAR 
+receivedMessagesQueue.add(new EnqueuedMessage(conn, message.array())); 
+ 
+WebSocket 18s vs. RSocket 30s 100k msgs 
+ 
+* Times of the whole process until it arrives to the receiver: 
+ 
+ResponseEntityMsg responseEntityMsg = new ResponseEntityMsg(HttpStatus.OK, null, message); 
+String payload = Utils.getJson(responseEntityMsg); 
+WServiceWSocketWServiceResponse msg = new WServiceWSocketWServiceResponse(UUID.randomUUID().toString(), null, payload); 
+//(9ms) to build the object 
+ 
+URI.create(topic);//just to validate uri (75.000ns, 0.075ms) 
+if (tryConnection()) {//(37.000ns, 0.037ms) 
+byte[] b0 = Utils.serializeObjectToBytes(msg);//(572.000ns, 0.57ms) 
+ 
+//send(b0); //send to other part 
+ 
+//on the receiver 
+Object o = Utils.deSerializeObjectFromBytes(b0);//(3ms) 
+WServiceWSocketWServiceResponse wsrp = (WServiceWSocketWServiceResponse)o;//(45.000ns, 0.045ms) 
+ResponseEntityMsg payload_ = Utils.getFromJson(wsrp.getPayload(), ResponseEntityMsg.class);//(3ms) 
+}
+
+
+
+
+ENVIRONMENT
+
+HARDWARE
+	MacBook Pro retina 15" mid2012
+	Intel i7-3615QM, 4core cpu @2.3GHz
+	8GB GDDR3 ram 1666Mhz
+
+IDE
+	IntelliJ IDEA 2020.2.1 (Community Edition)
+	Build #IC-202.6948.69, built on August 24, 2020
+	Runtime version: 11.0.8+10-b944.31 x86_64
+	VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.
+	macOS 10.15.1
+	GC: ParNew, ConcurrentMarkSweep
+	Memory: 1484M
+	Cores: 8
+	Registry: ide.tree.collapse.recursively=false
+	Non-Bundled Plugins: com.intellij.ideolog, Lombook Plugin, String Manipulation, com.viartemev.requestmapper, com.intellij.plugins.watcher, net.seesharpsoft.intellij.plugins.file-preview, com.jetbrains.codeWithMe, aws.toolkit, in.1ton.idea.spring.assistant.plugin
+
+WebSockets Library
+	https://github.com/TooTallNate/Java-WebSocket
+	<dependency>
+		<groupId>org.java-websocket</groupId>
+		<artifactId>Java-WebSocket</artifactId>
+		<version>1.5.1</version>
+	</dependency>
+
+
+
+
+

@@ -1,0 +1,1050 @@
+ 
+
+
+
+
+
+
+
+
+
+
+	
+	
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="es-ES" xml:lang="es-ES">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<meta name="Language" content="es-ES"/>
+<meta name="ROBOTS" content="INDEX,FOLLOW"/>
+
+<title>Configuración de nivel de seguridad en el Panel de Control de Java</title>
+
+	<meta name="description" content="Describe la configuración del nivel de seguridad en el panel de control de Java"/>
+	<meta name="keywords" content=""/>
+<meta name="date" content="2016-04-11"/>
+
+
+
+
+	
+		
+					<meta name='oracle:JRE' content='7.0,8.0'/>
+				
+
+		<meta name="oracle:articleType" content='help'/>		
+	
+		<link rel="stylesheet" media="all" type="text/css" href="/ga/css/oldcss.css" />
+	
+		<script type="text/javascript" src="/ga/js/popUp.js"></script>
+	 
+
+
+<link rel="stylesheet" href="/ga/css/screen.css" type="text/css" media="screen" charset="utf-8"/>
+<link rel="stylesheet" href="/ga/css/print.css" type="text/css" media="print" charset="utf-8"/>
+	<script async="async" type="text/javascript" src='//consent.truste.com/notice?domain=oracle.com&c=teconsent&text=true&language=es' crossorigin></script>
+	<style type="text/css">
+  		#teconsent a {
+  			text-decoration: underline;
+  		}
+  
+  		#teconsent a:hover {
+  			text-decoration: none;
+  		}
+	</style>
+	
+	<script async src="https://dyn-beacon.akamaized.net/js/dyn.beacon.v4.js" id="beaconcfg" data-id='0138'></script>
+</head>
+
+
+
+
+	 
+	
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+	
+
+ 
+
+
+
+
+
+
+
+	 
+	
+
+
+
+
+<body>
+	<a name="top"></a>
+	
+
+			
+		
+ 
+		
+			
+			
+			
+		 
+
+
+
+
+
+
+
+
+
+	
+		
+			
+				
+			  	
+				
+					
+						
+						
+						
+						
+													
+													
+						
+					
+				
+			
+		
+		
+		
+			
+			
+			
+	<!-- BEGIN: jWidget_C/Header/Display -->
+	
+	
+	
+	
+		 
+		 
+	
+	
+		
+	
+	<div class="jvh0">
+		<a href="/es/" class="jvl0" title="java.com">Java.com</a>
+
+<!-- BEGIN Header links -->
+<p>
+<a href="/inc/BrowserRedirect1.jsp?locale=es">Descargar</a>
+<a href="/es/download/help/">Ayuda</a>
+</p>
+<!-- END Header links -->
+
+<form name="searchForm" method="get" action="https://www.oracle.com/search/results" accept-charset="utf-8" class="jvs0 jv0sv0" onsubmit="if((document.searchForm.Ntt.value == document.searchForm.Ntt.defaultValue) || (document.searchForm.Ntt.value == '')){return false;}">
+<input type="hidden" name="cat" value="javacom">
+<input type="hidden" name="Ntk" value="SI-ALL5">
+<input type="hidden" name="lang" value="es">
+<input type="text" size="20" maxlength="55" name="Ntt" class="bodytext" onfocus="if( this.value==this.defaultValue ) this.value='';" onblur="if( this.value=='' ) this.value=this.defaultValue;" value="Buscar" title="Buscar">
+<input type="image" name="submit" src="/ga/images/jv0_search_btn.gif" id="searchbtn" alt="Buscar" />
+</form>
+	</div>
+	<!-- END: jWidget_C/Header/Display -->
+
+				
+	
+	
+
+
+
+
+
+	
+			
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	<div class="jvc0 jvc0v0 clearfix">
+		
+	<div class="jvc0w1 clearfix">
+	    <div style="float: right;"> 
+        	<a title='Versión para imprimir' href="?printFriendly=true" 
+           target="printFriendlyView" onclick="openPopup('','printFriendlyView',800,650,'no',1,1,0,0,0,0); return true;"> 
+           <img src="/ga/im/printer.png" width="15" height="14" alt='Versión para imprimir' class="pfv"> </a> 
+    	</div> 		
+	
+		
+	<div class="jvc0w2">	
+	<h3><b>
+        ¿Cómo se controla cuándo un applet o aplicación que no son de confianza se ejecutan en mi explorador web? 
+
+    </b></h3>
+	
+		
+	
+	
+	
+
+	
+
+	
+		<hr />
+		Este artículo se aplica a:
+		<ul>
+			
+				
+			
+			
+				
+			 
+			
+				
+					<li><b>Versiones de Java: </b>7.0, 8.0
+					</li>
+				
+				
+		</ul>
+		<hr />
+	
+	
+		
+	
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+Java 7u10 ha introducido la capacidad de gestionar cuándo y cómo las aplicaciones Java que no son de confianza (p. ej., una aplicación firmada digitalmente por un emisor desconocido, o un certificado que no haya emitido una autoridad de certificación de confianza) se ejecutarán si están incluidas en una página web. La configuración del nivel de seguridad en el Panel de Control de Java determinará si 
+<ol>
+<li>Se le solicitará confirmación antes de ejecutar una aplicación Java que no es de confianza (MEDIUM o HIGH) o
+</li>
+<li>Se bloquearán las aplicaciones Java que no son de confianza para que no se puedan ejecutar (VERY HIGH).</li></ol>
+
+<p>A partir de Java 7 Update 51, todavía se pueden autorizar la ejecución de los applets que no cumplen con las prácticas de seguridad más recientes si se incluyen los sitios que los albergan en la <a href="/es/download/faq/exception_sitelist.xml">lista de excepciones de sitios</a>.</p>
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+	
+		
+			
+				
+			  	
+				
+					
+						
+						
+						
+						
+													
+													
+						
+					
+				
+			
+		
+		
+		
+			
+			
+			
+<!-- BEGIN: jWidget_C/Raw-HTML/Display -->
+ 
+
+
+
+	 
+	 
+
+<p>
+<img class="infoic" src="/ga/images/ic-info16.png"/>A partir de <strong>Java 8 Update 20, el nivel de seguridad Medio ha sido eliminado</strong> del Panel de control Java. Solo están disponibles los niveles de seguridad Alta y Muy alta.
+</p>
+
+<p>La lista de excepciones de sitios proporciona a los usuarios la opción de permitir los mismos applets que se habrían permitido si se hubiera seleccionado la opción <strong>Media</strong>, pero sitio por sitio, reduciendo así al mínimo el riesgo de utilizar configuraciones más permisivas.</p><br/>
+
+<!-- END: jWidget_C/Raw-HTML/Display -->
+
+				
+	
+	
+
+
+
+
+
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+	
+		
+			
+				
+			  	
+				
+					
+						
+						
+						
+						
+													
+													
+						
+					
+				
+			
+		
+		
+		
+			
+			
+			
+<!-- BEGIN: jWidget_C/Raw-HTML/Display -->
+ 
+
+
+
+	 
+	 
+
+<h4 class="sub">Búsqueda del panel de control de Java</h4>
+<p>
+» <a href="/es/download/help/win_controlpanel.xml">Windows</a><br/> » <a href="/es/download/help/mac_controlpanel.xml">Mac OS X</a> 
+</p>
+
+<!-- END: jWidget_C/Raw-HTML/Display -->
+
+				
+	
+	
+
+
+
+
+
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<h4>Configuración de los niveles de seguridad mediante el Panel de Control de Java</h4>
+
+<ol>
+<li>En el Panel de Control de Java, haga clic en el separador <b>Seguridad</b>.</li>
+<li>Seleccione el nivel de seguridad que desee.</li>
+<li>Haga clic en <b>Aplicar</b>.</li>
+<li>Haga clic en <b>Aceptar</b> para guardar los cambios realizados en el Panel de Control de Java.</li>
+</ol>
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<em>Panel de control de Java - Java 8u20 y versiones posteriores</em><br/> <img alt="Separador Seguridad de panel de control de Java - Java 8u20" src="/ga/images/es/java_security8.jpg"/><br/><br/>
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<em>Panel de control de Java - Java 7</em><br/> <img alt="Separador Seguridad de panel de control de Java 7" src="/ga/images/es/java_security.jpg"/><br/><br/> <br/>
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<h4>Niveles de seguridad en el Panel de Control de Java</h4>
+<h5 class="sub">Muy Alta</h5>
+Este es el valor de seguridad más restrictivo. Se podrán ejecutar todas las aplicaciones firmadas con un certificado válido y que incluyan el atributo de permiso en el manifiesto para el archivo JAR principal tras las peticiones de datos de seguridad. El resto de aplicaciones se bloquearán. <br/> <br/>
+
+<h5 class="sub">Alta</h5>
+Esta es el nivel de configuración de seguridad <b>mínimo recomendado</b> (y por defecto). Se podrán ejecutar las aplicaciones firmadas con un certificado válido o caducado y que incluyan el atributo de permiso en el manifiesto para el archivo JAR principal tras las peticiones de datos de seguridad. Las aplicaciones también se pueden ejecutar una vez realizadas las peticiones de datos de seguridad cuando el estado del certificado no se puede comprobar. El resto de aplicaciones se bloquearán. <br/> <br/>
+
+<h5 class="sub">Media (nivel eliminado a partir de Java 8 Update 20)</h5>
+Sólo aparecen bloqueadas las aplicaciones sin firma que soliciten todos los permisos. El resto de aplicaciones se pueden ejecutar una vez realizadas las peticiones de datos de seguridad.  No se recomienda seleccionar el nivel de seguridad medio ya que hará que su computadora sea más vulnerable en caso de ejecutar una aplicación no autorizada. <br/><br/>
+
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+	
+
+	 
+	
+		
+	
+	
+		<hr>
+		<p><b>Puede que también le interese:</b></p>
+		<ul class="bluearrows">
+			
+		        
+		        
+		         
+				<li>
+					
+
+
+
+	
+	
+	
+		
+		
+	<!--  Begin /jArticle_C/Render-Link.jsp -->
+	
+	
+	
+    
+	
+	
+	
+		 
+		 
+	
+	<a href='/es/download/faq/exception_sitelist.xml'>¿Cómo puedo configurar la lista de excepciones de sitios?</a>
+	<!--  End /jArticle_C/Render-Link.jsp -->
+
+	
+	
+	
+
+				</li>
+			
+		        
+		        
+		         
+				<li>
+					
+
+
+
+	
+	
+	
+		
+		
+	<!--  Begin /jArticle_C/Render-Link.jsp -->
+	
+	
+	
+    
+	
+	
+	
+		 
+		 
+	
+	<a href='/es/download/faq/security-tips.xml'>Sugerencias de seguridad para utilizar Java de manera segura</a>
+	<!--  End /jArticle_C/Render-Link.jsp -->
+
+	
+	
+	
+
+				</li>
+				
+		</ul>
+		<br/><br/>
+	
+	 	
+	
+	</div><!-- /jvc0w2  -->
+	</div><!-- /jvc0w1 clearfix -->
+		
+	
+	
+		
+		<div class="jvcs0 clearfix">
+	
+		
+		
+		
+		
+			 
+			 
+		
+	
+		<div class="spsidebar">	
+		<div class="spheader"><a href='/es/download/help/index.xml'>RECURSOS DE AYUDA</a></div>
+		<ul>
+		
+		
+			
+	      		
+	   		
+		        
+				
+				
+				
+					 
+					 
+				
+				
+								
+				
+				
+					
+						
+						
+							<li><a href="/es/download/help/index_installing.xml">Instalación de Java</a></li>
+						
+					
+				
+			
+		        
+				
+				
+				
+					 
+					 
+				
+				
+								
+				
+				
+					
+						
+						
+							<li id="olderVersions"><a href="/es/download/faq/remove_olderversions.xml">Eliminar versiones anteriores de Java</a></li>
+						
+										
+				
+			
+		        
+				
+				
+				
+					 
+					 
+				
+				
+								
+				
+				
+					
+						
+						
+							<li><a href="/es/download/help/disable_browser.xml">Desactivar Java</a></li>
+						
+					
+				
+			
+		        
+				
+				
+				
+					 
+					 
+				
+				
+								
+				
+				
+					
+						
+							<li><a href="/es/download/help/index_using.xml"><b>Uso de Java</b></a></li>
+						
+						
+					
+				
+			
+		        
+				
+				
+				
+					 
+					 
+				
+				
+								
+				
+				
+					
+						
+						
+							<li><a href="/es/download/faq/index_general.xml">Preguntas generales</a></li>
+						
+					
+				
+			
+		        
+				
+				
+				
+					 
+					 
+				
+				
+								
+				
+				
+					
+						
+						
+							<li><a href="/es/download/faq/index_mobile.xml">Mobile Java</a></li>
+						
+					
+				
+			
+		        
+				
+				
+				
+					 
+					 
+				
+				
+								
+				
+				
+					
+						
+						
+							<li><a href="/es/security/">Seguridad</a></li>
+						
+					
+				
+			
+		        
+				
+				
+				
+					 
+					 
+				
+				
+								
+				
+				
+					
+						
+						
+							<li><a href="/es/download/support.jsp">Opciones de asistencia</a></li>
+						
+					
+				
+				
+			
+				
+					
+		</ul>
+		</div>
+		<br>
+		
+	
+			
+		
+			
+		
+		
+		
+			
+		
+			
+	
+		</div><!--  /jvcs0 clearfix -->
+		</div><!-- /jvc0 -->
+		
+	
+	
+		
+		
+			
+	 
+
+
+
+
+
+
+
+
+
+	
+		
+			
+				
+			  	
+				
+					
+						
+						
+						
+						
+													
+													
+						
+					
+				
+			
+		
+		
+		
+			
+			
+			
+	<!-- BEGIN: jWidget_C/Footer/Display -->
+	
+	
+	
+	
+		 
+		 
+	
+	<div class="jvf0">
+		<p>
+  <a href="/es/selectlanguage.jsp">Seleccionar idioma</a>
+| <a href="/es/about/">Acerca de Java</a>
+| <a href="/es/download/support.jsp">Soporte</a>
+| <a href="/es/download/faq/develop.xml">Desarrolladores</a>
+
+<br />
+  <a href="http://www.oracle.com/html/privacy.html">Privacidad</a>
+|&nbsp;<a><span id='teconsent'></span></a>&nbsp;
+| <a href="http://www.oracle.com/html/terms.html">Condiciones de uso</a>
+| <a href="http://www.oracle.com/html/3party.html">Marcas registradas</a>
+| <a href="/es/about/disclaimer.jsp">Descargo de responsabilidad</a>
+</p>
+
+<a href="http://www.oracle.com/" class="jvsun0">Oracle</a>
+
+	</div>
+	<!-- END: jWidget_C/Footer/Display -->
+
+				
+	
+	
+
+
+
+
+
+	
+	
+	
+		
+	
+	
+	
+		
+		
+			
+				
+			
+			
+		
+		<script language="JavaScript">
+		<!--
+			var s_channel="javac:Support:Help";
+			var s_pageName="javac:Support:Help:jcp_security.xml";
+			var s_prop19="es_javac:Support:Help:jcp_security.xml";
+			var s_charSet="UTF-8";
+		//-->
+		</script>
+		<script language="JavaScript" src="/ga/js/s_code_remote.js"></script>
+		<script>
+			userAgent = navigator.userAgent;
+			userAgent = userAgent == null ? "" : userAgent.toLowerCase();
+			
+			if (userAgent.indexOf('mac') != -1){
+				document.getElementById("olderVersions").style.display = "none"
+			}
+		</script>
+	
+		
+	
+</body>
+</html>
+
+

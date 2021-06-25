@@ -1,0 +1,32 @@
+DEPLOY SPRING BOOT ON EXTERNAL TOMCAT
+
+1. In pom.xml
+
+<!-- packaging to WAR -->
+<packaging>war</packaging>
+
+<!-- Instruct spring boot not to use the inbuilt Tomcat server -->
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-tomcat</artifactId>
+   <scope>provided</scope>
+</dependency>
+
+2. Extend main Class with SpringBootServletInitializer
+
+@SpringBootApplication
+public class SpringBootApp extends SpringBootServletInitializer {
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+	return application.sources(SpringBootApp.class);
+	}
+	...
+
+3. optional con application.properties
+server.contextPath=/springbootapp To target on this path when deployed
+
+4. Generate WAR file
+
+Right click on pom.xml -> Run as -> Maven install, this will generate a WAR file in your target folder. 
+Just copy that WAR file into your tomcat’s webapps folder and start the server ( or ) you can deploy 
+and test from your IDE (eclipse/sts) by importing that WAR into your work space and run that in the external tomcat.

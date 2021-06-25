@@ -1,0 +1,99 @@
+*******************************************************************
+******************* GUÍA COMANDOS RÁPIDOS macOS *******************
+*******************************************************************
+
+
+----------------------------- MISC
+
+
+cmd + q
+	(cerrar aplicación)
+cmd + n
+	(suele ser crear algo nuevo, en algunas apps te abre un menú a ver qué quieres crear)
+cmd + t
+	(en Finder: abrir nueva pestaña)
+
+
+----------------------------- COPIAR, PEGAR, CORTAR
+
+
+cmd + c
+	(copiar)
+cmd + v
+	(pegar)
+cmd + shift + v
+	((cortar en Finder) pega último fichero copiado y borra el original)
+cmd + x
+	(cortar en editores de texto. Copia y elimina, luego debes hacer cmd+v para pegar)
+
+
+----------------------------- GUARDAR, DESHACER/REHACER
+
+
+cmd + s
+	(guardar)
+cmd + shift + s
+	(guardar todo)
+cmd + z
+	(deshacer)
+cmd + shift + z
+	(rehacer)
+
+
+----------------------------- VER INFO RÁPIDA DE FICHEROS, MOSTRAR FICHEROS OCULTOS
+
+
+space
+	(selecciona un fichero, presiona espacio, se muestra un preview, presiona otra vez y se cierra el preview. Ahora usa las teclas izq,der,arriba,abajo para abrir el preview entre ficheros/carpetas dentro del finder)
+cmd + i
+	(1 fichero seleccionado, te muestra info resumida de este. N ficheros seleccionados, te muestra info de todos en ventanas separadas)
+cmd + alt + i
+	(si seleccionar N ficheros, te muestra en una sóla ventana info resumida de todos)
+cmd + shift + . (punto)
+	(mostrar/ocultar ficheros ocultos, se pueden ocultar los ficheros ;), pero también hacer un disco protegido con contraseña)
+
+
+----------------------------- CAPTURA/GRABACIÓN DE PANTALLA
+
+
+cmd + shift + 4
+	(captura de pantalla eligiendo región)
+cmd + shift + 5
+	(abre app rápida para captura de pantalla y grabación de video de lo que hagas en pantalla)
+
+
+----------------------------- ZOOM IN/OUT NAVEGADOR
+
+
+cmd + +
+	(aumentar zoom en navegador)
+cmd + -
+	(reducir zoom en navegador)
+
+
+----------------------------- SELECCIONAR COSAS
+
+
+cmd + a
+	(seleccionar todo)
+cmd + clic
+	(seleccionar ficheros o items uno a uno)
+shift + clic
+	(seleccionar algo (ficheros/texto) de un extremo al otro)
+
+shift + up/down
+	(seleccionar líneas enteras)
+shift + left/right
+	(seleccionar texto caracter por caracter)
+
+cmd + left/right
+	(mover cursor al inicio/final de la línea)
+cmd + shift + left/right
+	(editando texto, selecciona todos los caracteres hasta el inicio/final de la línea)
+
+alt + left+/right
+	(mover cursor a inicio/final de la palabra aledaña)
+alt + shift + left/right
+	(seleccionar palabra a palabra)
+
+

@@ -1,0 +1,313 @@
+﻿
+
+VARIOS
+
+//variables sin var, let o const se consideran globales
+var (dentro de función será local, fuera de función será global).. si se repite la declaración sería asignarle el nuevo valor, no dá error!.. permite usarla antes de declararla!.. PERMITE DESARROLLAR CON MALAS PRACTICAS!!
+let (pertenecen al scope donde son declaradas, más estricto!!! MEJOR)
+const (son constantes), siguen las reglas de scope que tiene let
+    const son sólo lectura, pero si es un objeto, puede modificarse el valor de sus atributos
+var,let,const comienzan con a-Z,_,$
+
+en HTML <script></script> o <script type="text/javascript" src="exampleAlert.js"></script>
+
+primitivos: number(NaN, infinity son un tipo de number), boolean, string, null, undefined, symbol  
+typeof  {} [] null = 'object', pero tenemos Array.isArray() en ES6 para diferenciar arrays de los otros
+typeof  funcion = 'function'
+
++ y .concat con string
+
+1+'2' = 12
+1++'2' = 3, 1+Number('2'), 1+Number.parseInt('2',10), Number.parseInt('10.25 2')=10.25, .toFixed(decimals)
+truthy y falsy: !!v (true si !=0 o !="") (false si "", 0, NaN, null o undefined)
+null==undefined, 5=='5', 0=='' (true) / (false) NaN==NaN, 5==='5'
+Symbol()==Symbol() (false), Symbol() sirve como clave única (digamos que es un objeto con id único)
+
+`comillas invertidas`: `usando comillas invertidas incluyo variables en string ${nombre} ${persona.name} ${(qty*price).toFixed(2)}, así`
+
+
+-----------------------
+
+OBJETOS (algunas cosas son de destructuring de ES6)
+let objeto = {'name':null, 'web':'url', 'age':20, fx:function(){...} } //funciones tbn puede definirse fx(){...}
+object.attribute o object[attribute]
+delete object.attribute (quedará undefined)
+
+Object.is(obj1,ob2) //mejora comparaciones que ni === lo hace bien, ie +0 === -0
+Object.assign(objetivo, {},{},otros) //guarda en objeto objetivo, las propiedades enumerables de los objetos que le pase
+
+let obj = Object.create(objeto);  obj.fx();
+
+//OBTENER DATOS DE OBJETO FÁCILMENTE (destructuring)
+let {name, age:unAlias, otraQueNoExiste:aliasOpcional=defaultValue} = objeto; //significa de manera abreviada, de objeto, dame estos atributos, y se les accede con el mismo nombre que tenían en el objeto.
+let {obj_interno {obj_masInterno:aliasOpcional}} = objeto;
+
+//OBTENER DE ARRAY FÁCILMENTE (aquí lo hace por index)
+let colors = ['red','green','blue']   let colors2=['r', ['g','b'], 'y']
+let [,,tercero] = colors; //toma 'blue'
+let [a, [b]] = colors2; //a toma r, b toma g
+let [a, ...rest] = colors; //rest toma el resto
+
+//intercambio de valores entre variables
+let a=1, b=2
+[a,b]=[b,a]
+
+
+VECTORES/ARRAYS
+let vec=['cad',20,null]
+vec[index]
+vec.push(item) .pop (inserta/elimina al final)
+vec.unshift(item) .shift (inserta/elimina al inicio)
+vec[10]=item (si index es mayor que lenght, completará con undefined)
+delete vec[index] (no altera los indices)
+vec.concat(vec2)
+vec.join("_") (unirá en un string usando _ como separador)
+vec.reverse()
+vec.map( function(value) {console.log(value)} )
+
+
+SET Y MAP
+let set = new Set(); o new Set([1,2,3,3]);//sólo tomará 1 vez entre los repetidos
+set.add('a');
+set.size(), set.has(), set.delete(5), set.clear()
+set.forEach(function(posicion, valor, setCompleto){...});
+set.forEach(fx, this); //si requiero usar el contexto dentro de dicha fx
+let array = [...set]; //convierte set en array
+
+let map = new Map(); o new Map([["name","Nicholas"],["age",25]]);
+map.set("title","UnderstandingES6");   map.set("year",2016);
+map.get('key')
+map.forEach( (key, valor, mapCompleto)=>{...});
+//la clave (key-value) puede ser un objeto!.. usará su identificador interno realmente
+
+-----------------------
+
+FUNCIONES
+
+function name(a,b) {}
+var name = function(a,b){}
+function fx( a = defecto, b ) {}
+function fx( a, b = metodo() ) {}
+let name = (a,b) => a*b; (lambda function)
+let name = (a,b) => {//operations}
+arguments[index] accede a los parámetros que llegan
+//la cantidad de parámetros que envío no deben ser exactamente los que define el método en su signature
+arguments[index] devuelve argumentos que llegan!
+    //si modifico param que llega a función, se modifica también en arguments, pq apunta al mismo!
+    //NO SI USO "use strict"; comenzando el método
+
+
+//PARÁMETRO REST
+function fx(par1, ...keys) {/* keys guarda el resto de variables pasadas en la llamada */}
+param rest se coloca al final del signature; no se puede usar en método set (setters) (ie. set name(value))
+
+//arguments no es array (es un objeto creo), ...rest es array y puedo usar .sort, .map, .forEach, .pop, etc.
+
+
+//SPREAD (ES6) Vs apply(ES5)
+function fx(x,y,z) {}
+var args=[0,1,2]; 
+    fx.apply(this, args); //fx recibe 0,1,2
+    fx(...args); // SPREAD
+
+//SPREAD Vs concat
+var v1=[1,2], v2=[3,4]
+    v1.concat(v2)
+    v3= [...v1, ...v2, ...vn] // SPREAD
+
+//SPREAD para concatenar sobre el mismo array
+v1.push(...v2);
+
+//ENTONCES ...rest, puede ponerse en:
+la signature (REST)
+en el llamado(SPREAD)
+concatenar n arrays
+concatenar sobre el mismo array
+
+
+//NEW.TARGET
+//indica si se llamó a método o constructor usando palabra reservada new
+function fx() {
+    if(typeof new.target !=== 'undefined')
+    else
+}
+
+
+//"use strict"; exige que el código sea más estricto!
+
+//FUNCIONES A NIVEL DE BLOQUE
+EN ES6 SE PUEDE DECLARAR FUNCTION DENTRO DE UN BLOQUE (if, for, etc)... en ES5 sólo si no use 'use strict'
+EN ES6, si la declaro usando let mifunc=function, debo llamarla luego de declararla obligatoriamente!
+
+
+//FUNCIONES ARROW-LAMBDA
+no tienen signature, por eso no se puede usar new, y se accede a parámetros con ...rest
+no carecerá de scope, se usa this y funciona determina el contexto
+    antes se llamaba (function(){...}).bind(context).. (ejemplo de click event en lámina 58 ES6)
+let sum = (p1,p2) => p1+p2; //recibe p1,p2 y devuelve la suma, la guarda en sum
+let otra = () => 'texto'; //no recibe nada y devuelve 'texto'
+() => { un cuerpo más elaborado }
+
+
+
+
+-----------------------
+
+ESTRUCTURAS DE CONTROL
+if, else if, else
+switch case
+while, do while
+for, for(let index in values), for(let value of values)
+break (sale del bloque), continue (salta una iteración)
+try catch finally
+
+-----------------------
+
+CREO NO ES THREAD, PERO PROGRAMA LLAMADO A UN MÉTODO
+var id0 = setTimeout(function, ms) (función y miliseconds)
+clearTimeout(id0)
+
+var id0 = setInterval(function, ms) (repetir llamado cada ms)
+clearInterval(id0)
+
+-----------------------
+
+DOM y BOM  document. y window. respectivamente
+
+document.body...
+document.getElementBy...
+
+document también se apunta desde window.document
+location se apunta desde document o window
+
+document.createElement("div") //u otro tag
+.createTextNode(content) //"Mi Texto!"
+parent.appendChild(node)
+
+node.parentNode.removeChild(node)
+
+node.attribute o node[attribute] //ie. nodolink.href (usar camelCase si el nombre es compuesto)
+
+
+window.document.lastModified, .referrer, title, URL
+document.anchors (array con items tipo <a name='nombre'>)
+.links (array con items tipo <a href='url'>)
+.embeds (los <embed>)
+.forms (los <form>)
+.forms[0].elements[0] o .forms[0].nameDelItem
+.images (los <img>)
+
+
+//sobre la url:
+window.location.hash (si hay #, un anchor)
+.location.host y .hostname(a veces elimina el www)
+.href (toda la url)
+.pathname (luego del host)
+.port
+.protocol (http,https,ftp...)
+.search (luego de ?)
+
+
+//sobre el browser:
+window.navigator (tipo, versión de browser, si permite cookies, Java, plugins...)
+
+
+//sobre historial de navegación:
+window.history, .history.back, .forward
+
+
+//sobre la pantalla del computador:
+window.screen
+.availWidth, .availHeight, .colorDepth, .width, .height
+
+
+//window measures:
+InternetExplorer
+window.screenLeft .screenTop posición de la ventana.
+área visible de la página: document.body.offsetWidth y document.body.offsetHeight.
+Mozilla, Safari, Opera, Chrome
+window.screenX .screenY posición ventana.
+.innerWidth .innerHeight zona visible.
+.outerWidth .outerHeight tamaño total ventana.
+
+
+-------------------------
+
+EVENTOS
+onblur, onfocus, onchange, 
+onclick, ondblclick, onkeydown, onkeypress, onkeyup,
+onmousedown, onmouseup,onmouseover, onmouseout, onmousemove,
+onreset, onsubmit, onload, onunload, onresize, onselect
+
+FLUJO DE EVENTOS
+FASE BUBBLING Y CAPTURING (interno a externo, o al revés)
+por defecto recorre en ambas fases.. empezando como CAPTURING
+inicia en window > document > body > div > ...
+
+node.addEventListener('click', funcion1, false) //false es usar bubbling
+node.addEventListener('click', funcion2, false) //puede asignarse N listeners a dif de Java
+
+OBJETO EVENT
+en IE
+rescato el evento con window.event
+el otros
+lo recibe la función por parámetro
+//usar functionmanejadorEventos(elEvento){varevento=elEvento || window.event;}
+
+//propiedades:
+.timeStamp, cuándo se origina el evento
+.type, nombre del evento
+.altKey, true si se ha pulsado tecla ALT
+.ctrlKey, .shiftKey
+.eventPhase, 0 capturing 1 targetelement 2 bubbling
+.target o .srcElement (IE), quien origina el evento
+.currentTarget, elemento objetivo del evento
+.relatedTarget, objetivo secundario del evento (relacionado con eventos del ratón)
+.bubbles, true si es fase bubbling
+.button, int con botón mouse pulsado
+.detail, nro de veces que se clickeó
+.keyCode .which, código ASCII tecla pulsada
+.key, tecla pulsada 
+.charCode, int con tecla pulsada
+.isChar
+.cancelable, si el evento se puede cancelar
+.cancelBubble, true si se ha detenido el flujo de eventos tipo bubbling
+.clientX, .clientY, coordenadas del puntero en área visible de pantalla
+.pageX, .pageY, coord respecto de la página
+.screenX, screenY, coord respecto de la pantalla
+
+
+.preventDefault, cancela comportamiento predeterminado del evento
+.stopPropagation, detiene ejecución del flujo de eventos
+
+
+-----------------------
+
+ALGUNOS REGEX Y VALIDACIONES
+
+var regex = 
+cadena.match(regex)
+o
+regex.test(cadena)
+
+es texto: /^\s+$/
+nro teléfono: /^\d{9}$/
+email: /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)/
+tiene minúscula, mayúscula y nro: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
+fecha: var v = new Date(anno,mes,dia)  if(!isNaN(v)){return false;}
+Array.isArray(item)
+isNaN(item)
+
+-------------------------
+
+
+
+
+
+
+
+
+
+
+
+

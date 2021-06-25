@@ -1,0 +1,1783 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Application deployment - WildFly 10 - Project Documentation Editor</title>
+
+        
+
+                        
+    
+
+            <meta http-equiv="X-UA-Compatible" content="IE=8">
+<meta charset="UTF-8">
+
+<!-- Deprecated since 3.4. To be removed in a future version of Confluence; use AJS.Confluence.getContextPath() -->
+<meta id="confluence-context-path" name="confluence-context-path" content="/author">
+<meta name="ajs-context-path" content="/author">
+<meta name="ajs-version-number" content="3.5.16">
+<meta name="ajs-build-number" content="2172">
+<meta id="atlassian-token" name="atlassian-token" content="7b519b08dfc377f6d871ec9b673d0ed4947f8426">
+<meta id="confluence-space-key" name="confluence-space-key" content="WFLY10">
+<meta name="ajs-remote-user" content="">
+<meta name="ajs-static-resource-url-prefix" content="/author/s/en/2172/19/_">
+
+<script type="text/javascript">
+    // Deprecated global variables. To be removed in a future version of Confluence.
+    var contextPath = '/author';
+</script>
+
+    
+
+<!-- include system css resources -->
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/376/_/download/superbatch/css/batch.css" media="all">
+<!--[if IE]>
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/376/_/download/superbatch/css/batch.css?ieonly=true" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/376/_/download/superbatch/css/batch.css?media=print" media="print">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/1.9.13/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plugin:syntaxhighlighter/com.atlassian.confluence.ext.newcode-macro-plugin:syntaxhighlighter.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/1.9.13/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plugin:sh-theme-confluence/com.atlassian.confluence.ext.newcode-macro-plugin:sh-theme-confluence.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/1.20/_/download/batch/com.atlassian.confluence.plugins.pagetree:pagetree-resources/com.atlassian.confluence.plugins.pagetree:pagetree-resources.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/1.0/_/download/resources/confluence.web.resources:aui-forms/confluence-forms.css" media="all">
+<!--[if IE]>
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/1.0/_/download/batch/confluence.web.resources:aui-forms/confluence.web.resources:aui-forms.css?ieonly=true" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/1.8/_/download/batch/com.atlassian.confluence.plugins.share-page:mail-page-resources/com.atlassian.confluence.plugins.share-page:mail-page-resources.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/2.1.9/_/download/batch/com.k15t.scroll.scroll-html:web-resources-core/com.k15t.scroll.scroll-html:web-resources-core.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/2.1.9/_/download/batch/com.k15t.scroll.scroll-html:web-resources-exportui/com.k15t.scroll.scroll-html:web-resources-exportui.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/2.1.8/_/download/batch/com.k15t.scroll.scroll-eclipsehelp:web-resources-core/com.k15t.scroll.scroll-eclipsehelp:web-resources-core.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/2.1.8/_/download/batch/com.k15t.scroll.scroll-eclipsehelp:web-resources-exportui/com.k15t.scroll.scroll-eclipsehelp:web-resources-exportui.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/2.0.7/_/download/batch/com.k15t.scroll.scroll-epub:web-resources-core/com.k15t.scroll.scroll-epub:web-resources-core.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/2.0.7/_/download/batch/com.k15t.scroll.scroll-epub:web-resources-exportui/com.k15t.scroll.scroll-epub:web-resources-exportui.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/2.4.1/_/download/batch/com.k15t.scroll.scroll-pdf:web-resources-core/com.k15t.scroll.scroll-pdf:web-resources-core.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/2.4.1/_/download/batch/com.k15t.scroll.scroll-pdf:web-resources-exportui/com.k15t.scroll.scroll-pdf:web-resources-exportui.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/1.0/_/download/batch/confluence.web.resources:view-comment/confluence.web.resources:view-comment.css" media="all">
+<!--[if IE]>
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/1.0/_/download/batch/confluence.web.resources:view-comment/confluence.web.resources:view-comment.css?ieonly=true" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/1.16-SEC1/_/download/batch/confluence.macros.advanced:fancy-box/confluence.macros.advanced:fancy-box.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/1.0.16/_/download/batch/com.atlassian.confluence.plugins.drag-and-drop:support/com.atlassian.confluence.plugins.drag-and-drop:support.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/4.2.4/_/download/batch/com.gliffy.integration.confluence:gliffy-global-resources/com.gliffy.integration.confluence:gliffy-global-resources.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/0.8/_/download/batch/com.atlassian.plugins.shortcuts.atlassian-shortcuts-module:shortcuts/com.atlassian.plugins.shortcuts.atlassian-shortcuts-module:shortcuts.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/3.5.16/_/download/batch/com.atlassian.confluence.keyboardshortcuts:confluence-keyboard-shortcuts/com.atlassian.confluence.keyboardshortcuts:confluence-keyboard-shortcuts.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/1.7.4/_/download/batch/de.communardo.confluence.plugins.subspace:subspace-resource/de.communardo.confluence.plugins.subspace:subspace-resource.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/1.7.4/_/download/batch/de.communardo.confluence.plugins.subspace:subspace-search-resource/de.communardo.confluence.plugins.subspace:subspace-search-resource.css" media="all">
+<link type="text/css" rel="stylesheet" href="/author/s/en/2172/19/1.7.4/_/download/batch/de.communardo.confluence.plugins.subspace:subspace-cf_3.4_theme_integration/de.communardo.confluence.plugins.subspace:subspace-cf_3.4_theme_integration.css" media="all">
+
+<!-- end system css resources -->
+
+    <link rel="stylesheet" href="/author/s/en/2172/19/4/_/styles/combined.css?spaceKey=WFLY10" type="text/css">
+
+    <meta name="confluence-request-time" content="1521736014923">
+
+<meta name="loggedInUsername" content="">
+            <meta name="ajs-keyboardshortcut-hash" content="3e7846f51c8b88ad012d6136f3df8701">
+    <!-- Deprecated since 3.4. To be removed in a future version of Confluence; use atl.header -->
+            <script type="text/x-template" title="gliffy-footer-webpanel">
+    <div class="gliffy-footer-webpanel"><span>This Confluence installation runs a Free Gliffy License - <a href="http://www.gliffy.com/products/confluence-plugin/">Evaluate Gliffy</a> for your Wiki!</span></div>
+</script>
+
+            <script id="gliffy-inline-gradient" type="text/plain">
+    {{#gradient}}
+<linearGradient id="grad1" x1="{{gradient_x1}}" y1="{{gradient_y1}}" x2="{{gradient_x2}}" y2="{{gradient_y2}}">
+    <stop stop-color="{{stop_color_1}}" offset="0%" />
+    <stop stop-color="{{stop_color_2}}" offset="100%"/>
+</linearGradient>
+<linearGradient id="grad2" x1="100%" y1="0%" x2="0%" y2="0%">
+<stop stop-color="{{stop_color_1}}" offset="0%" />
+<stop stop-color="{{stop_multiply_color_2}}" offset="100%"/>
+</linearGradient>
+<radialGradient id="radialGradient1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+<stop offset="0%" stop-color="#FFFFFF" stop-opacity="0" />
+<stop offset="100%" stop-color="{{fill}}" stop-opacity="0.75" />
+</radialGradient>
+<radialGradient id="radialGradient2" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+<stop offset="0%" stop-color="{{fill}}" stop-opacity="0" />
+<stop offset="100%" stop-color="{{fill}}" stop-opacity="0.75" />
+</radialGradient>
+{{/gradient}}
+</script>
+<script id="gliffy-inline-shape" type="text/plain">
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="none">
+    <g transform="matrix({{matrix_a}}, {{matrix_b}}, {{matrix_c}}, {{matrix_d}}, {{matrix_e}}, {{matrix_f}})">
+        {{> gradient }}
+        {{#shadow}}
+        <g transform="translate({{shadow_x}},{{shadow_y}}) scale({{shadow_scale_x}}, {{shadow_scale_y}})">
+            {{{shape_shadow}}}
+        </g>
+        {{/shadow}}
+        {{{shape}}}
+    </g>
+</svg>
+</script>
+<script id="gliffy-inline-path" type="text/plain">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+        {{#1_start}}
+        <marker overflow="visible" viewBox="0 0 10 10" id="1_start" refX="-0.1" refY="5" clearBackground="true" markerUnits="strokeWidth" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <path d="M 5 3 L 1 5 L 5 7" fill="none" stroke="{{stroke}}" stroke-width="1"/>
+        </marker>
+        {{/1_start}}
+        {{#1_end}}
+        <marker overflow="visible" viewBox="0 0 10 10" id="1_end" refX="10.1" refY="5" clearBackground="true" markerUnits="strokeWidth" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <path d="M 5 3 L 9 5 L 5 7" fill="none" stroke="{{stroke}}" stroke-width="1"/>
+        </marker>
+        {{/1_end}}
+        {{#2_start}}
+        <marker overflow="visible" viewBox="0 0 10 10" id="2_start" refX="0" refY="5.5" clearBackground="true" markerUnits="strokeWidth" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <path d="M 4.2 3.8 L 1 5.5 L 4.2 7.2z" fill="{{stroke}}" stroke="{{stroke}}" stroke-width="1"/>
+        </marker>
+        {{/2_start}}
+        {{#2_end}}
+        <marker overflow="visible" viewBox="0 0 10 10" id="2_end" refX="8.4" refY="5.5" clearBackground="true" markerUnits="strokeWidth" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <path d="M 4.2 3.8 L 7.4 5.5 L 4.2 7.2z" fill="{{stroke}}" stroke="{{stroke}}" stroke-width="1"/>
+        </marker>
+        {{/2_end}}
+        {{#3_start}}
+        <marker overflow="visible" viewBox="0 0 10 10" id="3_start" refX="0" refY="5.5" clearBackground="true" markerUnits="strokeWidth" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <path d="M 4.2 3.8 L 1 5.5 L 4.2 7.2z" fill="{{marker_fill}}" stroke="{{stroke}}" stroke-width="1"/>
+        </marker>
+        {{/3_start}}
+        {{#3_end}}
+        <marker overflow="visible" viewBox="0 0 10 10" id="3_end" refX="8.4" refY="5.5" clearBackground="true"  markerUnits="strokeWidth" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <path d="M 4.2 3.8 L 7.4 5.5 L 4.2 7.2z" fill="{{marker_fill}}" stroke="{{stroke}}" stroke-width="1"/>
+        </marker>
+        {{/3_end}}
+        {{#4_start}}
+        <marker overflow="visible" viewBox="{{marker_start_viewbox}}" id="4_start" clearBackground="true" refX="{{marker_start_refx}}" refY="12" markerUnits="userSpaceOnUse" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <path d="M 0 12 L 12 19 L 12 5z" fill="{{marker_fill}}" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/4_start}}
+        {{#4_end}}
+        <marker overflow="visible" viewBox="{{marker_end_viewbox}}" id="4_end" clearBackground="true" refX="{{marker_end_refx}}" refY="12" markerUnits="userSpaceOnUse" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <path d="M 14 12 L 2 19 L 2 5z" fill="{{marker_fill}}" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/4_end}}
+        {{#5_start}}
+        <marker overflow="visible" viewBox="{{marker_start_viewbox}}" id="5_start" clearBackground="true" refX="{{marker_start_refx}}" refY="10" markerUnits="userSpaceOnUse" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <path d="M -1 10 L 7 16 L 15 10 L 7 4z" fill="{{marker_fill}}" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/5_start}}
+        {{#5_end}}
+        <marker overflow="visible" viewBox="{{marker_end_viewbox}}" id="5_end" clearBackground="true" refX="{{marker_end_refx}}" refY="10" markerUnits="userSpaceOnUse" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <path d="M 14 10 L 6 4 L -2 10 L 6 16z" fill="{{marker_fill}}" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/5_end}}
+        {{#6_start}}
+        <marker overflow="visible" viewBox="{{marker_start_viewbox}}" id="6_start" clearBackground="true" refX="{{marker_start_refx}}" refY="10" markerUnits="userSpaceOnUse" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <path d="M 16 15 L 1 10 L 16 5" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/6_start}}
+        {{#6_end}}
+        <marker overflow="visible" viewBox="{{marker_end_viewbox}}" id="6_end" clearBackground="true" refX="{{marker_end_refx}}" refY="10" markerUnits="userSpaceOnUse" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <path d="M -1 15 L 14 10 L -1 5" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/6_end}}
+        {{#7_start}}
+        <marker overflow="visible" viewBox="{{marker_start_viewbox}}" id="7_start" clearBackground="true" refX="{{marker_start_refx}}" refY="10" markerUnits="userSpaceOnUse" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <path d="M -1 10 L 7 16 L 15 10 L 7 4z" fill="{{stroke}}" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/7_start}}
+        {{#7_end}}
+        <marker overflow="visible" viewBox="{{marker_end_viewbox}}" id="7_end" clearBackground="true" refX="{{marker_end_refx}}" refY="10" markerUnits="userSpaceOnUse" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <path d="M 14 10 L 6 4 L -2 10 L 6 16z" fill="{{stroke}}" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/7_end}}
+        {{#8_start}}
+        <marker overflow="visible" viewBox="{{marker_start_viewbox}}" id="8_start" clearBackground="true" refX="{{marker_start_refx}}" refY="6" markerUnits="userSpaceOnUse" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <path d="M -1 12 L -1 0 M 6 11 L -1 6 L 6 1" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/8_start}}
+        {{#8_end}}
+        <marker overflow="visible" viewBox="{{marker_end_viewbox}}" id="8_end" clearBackground="true" refX="{{marker_end_refx}}" refY="6" markerUnits="userSpaceOnUse" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <path d="M 14 12 L 14 0 M 7 11 L 14 6 L 7 1" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/8_end}}
+        {{#9_start}}
+        <marker overflow="visible" viewBox="{{marker_start_viewbox}}" id="9_start" clearBackground="false" refX="{{marker_start_refx}}" refY="6" markerUnits="userSpaceOnUse" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <path d="M -1 12 L 7 6 L -1 0" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+            <ellipse cx="11" cy="6" rx="3" ry="3" fill="{{marker_fill}}" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/9_start}}
+        {{#9_end}}
+        <marker overflow="visible" viewBox="{{marker_end_viewbox}}" id="9_end" clearBackground="false" refX="{{marker_end_refx}}" refY="6" markerUnits="userSpaceOnUse" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <path d="M 15 12 L 5 6 L 15 0" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+            <ellipse cx="4" cy="6" rx="3" ry="3" fill="{{marker_fill}}" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/9_end}}
+        {{#10_start}}
+        <marker overflow="visible" viewBox="{{marker_start_viewbox}}" id="10_start" clearBackground="false" refX="{{marker_start_refx}}" refY="6" markerUnits="userSpaceOnUse" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <path d="M 11 12 L 11 0 M -1 12 L 7 6 L -1 0" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/10_start}}
+        {{#10_end}}
+        <marker overflow="visible" viewBox="{{marker_end_viewbox}}" id="10_end" clearBackground="false" refX="{{marker_end_refx}}" refY="6" markerUnits="userSpaceOnUse" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <path d="M 4 12 L 4 0 M 15 12 L 5 6 L 15 0" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/10_end}}
+        {{#11_start}}
+        <marker overflow="visible" viewBox="{{marker_start_viewbox}}" id="11_start" clearBackground="false" refX="{{marker_start_refx}}" refY="6" markerUnits="userSpaceOnUse" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <path d="M 11 12 L 11 0 M 5 12 L 5 0" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/11_start}}
+        {{#11_end}}
+        <marker overflow="visible" viewBox="{{marker_end_viewbox}}" id="11_end" clearBackground="false" refX="{{marker_end_refx}}" refY="6" markerUnits="userSpaceOnUse" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <path d="M 3 12 L 3 0 M 9 12 L 9 0" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/11_end}}
+        {{#12_start}}
+        <marker overflow="visible" viewBox="{{marker_start_viewbox}}" id="12_start" clearBackground="false" refX="{{marker_start_refx}}" refY="6" markerUnits="userSpaceOnUse" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <path d="M 5 12 L 5 0" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/12_start}}
+        {{#12_end}}
+        <marker overflow="visible" viewBox="{{marker_end_viewbox}}" id="12_end" clearBackground="false" refX="{{marker_end_refx}}" refY="6" markerUnits="userSpaceOnUse" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <path d="M 9 12 L 9 0" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/12_end}}
+        {{#13_start}}
+        <marker overflow="visible" viewBox="{{marker_start_viewbox}}" id="13_start" clearBackground="false" refX="{{marker_start_refx}}" refY="6" markerUnits="userSpaceOnUse" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <path d="M 5 12 L 5 0" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+            <ellipse cx="10" cy="6" rx="3" ry="3" fill="{{marker_fill}}" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/13_start}}
+        {{#13_end}}
+        <marker overflow="visible" viewBox="{{marker_end_viewbox}}" id="13_end" clearBackground="false" refX="{{marker_end_refx}}" refY="6" markerUnits="userSpaceOnUse" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <path d="M 10 12 L 10 0" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+            <ellipse cx="5" cy="6" rx="3" ry="3" fill="{{marker_fill}}" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/13_end}}
+        {{#14_start}}
+        <marker overflow="visible" viewBox="{{marker_start_viewbox}}" id="14_start" clearBackground="false" refX="{{marker_start_refx}}" refY="6" markerUnits="userSpaceOnUse" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <path d="M 0 12 L 8 6 L 0 0" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/14_start}}
+        {{#14_end}}
+        <marker overflow="visible" viewBox="{{marker_end_viewbox}}" id="14_end" clearBackground="false" refX="{{marker_end_refx}}" refY="6" markerUnits="userSpaceOnUse" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <path d="M 15 12 L 5 6 L 15 0" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/14_end}}
+        {{#15_start}}
+        <marker overflow="visible" viewBox="{{marker_start_viewbox}}" id="15_start" clearBackground="true" refX="{{marker_start_refx}}" refY="6" markerUnits="userSpaceOnUse" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <ellipse cx="4" cy="6" rx="5" ry="5" fill="{{marker_fill}}" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/15_start}}
+        {{#15_end}}
+        <marker overflow="visible" viewBox="{{marker_end_viewbox}}" id="15_end" clearBackground="true" refX="{{marker_end_refx}}" refY="6" markerUnits="userSpaceOnUse" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <ellipse cx="10" cy="6" rx="5" ry="5" fill="{{marker_fill}}" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/15_end}}
+        {{#16_start}}
+        <marker overflow="visible" viewBox="{{marker_start_viewbox}}" id="16_start" clearBackground="false" refX="{{marker_start_refx}}" refY="5.5" markerUnits="userSpaceOnUse" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <path d="M 3 2 L 9 9" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/16_start}}
+        {{#16_end}}
+        <marker overflow="visible" viewBox="{{marker_end_viewbox}}" id="16_end" clearBackground="false" refX="{{marker_end_refx}}" refY="5.5" markerUnits="userSpaceOnUse" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <path d="M 11 9 L 5 2" fill="none" stroke="{{stroke}}" stroke-width="{{marker_strokewidth}}"/>
+        </marker>
+        {{/16_end}}
+        {{#17_start}}
+        <marker overflow="visible" viewBox="0 0 21 21" id="17_start" refX="0.1" clearBackground="true"  refY="2.2" markerUnits="strokeWidth" markerWidth="{{marker_start_width}}" markerHeight="{{marker_start_height}}" orient="{{marker_start_orient}}">
+            <path d="M 1 2.2 L 3.3 0 L 3.3 4.4z" fill="{{stroke}}" stroke="{{stroke}}" stroke-width="1"/>
+        </marker>
+        {{/17_start}}
+        {{#17_end}}
+        <marker overflow="visible" viewBox="0 0 21 21" id="17_end" refX="4" clearBackground="true" refY="2.2" markerUnits="strokeWidth" markerWidth="{{marker_end_width}}" markerHeight="{{marker_end_height}}" orient="{{marker_end_orient}}">
+            <path d="M 1 0 L 3.3 2.2 L 1 4.4z" fill="{{stroke}}" stroke="{{stroke}}" stroke-width="1"/>
+        </marker>
+        {{/17_end}}
+    </defs>
+    <path overflow="visible" d="{{#path}} {{name}} {{args}} {{/path}}" stroke-linejoin="{{stroke_linejoin}}" stroke-width="{{stroke_width}}" stroke-dasharray="{{stroke_dasharray}}" opacity="{{opacity}}" stroke="{{stroke}}" fill="none" marker-start="{{marker_start_url}}" marker-end="{{marker_end_url}}" />
+</svg>
+</script>
+
+            <script type="text/x-template" title="share-content-popup">
+    <form action="#" method="post" class="aui share-content-popup">
+        <fieldset>
+            <label for="users">User name or email</label>
+            <div class="autocomplete-user-target">
+                <input class="text autocomplete-sharepage" id="users" data-max="10" data-dropdown-target=".autocomplete-user-target" data-none-message="No matching user or email found"/>
+            </div>
+            <ol class="recipients">
+            </ol>
+            <div><label for="note">Note</label></div>
+            <textarea class="textarea" id="note" placeholder="Add an optional note"/>
+        </fieldset>
+        <div class="button-panel">
+            <div class="progress-messages-icon"></div>
+            <div class="progress-messages">
+            </div>
+            <input class="button submit" type="submit" value="Share" disabled/>
+            <a class="close-dialog" href="#">Cancel</a>
+        </div>
+    </form>
+</script>
+
+<script type="text/x-template" title="share-content-popup-recipient-username">
+    <li data-username="{username}" style="display: none">
+        <span>
+            <img src="{thumbnailLink.href}" title="{title}">
+            <span>{title}</span>
+            <span class="remove-recipient"/>
+        </span>
+    </li>
+</script>
+
+<script type="text/x-template" title="share-content-popup-recipient-email">
+    <li data-email="{email}" style="display: none">
+        <span>
+            <img src="{icon}" title="{email}">
+            <span>{email}</span>
+            <span class="remove-recipient"/>
+        </span>
+    </li>
+</script>
+            <meta name="ajs-use-keyboard-shortcuts" content="true">
+    
+    <link rel="shortcut icon" href="/author/favicon.ico">
+    <link rel="icon" type="image/png" href="/author/s/en/2172/19/_/images/logo/confluence_16.png">
+
+<link rel="search" type="application/opensearchdescription+xml" href="/author/opensearch/osd.action" title="Project Documentation Editor"/>
+
+        <!-- include system javascript resources -->
+                        
+    
+    <script type="text/javascript" src="/author/s/en/2172/19/376/_/download/superbatch/js/batch.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/1.9.13/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plugin:syntaxhighlighter/com.atlassian.confluence.ext.newcode-macro-plugin:syntaxhighlighter.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/1.9.13/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plugin:syntaxhighlighter-brushes/com.atlassian.confluence.ext.newcode-macro-plugin:syntaxhighlighter-brushes.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/1.20/_/download/batch/com.atlassian.confluence.plugins.pagetree:pagetree-resources/com.atlassian.confluence.plugins.pagetree:pagetree-resources.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/1.8/_/download/batch/com.atlassian.confluence.plugins.share-page:mail-page-resources/com.atlassian.confluence.plugins.share-page:mail-page-resources.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/2.1.9/_/download/batch/com.k15t.scroll.scroll-html:web-resources-core/com.k15t.scroll.scroll-html:web-resources-core.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/2.1.9/_/download/batch/com.k15t.scroll.scroll-html:web-resources-exportui/com.k15t.scroll.scroll-html:web-resources-exportui.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/2.1.8/_/download/batch/com.k15t.scroll.scroll-eclipsehelp:web-resources-core/com.k15t.scroll.scroll-eclipsehelp:web-resources-core.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/2.1.8/_/download/batch/com.k15t.scroll.scroll-eclipsehelp:web-resources-exportui/com.k15t.scroll.scroll-eclipsehelp:web-resources-exportui.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/1.0.0/_/download/batch/com.daskiworks.confluence.plugin.confluence-to-kindle:c2k-resources/com.daskiworks.confluence.plugin.confluence-to-kindle:c2k-resources.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/2.0.7/_/download/batch/com.k15t.scroll.scroll-epub:web-resources-core/com.k15t.scroll.scroll-epub:web-resources-core.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/2.0.7/_/download/batch/com.k15t.scroll.scroll-epub:web-resources-exportui/com.k15t.scroll.scroll-epub:web-resources-exportui.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/2.4.1/_/download/batch/com.k15t.scroll.scroll-pdf:web-resources-core/com.k15t.scroll.scroll-pdf:web-resources-core.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/2.4.1/_/download/batch/com.k15t.scroll.scroll-pdf:web-resources-exportui/com.k15t.scroll.scroll-pdf:web-resources-exportui.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/2.4.1/_/download/batch/com.k15t.scroll.scroll-pdf:web-resources-overwrite/com.k15t.scroll.scroll-pdf:web-resources-overwrite.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/1.16-SEC1/_/download/batch/confluence.macros.advanced:fancy-box/confluence.macros.advanced:fancy-box.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/1.16-SEC1/_/download/batch/confluence.macros.advanced:thumbnail-images/confluence.macros.advanced:thumbnail-images.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/1.0.16/_/download/batch/com.atlassian.confluence.plugins.drag-and-drop:support/com.atlassian.confluence.plugins.drag-and-drop:support.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/1.0.16/_/download/batch/com.atlassian.confluence.plugins.drag-and-drop:drag-and-drop-for-view-content/com.atlassian.confluence.plugins.drag-and-drop:drag-and-drop-for-view-content.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/4.2.4/_/download/batch/com.gliffy.integration.confluence:gliffy-global-resources/com.gliffy.integration.confluence:gliffy-global-resources.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/1.9/_/download/batch/com.atlassian.confluence.plugins.doctheme:splitter/com.atlassian.confluence.plugins.doctheme:splitter.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/0.8/_/download/batch/com.atlassian.plugins.shortcuts.atlassian-shortcuts-module:shortcuts/com.atlassian.plugins.shortcuts.atlassian-shortcuts-module:shortcuts.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/3.5.16/_/download/batch/com.atlassian.confluence.keyboardshortcuts:confluence-keyboard-shortcuts/com.atlassian.confluence.keyboardshortcuts:confluence-keyboard-shortcuts.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/1.0/_/download/batch/legacy.confluence.web.resources:prototype/legacy.confluence.web.resources:prototype.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/1.7.4/_/download/batch/de.communardo.confluence.plugins.subspace:subspace-resource/de.communardo.confluence.plugins.subspace:subspace-resource.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/1.7.4/_/download/batch/de.communardo.confluence.plugins.subspace:subspace-breadcrumbs-resource/de.communardo.confluence.plugins.subspace:subspace-breadcrumbs-resource.js" ></script>
+<script type="text/javascript" src="/author/s/en/2172/19/1.7.4/_/download/batch/de.communardo.confluence.plugins.subspace:subspace-search-resource/de.communardo.confluence.plugins.subspace:subspace-search-resource.js" ></script>
+
+    
+    <!-- end system javascript resources -->
+
+    
+
+    
+    <link rel="canonical" href="https://docs.jboss.org/author/display/WFLY10/Application+deployment">
+    <link rel="shortlink" href="https://docs.jboss.org/author/x/dwB7BQ">
+    <meta name="wikilink" content="[WFLY10:Application deployment]">
+    <meta name="page-version" content="5">
+
+</head>
+
+<body             onload="placeFocus()"
+     id="com-atlassian-confluence" class="theme-documentation ">
+<div id="full-height-container">
+    <div id="header-precursor">
+        <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push(
+{'gtm.start':new Date().getTime(),event:'gtm.js'}
+
+);var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NJWS5L');</script>
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NJWS5L" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager -->
+        
+<fieldset class="hidden parameters">
+    <input type="hidden" id="shortcutDialogTip" value="Shortcut tip: Pressing <b>{shortcut}</b> also opens this dialog box">
+        <input type="hidden" title="i18n.close.name" value="Close">
+        <input type="hidden" title="i18n.cancel.name" value="Cancel">
+</fieldset><fieldset class="hidden parameters">
+    <input type="hidden" id="statusDialogHeading" value="What are you working on?">
+    <input type="hidden" id="statusDialogAccessibilityLabel" value="Enter your status (140 character limit)">
+    <input type="hidden" id="statusDialogLatestLabel" value="Last update:">
+    <input type="hidden" id="statusDialogUpdateButtonLabel" value="Update">
+    <input type="hidden" id="statusDialogCancelButtonLabel" value="Cancel">
+</fieldset>
+
+<fieldset class="hidden parameters">
+    <input type="hidden" id="globalSettingsAttachmentMaxSize" value="104857600">
+    <input type="hidden" id="userLocale" value="en_UN">
+    <input type="hidden" id="staticResourceUrlPrefix" value="/author/s/en/2172/19/_">
+    <input type="hidden" id="contextPath" value="/author">
+</fieldset>
+                </div>
+
+<div id="header" class="sectionbottom ">
+        <form id="quick-search" class="quick-search" method="get" action="/author/dosearchsite.action">
+                <fieldset>
+            <input type="hidden" name="spaceSearch" value="false"/>
+        </fieldset>
+        <fieldset>
+            <legend>Quick Search</legend>
+            <input class="quick-search-query" id="quick-search-query" type="text" accessKey="q" autocomplete="off" name="queryString" size="25"/>
+            <input class="quick-search-submit" id="quick-search-submit" type="submit"  value="Search Confluence" />
+            <div class="aui-dd-parent quick-nav-drop-down"><!-- Quick nav appears here --></div>
+        </fieldset>
+        <fieldset class="hidden parameters">
+            <input type="hidden" id="quickNavEnabled" value="true" />
+                    </fieldset>
+    </form>
+
+    <ul id="header-menu-bar" class="ajs-menu-bar">
+                    
+        
+            <li class="normal ajs-menu-item">
+        <a id="browse-menu-link" class="browse trigger ajs-menu-title" href="#"><span><span>Browse</span></span></a>         <div class="assistive ajs-drop-down">
+                        <ul  id="browse-menu-link-leading"                 class="section-leading first">
+                                        <li>
+    
+        
+    
+    <a  id="space-pages-link" href="/author/pages/listpages.action?key=WFLY10"  class=""   title="Browse pages in the WildFly 10 space">
+                   <span>Pages</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="space-blogposts-link" href="/author/pages/viewrecentblogposts.action?key=WFLY10"  class=""   title="Browse blogs in the WildFly 10 space">
+                   <span>Blog</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="space-labels-link" href="/author/labels/listlabels-heatmap.action?key=WFLY10"  class=""   title="Browse labels in the WildFly 10 space">
+                   <span>Labels</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="space-attachments-link" href="/author/spaces/listattachmentsforspace.action?key=WFLY10"  class=""   title="Browse attachments in the WildFly 10 space">
+                   <span>Attachments</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="space-mail-link" href="/author/spaces/viewmailarchive.action?key=WFLY10"  class=""   title="Browse mail in the WildFly 10 space">
+                   <span>Mail</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="space-advanced-link" href="/author/spaces/viewspacesummary.action?key=WFLY10"  class=""   title="Browse additional space functions in the WildFly 10 space">
+                   <span>Advanced</span></a>        </li>
+                            </ul>
+                        <ul  id="browse-menu-link-global"                 class="section-global">
+                                        <li>
+    
+        
+    
+    <a  id="space-directory-link" href="/author/spacedirectory/view.action"  class=""   title="Browse the Confluence space directory">
+                   <span>Space Directory</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="keyboard-shortcuts-link" href="/author"  class=""   title="View available keyboard shortcuts">
+                   <span>Keyboard Shortcuts</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="gadget-directory-link" href="/author"  class="user-item administration-link"   title="Browse gadgets provided by Confluence">
+                   <span>Confluence Gadgets</span></a>        </li>
+                            </ul>
+                    </div>
+    </li>
+        
+                                                         <li class="ajs-menu-item normal">
+        
+        
+    
+    <a  id="login-link" href="/author/login.action?os_destination=%2Fdisplay%2FWFLY10%2FApplication%2Bdeployment"  class="user-item login-link"   title="">
+                   <span>Log In</span></a>        </li>
+                                <li class="normal ajs-menu-item">
+            <div id="splitter-button" class="hidden" title="Show or hide sidebar"></div>
+        </li>
+
+    </ul>
+    
+    
+    <ol id="breadcrumbs">
+                    
+                        
+        <li class="first" >
+                                            <span><a href="/author/dashboard.action" title="Go to Dashboard">Project Documentation Editor</a></span>
+                </li>
+                    
+                
+        <li>
+                                            <span><a href="/author/display/WFLY10">WildFly 10</a></span>
+                </li>
+                                        <li id="ellipsis" title="Show all breadcrumbs"><span><strong>&#8230;</strong></span></li>
+                                    
+                
+        <li class="hidden-crumb" >
+                                            <span><a href="/author/display/WFLY10/Documentation">Documentation</a></span>
+                </li>
+                                
+                
+        <li class="hidden-crumb" >
+                                            <span><a href="/author/display/WFLY10/Admin+Guide">Admin Guide</a></span>
+                </li>
+                    
+                
+        <li>
+                                            <span><a href="/author/display/WFLY10/Management+tasks">Management tasks</a></span>
+                </li>
+                    
+                
+        <li>
+                                            <span>Application deployment</span>
+                </li>
+        </ol>
+
+</div>
+
+    <div id="splitter">
+    <div id="splitter-sidebar" >
+        
+
+                    
+        
+    
+
+<div class="plugin_pagetree">
+
+                <div id="pagetreesearch">
+            <form method="POST" action="/author/plugins/pagetreesearch/pagetreesearch.action" name="pagetreesearchform">
+                                    <input type="hidden" name="ancestorId" value="91947110">
+                                <input type="hidden" name="spaceKey" value="WFLY10">
+                <input type="text"  size="20" name="queryString">
+                <input type="submit" value="Search">
+            </form>
+        </div>
+    
+        
+    <ul class="plugin_pagetree_children_list plugin_pagetree_children_list_noleftspace">
+        <div class="plugin_pagetree_children">
+        </div>
+    </ul>
+
+    <fieldset class="hidden">
+        <input type="hidden" name="treeId" value="">
+        <input type="hidden" name="treeRequestId" value="/author/plugins/pagetree/naturalchildren.action?decorator=none&amp;excerpt=false&amp;sort=position&amp;reverse=false&amp;disableLinks=false">
+        <input type="hidden" name="treePageId" value="91947127">
+
+        <input type="hidden" name="noRoot" value="false">
+        <input type="hidden" name="rootPageId" value="91947110">
+
+        <input type="hidden" name="rootPage" value="">
+        <input type="hidden" name="startDepth" value="0">
+        <input type="hidden" name="spaceKey" value="WFLY10" >
+
+        <input type="hidden" name="i18n-pagetree.loading" value="Loading...">
+        <input type="hidden" name="i18n-pagetree.error.permission" value="Unable to load page tree. It seems that you do not have permission to view the root page.">
+        <input type="hidden" name="i18n-pagetree.eeror.general" value="There was a problem retrieving the page tree. Please check the server log file for more information.">
+        <input type="hidden" name="loginUrl" value="/author/login.action?os_destination=%2Fdisplay%2FWFLY10%2FApplication%2Bdeployment">
+
+                <fieldset class="hidden">
+                                                <input type="hidden" name="ancestorId" value="91947121">
+                                    <input type="hidden" name="ancestorId" value="91947111">
+                                    <input type="hidden" name="ancestorId" value="91947110">
+                                    </fieldset>
+    </fieldset>
+</div>
+
+
+
+            </div>
+    <div id="splitter-content">
+
+                    <script type="text/javascript" src="/author/s/en/2172/19/1.9/_/download/resources/com.atlassian.confluence.plugins.doctheme:resources/doc-theme.js"></script>
+    
+            
+        <div id="theme-header">
+            <div style='margin: 10px 0 10px 10px;'><a style='font-size: 1em;' href='/author/display/WFLY10/Management+tasks' title='Management tasks'>&lt;&nbsp;Previous</a> | <a style='font-size: 1em;' href='/author/display/WFLY10/Admin+Guide' title='Admin Guide'>Front&nbsp;page</a> | <a style='font-size: 1em;' href='/author/display/WFLY10/Audit+logging' title='Audit logging'>Next&nbsp;&gt;</a></div>
+
+        </div>
+    
+    
+<div id="main" >
+    <div id="main-header">
+	    
+	    
+    <div id="navigation" class="content-navigation view">
+        <fieldset class="hidden parameters">
+            <input type="hidden" id="pageId" value="91947127">
+        </fieldset>
+        <ul class="ajs-menu-bar">
+                                
+                        
+            <li class="normal ajs-menu-item">
+        <a id="action-menu-link" class="action trigger ajs-menu-title" href="#"><span><span>Tools</span></span></a>         <div class="assistive ajs-drop-down">
+                        <ul  id="action-menu-link-primary"                 class="section-primary first">
+                                        <li>
+    
+        
+    
+    <a  id="view-attachments-link" href="/author/pages/viewpageattachments.action?pageId=91947127"  class="action-view-attachments"  accessKey="a"  title="View Attachments">
+                   <span><u>A</u>ttachments (0)</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="action-view-history-link" href="/author/pages/viewpreviousversions.action?pageId=91947127"  class="action-view-history"   title="">
+                   <span>Page History</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="action-page-permissions-link" href="/author/pages/viewinfo.action?pageId=91947127"  class="action-page-permissions"   title="Edit restrictions">
+                   <span>Restrictions</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="c2k.dimport" href="/author/pages/viewpage.action?pageId=91947127"  class="kindleWidget"   title="">
+                    <span>
+                <img alt="Send to Kindle" src="/author/download/resources/com.daskiworks.confluence.plugin.confluence-to-kindle/images/icon16.png" height="15" width="15" title="Send to Kindle">
+                Send to Kindle
+            </span></a>        </li>
+                            </ul>
+                        <ul  id="action-menu-link-secondary"                 class="section-secondary">
+                                        <li>
+    
+        
+    
+    <a  id="view-page-info-link" href="/author/pages/viewinfo.action?pageId=91947127"  class="action-view-info"   title="">
+                   <span>Info</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="link-to-page-link" href="/author/pages/viewinfo.action?pageId=91947127"  class=""   title="Link to this Page">
+                   <span>Link to this Page&hellip;</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="view-in-hierarchy-link" href="/author/pages/listpages-dirview.action?key=WFLY10&amp;openId=91947127#selectedPageInHierarchy"  class=""   title="">
+                   <span>View in Hierarchy</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="action-view-source-link" href="/author/pages/viewpagesrc.action?pageId=91947127"  class="action-view-source popup-link"   title="">
+                   <span>View Wiki Markup</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="action-export-pdf-link" href="/author/spaces/flyingpdf/pdfpageexport.action?pageId=91947127"  class=""   title="">
+                   <span>Export to PDF</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="com-k15t-confluence-scroll-html-launcher" href="/author/pages/viewpage.action?pageId=91947127"  class=""   title="">
+                   <span>Export to HTML</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="com-k15t-confluence-scroll-ehlp-launcher" href="/author/pages/viewpage.action?pageId=91947127"  class=""   title="">
+                   <span>Export to EclipseHelp</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="com-k15t-confluence-scroll-epub-launcher" href="/author/pages/viewpage.action?pageId=91947127"  class=""   title="">
+                   <span>Export to EPUB</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="com-k15t-confluence-scroll-pdf-launcher" href="/author/pages/viewpage.action?pageId=91947127"  class=""   title="">
+                   <span>Export to PDF</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="action-export-word-link" href="/author/exportword?pageId=91947127"  class="action-export-word"   title="">
+                   <span>Export to Word</span></a>        </li>
+                            </ul>
+                    </div>
+    </li>
+            </ul>
+    </div>
+
+	    
+	    <h1 id="title-heading" class="pagetitle">
+	        	            <a href="/author/display/WFLY10"><img class="logo space custom" src="/author/download/attachments/91947108/WFLY10?version=1&modificationDate=1431615881000" alt=""></a>	        	
+			<span id="title-text">
+							            <a href="/author/display/WFLY10/Application+deployment">Application deployment</a>
+    						</span>
+	    </h1>
+	</div>
+
+    
+
+    
+    
+    
+    <div id="content" class="page view">
+    
+
+
+
+<div id="link-to-page-fields" class="hidden parameters">
+    <input type="hidden" id="linkToThisPageHeading" value="Link to this Page">
+    <input type="hidden" id="linkToThisPageLink" value="Link">
+    <input type="hidden" id="linkToThisPageTinyLink" value="Tiny Link">
+    <input type="hidden" id="linkToThisPageWikiMarkup" value="Wiki Markup">
+    <input type="hidden" id="linkToThisPageClose" value="Close">
+</div>
+<fieldset class="hidden parameters">
+    <input type="hidden" title="movePageDialogViewPageTitle" value="Move Page &ndash; &#8216;Application deployment&#8217;">
+    <input type="hidden" title="movePageDialogEditPageTitle" value="Set Page Location">
+    <input type="hidden" title="movePageDialogMoveButton" value="Move">
+    <input type="hidden" title="movePageDialogCancelButton" value="Cancel">
+    <input type="hidden" title="movePageDialogBrowsePanelTip" value="Click to select the new parent page for this page and its children.">
+    <input type="hidden" title="movePageDialogSearchPanel" value="Search">
+    <input type="hidden" title="movePageDialogHistoryPanel" value="Recently Viewed">
+    <input type="hidden" title="movePageDialogHistoryNoResults" value="There were no recently viewed pages found.">
+    <input type="hidden" title="movePageDialogLocationPanel" value="Known Location">
+    <input type="hidden" title="movePageDialogLocationNotFound" value="The specified page was not found.">
+    <input type="hidden" title="movePageDialogBrowsePanel" value="Browse">
+    <input type="hidden" title="movePageDialogPanelLoadErrorMsg" value="Error reading the panel content from the server.">
+    <input type="hidden" title="movePageDialogPanelLoadErrorTip" value="You could try reloading the page and launching the dialog again.">
+    <input type="hidden" title="movePageDialogPanelLoadErrorStatus" value="HTTP Status">
+    <input type="hidden" title="movePageDialogNoSelectionErrorMsg" value="You must make a selection in the tree before you can move the page.">
+    <input type="hidden" title="movePageDialogSearchError" value="Failed to retrieve search results from the server.">
+    <input type="hidden" title="movePageDialogSearchNoResults" value="There were no pages found containing <b>{0}</b>.">
+    <input type="hidden" title="movePageDialogSearchResultCount" value="Showing <b>{0}</b>-<b>{1}</b> of <b>{2}</b> pages containing <b>{3}</b>.">
+    <input type="hidden" title="movePageDialogMoveFailed" value="Move failed. There was a problem contacting the server.">
+    <input type="hidden" title="movePageDialogCannotChangeSpace" value="You cannot move this page to another space because you do not have permission to remove it from this space.">
+    <input type="hidden" title="pageTitle" value="Application deployment"/>
+    <input type="hidden" title="parentPageTitle" value="Management tasks"/>
+    <input type="hidden" title="fromPageTitle" value=""/>
+    <input type="hidden" title="spaceKey" value="WFLY10"/>
+    <input type="hidden" title="spaceName" value="WildFly 10"/>
+    <input type="hidden" title="movePageDialogInvalidLocation" value="You cannot move a page to be underneath itself or its children."/>
+    <input type="hidden" title="movePageDialogOrderingTitle" value="Page Ordering"/>
+    <input type="hidden" title="movePageDialogBackButton" value="Back"/>
+    <input type="hidden" title="movePageDialogMoveAndOrderButton" value="Reorder"/>
+    <input type="hidden" title="movePageDialogNextButton" value="Move"/>
+</fieldset>
+
+<script type="text/x-template" title="movePageDialog">
+    <div class="row information">
+        <div class="inner">
+            <div class="element">
+                Specify the new parent page for this page and its children by space and title.
+            </div>
+        </div>
+    </div>
+    <div class="form">
+        <fieldset>
+                
+
+    <legend class="assistive"><span>Change the Parent Page to a Known Page</span></legend>
+            <div class="row">
+                <label for="new-space">New space:</label>
+                <div class="value new-space-value">
+                    <input id="new-space-key" name="new-space-key" type="hidden" value="WFLY10">
+                                            <span class="space-input">
+                            <input id="new-space" name="new-space" value="WildFly 10" disabled="disabled">
+                        </span>
+                        <span class="description warning">You cannot move this page to another space because you do not have permission to remove it from this space.</span>
+                                        <div class="new-space-dropdown aui-dd-parent autocomplete"></div>
+                </div>
+            </div>
+            <div class="row">
+                <label for="new-parent-page">New parent page:</label>
+                <div class="value new-parent-page-value">
+                    <span class="page-input">
+                        <input id="new-parent-page" name="new-parent-page" value="Management tasks">
+                    </span>
+                    <span class="description">Start typing a page title to see a list of suggestions.</span>
+                    <div class="new-parent-page-dropdown aui-dd-parent autocomplete"></div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="location-info">
+        <div class="row">
+            <label>Current location:</label>
+            <div class="value breadcrumbs-container">
+                <div class="breadcrumbs-line">
+                    <ul id="current-parent-breadcrumbs" class="breadcrumbs">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label>New location:</label>
+            <div class="value breadcrumbs-container">
+                <div class="breadcrumbs-line">
+                    <ul id="new-parent-breadcrumbs" class="breadcrumbs">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/x-template" title="movePageErrors">
+    <div id="move-errors" class="hidden warning"></div>
+</script>
+<script type="text/x-template" title="movePageBreadcrumb">
+    <li><a class="{2}" title="{3}" tabindex="-1"><span>{0}</span></a></li>
+</script>
+<script type="text/x-template" title="movePageBreadcrumbLoading">
+    <li class="loading"><span>Loading breadcrumbs&hellip;</span></li>
+</script>
+<script type="text/x-template" title="movePageBreadcrumbError">
+    <li class="warning last"><span>Error retrieving breadcrumbs.</span></li>
+</script>
+<script type="text/x-template" title="movePageNoMatchingPages">
+    <ol><li><span class="warning">No matching pages found.</span></li></ol>
+</script>
+<script type="text/x-template" title="movePageNoMatchingSpaces">
+    <ol><li><span class="warning">No matching spaces found.</span></li></ol>
+</script>
+
+<script type="text/x-template" title="movePageSearchPanel">
+    <div class="row information">
+        <div class="inner">
+            <div class="element">
+                Search for and select the new parent page for this page and its children.
+            </div>
+        </div>
+    </div>
+    <div id="move-page-search-container" class="row">
+        <div class="search-form">
+            <fieldset>
+                    
+
+    <legend class="assistive"><span>Search for a New Parent Page</span></legend>
+                    
+
+    <label  for="move-page-search-query" class="assistive">Search keywords</label>
+                <input class="search-query" id="move-page-search-query">
+                    
+
+    <label  for="move-page-search-space" class="assistive">Search in space</label>
+                                    <select id="move-page-search-space" class="search-space" disabled="disabled">
+                        <option value="WFLY10" selected="selected">WildFly 10</option>
+                    </select>
+                                <input type="button" value="Search">
+                                    <div class="description warning">You cannot move this page to another space because you do not have permission to remove it from this space.</div>
+                            </fieldset>
+        </div>
+        <div class="search-results">
+        </div>
+    </div>
+</script>
+<script type="text/x-template" title="movePageSearchResultsLoading">
+    <div class="searching">Searching…</div>
+</script>
+
+<script type="text/x-template" title="movePageHistoryPanel">
+    <div class="row information">
+        <div class="inner">
+            <div class="element">
+                Select the new parent page for this page and its children from your history.
+            </div>
+        </div>
+    </div>
+    <div id="move-page-search-container" class="row">
+        <div class="search-results">
+        </div>
+    </div>
+</script>
+<script type="text/x-template" title="movePageHistoryLoading">
+    <div class="searching">Loading…</div>
+</script>
+<script type="text/x-template" title="movePageBrowsePanel">
+    <div class="row information">
+        <div class="inner">
+            <div class="element">
+                Click to select the new parent page for this page and its children.
+            </div>
+        </div>
+    </div>
+    <div class="tree"></div>
+</script>
+<script type="text/x-template" title="movePagePanelLoading">
+    <span>Loading…</span>
+</script>
+<script type="text/x-template" title="movePageBrowsePanelSpace">
+    <ul><li id='tree-root-node-item' class='root-node-list-item'><a class='root-node' href='#'>{0}</a></li></ul>
+</script>
+<script type="text/x-template" title="orderingPagePanel">
+<div id="orderingPlaceHolder"></div>
+</script>
+<script type="text/x-template" title="reorderCheckbox">
+<span id="reorderRequirement"><input id="reorderCheck" type="checkbox" name="reorderFlag" title="Choose the position of this page within the list of child pages."/><label for="reorderCheck" title="Choose the position of this page within the list of child pages.">Reorder</label></span>
+</script>
+<script type="text/x-template" title="move-help-link">
+    <div class="dialog-help-link">
+            <a href="http://docs.atlassian.com/confluence/docs-35/Moving+a+Page" target="_blank">Help</a>
+    </div>
+</script>
+<script type="text/x-template" title="searchResultsGrid">
+    <table>
+        <thead>
+            <tr class="header">
+                <th class="search-result-title">Page Title</th>
+                <th class="search-result-space">Space</th>
+                <th class="search-result-date">Updated</th>
+            </tr>
+        </thead>
+    </table>
+</script>
+<script type="text/x-template" title="searchResultsGridCount">
+    <p class="search-result-count">{0}</p>
+</script>
+<script type="text/x-template" title="searchResultsGridRow">
+    <tr class="search-result">
+        <th class="search-result-title"><a href="{1}" class="content-type-{2}"><span>{0}</span></a></th>
+        <td class="search-result-space"><a class="space" href="/author/display/{4}/" title="{3}">{3}</a></td>
+        <td class="search-result-date"><span class="date" title="{6}">{5}</span></td>
+    </tr>
+</script>
+<!-- Start restrictions section -->
+<script type="text/x-template" title="page-permissions-div">
+<div id="page-permissions-div">
+    <div id="page-permissions-editor-form">
+
+                <div id="page-permissions-error-div" class="hidden">
+            <a href="#" id="permissions-error-div-close">Ok</a>
+            <div></div>
+        </div>
+
+                <div id="page-permissions-type-radios" class="page-permissions-label-rows">
+            <div>
+                <input id="restrictViewRadio" type="radio" checked="checked" name="pagePermissionTypeRadio" value="view"/>
+                <label for="restrictViewRadio">Restrict viewing of this page</label>
+                <input id="restrictEditRadio" type="radio" name="pagePermissionTypeRadio" value="edit"/>
+                <label for="restrictEditRadio">Restrict editing of this page</label>
+            </div>
+        </div>
+        <div id="page-permissions-input" class="page-permissions-label-rows">
+            <div class="page-permissions-label">To:</div>
+            <div id="page-permissions-chooser-box">
+                                <span id="page-permissions-choose-user" class="ajs-button">
+                    
+
+
+
+    
+
+
+
+<a href="#" id='userpicker-popup-link-image' onClick="var picker = window.open('/author/spaces/openuserpicker.action?key=WFLY10&amp;startIndex=0&amp;onPopupSubmit=AJS.PagePermissions.addUserPermissions', 'EntitiesPicker', 'status=yes,resizable=yes,top=100,left=200,width=700,height=680,scrollbars=yes'); picker.focus(); return false;"><img src="/author/s/en/2172/19/_/images/icons/user_16.gif" height=16 width=16 border=0 align="absmiddle"  title="Choose users" /></a>
+<a href="#" id='userpicker-popup-link-text' onClick="var picker = window.open('/author/spaces/openuserpicker.action?key=WFLY10&amp;startIndex=0&amp;onPopupSubmit=AJS.PagePermissions.addUserPermissions', 'EntitiesPicker', 'status=yes,resizable=yes,top=100,left=200,width=700,height=680,scrollbars=yes'); picker.focus(); return false;">Person...</a>
+
+
+                </span>
+                <span id="page-permissions-choose-group" class="ajs-button">
+                    
+
+
+
+    
+
+ 
+
+<a href="#" id='grouppicker-popup-link-image' onClick="var picker = window.open('/author/spaces/opengrouppicker.action?key=WFLY10&amp;startIndex=0&amp;actionName=dosearchgroups.action&amp;onPopupSubmit=AJS.PagePermissions.addGroupPermissions', 'EntitiesPicker', 'status=yes,resizable=yes,top=100,left=200,width=580,height=550,scrollbars=yes'); picker.focus(); return false;"><img src="/author/s/en/2172/19/_/images/icons/group_16.gif" height=16 width=16 border=0 align="absmiddle"  title="Choose groups" /></a>
+<a href="#" id='grouppicker-popup-link-text' onClick="var picker = window.open('/author/spaces/opengrouppicker.action?key=WFLY10&amp;startIndex=0&amp;actionName=dosearchgroups.action&amp;onPopupSubmit=AJS.PagePermissions.addGroupPermissions', 'EntitiesPicker', 'status=yes,resizable=yes,top=100,left=200,width=580,height=550,scrollbars=yes'); picker.focus(); return false;">Group...</a>
+
+
+                </span>
+            </div>
+            <div id="page-permissions-input-box">
+                                <span>
+                    <input type="text" id="page-permissions-names-input" class="input-placeholder" value="Enter user or group name" name="permissionNames" size="30" autocomplete="off"/>
+                </span>
+                <input
+    type="hidden"
+                            id="page-permissions-names-hidden"           />                <img height="16px" width="1px" src="/author/s/en/2172/19/_/images/border/spacer.gif"/>
+                <input type="button" id="add-typed-names" value="Restrict">
+            </div>
+        </div>
+    </div>
+    <div id="page-permissions-tables">
+        <div id="page-permissions-table-div">
+                        <table id="page-permissions-table" class="page-permissions-table">
+                <tr id="page-permissions-no-views" class="marker-row">
+                    <td colspan="3" class="page-permissions-marker-cell"><span>No view restrictions are defined for this page</span></td>
+                </tr>
+                <tr id="page-permissions-no-edits" class="marker-row">
+                    <td colspan="3" class="page-permissions-marker-cell"><span>No edit restrictions are defined for this page</span></td>
+                </tr>
+            </table>
+        </div>
+        <div id="page-inherited-permissions-table-div" class="hidden">
+            <span id="page-inherited-permissions-table-desc">
+                <a class="icon twisty-closed">Show/Hide</a>
+                <a id="toggle-inherited-permissions" title="Click to see inherited restrictions">This page has restricted parent pages. It can only be seen by users who can see those parent pages.</a>
+            </span>
+            <div id="page-inherited-permissions-tables" class="hidden page-inheritance-togglable"></div>
+        </div>
+    </div>
+</div>
+</script>
+
+<script type="text/x-template" title="permissions-row-template">
+    <tr class="permission-row">
+                                
+                <td class="page-permissions-marker-cell" width="20%">
+            <span>Viewing restricted to:</span>
+        </td>
+                <td class="permission-entity" nowrap="true" width="40%">
+            <span class="entity-container">
+                <img class="permission-entity-picture"/>
+                <span class="permission-entity-display-name"></span>
+                <span class="permission-entity-name-wrap">&nbsp;(<span class="permission-entity-name"></span>)</span>
+            </span>
+        </td>
+        <td class="permission-detail-column">
+            <div class="permission-remove-div">
+                <a href="#" class="remove-permission-link">Remove restriction</a>
+            </div>
+        </td>
+    </tr>
+</script>
+<script type="text/x-template" title="permissions-username-no-suggestion-template">
+    <ol>
+        <li><a href="#" class="message"><span>No matches</span></a></li>
+    </ol>
+</script>
+<script type="text/x-template" title="page-inherited-permissions-table-div-template">
+        <div class="page-inherited-permissions-owner-div">
+        <div class="page-inherited-permissions-table-desc">Viewing restrictions apply to “<a></a>”. In order to see “<span></span>”, a user must be in the following list of users and groups:</div>
+        <table class="page-permissions-table"></table>
+    </div>
+</script>
+<script type="text/x-template" title="page-restrictions-help-link">
+    <div class="dialog-help-link">
+            <a href="http://docs.atlassian.com/confluence/docs-35/Page+Restrictions" target="_blank">Help</a>
+    </div>
+</script>
+<!-- End restrictions section -->
+
+<fieldset class="hidden parameters">
+    <input type="hidden" title="spaceKeyEncoded" value="WFLY10">
+    <input type="hidden" title="spaceKeyDecoded" value="WFLY10">
+</fieldset>
+
+
+        
+    
+    
+        <fieldset class="hidden parameters">
+            <input type="hidden" title="parentPageId" value="91947121">
+        </fieldset>
+
+        
+                            
+    
+
+                    
+
+        
+        <a href="#page-metadata-end" class="assistive">Skip to end of metadata</a>
+<div id="page-metadata-start" class="assistive"></div>
+
+    <div class="page-metadata">
+        <ul>
+                            <li class="page-metadata-item noprint">
+    
+            
+    
+    <a  id="content-metadata-page-restrictions" href="#"  class="page-metadata-icon page-restrictions hidden"   title="Page restrictions apply. Click the lock icon to view or edit the restriction.">
+                   <span>Page restrictions apply</span></a>        </li>
+                        <li class="page-metadata-modification-info">
+                                    Added by <a href="/author/display/~kabirkhan"
+                          class="url fn"
+                   >Kabir Khan</a>, last edited by <a href="/author/display/~brian.stansberry"
+                          class="url fn"
+                   >Brian Stansberry</a> on Jun 29, 2016
+                                                                <span class="noprint">&nbsp;(<a id="view-change-link" href="/author/pages/diffpages.action?pageId=91947127&originalId=107675965">view change</a>)</span>
+                                                </li>
+                    </ul>
+          <div id="version-comment" class="noteMacro" style="display: none;">
+      <strong>Comment:</strong>
+      <br />
+  </div>
+    </div>
+
+
+<a href="#page-metadata-start" class="assistive">Go to start of metadata</a>
+<div id="page-metadata-end" class="assistive"></div>
+        
+        <fieldset class="hidden parameters">
+                        <input type="hidden" title="browsePageTreeMode" value="view">
+        </fieldset>
+
+        <div class="wiki-content">
+           <!-- wiki content -->
+            <h2><a name="Applicationdeployment-ManagedDomain"></a>Managed Domain</h2>
+
+<p>In a managed domain, deployments are associated with a <tt>server-group</tt> (see ﻿<a href="/author/display/WFLY10/Core+management+concepts" title="Core management concepts">Core management concepts</a>). Any server within the server group will then be provided with that deployment.</p>
+
+<p>The domain and host controller components manage the distribution of binaries across network boundaries.</p>
+
+<h3><a name="Applicationdeployment-DeploymentCommands"></a>Deployment Commands</h3>
+
+<p>Distributing deployment binaries involves two steps: uploading the deployment to the repository the domain controller will use to distribute its contents, and then assigning the deployment to one or more server groups.</p>
+
+<p>You can do this in one sweep with the CLI:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<script type="syntaxhighlighter" class="theme: Confluence; brush: java; gutter: false"><![CDATA[
+[domain@localhost:9990 /] deploy ~/Desktop/test-application.war
+Either --all-server-groups or --server-groups must be specified.
+
+[domain@localhost:9990 /] deploy ~/Desktop/test-application.war --all-server-groups
+'test-application.war' deployed successfully.
+]]></script>
+</div></div>
+
+<p>The deployment will be available to the domain controller, assigned to a server group, and deployed on all running servers in that group:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<script type="syntaxhighlighter" class="theme: Confluence; brush: java; gutter: false"><![CDATA[
+[domain@localhost:9990 /] :read-children-names(child-type=deployment)
+{
+   "outcome" =&gt; "success",
+   "result" =&gt; [
+       "mysql-connector-java-5.1.15.jar",
+       "test-application.war"
+   ]
+}
+
+[domain@localhost:9990 /] /server-group=main-server-group/deployment=test-application.war:read-resource
+{
+   "outcome" =&gt; "success",
+   "result" =&gt; {
+       "enabled" =&gt; true,
+       "name" =&gt; "test-application.war",
+       "runtime-name" =&gt; "test-application.war"
+   }
+}
+
+]]></script>
+</div></div>
+
+<p>If you only want the deployment deployed on servers in some server groups, but not all, use the <tt>--server-groups</tt> parameter instead of <tt>-all-server-groups</tt>:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<script type="syntaxhighlighter" class="theme: Confluence; brush: java; gutter: false"><![CDATA[
+[domain@localhost:9990 /] deploy ~/Desktop/test-application.war --server-groups=main-server-group,another-group
+'test-application.war' deployed successfully.
+]]></script>
+</div></div>
+
+<p>If you have a new version of the deployment that you want to deploy replacing an existing one, use the <tt>--force</tt> parameter:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<script type="syntaxhighlighter" class="theme: Confluence; brush: java; gutter: false"><![CDATA[
+[domain@localhost:9990 /] deploy ~/Desktop/test-application.war --all-server-groups --force
+'test-application.war' deployed successfully.
+]]></script>
+</div></div>
+
+<p>You can remove binaries from server groups with the <tt>undeploy</tt> command:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<script type="syntaxhighlighter" class="theme: Confluence; brush: java; gutter: false"><![CDATA[
+[domain@localhost:9990 /] undeploy test-application.war --all-relevant-server-groups
+Successfully undeployed test-application.war.
+
+[domain@localhost:9990 /] /server-group=main-server-group:read-children-names(child-type=deployment)
+{
+   "outcome" =&gt; "success",
+   "result" =&gt; []
+}
+]]></script>
+</div></div>
+
+<p>If you only want to undeploy from some server groups but not others, use the <tt>-<del>server-groups</tt> parameter instead of <tt></del>-all-relevant-server-groups</tt>.</p>
+
+<p>The CLI <tt>deploy</tt> command supports a number of other parameters that can control behavior. Use the <tt>--help</tt> parameter to learn more:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<script type="syntaxhighlighter" class="theme: Confluence; brush: java; gutter: false"><![CDATA[
+[domain@localhost:9990 /] deploy --help
+[...]
+]]></script>
+</div></div>
+
+<div class='panelMacro'><table class='tipMacro'><colgroup><col width='24'><col></colgroup><tr><td valign='top'><img src="/author/images/icons/emoticons/check.gif" width="16" height="16" align="absmiddle" alt="" border="0"></td><td>Managing deployments through the web interface provides an alternate, sometimes simpler approach.</td></tr></table></div>
+
+<h3><a name="Applicationdeployment-XMLConfigurationFile"></a>XML Configuration File</h3>
+
+<p>When you deploy content, the domain controller adds two types of entries to the <tt>domain.xml</tt> configuration file, one showing global information about the deployment, and another for each relevant server group showing how it is used by that server group:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<script type="syntaxhighlighter" class="theme: Confluence; brush: java; gutter: false"><![CDATA[
+[...]
+&lt;deployments&gt;
+   &lt;deployment name="test-application.war"
+               runtime-name="test-application.war"&gt;
+       &lt;content sha1="dda9881fa7811b22f1424b4c5acccb13c71202bd"/&gt;
+   &lt;/deployment&gt;
+&lt;/deployments&gt;
+[...]
+&lt;server-groups&gt;
+   &lt;server-group name="main-server-group" profile="default"&gt;
+       [...]
+       &lt;deployments&gt;
+           &lt;deployment name="test-application.war" runtime-name="test-application.war"/&gt;
+       &lt;/deployments&gt;
+   &lt;/server-group&gt;
+&lt;/server-groups&gt;
+[...]
+]]></script>
+</div></div>
+<p><sub>(See domain/configuration/domain.xml)</sub></p>
+
+<h2><a name="Applicationdeployment-StandaloneServer"></a>Standalone Server</h2>
+
+<p>Deployments on a standalone server work in a similar way to those on managed domains. The main difference is that there are no server group associations.</p>
+
+<h3><a name="Applicationdeployment-DeploymentCommands"></a>Deployment Commands</h3>
+
+<p>The same CLI commands used for managed domains work for standalone servers when deploying and removing an application:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<script type="syntaxhighlighter" class="theme: Confluence; brush: java; gutter: false"><![CDATA[
+[standalone@localhost:9990 /] deploy ~/Desktop/test-application.war
+'test-application.war' deployed successfully.
+
+[standalone@localhost:9990 /] undeploy test-application.war
+Successfully undeployed test-application.war.
+]]></script>
+</div></div>
+
+<p><a name="Applicationdeployment-filesystemdeployments"></a></p>
+
+<h3><a name="Applicationdeployment-DeployingUsingtheDeploymentScanner"></a>Deploying Using the Deployment Scanner</h3>
+
+<p>Deployment content (for example, war, ear, jar, and sar files) can be placed in the standalone/deployments directory of the WildFly distribution, in order to be automatically deployed into the server runtime. For this to work the <tt>deployment-scanner</tt> subsystem must be present. The scanner periodically checks the contents of the deployments directory and reacts to changes by updating the server.</p>
+
+<div class='panelMacro'><table class='infoMacro'><colgroup><col width='24'><col></colgroup><tr><td valign='top'><img src="/author/images/icons/emoticons/information.gif" width="16" height="16" align="absmiddle" alt="" border="0"></td><td>Users are encouraged to use the WildFly management APIs to upload and deploy deployment content instead of relying on the deployment scanner that periodically scans the directory, particularly if running production systems.</td></tr></table></div>
+
+<h4><a name="Applicationdeployment-DeploymentScannerModes"></a>Deployment Scanner Modes</h4>
+
+<p>The WildFly filesystem deployment scanner operates in one of two different modes, depending on whether it will directly monitor the deployment content in order to decide to deploy or redeploy it.</p>
+
+
+<p><ins>Auto-deploy mode</ins>:</p>
+
+<p>The scanner will directly monitor the deployment content, automatically deploying new content and redeploying content whose timestamp has changed. This is similiar to the behavior of previous AS releases, although there are differences:</p>
+
+<ul>
+	<li>A change in any file in an exploded deployment triggers redeploy. Because EE 6&#43; applications do not require deployment descriptors,<br/>
+there is no attempt to monitor deployment descriptors and only redeploy when a deployment descriptor changes.</li>
+	<li>The scanner will place marker files in this directory as an indication of the status of its attempts to deploy or undeploy content. These are detailed below.</li>
+</ul>
+
+
+<p><ins>Manual deploy mode</ins>:</p>
+
+<p>The scanner will not attempt to directly monitor the  deployment content and decide if or when the end user wishes the content to be deployed. Instead, the scanner relies on a system of marker  files, with the user's addition or removal of a marker file serving as a sort of command telling the scanner to deploy, undeploy or redeploy content.</p>
+
+<p>Auto-deploy mode and manual deploy mode can be independently configured for  zipped deployment content and exploded deployment content. This is done via the "auto-deploy" attribute on the deployment-scanner element in the standalone.xml configuration file:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<script type="syntaxhighlighter" class="theme: Confluence; brush: java; gutter: false"><![CDATA[
+&lt;deployment-scanner scan-interval="5000" relative-to="jboss.server.base.dir"
+   path="deployments" auto-deploy-zipped="true" auto-deploy-exploded="false"/&gt;
+]]></script>
+</div></div>
+
+<p>By default, auto-deploy of zipped content is enabled, and auto-deploy of exploded content is disabled. Manual deploy mode is strongly recommended for exploded content, as exploded content is inherently vulnerable to the scanner trying to auto-deploy partially copied content.</p>
+
+<h4><a name="Applicationdeployment-MarkerFiles"></a>Marker Files</h4>
+
+<p>The marker files always have the same name as the deployment content to which they relate, but with an additional file suffix appended. For example, the marker file to indicate the example.war file should be deployed is named example.war.dodeploy. Different marker file suffixes have different meanings.</p>
+
+<p>The relevant marker file types are:</p>
+<div class='table-wrap'>
+<table class='confluenceTable'><tbody>
+<tr>
+<th class='confluenceTh'> File </th>
+<th class='confluenceTh'> Purpose </th>
+</tr>
+<tr>
+<td class='confluenceTd'> .dodeploy </td>
+<td class='confluenceTd'> Placed by the user to indicate that the given content should <br class="atl-forced-newline" />
+be deployed into the runtime (or redeployed if already <br class="atl-forced-newline" />
+deployed in the runtime.) </td>
+</tr>
+<tr>
+<td class='confluenceTd'> .skipdeploy </td>
+<td class='confluenceTd'> Disables auto-deploy of the content for as long as the file <br class="atl-forced-newline" />
+is present. Most useful for allowing updates to exploded <br class="atl-forced-newline" />
+content without having the scanner initiate redeploy in the <br class="atl-forced-newline" />
+middle of the update. Can be used with zipped content as <br class="atl-forced-newline" />
+well, although the scanner will detect in-progress changes <br class="atl-forced-newline" />
+to zipped content and wait until changes are complete. </td>
+</tr>
+<tr>
+<td class='confluenceTd'> .isdeploying </td>
+<td class='confluenceTd'> Placed by the deployment scanner service to indicate that it <br class="atl-forced-newline" />
+has noticed a .dodeploy file or new or updated auto-deploy <br class="atl-forced-newline" />
+mode content and is in the process of deploying the content. <br class="atl-forced-newline" />
+This marker file will be deleted when the deployment process <br class="atl-forced-newline" />
+completes. </td>
+</tr>
+<tr>
+<td class='confluenceTd'> .deployed </td>
+<td class='confluenceTd'> Placed by the deployment scanner service to indicate that the <br class="atl-forced-newline" />
+given content has been deployed into the runtime. If an end <br class="atl-forced-newline" />
+user deletes this file, the content will be undeployed. </td>
+</tr>
+<tr>
+<td class='confluenceTd'> .failed </td>
+<td class='confluenceTd'> Placed by the deployment scanner service to indicate that the <br class="atl-forced-newline" />
+given content failed to deploy into the runtime. The content <br class="atl-forced-newline" />
+of the file will include some information about the cause of <br class="atl-forced-newline" />
+the failure. Note that with auto-deploy mode, removing this <br class="atl-forced-newline" />
+file will make the deployment eligible for deployment again. </td>
+</tr>
+<tr>
+<td class='confluenceTd'> .isundeploying </td>
+<td class='confluenceTd'> Placed by the deployment scanner service to indicate that it <br class="atl-forced-newline" />
+has noticed a .deployed file has been deleted and the <br class="atl-forced-newline" />
+content is being undeployed. This marker file will be deleted <br class="atl-forced-newline" />
+when the undeployment process completes. </td>
+</tr>
+<tr>
+<td class='confluenceTd'> .undeployed </td>
+<td class='confluenceTd'> Placed by the deployment scanner service to indicate that the <br class="atl-forced-newline" />
+given content has been undeployed from the runtime. If an end <br class="atl-forced-newline" />
+user deletes this file, it has no impact. </td>
+</tr>
+<tr>
+<td class='confluenceTd'> .pending </td>
+<td class='confluenceTd'> Placed by the deployment scanner service to indicate that it <br class="atl-forced-newline" />
+has noticed the need to deploy content but has not yet <br class="atl-forced-newline" />
+instructed the server to deploy it. This file is created if <br class="atl-forced-newline" />
+the scanner detects that some auto-deploy content is still in <br class="atl-forced-newline" />
+the process of being copied or if there is some problem that <br class="atl-forced-newline" />
+prevents auto-deployment. The scanner will not instruct the <br class="atl-forced-newline" />
+server to deploy or undeploy any content (not just the <br class="atl-forced-newline" />
+directly affected content) as long as this condition holds. </td>
+</tr>
+</tbody></table>
+</div>
+
+
+<p><b>Basic workflows:</b><br/>
+All examples assume variable $JBOSS_HOME points to the root of the WildFly distribution.</p>
+
+<p>A) Add new zipped content and deploy it:</p>
+
+<ol>
+	<li>cp target/example.war/ $JBOSS_HOME/standalone/deployments</li>
+	<li>(Manual mode only) touch $JBOSS_HOME/standalone/deployments/example.war.dodeploy</li>
+</ol>
+
+
+<p>B) Add new unzipped content and deploy it:</p>
+
+<ol>
+	<li>cp &#45;r target/example.war/ $JBOSS_HOME/standalone/deployments</li>
+	<li>(Manual mode only) touch $JBOSS_HOME/standalone/deployments/example.war.dodeploy</li>
+</ol>
+
+
+<p>C) Undeploy currently deployed content:</p>
+
+<ol>
+	<li>rm $JBOSS_HOME/standalone/deployments/example.war.deployed</li>
+</ol>
+
+
+<p>D) Auto-deploy mode only: Undeploy currently deployed content:</p>
+
+<ol>
+	<li>rm $JBOSS_HOME/standalone/deployments/example.war</li>
+</ol>
+
+
+<p>E) Replace currently deployed zipped content with a new version and deploy it:</p>
+<ol>
+	<li>cp target/example.war/ $JBOSS_HOME/standalone/deployments</li>
+	<li>(Manual mode only) touch $JBOSS_HOME/standalone/deployments/example.war.dodeploy</li>
+</ol>
+
+
+<p>F) Manual mode only: Replace currently deployed unzipped content with a new version and deploy it:</p>
+<ol>
+	<li>rm $JBOSS_HOME/standalone/deployments/example.war.deployed</li>
+	<li>wait for $JBOSS_HOME/standalone/deployments/example.war.undeployed file to appear</li>
+	<li>cp &#45;r target/example.war/ $JBOSS_HOME/standalone/deployments</li>
+	<li>touch $JBOSS_HOME/standalone/deployments/example.war.dodeploy</li>
+</ol>
+
+
+<p>G) Auto-deploy mode only: Replace currently deployed unzipped content with a new version and deploy it:</p>
+<ol>
+	<li>touch $JBOSS_HOME/standalone/deployments/example.war.skipdeploy</li>
+	<li>cp &#45;r target/example.war/ $JBOSS_HOME/standalone/deployments</li>
+	<li>rm $JBOSS_HOME/standalone/deployments/example.war.skipdeploy</li>
+</ol>
+
+
+<p>H) Manual mode only: Live replace portions of currently deployed unzipped content without redeploying:</p>
+<ol>
+	<li>cp &#45;r target/example.war/foo.html $JBOSS_HOME/standalone/deployments/example.war</li>
+</ol>
+
+
+<p>I) Auto-deploy mode only: Live replace portions of currently deployed unzipped content without redeploying:</p>
+<ol>
+	<li>touch $JBOSS_HOME/standalone/deployments/example.war.skipdeploy</li>
+	<li>cp &#45;r target/example.war/foo.html $JBOSS_HOME/standalone/deployments/example.war</li>
+</ol>
+
+
+<p>J) Manual or auto-deploy mode: Redeploy currently deployed content (i.e. bounce it with no content change):</p>
+<ol>
+	<li>touch $JBOSS_HOME/standalone/deployments/example.war.dodeploy</li>
+</ol>
+
+
+<p>K) Auto-deploy mode only: Redeploy currently deployed content (i.e. bounce it with no content change):</p>
+<ol>
+	<li>touch $JBOSS_HOME/standalone/deployments/example.war</li>
+</ol>
+
+
+<div class='panelMacro'><table class='infoMacro'><colgroup><col width='24'><col></colgroup><tr><td valign='top'><img src="/author/images/icons/emoticons/information.gif" width="16" height="16" align="absmiddle" alt="" border="0"></td><td>The above examples use Unix shell commands. Windows equivalents are:
+
+<p>cp src dest &#45;-&gt; xcopy /y src dest<br/>
+cp &#45;r src dest &#45;-&gt; xcopy /e /s /y src dest<br/>
+rm afile &#45;-&gt; del afile<br/>
+touch afile &#45;-&gt; echo&gt;&gt; afile</p>
+
+<p>Note that the behavior of 'touch' and 'echo' are different but the differences are not relevant to the usages in the examples above.</p></td></tr></table></div>
+
+<h2><a name="Applicationdeployment-ManagedandUnmanagedDeployments"></a>Managed and Unmanaged Deployments</h2>
+
+<p>WildFly supports two mechanisms for dealing with deployment content &#8211; managed and unmanaged deployments. </p>
+
+<p>With a managed deployment the server takes the deployment content and copies it into an internal content repository and thereafter uses that copy of the content, not the original user-provided content. The server is thereafter responsible for the content it uses. </p>
+
+<p>With an unmanaged deployment the user provides the local filesystem path of deployment content, and the server directly uses that content. However the user is responsible for ensuring that content, e.g. for making sure that no changes are made to it that will negatively impact the functioning of the deployed application.</p>
+
+<p>Managed deployments have a number of benefits over unmanaged:</p>
+<ul>
+	<li>They can be manipulated by remote management clients, not requiring access to the server filesystem.</li>
+	<li>In a managed domain, WildFly/EAP will take responsibility for replicating a copy of the deployment to all hosts/servers in the domain where it is needed. With an unmanaged deployment, it is the user's responsibility to have the deployment available on the local filesystem on all relevant hosts, at a consistent path.</li>
+	<li>The deployment content actually used is stored on the filesystem in the internal content repository, which should help shelter it from unintended changes.</li>
+</ul>
+
+
+<p>The primary advantage of unmanaged deployments is that unmanaged deployments can be 'exploded', i.e. on the filesystem in the form of a directory structure whose structure corresponds to an unzipped version of the archive. An exploded deployment can be convenient to administer if your administrative processes involve inserting or replacing files from a base version in order to create a version tailored for a particular use (for example, copy in a base deployment and then copy in a jboss-web.xml file to tailor a deployment for use in WildFly.) Exploded deployments are also nice in some development scenarios, as you can replace static content (e.g. .html, .css) files in the deployment and have the new content visible immediately without requiring a redeploy.</p>
+
+<p>All of the previous examples above illustrate using managed deployments, except for any discussion of deployment scanner handling of exploded deployments. In WildFly 10 and earlier exploded deployments are always unmanaged.</p>
+
+<h3><a name="Applicationdeployment-ContentRepository"></a>Content Repository</h3>
+
+<p>For a managed deployment, the actual file the server uses when creating runtime services is not the file provided to the CLI <tt>deploy</tt> command or to the web console. It is a copy of that file stored in an internal content repository. The repository is located in the <tt>domain/data/content</tt> directory for a managed domain, or in <tt>standalone/data/content</tt> for a standalone server. Actual binaries are stored in a subdirectory:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<script type="syntaxhighlighter" class="theme: Confluence; brush: java; gutter: false"><![CDATA[
+ls domain/data/content/
+  |---/47
+  |-----95cc29338b5049e238941231b36b3946952991
+  |---/dd
+  |-----a9881fa7811b22f1424b4c5acccb13c71202bd
+]]></script>
+</div></div>
+
+<div class='panelMacro'><table class='tipMacro'><colgroup><col width='24'><col></colgroup><tr><td valign='top'><img src="/author/images/icons/emoticons/check.gif" width="16" height="16" align="absmiddle" alt="" border="0"></td><td>The location of the content repository and its internal structure is subject to change at any time and should not be relied upon by end users.</td></tr></table></div>
+
+<p>The description of a managed deployment in the domain or standalone configuration file includes an attribute recording the SHA1 hash of the deployment content:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<script type="syntaxhighlighter" class="theme: Confluence; brush: java; gutter: false"><![CDATA[
+&lt;deployments&gt;
+   &lt;deployment name="test-application.war"
+               runtime-name="test-application.war"&gt;
+       &lt;content sha1="dda9881fa7811b22f1424b4c5acccb13c71202bd"/&gt;
+   &lt;/deployment&gt;
+&lt;/deployments&gt;
+]]></script>
+</div></div>
+
+<p>The WildFly process calculates and records that hash when the user invokes a management operation (e.g. CLI <tt>deploy</tt> command or using the console) providing deployment content. The user is not expected to calculate the hash.</p>
+
+<p>The sha1 attribute in the content element tells the WildFly process where to find the deployment content in its internal content repository. </p>
+
+<p>In a domain each host will have a copy of the content needed by its servers in its own local content repository. The WildFly domain controller and slave host controller processes take responsibility for ensuring each host has the needed content.</p>
+
+<h3><a name="Applicationdeployment-UnmanagedDeployments"></a>Unmanaged Deployments</h3>
+
+<p>An unmanaged deployment is one where the server directly deploys the content at a path you specify instead of making an internal copy and then deploying the copy.</p>
+
+<p>Initially deploying an unmanaged deployment is much like deploying a managed one, except you tell WildFly that you do not want the deployment to be managed:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<script type="syntaxhighlighter" class="theme: Confluence; brush: java; gutter: false"><![CDATA[
+[standalone@localhost:9990 /] deploy ~/Desktop/test-application.war --unmanaged
+'test-application.war' deployed successfully.
+]]></script>
+</div></div>
+
+<p>When you do this, instead of the server making a copy of the content at <tt><sub>/Desktop/test-application.war</tt>, calculating the hash of the content, storing the hash in the configuration file and then installing the copy into the runtime, instead it will convert <tt></sub>/Desktop/test-application.war</tt> to an absolute path, store the path in the configuration file, and then install the original content in the runtime.</p>
+
+<p>You can also use unmanaged deployments in a domain:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<script type="syntaxhighlighter" class="theme: Confluence; brush: java; gutter: false"><![CDATA[
+[domain@localhost:9990 /] deploy /home/example/Desktop/test-application.war --server-group=main-server-group --unmanaged
+'test-application.war' deployed successfully.
+]]></script>
+</div></div>
+
+<p>However, before you run this command you must ensure that a copy of the content is present on all machines that have servers in the target server groups, all at the same filesystem path. The domain will not copy the file for you.</p>
+
+<p>Undeploy is no different from a managed undeploy:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<script type="syntaxhighlighter" class="theme: Confluence; brush: java; gutter: false"><![CDATA[
+[standalone@localhost:9990 /] undeploy test-application.war
+Successfully undeployed test-application.war.
+]]></script>
+</div></div>
+
+<p>Doing a replacement of the deployment with a new version is a bit different, the server is using the file you want to replace. You should undeploy the deployment, replace the content, and then deploy again. Or you can stop the server, replace the deployment and deploy again.</p>
+
+<h2><a name="Applicationdeployment-Deploymentoverlays"></a>Deployment overlays</h2>
+<p>Deployment overlays are our way of 'overlaying' content into an existing deployment, without physically modifying the contents of the deployment archive. Possible use cases include swapping out deployment descriptors, modifying static web resources to change the branding of an application, or even replacing jar libraries with different versions.</p>
+
+<p>Deployment overlays have a different lifecycle to a deployment. In order to use a deployment overlay, you first create the overlay, using the CLI or the management API. You then add files to the overlay, specifying the deployment paths you want them to overlay. Once you have created the overlay you then have to link it to a deployment name (which is done slightly differently depending on if you are in standalone or domain mode). Once you have created the link any deployment that matches the specified deployment name will have the overlay applied.</p>
+
+<p>When you modify or create an overlay it will not affect existing deployments, they must be redeployed in order to take effect</p>
+
+<h3><a name="Applicationdeployment-Creatingadeploymentoverlay"></a>Creating a deployment overlay</h3>
+
+<p>To create a deployment overlay the CLI provides a high level command to do all the steps specified above in one go. An example command is given below for both standalone and domain mode:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<script type="syntaxhighlighter" class="theme: Confluence; brush: java; gutter: false"><![CDATA[
+deployment-overlay add --name=myOverlay --content=/WEB-INF/web.xml=/myFiles/myWeb.xml,/WEB-INF/ejb-jar.xml=/myFiles/myEjbJar.xml --deployments=test.war,*-admin.war --redeploy-affected
+]]></script>
+</div></div>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<script type="syntaxhighlighter" class="theme: Confluence; brush: java; gutter: false"><![CDATA[
+deployment-overlay add --name=myOverlay --content=/WEB-INF/web.xml=/myFiles/myWeb.xml,/WEB-INF/ejb-jar.xml=/myFiles/myEjbJar.xml --deployments=test.war,*-admin.war --server-groups=main-server-group --redeploy-affected
+]]></script>
+</div></div>
+        </div>
+
+        <!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+         <rdf:Description
+    rdf:about="https://docs.jboss.org/author/display/WFLY10/Application+deployment"
+    dc:identifier="https://docs.jboss.org/author/display/WFLY10/Application+deployment"
+    dc:title="Application deployment"
+    trackback:ping="https://docs.jboss.org/author/rpc/trackback/91947127"/>
+</rdf:RDF>
+-->
+
+            
+    
+
+
+<fieldset class="hidden parameters">
+    <legend>Labels parameters</legend>
+    <input type="hidden" id="domainName" value="https://docs.jboss.org/author">
+    <input type="hidden" id="pageId" value="91947127">
+    <input type="hidden" id="spaceKey" value="WFLY10">
+</fieldset>
+
+<div id="labels-section" class="pageSection">
+    <div class="labels-editor">
+        <span id="labels-section-title" class="label-title">
+            <b>Labels:</b>
+        </span>
+        <div id="labels-section-content" class="content-column">
+            <span id="labels-section-title-none" class="label-title none ">
+                None
+            </span>
+
+            <div id="labelsList" class="label-list">
+                            </div>
+
+                    </div>
+
+        <span class="errorMessage error" id="errorSpan"></span>
+        <form method="GET" action="" id="add-labels-form">
+            <div id="labelInputSpan" class="labels-input">
+                <div id="labelOperationErrorContainer" class="hidden">
+                    <span class="error"><span class="errorMessage" id="labelOperationErrorMessage"></span></span>
+                </div>
+
+                <div class="caption">Enter labels to add to this page:</div>
+                <div id="label-input-fields">
+                    <input autocomplete="off" id="labelsString" name="labelsString" value="" size="40">
+                    <input id="add-labels-editor-button" type="submit" class="add-labels" value="Add">
+                    <input id="close-labels-editor-button" type="submit" class="hide-labels-editor" value="Done">
+                </div>
+                <div id="waitImageAndStatus">
+                    <img class="waiting" alt="Please wait" src="/author/s/en/2172/19/_/images/icons/wait.gif">&nbsp;
+                    <span id="labelOperationStatus" class="smalltext"></span>
+                </div>
+                <div id="labelsAutocompleteList" class="aui-dd-parent"></div>
+                <div class="labels-tip">
+                    <div id="suggestedLabelsSpan"></div>
+                    Looking for a label? Just start typing.
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+            
+            
+
+
+
+
+            
+    
+
+        
+<fieldset class="parameters hidden">
+    <input type="hidden" id="deleteCommentConfirmMessage" value="Are you sure you want to remove the comment?">
+    <input type="hidden" id="collapseTooltip" value="Click to toggle the display of this comment.">
+        </fieldset>
+
+<fieldset class="hidden parameters i18n">
+        <input type="hidden" title="i18n.cancel.name" value="Cancel">
+</fieldset>
+
+
+
+
+
+
+<div id="comments-section" class="pageSection">
+    
+    
+    
+    
+                                    </div>
+
+
+            
+</div>
+
+
+    
+
+
+
+    
+    
+
+    
+    
+    
+
+
+<script type="text/x-template" title="manage-watchers-dialog">
+<div class="dialog-content">
+    <div class="column page-watchers">
+        <h3>Watching this page</h3>
+        <p class="description">These people are notified when the page is changed. You can add or remove people from this list.</p>
+        <form action="/author/json/addwatch.action" method="POST">
+                <input type="hidden" name="atl_token" value="7b519b08dfc377f6d871ec9b673d0ed4947f8426">
+            <input type="hidden" name="pageId" value="91947127"/>
+            <input type="hidden" id="add-watcher-username" name="username" value=""/>
+            <label for="add-watcher-user">User</label>
+            <input id="add-watcher-user" name="userFullName" type="search" class="autocomplete-user"
+               value="" placeholder="Full name or username" autocomplete="off"
+               data-max="10" data-target="#add-watcher-username" data-dropdown-target="#add-watcher-dropdown"
+               data-template="{title}" data-none-message="No matching users found.">
+            <input id="add-watcher-submit" type="submit" name="add" value="Add">
+            <div id="add-watcher-dropdown" class="aui-dd-parent autocomplete"></div>
+            <div class="status hidden"></div>
+        </form>
+        <ul class="user-list">
+            <li class="loading">Loading&hellip;</li>
+            <li class="no-users hidden">No page watchers</li>
+        </ul>
+    </div>
+    <div class="column space-watchers">
+        <h3>Watching this space</h3>
+        <p class="description">These people are notified when any content in the space is changed. You cannot modify this list.</p>
+        <ul class="user-list">
+            <li class="loading">Loading&hellip;</li>
+            <li class="no-users hidden">No space watchers</li>
+        </ul>
+    </div>
+</div>
+</script>
+<script type="text/x-template" title="manage-watchers-user">
+    <li class="watch-user">
+        <img class="profile-picture confluence-userlink" src="{iconUrl}" data-username="{username}">
+        <a class="confluence-userlink" href="{url}" data-username="{username}">{fullName} <span class="username">({username})</span></a>
+        <span class="remove-watch" title="Remove"
+            data-username="{username}">Remove</span>
+    </li>
+</script>
+<script type="text/x-template" title="manage-watchers-help-link">
+    <div class="dialog-help-link">
+            <a href="http://docs.atlassian.com/confluence/docs-35/Managing+Watchers" target="_blank">Help</a>
+    </div>
+</script>
+    <br class="clear">
+</div>
+  
+        <div id="theme-footer">
+            <div style='margin: 10px 0 10px 10px;'><a style='font-size: 1em;' href='/author/display/WFLY10/Management+tasks' title='Management tasks'>&lt;&nbsp;Previous</a> | <a style='font-size: 1em;' href='/author/display/WFLY10/Admin+Guide' title='Admin Guide'>Front&nbsp;page</a> | <a style='font-size: 1em;' href='/author/display/WFLY10/Audit+logging' title='Audit logging'>Next&nbsp;&gt;</a></div>
+        </div>
+    
+    </div>
+</div>
+
+<div id="footer">
+                                                <p class="license license-opensource">
+                  Powered by a free <b>Atlassian Confluence Open Source Project License</b> granted to Red Hat, Inc.. <a href="http://www.atlassian.com/c/conf/11461">Evaluate Confluence today</a>.<br>
+                </p>
+                        
+    <ul id="poweredby">
+        <li class="noprint">Powered by <a href="http://www.atlassian.com/software/confluence" class="hover-footer-link">Atlassian Confluence</a> 3.5.16, the <a href="http://www.atlassian.com/software/confluence/tour/enterprise-wiki.jsp" class="hover-footer-link">Enterprise Wiki</a></li>
+        <li class="print-only">Printed by Atlassian Confluence 3.5.16, the Enterprise Wiki.</li>        
+        <li class="noprint"> &nbsp; |&nbsp; <a href="http://jira.atlassian.com/secure/BrowseProject.jspa?id=10470" class="hover-footer-link">Report a bug</a></li>
+        <li class="noprint"> &nbsp;|&nbsp; <a href="http://www.atlassian.com/about/connected.jsp?s_kwcid=Confluence-stayintouch" class="hover-footer-link">Atlassian News</a></li>
+    </ul>
+
+    
+
+            
+    </div></div>
+</body>
+</html>

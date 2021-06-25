@@ -1,0 +1,44 @@
+BLOB vs FileSystem
+
+COMENTARIOS ENCONTRADOS:
+
+- filesystem y ruta relativa en una bbdd (** ver al final)
+
+- el almacenamiento de imágenes no debe hacerse en una bbdd, incrementa considerablemente el tamaño de cada entrada. Sólo para algunos escenarios donde se quiera aprovechar algunas capacidades que ofrecen los SGBD.
+
+- si es crítica la imagen, mejor en blob (ve más fácil que se pierda un fichero del sistema de archivos)
+
+- nadie recomendaría guardar en blob 400GB en imágenes/año
+
+- al menos sobre SQLServer, se recomienda blob para ficheros de hasta 256KB, para ficheros de más de 1MB filesystem... entre 256KB y 1MB dependerá de la tasa lectura:escritura y tasa de overwrite or replacement of object.
+
+- la mayoría usa filesystem
+
+- recuperando muchas imágenes a veces algunas no se mostraban
+
+***** CUÁNDO UNO Y CUÁNDO EL OTRO ?
+
+ * BLOB Storage as the Best Solution
+
+    .For better scalability. Although file systems are designed to handle a large number of objects of varying sizes, say files and folders, actually they are not optimized for a huge number (tens of millions) of small files. Database systems are optimized for such scenarios.
+    .For better availability. Database servers have availability features that extend beyond those provided by the file system. Database replication is a set of solutions that allow you to copy, distribute, and potentially modify data in a distributed environment whereas Log shipping provides a way of keeping a stand-by copy of a database in case the primary system fails.
+    .For central repository of data with controlled growth. DBA has the privilege to control and monitor the growth of database and split the database as and when needed.
+    .For full-text index and search operations. You can index and search certain types of data stored in BLOB columns. When a database designer decides that a table will contain a BLOB column and the column will participate in a full-text index, the designer must create, in the same table, a separate character-based data column that will hold the file extension of the file in the corresponding BLOB field. During the full-text indexing operation, the full-text service looks at the extensions listed in the character-based column (.txt, .doc, .xls, etc.), applies the corresponding filter to interpret the binary data, and extracts the textual information needed for indexing and querying.
+
+ * File System Storage as the Best Solution
+
+    .For the application in which the images will be used requires streaming performance, such as real-time video playback.
+    .For applications such as Microsoft PhotoDraw or Adobe PhotoShop, which only know how to access files.
+    .If you want to use some specific feature in the NTFS file system such as Remote Storage.
+
+
+(**) ANÁLISIS:
+
+. Usar websocket para cada consulta, aparte que sean multimedia (donde el payload es mucho mayor que los headers), no tendrá una ventaja considerable.
+
+. Usar webservice para devolver imágenes, con el fin de no exponer ningún tipo de ruta, no es necesario (suponiendo que sólo se pasa el id de la imagen al ws y este devuelve la misma). Esto ya que notemos que en internet hay millones de imágenes que exponen su ruta de acceso url (no ruta de almacenado en servidor). ie. http://servidor.com/images/x.jpg, no expondrá en qué parte del hdd está guardada dicha imagen.
+
+. Debemos usar una BBDD obligatoriamente para hacer consultas que impliquen los ficheros multimedia, ie. queremos obtener las imágenes de x usuario.
+
+. En la BBDD guardamos una ruta relativa (multimedia/images/x.jpg), no todo el url path de la imagen (http://servidor1.com/multimedia/images/x.jpg), así podemos cambiarlo cuando guste del servidor1.com a servidor2.net por ejemplo, y sólo modificamos dicho prefix en un único punto, que puede ser en una variable en alguna clase del servidor. No tiene que ser en un archivo porque igual no se consultará a cada rato cuál es el prefix del servidor actual, se haría al arrancar y esto implica igual reiniciarlo, por lo que podemos entonces anotarla directamente en la clase.
+

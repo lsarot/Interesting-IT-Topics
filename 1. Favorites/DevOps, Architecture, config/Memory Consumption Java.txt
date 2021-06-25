@@ -1,0 +1,36 @@
+Memory Consumption Java
+
+If your application is rather IO-bound, you will very likely need to create a thread pool with a significant number of threads which can be bound to some IO operations (in blocked/waiting state, reading from DB, sending HTTP request).
+
+However, if your app rather spends time on some computing task, you can, for instance, use HTTP server (e.g. Netty) with a lower number of threads and save a lot of memory.
+
+
+*** Default thread configuration for Java
+
+Thread memory contains stack frames, local variables, method parameters, ... and a thread size is configured with defaults this way (in kilobytes):
+
+run on terminal:
+java -XX:+PrintFlagsFinal -version | grep ThreadStackSize
+
+
+*** Thread Memory Consumption on Java
+
+run on terminal:
+java -XX:+UnlockDiagnosticVMOptions -XX:NativeMemoryTracking=summary -XX:+PrintNMTStatistics -version
+
+
+We can see two types of memory:
+
+-Reserved — the size which is guaranteed to be available by a host's OS (but still not allocated and cannot be accessed by JVM) — it's just a promise.
+-Committed — already taken, accessible, and allocated by JVM.
+
+
+***
+Java 8 asigna agresivamente el máximo disponible para la parte de threads desde el inicio:
+In section Thread, we can spot the same number in Reserved and Committed memory, which is very close to a number of threads * 1MB. The reason is that JVM aggressively allocates the maximum available memory for threads from the very beginning.
+
+Java 11 no lo hace:
+You may notice that we are saving a lot of memory just because we are using Java 11, which no longer aggressively allocates up to Reserved Memory at the time of thread creation. Of course, this is just java -version command, but if you try it out, you will definitely notice a big improvement.
+
+
+

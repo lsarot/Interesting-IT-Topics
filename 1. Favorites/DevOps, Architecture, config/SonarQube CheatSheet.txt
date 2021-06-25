@@ -1,0 +1,263 @@
+SONARQUBE
+
+YA PORQUE ESTÁ CONFIGURADO HACEMOS:
+	levantar image Docker postgres
+	levantar image Docker sonarqube
+	Run your maven project on the SonarQube server step: (en ruta del pom del proyecto /sonarqube-tutorial/maven-basic)
+		mvn sonar:sonar \
+		-Dsonar.projectKey=org.sonarqube:sonarscanner-maven-basic \
+		-Dsonar.host.url=http://localhost:9000 \
+		-Dsonar.login=02181d31640e8653a15f400a98414cb0a57156bb
+
+Sólo logramos ejecutar un análisis a un proyecto Java (Maven o SpringBoot) (sin estar en un contenedor este último).
+Abajo tenemos CONFIGURAR CON JENKINS, aunque nos dió un fallo.
+
+
+---------------------------------------- STEPS
+Configure a DDBB schema to use, using Posgres, SQLserver or Oracle. (H2 is default but not for production !!)
+	Configure a dedicated user in postgres for sonarqube. ('sonarqubeuser')
+	Configure postgres ddbb empty schema on SonarQube Docker container. ('sonarqube')
+
+	// https://hub.docker.com/_/postgres?tab=description
+	docker pull postgres:latest
+
+	With iterative terminal:
+		docker run -it --rm --network some-network postgres psql -h postgres-sonarqube -U postgres
+
+	But we used:
+		docker run -itd --name postgres-sonarqube \
+		-v postgres-data:/var/lib/postgresql/data \
+		--network sonar-qube --network-alias postgresql \
+		-e POSTGRES_PASSWORD=admin \
+		//-e PGDATA=/var/lib/postgresql/data/pgdata \ //to sotre data in another location
+		-p 5433:5432 \
+		postgres  
+
+	* usamos un cliente (pgAdmin) para conectar a la instancia postgres, no por consola!, por eso enlazamos tcp/5433 a tcp/5432 del container.
+
+	Then, create user, schema and configure grants:
+		CREATE USER sonarqubeuser WITH PASSWORD 'sonarqube*adm';
+		//if user is not schema owner, to ease not to use fully qualified names
+		ALTER USER sonarqubeuser SET search_path to sonarqube;
+		//nos funcionó fue haciendo owner del schema al nuevo user
+		CREATE SCHEMA IF NOT EXISTS sonarqube AUTHORIZATION sonarqubeuser;
+		//permissions to create tables, indices, and triggers must be granted to JDBC user. The schema must be created first. 
+		ALTER DEFAULT PRIVILEGES FOR USER sonarqubeuser IN SCHEMA sonarqube GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO sonarqubeuser;
+		GRANT CREATE ON SCHEMA sonarqube TO sonarqubeuser;
+		GRANT TRIGGER ON ALL TABLES IN SCHEMA sonarqube TO sonarqubeuser;
+
+
+Install SonarQube from a Docker image or use a Linux/Windows distribution.
+	A Docker image will require to configure some volumes.
+
+	docker volume create --name sonarqube_data
+	docker volume create --name sonarqube_extensions
+	docker volume create --name sonarqube_logs
+
+
+Run your SonarQube instance.
+
+	docker run -d --name sonarqube \
+	--network sonar-qube \
+    -p 9000:9000 \
+    //-p 5434:5432 \ //hacer enlace a 5433 no puedo pq ya está en uso ese puerto (entre host y container postgres), podemos usar otro y redirigir, pero mejor usar la utilidad de conectar a la misma network
+    -e SONAR_JDBC_URL="jdbc:postgresql://172.20.0.2:5432/postgres?currentSchema=sonarqube&search_path=sonarqube" \
+    	    //By default the schema named "public" is used. It can be overridden with the parameter "currentSchema".
+    		//igual no sirvieron los params al jdbc url, tuvimos que hacer owner al user
+    -e SONAR_JDBC_USERNAME=sonarqubeuser \
+    -e SONAR_JDBC_PASSWORD=sonarqube*adm \
+    -v sonarqube_data:/opt/sonarqube/data \
+    -v sonarqube_extensions:/opt/sonarqube/extensions \
+    -v sonarqube_logs:/opt/sonarqube/logs \
+    sonarqube
+
+
+Environment variables for Docker image: // https://docs.sonarqube.org/latest/setup/environment-variables/
+
+	Log in to http://localhost:9000 with System Administrator credentials (login=admin, password=admin).
+	Click on: Create your first project. You will obtain a code and then use it to link your project to SonarQube.
+
+
+Configure your project depending on the build type:
+	Maven, Gradle, MSBuild, Ant, AzureDevOps, Jenkins, or CLI for others.
+
+Run your maven project on the SonarQube server
+
+	PROYECTO /sonarqube-tutorial/maven-basic    https://github.com/SonarSource/sonar-scanning-examples/tree/master/sonarqube-scanner-maven/maven-basic
+
+		mvn sonar:sonar \
+		-Dsonar.projectKey=org.sonarqube:sonarscanner-maven-basic \
+		-Dsonar.host.url=http://localhost:9000 \
+		-Dsonar.login=02181d31640e8653a15f400a98414cb0a57156bb
+		//clean verify //NO LO PEDÍA EL EJEMPLO DEL SERVIDOR SONAR AL CREAR EL PROYECTO !!!
+
+		other options:
+		-Dsonar.issuesReport.html.enable=true
+
+	PROYECTO /sonarqube-tutorial/springboot-basic  //un proyecto SpringBoot sin mucho más
+	
+			mvn sonar:sonar \
+			-Dsonar.projectKey=com.example:springboot-sonarqube-basic-demo \
+			-Dsonar.host.url=http://localhost:9000 \
+			-Dsonar.login=02181d31640e8653a15f400a98414cb0a57156bb \
+			-Dsonar.scm.disabled=true \ //resuelve un fallo relacionado con git worktrees
+			-X //debug if needed \
+			-Dsonar.projectName=springboot-basic \ //by default will use pom.xml <name> value.. lo podemos cambiar en cualquier momento, se hará referencia al mismo proyecto.
+			clean package //if we want to do more goals
+
+
+			Sólo requiere agregar al pom.xml: ('puede configurarse algo en el maven main config file para aplicar siempre') https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-maven/
+				<plugin>
+		          <groupId>org.sonarsource.scanner.maven</groupId>
+		          <artifactId>sonar-maven-plugin</artifactId>
+		          <version>3.6.0.1398</version>
+		        </plugin>
+
+
+---------------------------------------- CONFIGURAR EN JENKINS
+https://medium.com/@rosaniline/setup-sonarqube-with-jenkins-declarative-pipeline-75bccdc9075f
+https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-jenkins/
+	* 'Analyzing a Java project with Maven or Gradle' NO SE ENTENDIÓ ESTE PUNTO!!
+	* 'Using a Jenkins pipeline'
+			stage('SonarQube analysis') {
+	    		withSonarQubeEnv(credentialsId: 'f225455e-ea59-40fa-8af7-08176e86507a', installationName: 'My SonarQube Server') { // You can override the credential to be used
+	      			sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar' // o sonar:sonar
+			    }
+			}
+	* 'Pause pipeline until quality gate is computed'
+		    Configure a webhook in your SonarQube server pointing to <your Jenkins instance>/sonarqube-webhook/
+		    Use withSonarQubeEnv step in your pipeline (so that SonarQube taskId is correctly attached to the pipeline context).
+
+		    	SI CONFIGURAMOS SONAR COMO UN TOOL EN: Manage Jenkins > Global Tool Configuration > SonarQube Scanner
+				    stage('Sonarqube') {
+					    environment {
+					        scannerHome = tool 'SonarQubeScanner'
+					    }    
+					    steps {
+					        withSonarQubeEnv('sonarqube') {      nombre que usamos en Manage Jenkins > Configure System > SonarQube servers
+					            sh "${scannerHome}/bin/sonar-scanner"
+					        }        
+					        timeout(time: 10, unit: 'MINUTES') {
+					            waitForQualityGate abortPipeline: true
+					        }
+					    }
+					}
+
+			SE USÓ ESTA CONFIG (ver Jenkinsfile en jenkins-demo3) - FALLÓ !!! no se completó y se cayó el servidor Sonarqube.
+		    pipeline {
+			    agent any
+			    stages {
+			        stage('SCM') {//RELLENO DEL EJEMPLO!!!
+			            steps {
+			                git url: 'https://github.com/foo/bar.git'
+			            }
+			        }
+			        stage('build && SonarQube analysis') {
+			            steps {
+			                withSonarQubeEnv('sonarqube') { //es igual a installationName: 'sonarqube'
+			                    // Optionally use a Maven environment you've configured already
+			                    withMaven(maven:'Maven 3.5') {
+			                        sh 'mvn clean package sonar:sonar'
+			                    }
+			                }
+			            }
+			        }
+			        stage("Quality Gate") {
+			            steps {
+			                timeout(time: 1, unit: 'HOURS') {
+			                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+			                    // true = set pipeline to UNSTABLE, false = don't
+			                    waitForQualityGate abortPipeline: true
+			                }
+			            }
+			        }
+			    }
+			}
+
+			** If you want to run multiple analysis in the same pipeline and use waitForQualityGate you have to do everything in order:
+
+			pipeline {
+			    agent any
+			    stages {
+			        stage('SonarQube analysis 1') {
+			            steps {
+			                sh 'mvn clean package sonar:sonar'
+			            }
+			        }
+			        stage("Quality Gate 1") {
+			            steps {
+			                waitForQualityGate abortPipeline: true
+			            }
+			        }
+			        stage('SonarQube analysis 2') {
+			            steps {
+			                sh 'gradle sonarqube'
+			            }
+			        }
+			        stage("Quality Gate 2") {
+			            steps {
+			                waitForQualityGate abortPipeline: true
+			            }
+			        }
+			    }
+			}
+
+	* 'Configuring a webhook secret'
+
+			If you want to verify the webhook payload that is sent to Jenkins, you can add a secret to your webhook on SonarQube.
+			To set the secret:
+			    In Jenkins, navigate to Manage Jenkins > Configure System > SonarQube Server > Advanced > Webhook Secret and click the Add button.
+			    Select Secret text and give the secret an ID.
+			    Select the secret from the dropdown menu.
+
+			If you want to override the webhook secret on a project level, you can add the secret to Jenkins and then reference the secret ID when calling waitForQualityGate.
+				waitForQualityGate(webhookSecretId: 'yourSecretID')    if your pipeline is declarative
+
+
+
+---------------------------------------- USAR DOCKER COMPOSE PARA LEVANTAR VARIOS CONTENEDORES AL MISMO TIEMPO!
+
+docker-compose.yml en raíz del proyecto principal (ie. SpringBoot app)
+----------------------------------------
+version: "3.7"
+#define the list of services (or containers) we want to run as part of our application
+services:
+    postgresql:
+        image: postgres:latest
+        ports:
+        	- 5433:5432
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        environment: 
+            POSTGRES_PASSWORD=admin
+        
+    sonarqube:
+        image: sonarqube:latest
+        //command: sh -c "yarn install && yarn run dev"
+        ports:
+            - 9000:9000
+        //working_dir: /app
+        volumes:
+            //- ./:/app     //#for volumes, we can use relative paths from the current directory.
+        	- sonarqube_data:/opt/sonarqube/data
+    		- sonarqube_extensions:/opt/sonarqube/extensions
+    		- sonarqube_logs:/opt/sonarqube/logs
+        environment:
+        	SONAR_JDBC_URL="jdbc:postgresql://172.20.0.2:5432/postgres?currentSchema=sonarqube&search_path=sonarqube"
+				//pero la IP ya no será la misma en otro arranque del stack, debemos usar un dns name
+        		//buscar en:    https://docs.docker.com/compose/networking/
+			SONAR_JDBC_USERNAME=sonarqubeuser
+			SONAR_JDBC_PASSWORD=sonarqube*adm
+         
+	app:
+		FALTARÍA OTRO CONTAINER CON MI APP QUE TENGA EL FICHERO docker-compose.yml
+
+
+volumes:
+    postgres-data:
+    sonarqube_data:
+    sonarqube_extensions:
+    sonarqube_logs:
+
+#By default, Docker Compose automatically creates a network specifically for the application stack (which is why we didn't define one in this file).
+----------------------------------------

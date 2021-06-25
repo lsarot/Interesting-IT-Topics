@@ -1,0 +1,399 @@
+MAIN CONCEPTS OF Cassandra
+Cluster, DataCenters, Nodes(clockwise direction)
+CommitLog, MemTable, SSTable, BloomFilter
+PK(PartitionKey(colA,colB), ClusteringKeyA, ClusteringKeyB, ...)
+ReplicationFactor(min 3), ReplicationStrategy(SimpleStrategy, NetworkTopologyStrategy)
+Keyspace (similar to RDBMS Database)(Keyspace holds col families, indexes, user defined types, data center awareness, strategy used in keyspace, replication factor, etc)
+Column Families (a table in RDBMS)
+Collections DataType (Set,List,Map)
+
+https://cassandra.apache.org/download/
+
+DataStax
+https://downloads.datastax.com/
+
+DataStax, building a NoSQL data model
+https://www.youtube.com/watch?v=4D39wJu5Too
+
+
+TUTORIAL
+https://www.guru99.com/cassandra-tutorial.html
+
+What is Apache Cassandra?
+
+    Cassandra is a distributed database management system designed for handling a high volume of structured data across commodity servers
+
+    Cassandra handles the huge amount of data with its distributed architecture. Data is placed on different machines with more than one replication factor that provides high availability and no single point of failure.
+
+How to Download & Install Cassandra on Windows
+
+Cassandra Architecture & Replication Factor Strategy
+    
+Cassandra Data Model with Simple Example
+
+Create, Alter & Drop Keyspace in Cassandra with Example
+
+Cassandra Table: Create, Alter, Drop & Truncate (with Example)
+
+Cassandra Query Language(CQL): Insert Into, Update, Delete (Example)
+
+Create & Drop INDEX in Cassandra
+
+Cassandra CQL Data Types & Data Expiration using TTL (Example)
+
+Cassandra Collection: Set, List, Map with Example
+
+Cassandra Cluster Setup on Multiple Nodes (Machines)
+
+DataStax DevCenter & OpsCenter Installation Guide
+
+Cassandra Security: Create User & Authentication with JMX
+
+------------------------------------------------------------------------------- CheatSheet
+
+:::::::: DDL ::::::::
+
+Cassandra Security: Create User & Authentication with JMX (ver al final de esta guía)
+
+Create keyspace KeyspaceName with replication={'class':'SimpleStrategy','replication_factor': 3};
+
+Alter Keyspace KeyspaceName with replication={'class':'SimpleStrategy', 'replication_factor': 3} with DURABLE_WRITES=true/false;
+	#DURABLE_WRITES :DURABLE_WRITES value can be altered by specifying its value true/false. By default, it is true. If set to false, no updates will be written to the commit log and vice versa.
+
+Alter Keyspace University with replication={'class':'NetworktopologyStrategy', 'DataCenter1':1};
+	#After successful execution of the command "Alter Keyspace", Strategyname will be changed from 'SimpleStrategy' to 'NetworkTopologyStrategy' and replication factor will be changed from 3 to 1 for 'DataCenter1'
+
+Drop keyspace KeyspaceName;
+
+Describe keyspaces; //show all keyspaces
+Select * from system_schema.keyspaces;
+
+Drop Table KeyspaceName.TableName; //drops specified table including all the data from the keyspace. Before dropping the table, Cassandra takes a snapshot of the data not the schema as a backup.
+
+Truncate KeyspaceName.TableName; //removes all the data from the specified table. Before truncating the data, Cassandra takes the snapshot of the data as a backup. 
+
+desc KeyspaceName.TableName; //will show description for object
+
+
+Create table KeyspaceName.TableName (
+col1 DataType,
+col2 DataType,
+col3 DataType,
+...
+Primary Key((col1,col2),col3...))
+) with PropertyName=PropertyValue;
+//PRIMARY KEY (col1)	1 partition; col1 as PK(named clustering key in Cassandra)
+//PRIMARY KEY (col1,col2)	N partitions based on col1; col2 as PK
+//PRIMARY KEY ((col1,col2),col3)	N partitions based on col1 and col2; col3 as PK
+
+
+Alter table KeyspaceName.TableName  +
+	Alter colName TYPE Dataype |
+	Add colName DataType |
+	Drop colName |
+	Rename colName To newcolName |
+	With propertyName=PropertyValue;
+
+
+:::::::: DML ::::::::
+
+Select ColumnNames from KeyspaceName.TableName Where 
+	colName1=col1Value AND
+	colName2=col2Value AND ... OR is not supported
+
+	*** In Cassandra, data retrieval is a sensitive issue. The column is filtered in Cassandra by creating an index on non-primary key columns.
+
+
+Insert into KeyspaceName.TableName(colName1, colName2, colName3 ...) values (col1Value, col2Value, col3Value ...) using TTL 84600;
+Insert into NerdMovies JSON '{"movie": "Serenity","director": "Joss Whedon","year": 2005}';
+
+Upsert into KeyspaceName.TableName ALSO EXISTS
+
+Update KeyspaceName.TableName
+Set colName1=newcol1Value,
+    colName2=newcol2Value,
+    colName3=newcol3Value,
+    ...
+Where colName=colValue;
+
+Delete from KeyspaceName.TableName Where colName1=colValue; //whole rows
+Delete ColumnNames from KeyspaceName.TableName Where colName1=colValue; //just some columns
+
+
+:::::::: INDEXES ::::::::
+
+-The index cannot be created on primary key as a primary key is already indexed.
+-Indexes on collections are not supported.
+-Without indexing on the column, Cassandra cant filter that column unless it is a primary key.
+
+Create index IndexName on KeyspaceName.TableName(ColumnName);
+Drop index IF EXISTS KeyspaceName.IndexName;
+
+
+:::::::: What Cassandra does not support ::::::::
+
+There are following limitations in Cassandra query language (CQL).
+    CQL does not support aggregation queries like max, min, avg
+    CQL does not support group by, having queries.
+    CQL does not support joins.
+    CQL does not support OR queries.
+    CQL does not support wildcard queries.
+    CQL does not support Union, Intersection queries.
+    Table columns cannot be filtered without creating the index.
+    Greater than (>) and less than (<) query is only supported on clustering column.
+
+    *** Cassandra query language is not suitable for analytics purposes because it has so many limitations !!!
+
+
+:::::::: CQL DATA TYPES AND DATA EXPIRATION USING TTL ::::::::
+
+CQL Type 	Constants 									Description
+ascii 		Strings 									US-Ascii character string
+Bigint 		Integers 									64-bit signed long
+Blob 		Blobs 										Arbitrary bytes in hexadecimal
+Boolean 	Booleans 									True or false
+Counter 	Integers 									Distributed counter values 64 bit
+Decimal 	Integers, floats 							Variable precision decimal
+Double 		Integers, floats 							64-bit floating point
+Float 		Integers, floats 							32-bit floating point
+Frozen 		Tuples, collections, user defined types 	Stores cassandra types
+Inet 		Strings 									IP address in IPV4 or IPV6 format
+Int 		Integers 									32 bit signed integer
+List 													Collection of elements
+Map 													Json style collection of elements
+Set 													Collection of elements
+Text 		Strings 									UTF-8 encoded strings
+Timestamp 	Integers, strings 							Id generated with date plus time
+Timeuuid 	Uuids 										Type 1 uuid
+Tuple 													A group of 2,3 fields
+Uuid 		Uuids 										Standard uuid
+Varchar 	Strings 									UTF-8 encoded string
+Varint 		Integers 									Arbitrary precision integer 
+
+
+*** Cassandra Automatic Data Expiration using Time to Live (ttl)
+
+Cassandra provides functionality by which data can be automatically expired.
+During data insertion, you have to specify 'ttl' value in seconds. 'ttl' value is the time to live value for the data. After that particular amount of time, data will be automatically removed.
+For example, specify ttl value 100 seconds during insertion. Data will be automatically deleted after 100 seconds. When data is expired, that expired data is marked with a tombstone.
+A tombstone exists for a grace period. After data is expired, data is automatically removed after compaction process.
+
+Insert into KeyspaceName.TableName(ColumnNames) values(colValues)
+	using ttl TimeInseconds;
+
+
+:::::::: Cassandra Collection: Set, List, Map ::::::::
+
+-Cassandra collection cannot store data more than 64KB.
+-Keep a collection small to prevent the overhead of querying collection because entire collection needs to be traversed.
+-If you store more than 64 KB data in the collection, only 64 KB will be able to query, it will result in loss of data.
+
+Examples: (when creating table)
+
+email set<text>
+
+insert into University.Teacher(id,Name,Email)
+	values(l,'Guru99',{'abc@gmail.com','xyz@hotmail.com'});
+
+coursenames list<text>
+
+insert into University.Teacher(id,Name,Email)
+	values(2,'Hamilton',{'hamilton@hotmail.com'},['Data Science']);
+	//note the usage of [] instead of {}
+
+prerequisite map<text,text>
+
+insert into University.Course(id,prereq) //prerequisites for a course
+	values(1,{'DataScience':'Database', 'Neural Network':'Artificial Intelligence'});
+
+insert into Payroll.Employee(id,account)
+	values(1685386,{'BBVA':'ES940182..', 'SANTANDER':'ES910123..'});
+
+
+:::::::: Cassandra Cluster Setup on Multiple Nodes (Machines) ::::::::
+
+-Cluster is basically a group of nodes, so that nodes can communicate with each other easily.
+-Coordinator node is the node that communicates with replicas.
+-Partitioner: a partitioner determines how the data should be distributed on the cluster. Partitioner uses a hash function to distribute data on the cluster. It takes partition key to calculate the hash. That hash is called token. Data is distributed on the basis of this token.
+
+There are following requirements for cluster setup:
+    You should have multiple machines (Nodes).
+    Nodes must be connected with each other on Local Area Network (LAN).
+    Linux must be installed on each node.
+    You should have Cassandra Enterprise edition.
+    JDK must be installed on each machine.
+
+
+------------------------------------------------------------------------------- Cassandra Security: Create User & Authentication with JMX
+
+:::: What is Internal Authentication and Authorization ::::
+
+Authentication: users are authenticated with login and password. All user accounts are managed internally.
+Authorization: users has permissions to perform actions.
+	Apache Cassandra can only manage internal authentication.
+	DataStax Enterprise (Cassandra enterprise version) can manage internal and external authentication, by means of Kerberos or LDAP.
+
+
+:::: Configure Authentication and Authorization ::::
+
+Open Cassandra.yaml file and uncomment lines that deals with internal authentication and authorization.
+	authenticator: com.datastax.bdp.cassandra.auth.PasswordAuthenticator
+	authorizer: com.datastax.bdp.cassandra.auth.CassandraAuthorizer
+
+
+:::: Logging in ::::
+
+By default, Cassandra provides the super account with user name 'cassandra' and password 'cassandra'. By logging in to 'Cassandra' account, you can do whatever you want.
+Change that psw:
+	alter user cassandra with password 'newpassword';
+
+
+:::: Create New User ::::
+
+create user robin with password 'manager' superuser;
+create user robin with password 'newhire';
+list users;
+drop user laura;
+
+
+:::: Authorization ::::
+
+GRANT permission ON resource TO user;
+	ALL|ALTER|AUTHORIZIZE|CREATE|DROP|MODIFY|SELECT
+
+grant all on dev.emp to laura;
+revoke all on dev.emp to laura;
+grant select on dev.emp to laura;
+
+list all permissions of laura;
+list all permissions on dev.emp;
+
+
+:::: Configuring Firewall ::::
+
+If the firewall is running, following ports must be opened for communication between nodes including some Cassandra ports.
+If Cassandra ports will not be opened, Cassandra nodes will act as standalone database server rather than joining the database cluster.
+
+Port Number 	Description
+Cassandra Client Ports
+9042 			Cassandra Client Port
+9160 			Cassandra Client Port Thrift
+Cassandra Internode ports
+7000 			Cassandra internode cluster communication
+7001 			Cassandra SSL internode cluster communication
+7199 			Cassandra JMX monitoring port
+Public Ports
+22 				SSH port
+8888 			OpsCenter Website. Browser http request.
+Cassandra OpsCenter ports
+61620 			OpsCenter monitoring port.
+61621 			Opscenter agent port 
+
+
+:::: Enabling JMX Authentication ::::
+//copy-paste del tutorial
+
+With the default settings of Cassandra, JMX can only be accessed from the localhost. If you want to access JMX remotely, change the LOCAL_JMX setting in Cassandra-env.sh and enable authentication or SSL.
+After enabling JMX authentication, make sure OpsCenter and nodetool are configured to use authentication.
+
+There are following steps for enabling JMX authentication.
+
+1. In the cassandra-env.sh file, add or update following lines.
+JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=true"
+JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.password.file=/etc/cassandra/jmxremote.password"
+Also, change the LOCAL_JMX setting in Cassandra-env.sh
+LOCAL_JMX=no
+
+2. Copy the jmxremote.password.template from /jdk_install_location/lib/management/ to /etc/cassandra/ and rename it to jmxremote.password.
+cp />jdk_install_dir/lib/management/jmxremote.password.template /etc/cassandra/jmxremote.password
+
+3. Change the ownership of jmxremote.password to the user you run Cassandra with and change permission to read only
+chown cassandra:cassandra /etc/cassandra/jmxremote.password
+chmod 400 /etc/cassandra/jmxremote.password
+
+4. Edit jmxremote.password and add the user and password for JMX-compliant utilities:
+monitorRole QED
+controlRole R&D
+cassandra cassandrapassword
+
+5. Add the Cassandra user with read and write permission to /jdk_install_location/lib/management/jmxremote.access
+monitorRole readonly
+cassandra readwrite
+controlRole readwrite \
+create javax.management.monitor.,javax.management.timer. \ 
+unregister
+
+6. Restart Cassandra
+7. Run nodetool with the Cassandra user and password.
+nodetool status -u cassandra -pw cassandra
+
+
+------------------------------------------------------------------------------- DataStax DevCenter, Studio & OpsCenter
+//https://www.guru99.com/cassandra-devcenter-opscenter.html
+
+DevCenter (Note this tool is End of Service Life and no longer under active development. DataStax customers should use DataStax Studio.)
+is the front end query tool where you can write your query and execute it. DevCenter is provided by the Datastax.
+
+Studio
+is a visual developer tool that makes it easy for developers to write queries, slice and dice your data through visualizations, and collaborate with teammates in an intuitive notebook-based development environment.
+
+OpsCenter
+is the visual management and monitoring tool for Apache Cassandra and Datastax enterprise. This is a very helpful tool for architects, database administrators, and database operators.
+	In large organizations, they have thousands of servers. It is very difficult to monitor these servers that which server is running and which server is down. OpsCenter is the tool where you can monitor all the Cassandra nodes by sitting and watching on a single machine.
+
+
+EN macOS USAMOS DATASTAX DESKTOP
+trabaja con Docker images para provisionar las aplicaciones de Cassandra.
+    o podemos configurar las Docker images por nuestra cuenta!
+
+DataStax Studio (no docker image) no arrancó!
+
+------------------------------------------------------------------------------- OTRAS NOTAS
+
+DataStax Astra (cloud Cassandra)(no sirvió ni registrarse!)
+
+Amazon Keyspaces (para Apache Cassandra) Lo configuramos y funcionó, pero ya CQL es limitado y AWS Keyspaces más aún. No permite TTL ni IN clause.
+
+
+PARA USAR CON LOG4J2 Y GUARDAR REGISTRO DEL LOGGER EN AWS-Keyspaces:
+
+        CREATE KEYSPACE IF NOT EXISTS tutorialkeyspace WITH replication = {'class': 'SingleRegionStrategy'}; //notar que usa una estrategia especial de AWS
+        CREATE TABLE IF NOT EXISTS tutorialkeyspace.tutorialtable (
+           name text,
+           email text,
+           age int,
+           PRIMARY KEY (email)
+        );
+        INSERT INTO tutorialkeyspace.tutorialtable (name, email, age) VALUES ('John', 'john@example.com', 21);
+        SELECT * FROM tutorialkeyspace.tutorialtable;
+
+        CREATE KEYSPACE "logger_messages_test" WITH REPLICATION = {'class': 'SingleRegionStrategy'}
+
+        CREATE TABLE "logger_messages_test"."logs"(
+        	"level" text,
+        	"id" timeuuid,
+        	"timeid" timeuuid,
+        	"message" text,
+        	"marker" text,
+        	"logger" text,
+        	"timestamp" timestamp,
+        	"mdc" map<text, text>,
+        	"ndc" list<text>,
+        	PRIMARY KEY("level", "id"))
+        WITH CUSTOM_PROPERTIES = {'capacity_mode':{'throughput_mode':'PAY_PER_REQUEST'}} AND CLUSTERING ORDER BY("id" DESC)
+
+
+
+MACOS CASSANDRA SHELL (not server)
+cd /Applications/apache-cassandra-3.11.6/bin
+./cqlsh cassandra.us-east-1.amazonaws.com 9142 -u "keyspaces-user..." -p "psw..." --ssl
+//buscará fichero con privatekey en /Users/Leo/.cassandra/cqlshrc
+
+
+
+DATASTAX ASTRA (min 1620$.month)
+//ASTRA usa AWS o GCP, pero usa servidores configurados por ellos, no como AWS-Keyspaces que es fully managed
+How to connect from Java: https://docs.datastax.com/en/astra/aws/doc/dscloud/astra/dscloudConnectJavaDriver.html
+
+HOW TO USE DATASTAX DRIVER TO ACCESS CASSANDRA FROM JAVA
+        //https://docs.datastax.com/en/developer/java-driver/4.7/manual/core/

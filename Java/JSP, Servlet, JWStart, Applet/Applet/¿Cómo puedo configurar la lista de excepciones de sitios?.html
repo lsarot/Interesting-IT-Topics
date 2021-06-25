@@ -1,0 +1,1279 @@
+ 
+
+
+
+
+
+
+
+
+
+
+	
+	
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="es-ES" xml:lang="es-ES">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<meta name="Language" content="es-ES"/>
+<meta name="ROBOTS" content="INDEX,FOLLOW"/>
+
+<title>¿Cómo puedo configurar la lista de excepciones de sitios?</title>
+
+	<meta name="description" content="Explica cómo utilizar la función Lista de excepciones de sitios introducida en 7u51"/>
+	<meta name="keywords" content="bloquear, peticiones"/>
+<meta name="date" content="2016-04-11"/>
+
+
+
+
+	
+		
+					<meta name='oracle:JRE' content='7.0,8.0'/>
+				
+
+		<meta name="oracle:articleType" content='faq'/>		
+	
+		<link rel="stylesheet" media="all" type="text/css" href="/ga/css/oldcss.css" />
+	
+		<script type="text/javascript" src="/ga/js/popUp.js"></script>
+	 
+
+
+<link rel="stylesheet" href="/ga/css/screen.css" type="text/css" media="screen" charset="utf-8"/>
+<link rel="stylesheet" href="/ga/css/print.css" type="text/css" media="print" charset="utf-8"/>
+	<script async="async" type="text/javascript" src='//consent.truste.com/notice?domain=oracle.com&c=teconsent&text=true&language=es' crossorigin></script>
+	<style type="text/css">
+  		#teconsent a {
+  			text-decoration: underline;
+  		}
+  
+  		#teconsent a:hover {
+  			text-decoration: none;
+  		}
+	</style>
+	
+	<script async src="https://dyn-beacon.akamaized.net/js/dyn.beacon.v4.js" id="beaconcfg" data-id='0138'></script>
+</head>
+
+
+
+
+	 
+	
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+	
+
+ 
+
+
+
+
+
+
+
+	 
+	
+
+
+
+
+<body>
+	<a name="top"></a>
+	
+
+			
+		
+ 
+		
+			
+			
+			
+		 
+
+
+
+
+
+
+
+
+
+	
+		
+			
+				
+			  	
+				
+					
+						
+						
+						
+						
+													
+													
+						
+					
+				
+			
+		
+		
+		
+			
+			
+			
+	<!-- BEGIN: jWidget_C/Header/Display -->
+	
+	
+	
+	
+		 
+		 
+	
+	
+		
+	
+	<div class="jvh0">
+		<a href="/es/" class="jvl0" title="java.com">Java.com</a>
+
+<!-- BEGIN Header links -->
+<p>
+<a href="/inc/BrowserRedirect1.jsp?locale=es">Descargar</a>
+<a href="/es/download/help/">Ayuda</a>
+</p>
+<!-- END Header links -->
+
+<form name="searchForm" method="get" action="https://www.oracle.com/search/results" accept-charset="utf-8" class="jvs0 jv0sv0" onsubmit="if((document.searchForm.Ntt.value == document.searchForm.Ntt.defaultValue) || (document.searchForm.Ntt.value == '')){return false;}">
+<input type="hidden" name="cat" value="javacom">
+<input type="hidden" name="Ntk" value="SI-ALL5">
+<input type="hidden" name="lang" value="es">
+<input type="text" size="20" maxlength="55" name="Ntt" class="bodytext" onfocus="if( this.value==this.defaultValue ) this.value='';" onblur="if( this.value=='' ) this.value=this.defaultValue;" value="Buscar" title="Buscar">
+<input type="image" name="submit" src="/ga/images/jv0_search_btn.gif" id="searchbtn" alt="Buscar" />
+</form>
+	</div>
+	<!-- END: jWidget_C/Header/Display -->
+
+				
+	
+	
+
+
+
+
+
+	
+			
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	<div class="jvc0 jvc0v0 clearfix">
+		
+	<div class="jvc0w1 clearfix">
+	    <div style="float: right;"> 
+        	<a title='Versión para imprimir' href="?printFriendly=true" 
+           target="printFriendlyView" onclick="openPopup('','printFriendlyView',800,650,'no',1,1,0,0,0,0); return true;"> 
+           <img src="/ga/im/printer.png" width="15" height="14" alt='Versión para imprimir' class="pfv"> </a> 
+    	</div> 		
+	
+		
+	<div class="jvc0w2">	
+	<h3><b>
+        ¿Cómo puedo configurar la lista de excepciones de sitios?
+    </b></h3>
+	
+		
+	
+	
+	
+
+	
+
+	
+		<hr />
+		Este artículo se aplica a:
+		<ul>
+			
+				
+			
+			
+				
+			 
+			
+				
+					<li><b>Versiones de Java: </b>7.0, 8.0
+					</li>
+				
+				
+		</ul>
+		<hr />
+	
+	
+		
+	
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<p>La función <b>Lista de excepciones de sitios</b> se introdujo en Java 7 Update 51. Al agregar la URL de la aplicación a la lista de excepciones, los usuarios pueden ejecutar aplicaciones de Internet enriquecidas (RIA) que normalmente bloquean las comprobaciones de seguridad.</p>
+
+A continuación se detallan algunos casos en los que se permite ejecutar las aplicaciones agregando la URL de la aplicación a la lista de sitios:
+<ul>
+<li>Si la aplicación no está firmada con un certificado de una autoridad de certificación de confianza.</li>
+<li>Si la aplicación está alojada localmente.</li>
+<li>Archivo Jar que no tiene el atributo de manifiesto de permisos.</li>
+<li>Aplicación firmada con un certificado caducado.</li>
+<li>El certificado utilizado para firmar la aplicación no se puede seleccionar para la revocación.</li></ul>
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<h4 class="sub">Gestión de la lista de excepciones de sitios</h4>
+<p>
+La lista de excepciones de sitios se gestiona en el separador <b>Seguridad</b> del <b>panel del control de Java</b>. La lista aparece en el separador. Para agregar, editar o eliminar una URL en la lista, haga clic en <b>Editar lista de sitios</b>.</p>
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+	
+		
+			
+				
+			  	
+				
+					
+						
+						
+						
+						
+													
+													
+						
+					
+				
+			
+		
+		
+		
+			
+			
+			
+<!-- BEGIN: jWidget_C/Raw-HTML/Display -->
+ 
+
+
+
+	 
+	 
+
+<h4 class="sub">Búsqueda del panel de control de Java</h4>
+<p>
+» <a href="/es/download/help/win_controlpanel.xml">Windows</a><br/> » <a href="/es/download/help/mac_controlpanel.xml">Mac OS X</a> 
+</p>
+
+<!-- END: jWidget_C/Raw-HTML/Display -->
+
+				
+	
+	
+
+
+
+
+
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<h4 class="sub">Agregar una URL</h4>
+<ol>
+<li>Haga clic en el botón <b> Editar lista de sitios</b>.</li>
+<li>Haga clic en <b>Agregar</b> en la ventana Lista de excepción de sitios.</li>
+<li>Haga clic en el campo vacío del campo Ubicación para introducir la URL.<br/> La URL debe empezar por <code>http://</code> o <code>https://</code><br/> por ejemplo <code>http://myexample.com</code> o <code>https://myexample.com</code>
+</li>
+<li>Haga clic en <b>Aceptar</b> para guardar la URL que ha introducido. Si hace clic en <strong>Cancelar</strong>, las URL no se guardan.</li>
+<li>Haga clic en <b>Continuar </b> en el cuadro de diálogo Advertencia de seguridad.</li></ol>
+
+<br/>
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<div>
+<img alt="Ventana de lista de excepciones de sitios" src="/ga/images/es/add_url.jpg"/>
+</div>
+<br/>
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<h5 class="sub">Formato de URL</h5>
+<ul>
+<li>
+Se necesita un protocolo y un dominio.<br/> Los protocolos soportados son <code>FILE</code>, <code>HTTP</code> y <code>HTTPS</code>. Se recomienda utilizar <code>HTTPS</code>. Si el protocolo no es <code>HTTPS</code>, se muestra un mensaje de advertencia.
+</li>
+<li>El número de puerto es obligatorio solo si no se utiliza el puerto por defecto.</li>
+<li>La ruta de acceso es opcional.</li>
+<li>Los comodines no están soportados.<br/>
+<ul><li>Si solo se proporciona un dominio, se podrá ejecutar cualquier RIA desde dicho dominio. Un dominio puede tener varias entradas como, por ejemplo, <code>https://www.example.com</code> y <code>http://www.example.com</code>.
+</li>
+<li>Si la ruta acaba con una barra (/), por ejemplo, <code>https://www.example.com/apps/</code>, se podrán ejecutar RIA en ese directorio y en cualquier subdirectorio. Si la ruta no termina con una barra, por ejemplo, <code>http://www.example.com/test/applet.html</code>, solo se podrá ejecutar en ese RIA específico.
+</li></ul>
+</li>
+</ul>
+<p>Solo agregue un sitio a la lista de excepciones si confía en el sitio en su totalidad. Incluso si se especifica la ruta, agregar un sitio que puede contener otras rutas no de confianza podría suponer riesgos de seguridad. No se recomienda hacerlo.</p>
+<p>Si se introduce un URL no válida, aparece un icono de error junto al elemento. Si no se corrige la URL antes de hacer clic en <strong>Aceptar</strong>, la URL no válida no se habrá guardado.</p>
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<h4 class="sub">Editar una URL</h4>
+<ol>
+<li>Haga doble clic en la URL que desee editar en la ventana Lista de excepciones de sitios.</li>
+<li>Realice los cambios en la URL.</li>
+<li>Haga clic en <b>Aceptar</b> para guardar los cambios. Si hace clic en <strong>Cancelar</strong>, los cambios no se guardan. </li>
+</ol>
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<h4 class="sub">Eliminar una URL</h4>
+<ol>
+<li>Haga clic en la URL que desee eliminar en la ventana Lista de excepciones de sitios.</li>
+<li>Haga clic en <b>Eliminar</b>.</li>
+<li>Haga clic en <b>Aceptar</b> para guardar el cambio. Si hace clic en <strong>Cancelar</strong>, las URL no se eliminan de la lista.
+</li>
+</ol>
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<!-- no bodytext --><hr/><span class="titleblack">INFORMACIÓN RELACIONADA</span><br><br>
+
+
+
+
+			
+		
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<p>
+<img class="alertimg" src="/ga/images/ic_tipblue20x20.png"/>Si la URL donde está el applet no es la misma que la de la página web desde la que se inicia el applet, <strong>deberá añadir la URL del applet y la de la página web.</strong>
+</p>
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<h6 class="sub">Ejemplo con distintas URL para el applet y la página web</h6>
+<p>
+Para Yahoo games Checkers, debe introducir ambas URL (las URL pueden ser distintas en función del host que albergue el juego)</p>
+<ol>
+<li>
+http://www.games.yahoo.com<br/> URL del dominio de juegos de Yahoo</li>
+<li>http://yog36.games.sp2.yahoo.com<br/> URL en la que está albergado el juego y que aparecerá en el cuadro de diálogo de la aplicación bloqueada</li>
+</ol>
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<!-- no bodytext --><hr/><span class="titleblack">INFORMACIÓN TÉCNICA ADICIONAL</span><br><br>
+
+
+
+
+			
+		
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<h5 class="sub">Juego de reglas de despliegue</h5>
+<p>
+Si hay instalado algún juego de reglas de despliegue activo en el sistema, las reglas de despliegue tienen prioridad sobre la lista de excepciones de sitios. La lista de excepciones de sitios solo se tiene en cuenta si se aplica la regla por defecto. Consulte el apartado sobre el <a href="http://docs.oracle.com/javase/8/docs/technotes/guides/deploy/deployment_rules.html">juego de reglas de despliegue</a> si desea obtener más información sobre las reglas de despliegue.
+</p>
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+				<span class="bodytext">
+			
+		
+				
+		
+			
+		
+
+
+
+
+
+
+
+
+
+
+<h5 class="sub">Información relacionada</h5>
+» <a href="https://blogs.oracle.com/java-platform-group/entry/upcoming_exception_site_list_in">Lista de excepciones de sitios en 7u51</a> (blogs.oracle.com)<br/> » <a href="http://docs.oracle.com/javase/8/docs/technotes/guides/deploy/exception_site_list.html">Documentación de Lista de excepciones de sitios</a> (docs.oracle.com)<br/>
+
+
+
+
+
+			
+		
+			
+				</span>
+			
+		
+	
+	
+
+	 
+	
+		
+	
+	
+		<hr>
+		<p><b>Puede que también le interese:</b></p>
+		<ul class="bluearrows">
+			
+		        
+		        
+		         
+				<li>
+					
+
+
+
+	
+	
+	
+		
+		
+	<!--  Begin /jArticle_C/Render-Link.jsp -->
+	
+	
+	
+    
+	
+	
+	
+		 
+		 
+	
+	<a href='/es/download/faq/deployment_rule.xml'>¿Cómo desplegar applets de Java en un entorno empresarial?</a>
+	<!--  End /jArticle_C/Render-Link.jsp -->
+
+	
+	
+	
+
+				</li>
+				
+		</ul>
+		<br/><br/>
+	
+	 	
+	
+	</div><!-- /jvc0w2  -->
+	</div><!-- /jvc0w1 clearfix -->
+		
+	
+	
+		
+		<div class="jvcs0 clearfix">
+	
+		
+		
+		
+		
+			 
+			 
+		
+	
+		<div class="spsidebar">	
+		<div class="spheader"><a href='/es/download/help/index.xml'>RECURSOS DE AYUDA</a></div>
+		<ul>
+		
+		
+			
+	      		
+	   		
+		        
+				
+				
+				
+					 
+					 
+				
+				
+								
+				
+				
+					
+						
+						
+							<li><a href="/es/download/help/index_installing.xml">Instalación de Java</a></li>
+						
+					
+				
+			
+		        
+				
+				
+				
+					 
+					 
+				
+				
+								
+				
+				
+					
+						
+						
+							<li id="olderVersions"><a href="/es/download/faq/remove_olderversions.xml">Eliminar versiones anteriores de Java</a></li>
+						
+										
+				
+			
+		        
+				
+				
+				
+					 
+					 
+				
+				
+								
+				
+				
+					
+						
+						
+							<li><a href="/es/download/help/disable_browser.xml">Desactivar Java</a></li>
+						
+					
+				
+			
+		        
+				
+				
+				
+					 
+					 
+				
+				
+								
+				
+				
+					
+						
+						
+							<li><a href="/es/download/help/index_using.xml">Uso de Java</a></li>
+						
+					
+				
+			
+		        
+				
+				
+				
+					 
+					 
+				
+				
+								
+				
+				
+					
+						
+							<li><a href="/es/download/faq/index_general.xml"><b>Preguntas generales</b></a></li>
+						
+						
+					
+				
+			
+		        
+				
+				
+				
+					 
+					 
+				
+				
+								
+				
+				
+					
+						
+						
+							<li><a href="/es/download/faq/index_mobile.xml">Mobile Java</a></li>
+						
+					
+				
+			
+		        
+				
+				
+				
+					 
+					 
+				
+				
+								
+				
+				
+					
+						
+						
+							<li><a href="/es/security/">Seguridad</a></li>
+						
+					
+				
+			
+		        
+				
+				
+				
+					 
+					 
+				
+				
+								
+				
+				
+					
+						
+						
+							<li><a href="/es/download/support.jsp">Opciones de asistencia</a></li>
+						
+					
+				
+				
+			
+				
+					
+		</ul>
+		</div>
+		<br>
+		
+	
+			
+		
+			
+		
+		
+		
+			
+		
+			
+	
+		</div><!--  /jvcs0 clearfix -->
+		</div><!-- /jvc0 -->
+		
+	
+	
+		
+		
+			
+	 
+
+
+
+
+
+
+
+
+
+	
+		
+			
+				
+			  	
+				
+					
+						
+						
+						
+						
+													
+													
+						
+					
+				
+			
+		
+		
+		
+			
+			
+			
+	<!-- BEGIN: jWidget_C/Footer/Display -->
+	
+	
+	
+	
+		 
+		 
+	
+	<div class="jvf0">
+		<p>
+  <a href="/es/selectlanguage.jsp">Seleccionar idioma</a>
+| <a href="/es/about/">Acerca de Java</a>
+| <a href="/es/download/support.jsp">Soporte</a>
+| <a href="/es/download/faq/develop.xml">Desarrolladores</a>
+
+<br />
+  <a href="http://www.oracle.com/html/privacy.html">Privacidad</a>
+|&nbsp;<a><span id='teconsent'></span></a>&nbsp;
+| <a href="http://www.oracle.com/html/terms.html">Condiciones de uso</a>
+| <a href="http://www.oracle.com/html/3party.html">Marcas registradas</a>
+| <a href="/es/about/disclaimer.jsp">Descargo de responsabilidad</a>
+</p>
+
+<a href="http://www.oracle.com/" class="jvsun0">Oracle</a>
+
+	</div>
+	<!-- END: jWidget_C/Footer/Display -->
+
+				
+	
+	
+
+
+
+
+
+	
+	
+	
+		
+	
+	
+	
+		
+		
+			
+			
+				
+			
+		
+		<script language="JavaScript">
+		<!--
+			var s_channel="javac:Support:FAQ";
+			var s_pageName="javac:Support:FAQ:exception_sitelist.xml";
+			var s_prop19="es_javac:Support:FAQ:exception_sitelist.xml";
+			var s_charSet="UTF-8";
+		//-->
+		</script>
+		<script language="JavaScript" src="/ga/js/s_code_remote.js"></script>
+		<script>
+			userAgent = navigator.userAgent;
+			userAgent = userAgent == null ? "" : userAgent.toLowerCase();
+			
+			if (userAgent.indexOf('mac') != -1){
+				document.getElementById("olderVersions").style.display = "none"
+			}
+		</script>
+	
+		
+	
+</body>
+</html>
+
+

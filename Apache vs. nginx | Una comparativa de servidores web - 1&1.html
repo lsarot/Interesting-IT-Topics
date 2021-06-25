@@ -1,0 +1,4386 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es">
+<head itemscope itemtype="http://schema.org/WebSite">
+  <meta itemprop="name" content="1&amp;1 Digital Guide"/>
+  <script src="//assets.adobedtm.com/2aa09d282e676fefba9cb3aa1cf95e8ef5600499/satelliteLib-f68a2914f4e4738802a1a21a096f14b2a173b441.js"></script>
+
+<meta charset="utf-8">
+<!-- 
+	This website is powered by TYPO3 - inspiring people to share!
+	TYPO3 is a free open source Content Management Framework initially created by Kasper Skaarhoj and licensed under GNU/GPL.
+	TYPO3 is copyright 1998-2017 of Kasper Skaarhoj. Extensions are copyright of their respective owners.
+	Information and contribution at https://typo3.org/
+-->
+
+<base href="https://www.1and1.es/digitalguide/">
+
+
+<meta name="generator" content="TYPO3 CMS">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="meta-category" content="Digitalguide">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="robots" content="index,follow">
+
+
+<link rel="stylesheet" type="text/css" href="typo3temp/Assets/5673432b8e.css?1516354498" media="all">
+<link rel="stylesheet" type="text/css" href="typo3conf/ext/transkript/Resources/Public/Css/modules/transkript.css?1497951493" media="all">
+<link rel="stylesheet" type="text/css" href="typo3conf/ext/ciso_shop_includes/Resources/Public/Css/footer.css?1513852454" media="all">
+<link rel="stylesheet" type="text/css" href="fileadmin/templates/ratgeberportal/Resources/Public/Css/bootstrap.css?1513598380" media="all">
+<link rel="stylesheet" type="text/css" href="fileadmin/templates/ratgeberportal/Resources/Public/Css/font-awesome.min.css?1513598380" media="all">
+<link rel="stylesheet" type="text/css" href="fileadmin/templates/ratgeberportal/Resources/Public/Css/main.css?1513688337" media="all">
+<link rel="stylesheet" type="text/css" href="fileadmin/templates/ratgeberportal/Resources/Public/Css/rainbow.css?1513598380" media="all">
+<link rel="stylesheet" type="text/css" href="typo3conf/ext/iconfont/Resources/Public/Lib/font-awesome/css/font-awesome.min.css?1497951471" media="all">
+<link rel="stylesheet" type="text/css" href="typo3conf/ext/toc/Resources/Public/Css/style.css?1513598075" media="all">
+
+
+
+<script src="fileadmin/templates/ratgeberportal/Resources/Public/JavaScript/modernizr.js?1513598382" type="text/javascript"></script>
+<script src="typo3conf/ext/rating/Resources/Public/Script/scripts.js?1513598080" type="text/javascript"></script>
+
+
+<link rel="shortcut icon" href="/favicon.ico" /><style type="text/css">#bannerImage{ background-image: url(fileadmin/DigitalGuide/Stage_Visual/server-vergleich-s.jpg); }</style><link rel="canonical" href="https://www.1and1.es/digitalguide/servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/"><link rel="alternate" hreflang="es" href="https://www.1and1.es/digitalguide/servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/"><link rel="alternate" hreflang="es-ES" href="https://www.1and1.es/digitalguide/servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/"><link rel="alternate" hreflang="en-GB" href="https://www.1and1.co.uk/digitalguide/server/know-how/nginx-vs-apache-a-web-server-comparison/"><link rel="alternate" hreflang="en" href="https://www.1and1.com/digitalguide/server/know-how/nginx-vs-apache-a-web-server-comparison/"><link rel="alternate" hreflang="en-US" href="https://www.1and1.com/digitalguide/server/know-how/nginx-vs-apache-a-web-server-comparison/"><link rel="alternate" hreflang="en-CA" href="https://www.1and1.ca/digitalguide/server/know-how/nginx-vs-apache-a-web-server-comparison/"><link rel="alternate" hreflang="es-MX" href="https://www.1and1.mx/digitalguide/servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/"><link rel="alternate" hreflang="it-IT" href="https://www.1and1.it/digitalguide/server/know-how/nginx-vs-apache-un-confronto-dei-web-server/"><link rel="alternate" hreflang="de-DE" href="https://hosting.1und1.de/digitalguide/server/knowhow/nginx-vs-apache-ein-webserver-vergleich/"><link rel="alternate" hreflang="de-AT" href="https://www.1und1.at/digitalguide/server/knowhow/nginx-vs-apache-ein-webserver-vergleich/">
+	<title>Apache vs. nginx | Una comparativa de servidores web - 1&amp;1</title>
+	<meta name="description" content="Nginx vs. Apache: ¿qué diferencia a los servidores web más populares en términos de arquitectura, configuración y posibilidades de expansión?" />
+	
+<meta property="og:title" content="Apache vs. nginx | Una comparativa de servidores web">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://www.1and1.es/digitalguide/fileadmin/DigitalGuide/Stage_Visual/server-vergleich-s.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="440">
+<meta property="og:url" content="https://www.1and1.es/digitalguide/servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/">
+<meta property="og:site_name" content="1&amp;1 Digitalguide">
+<meta property="og:description" content="Nginx vs. Apache: ¿qué diferencia a los servidores web más populares en términos de arquitectura, configuración y posibilidades de expansión?">
+<meta property="og:locale" content="es_ES">
+<script type="text/javascript">
+        var cookieContent = '';
+        var params = document.location.search;
+
+        if (params.indexOf('ac') != -1) {
+          var regExp = new RegExp(/ac=([a-z0-9.]*)/i);
+          var matches = params.match(regExp);
+
+          if (matches != null && matches.length > 0) {
+              cookieContent = matches[1];
+          }
+        }
+        else {
+            var referrer = document.referrer;
+            var cookieValueSearchEngine = 'OM.WE.WEo50K361688T7073a';
+            var cookieValueOther = 'OM.WE.WEd32K41385T7073a';
+
+            if (referrer != '') {
+                var re = new RegExp(/^http[s]?:\/\/(www\.)?(google|bing|yahoo)/i);
+                var matches = referrer.match(re);
+
+                cookieContent = (matches != null && matches.length > 0) ? cookieValueSearchEngine : cookieValueOther;
+            }
+        }
+        var cookieName = 'ac-whorder-es';
+        if(document.cookie.indexOf(cookieName) == -1 && cookieContent != '') {
+            var thirtyDaysFromNow = Date.now() + (86400000 * 30);
+            var expiresDate = new Date(thirtyDaysFromNow).toUTCString(); 
+            var cookieSettings = '; expires=' + expiresDate + '; path=/';
+            document.cookie = cookieName + '=' + cookieContent + cookieSettings;
+        }
+        </script>
+</head>
+<body class="see-drop page-1728">
+
+
+<div id="wrapper">
+
+  
+  <header id="header">
+    <div class="header-frame">
+      <div class="container">
+        <div class="logo">
+          <a href="/digitalguide/">
+            <span class="img-logo"><img src="fileadmin/templates/images/logo.svg" alt="1&1" width="40" height="40"></span>
+            <span class="text">digital guide</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="header-holder">
+      <div class="container">
+        <div class="nav-logo">
+          <a href="#"><img src="fileadmin/templates/images/logo.svg" alt="1&1" width="32" height="32"></a>
+        </div>
+        <nav id="nav"> <a href="#" class="nav-opener"><span></span></a> <div class="nav-drop"> <div class="nav-wrap"> <ul id="navigation" class="navigation"><li ><a title="Páginas web" href="paginas-web/">Páginas web</a><div class="inner-drop hidden-drop"><div class="container"><ul><li ><a href="paginas-web/creacion-de-paginas-web/" title="Creación de páginas web">Creación de páginas web</a></li><li ><a href="paginas-web/diseno-web/" title="Diseño web">Diseño web</a></li><li ><a href="paginas-web/desarrollo-web/" title="Desarrollo web">Desarrollo web</a></li><li ><a href="paginas-web/derecho-digital/" title="Derecho digital">Derecho  digital</a></li></ul></div></div></li><li ><a title="Hosting" href="hosting/">Hosting</a><div class="inner-drop hidden-drop"><div class="container"><ul><li ><a href="hosting/cms/" title="CMS">CMS</a></li><li ><a href="hosting/blogs/" title="Blogs">Blogs</a></li><li ><a href="hosting/cuestiones-tecnicas/" title="Cuestiones técnicas">Cuestiones técnicas</a></li></ul></div></div></li><li class="inner-drop-active "><a title="Servidores" href="servidores/">Servidores</a><div class="inner-drop"><div class="container"><ul><li class="active "><a href="servidores/know-how/" title="Know How">Know How</a></li><li ><a href="servidores/configuracion/" title="Configuración">Configuración</a></li><li ><a href="servidores/seguridad/" title="Seguridad">Seguridad</a></li><li ><a href="servidores/herramientas/" title="Herramientas">Herramientas</a></li></ul></div></div></li><li ><a title="Dominios" href="dominios/">Dominios</a><div class="inner-drop hidden-drop"><div class="container"><ul><li ><a href="dominios/extensiones-de-dominio/" title="Extensiones de dominio">Extensiones de dominio</a></li><li ><a href="dominios/gestion-de-dominios/" title="Gestión de dominios">Gestión de dominios</a></li><li ><a href="dominios/noticias-sobre-dominos/" title="Noticias sobre dominos">Noticias sobre dominos</a></li><li ><a href="dominios/consejos-sobre-dominios/" title="Consejos sobre dominios">Consejos sobre dominios</a></li></ul></div></div></li><li ><a title="Online Marketing" href="online-marketing/">Online Marketing</a><div class="inner-drop hidden-drop"><div class="container"><ul><li ><a href="online-marketing/vender-en-internet/" title="Vender en Internet">Vender en Internet</a></li><li ><a href="online-marketing/marketing-para-motores-de-busqueda/" title="Marketing para motores de búsqueda">Marketing para motores de búsqueda</a></li><li ><a href="online-marketing/redes-sociales/" title="Redes sociales">Redes sociales</a></li><li ><a href="online-marketing/analisis-web/" title="Análisis web">Análisis web</a></li></ul></div></div></li><li ><a title="Correo electrónico" href="correo-electronico/">Correo electrónico</a><div class="inner-drop hidden-drop"><div class="container"><ul><li ><a href="correo-electronico/e-mail-marketing/" title="E-mail marketing">E-mail marketing</a></li><li ><a href="correo-electronico/seguridad-correo-electronico/" title="Seguridad correo electrónico">Seguridad correo electrónico</a></li><li ><a href="correo-electronico/cuestiones-tecnicas/" title="Cuestiones técnicas">Cuestiones técnicas</a></li></ul></div></div></li><li ><a title="PYMES" href="pymes/">PYMES</a><div class="inner-drop hidden-drop"><div class="container"><ul><li ><a href="pymes/contabilidad/" title="Contabilidad">Contabilidad</a></li><li ><a href="pymes/facturacion/" title="Facturación">Facturación</a></li><li ><a href="pymes/impuestos-y-derechos/" title="Impuestos y derechos">Impuestos y derechos</a></li></ul></div></div></li><li><a href="https://https://www.1and1.es">1&amp;1 tienda online</a></li></ul></div></div></nav>
+        <div class="header-info">
+          <ul class="list-inline list-links">
+            <li>
+              <div class="dropdown search-box">
+                <a href="#" class="search-opener dropdown-toggle" data-toggle="dropdown"><span class="icon-search"></span></a>
+                <div class="search-drop dropdown-menu">
+                  <form class="search-form" action="buscar/?tx_indexedsearch_pi2%5Baction%5D=search&tx_indexedsearch_pi2%5Bsearch%5D%5BlanguageUid%5D=2&tx_indexedsearch_pi2%5Bcontroller%5D=Search" method="post">
+                  <fieldset>
+                    <div class="form-group">
+                      <input class="form-control" type="search" placeholder="Buscar" name="tx_indexedsearch_pi2[search][sword]">
+                      <button type="submit"><span class="icon-search"></span></button>
+                    </div>
+                  </fieldset>
+                  </form>
+                </div>
+              </div>
+            </li>
+            <li class="sub-drop-opener dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Productos 1&1</a>
+              <div class="sub-drop-wrap dropdown-menu">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm-3"><strong class="sub-head"><a href="">
+          Dominios
+     
+       </a></strong><ul class="sub-menu-list list-unstyled"><li><a href="https://www.1and1.es/dominios"><strong class="sub-title">Registra y compra tus Dominios</strong><p> ¡Registra hoy mismo tu nombre de dominio con 1&1!</p></a></li><li><a href="https://www.1and1.es/nuevas-terminaciones-dominios"><strong class="sub-title">Nuevos nombres de Dominios</strong><p> Más de 700 nuevas terminaciones de dominio</p></a></li><li><a href="https://www.1and1.es/transferencia-dominios"><strong class="sub-title">Transferencia de Dominios</strong><p> Transfiere tu dominio a 1&1 fácilmente</p></a></li><li><a href="https://www.1and1.es/compra-dominios"><strong class="sub-title">Precios de Dominios</strong><p> Compra dominios a los mejores precios del mercado</p></a></li><li><a href="https://www.1and1.es/registrar-dominio-privado"><strong class="sub-title">Registro de dominio privado</strong><p> Dominio con privacidad WHOIS incluido gratis</p></a></li><li><a href="https://www.1and1.es/whois-domain"><strong class="sub-title">Información Whois</strong><p> Busca información sobre un dominio</p></a></li><li><a href="https://www.1and1.es/domain-check"><strong class="sub-title">Domain Check</strong><p> </p></a></li></ul><strong class="sub-head"><a href="">
+         Seguridad
+     
+       </a></strong><ul class="sub-menu-list list-unstyled"><li><a href="https://www.1and1.es/certificado-ssl"><strong class="sub-title">Certificado SSL</strong><p> Máxima Seguridad con accesso https</p></a></li><li><a href="https://www.1and1.es/ssl-checker"><strong class="sub-title">SSL Checker</strong><p> Comprueba gratis de tu cifrado HTTPS</p></a></li></ul></div><div class="col-sm-3"><strong class="sub-head"><a href="">
+          Páginas Web & Hosting
+     
+       </a></strong><ul class="sub-menu-list list-unstyled"><li><a href="https://www.1and1.es/crear-pagina-web"><strong class="sub-title">Crea tu página web</strong><p> Crea fácilmente la página web de tu negocio</p></a></li><li><a href="https://www.1and1.es/templates"><strong class="sub-title">Plantillas web</strong><p> Múltiples diseños y gran variedad de plantillas</p></a></li><li><a href="https://www.1and1.es/tiendas-online"><strong class="sub-title">Tiendas Online</strong><p> Crea tu propia tienda online rápidamente</p></a></li><li><a href="https://www.1and1.es/alojamiento-web"><strong class="sub-title">Hosting</strong><p> Alojamiento web para profesionales</p></a></li><li><a href="https://www.1and1.es/hosting-linux"><strong class="sub-title">Hosting Linux</strong><p> La elección ideal para Apache, PHP y MySQL</p></a></li><li><a href="https://www.1and1.es/blogs-de-wordpress"><strong class="sub-title">WordPress Hosting</strong><p> Hosting profesional para WordPress</p></a></li><li><a href="https://www.1and1.es/hosting-windows"><strong class="sub-title">Windows Hosting</strong><p> Alojamiento web para asp</p></a></li></ul><strong class="sub-head"><a href="">
+          Correo & Office
+     
+       </a></strong><ul class="sub-menu-list list-unstyled"><li><a href="https://www.1and1.es/correo"><strong class="sub-title">Dirección de correo electrónico</strong><p> Correo electrónico profesional</p></a></li></ul></div><div class="col-sm-3"><strong class="sub-head"><a href="">
+          Servidores
+     
+       </a></strong><ul class="sub-menu-list list-unstyled"><li><a href="https://www.1and1.es/servidor-cloud-dinamico"><strong class="sub-title">Servidor Cloud</strong><p> Soluciones de cloud hosting y respaldo</p></a></li><li><a href="https://www.1and1.es/servidores-dedicados"><strong class="sub-title">Servidores Dedicados</strong><p> Hosting dedicado en España: Windows o Linux</p></a></li><li><a href="https://www.1and1.es/servidores-virtuales"><strong class="sub-title">Servidores Virtuales</strong><p> Servidor Virtual Privado al mejor precio</p></a></li><li><a href="https://www.1and1.es/servidores"><strong class="sub-title">Servidores</strong><p> </p></a></li></ul></div><div class="col-sm-3"><strong class="sub-head"><a href="">
+         Herramientas
+     
+       </a></strong><ul class="sub-menu-list list-unstyled"><li><a href="https://www.1and1.es/analisis-web"><strong class="sub-title">Análisis Web</strong><p> Análisis del rendimiento de tu página web</p></a></li><li><a href="https://www.1and1.es/analisis-seo"><strong class="sub-title">Análisis SEO</strong><p> Comprueba gratis si tu sitio web está optimizada</p></a></li><li><a href="https://www.1and1.es/crear-favicon"><strong class="sub-title">Crear favicon</strong><p> Crea tu favicon gratis en linea</p></a></li><li><a href="https://www.1and1.es/crear-logo"><strong class="sub-title">Crear logo</strong><p> Generador de logos para tu negocio</p></a></li><li><a href="https://www.1and1.es/direccion-ip"><strong class="sub-title">¿Cual es mi IP?</strong><p> Descubre tu direccion IP gratis </p></a></li></ul></div>
+                    </div>
+                  </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <script type="application/ld+json">{ "@context": "http://schema.org","@type": "BreadcrumbList", "itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https:\/\/hosting.1und1.de","name":"1&1"}},{"@type":"ListItem","position":2,"item":{"@id":"https:\/\/hosting.1und1.de\/digitalguide","name":"Consejero"}},{"@type":"ListItem","position":3,"item":{"@id":"servidores\/","name":"Servidores"}},{"@type":"ListItem","position":4,"item":{"@id":"servidores\/know-how\/","name":"Know How"}},{"@type":"ListItem","position":5,"item":{"@id":"servidores\/know-how\/apache-vs-nginx-una-comparativa-de-servidores-web\/","name":"Apache vs. nginx | Una comparativa de servidores web"}}]}</script>
+    
+	<nav class="breadcrumbs"> <div class="container"> <ol class="list-inline"><li><a href="/" title="1&1" itemprop="item">1&1</a></li><li><a href="" title="Digitalguide" itemprop="item"><span itemprop="name">Digitalguide</span></a></li><li><a href="servidores/" title="Servidores" itemprop="item"><span itemprop="name">Servidores</span></a></li><li><a href="servidores/know-how/" title="Know How" itemprop="item"><span itemprop="name">Know How</span></a></li><li><a href="servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/" title="Apache vs. nginx: los mejores servidores web open source" itemprop="item"><span itemprop="name">Apache vs. nginx | Una comparativa de servidores web</span></a></li></ol></div></nav>
+
+
+    <div class="main-container">
+      <div class="container meta-holder">
+        <div class="row">
+          <div class="col-sm-8">
+              
+<div class="article-meta">
+    <ul class="list-inline meta">
+        <li>
+            <time datetime=" 2017-12-19"><span class="icon-clock-o"></span>  19.12.17</time>
+        </li>
+        <li><a title="Know How" href="servidores/know-how/">Know How</a>
+        </li>
+    </ul>
+    <ul class="list-inline list-info">
+        <li>
+            
+                    
+
+    
+            
+<div class="star-rating">
+
+    <div class="star-rating__text">
+
+        <span class="text-info"
+             data-role="ratingsWording"
+              data-default="¿Te ha gustado el artículo?"
+             data-thanks="Muchas gracias por tu valoración">
+            ¿Te ha gustado el artículo?
+        </span>
+
+        <span class="star-rating__average" title="Nota promedio"
+             data-role="ratingsAverage">
+            0
+        </span>
+
+    </div>
+
+    <div class="star-rating__wrap">
+        <input class="star-rating__input" id="star-rating-5" type="radio" name="ratingtop" value="5"
+               data-role="ratingStarInput5">
+        <label class="star-rating__ico" for="star-rating-5" data-role="star" data-amount="5">
+                    <span class="fa fa-stack fa-lg">
+                        <i class="fa fa-star fa-stack-1x"></i>
+                        <i class="fa fa-star-o fa-stack-1x"></i>
+                    </span>
+        </label>
+        <input class="star-rating__input" id="star-rating-4" type="radio" name="ratingtop" value="4"
+               data-role="ratingStarInput4">
+        <label class="star-rating__ico" for="star-rating-4" data-role="star" data-amount="4">
+                    <span class="fa fa-stack fa-lg">
+                    <i class="fa fa-star fa-stack-1x"></i>
+                        <i class="fa fa-star-o fa-stack-1x"></i>
+                    </span>
+        </label>
+        <input class="star-rating__input" id="star-rating-3" type="radio" name="ratingtop" value="3"
+               data-role="ratingStarInput3">
+        <label class="star-rating__ico" for="star-rating-3" data-role="star" data-amount="3">
+                    <span class="fa fa-stack fa-lg">
+                        <i class="fa fa-star fa-stack-1x"></i>
+                        <i class="fa fa-star-o fa-stack-1x"></i>
+                    </span>
+        </label>
+        <input class="star-rating__input" id="star-rating-2" type="radio" name="ratingtop" value="2"
+               data-role="ratingStarInput2">
+        <label class="star-rating__ico" for="star-rating-2" data-role="star" data-amount="2">
+                    <span class="fa fa-stack fa-lg">
+                        <i class="fa fa-star fa-stack-1x"></i>
+                        <i class="fa fa-star-o fa-stack-1x"></i>
+                    </span>
+        </label>
+        <input class="star-rating__input" id="star-rating-1" type="radio" name="ratingtop" value="1"
+               data-role="ratingStarInput1">
+        <label class="star-rating__ico" for="star-rating-1" data-role="star" data-amount="1">
+                    <span class="fa fa-stack fa-lg">
+                        <i class="fa fa-star fa-stack-1x"></i>
+                        <i class="fa fa-star-o fa-stack-1x"></i>
+                    </span>
+        </label>
+    </div>
+
+    <div class="star-rating__amount" data-role="ratingTotalAmount"
+         title="Total de reseñas">0
+    </div>
+
+    <div class="clearfix"></div>
+</div>
+
+            
+        
+
+
+                
+
+        </li>
+        <li>
+            <ul class="list-inline social-networks">
+                <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.1and1.es/digitalguide/servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/" class="facebook"><span class="icon-facebook"></span></a></li>
+                <li><a target="_blank" href="https://twitter.com/intent/tweet?source=https://www.1and1.es/digitalguide/servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/&text=https://www.1and1.es/digitalguide/servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/%20%23DigitalGuide" class="twitter"><span class="icon-twitter"></span></a></li>
+                <li><a target="_blank" href="https://www.xing.com/spi/shares/new?url=https://www.1and1.es/digitalguide/servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/" class="xing"><span class="icon-xing"></span></a></li>
+                <li><a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=https://www.1and1.es/digitalguide/servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/" class="linkedin"><span class="icon-linkedin"></span></a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+          </div>
+        </div>
+      </div>
+      
+
+
+
+
+      <div class="container two-columns   ">
+        <div class="row">
+          <!--TYPO3SEARCH_begin-->
+          <div class="col-sm-8" id="content">
+            <div class="content-block">
+
+            
+
+
+    
+     <div class="aligncenter visual-img hidden-xs">
+        
+        <picture>
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="fileadmin/_processed_/9/6/csm_server-vergleich-t_5e2d02d33f.jpg" media="(max-width: 767px)">
+            <source srcset='fileadmin/_processed_/9/6/csm_server-vergleich-t_1abc3c8035.jpg' media="(max-width: 1023px)">
+            <source srcset='fileadmin/DigitalGuide/Teaser/server-vergleich-t.jpg'>
+            <!--[if IE 9]></video><![endif]-->
+            <img src="fileadmin/DigitalGuide/Teaser/server-vergleich-t.jpg" alt="Apache vs. nginx | Una comparativa de servidores web" title="Apache vs. nginx | Una comparativa de servidores web">
+        </picture>
+    
+     </div>
+    
+
+
+
+            
+<div id="c111291">
+	
+
+	
+		
+				
+			
+
+		
+
+	
+		<h1 class="blue">Apache vs. nginx: los mejores servidores web open source</h1>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+
+
+</div>
+
+<div id="c111292">
+	
+		
+
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>La primera versión del <strong>servidor</strong> <strong>HTTP</strong> <strong>Apache</strong> nace en 1995. Sin embargo, a día de hoy, más de 20 años después. El servidor web ruso <strong>nginx</strong>, que se pronuncia como “Engine-x”, también de código abierto, es el que posee una cuota de mercado mayor, creciendo de manera exponencial. Algo que resulta especialmente doloroso para la Apache Foundation es que la mayoría de páginas web con una buena posición en el <a title="El ranking de Alexa: qué es y cómo puedes mejorarlo" href="online-marketing/marketing-para-motores-de-busqueda/ranking-de-alexa-que-es-y-como-mejorarlo/" class="internal-link">ranking de Alexa</a> se entregan por medio de nginx, tal y como muestra un estudio estadístico de <a href="https://w3techs.com/technologies/cross/web_server/ranking" title="Cifras actuales sobre servidores web en w3techs.com" target="_blank" class="external-link-new-window">W3Techs</a> que se actualiza regularmente. </p>
+<p>No solo los grandes buscadores rusos como Rambler y Yandex, el servicio de correo electrónico Mail.RU o la red social VK utilizan el ligero servidor, sino que también proveedores internacionales como Dropbox, Netflix, WordPress y FastMail utilizan nginx para mejorar el rendimiento de sus servicios. ¿Significa esto que el Apache HTTP Server forma parte del pasado?</p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+
+<div id="c111293">
+	
+
+	
+
+
+	
+	<div class="tx-toc">
+	
+  
+    <div id="toc" class="toc content-table smoothscroll 
+         numbers 
+          
+          
+         
+         togglestyle">
+      <div id="toctitle" class="opener">
+        <strong class="h3">Índice</strong>
+        
+            <span class="toctoggle">
+                
+                        <a href="#" id="togglelinkStyle"></a>
+                    
+            </span>
+        
+      </div>
+      
+          
+   
+    <ol class="ordered-list list-content toclist hierarchy">
+      
+        <li class="toclevel-2">
+            
+        
+                <a href="servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/#c111295">
+                    <span class="toctext" data-slug="los-desafios-de-la-web-2-0">Los desafíos de la Web 2.0</span>
+                </a>                  
+            
+        
+        
+    
+
+        </li>
+      
+        <li class="toclevel-2">
+            
+        
+                <a href="servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/#c111297">
+                    <span class="toctext" data-slug="diferencias-arquitectonicas">Diferencias arquitectónicas</span>
+                </a>                  
+            
+        
+        
+          
+        <ol class="ordered-list">
+            
+                <li class="toclevel-3">
+                
+                        <a href="servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/#c111298">
+                            <span class="toctext" data-slug="gestion-de-la-conexion">Gestión de la conexión </span>
+                        </a>                
+                                
+                
+    
+
+                </li>
+            
+                <li class="toclevel-3">
+                
+                        <a href="servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/#c111304">
+                            <span class="toctext" data-slug="gestion-de-los-contenidos-web-estaticos-y-dinamicos">Gestión de los contenidos web estáticos y dinámicos </span>
+                        </a>                
+                                
+                
+    
+
+                </li>
+            
+                <li class="toclevel-3">
+                
+                        <a href="servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/#c111306">
+                            <span class="toctext" data-slug="interpretacion-de-las-solicitudes-de-los-clientes">Interpretación de las solicitudes de los clientes</span>
+                        </a>                
+                                
+                
+    
+
+                </li>
+            
+                <li class="toclevel-3">
+                
+                        <a href="servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/#c111327">
+                            <span class="toctext" data-slug="configuracion">Configuración</span>
+                        </a>                
+                                
+                
+    
+
+                </li>
+            
+        </ol>
+    
+
+        </li>
+      
+        <li class="toclevel-2">
+            
+        
+                <a href="servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/#c111333">
+                    <span class="toctext" data-slug="posibilidades-de-extension">Posibilidades de extensión </span>
+                </a>                  
+            
+        
+        
+    
+
+        </li>
+      
+        <li class="toclevel-2">
+            
+        
+                <a href="servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/#c111335">
+                    <span class="toctext" data-slug="documentacion-y-asistencia">Documentación y asistencia </span>
+                </a>                  
+            
+        
+        
+    
+
+        </li>
+      
+        <li class="toclevel-2">
+            
+        
+                <a href="servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/#c111337">
+                    <span class="toctext" data-slug="compatibilidad-y-ecosistema">Compatibilidad y ecosistema</span>
+                </a>                  
+            
+        
+        
+    
+
+        </li>
+      
+        <li class="toclevel-2">
+            
+        
+                <a href="servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/#c111339">
+                    <span class="toctext" data-slug="apache-vs-nginx-resumen-de-diferencias">Apache vs. nginx: resumen de diferencias</span>
+                </a>                  
+            
+        
+        
+    
+
+        </li>
+      
+        <li class="toclevel-2">
+            
+        
+                <a href="servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/#c111341">
+                    <span class="toctext" data-slug="en-resumen">En resumen </span>
+                </a>                  
+            
+        
+        
+    
+
+        </li>
+      
+    </ol>
+  
+          
+        
+    </div>
+    
+  
+
+</div>
+
+	
+
+
+</div>
+<div class="info-box orange">
+<div id="c111294">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+		<div class="headline h2 blue title"><i class="fa fa-exclamation"></i> Nota</div>
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class=" ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p> El servidor HTTP Apache, conocido en la comunidad internauta por su versión economizada “Apache”, es un proyecto de software impulsado bajo el patrocinio de la Apache Foundation. Esta convención también se aplica a esta guía y al hablar de Apache se hace referencia al software y no al fabricante. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+</div>
+<div id="c111295">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+			
+
+	
+	
+		<h2 class="blue">Los desafíos de la Web 2.0</h2>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+		
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class="text-row ce-textpic ce-right ce-intext">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>Owen Garrett, responsable de productos de Nginx, Inc., describe al servidor web Apache en el <a href="https://www.nginx.com/blog/nginx-vs-apache-our-view/" title="Artículo completo en nginx.com" target="_blank" class="external-link-new-window">blog de nginx.com</a> en 2015 como el “backbone” (columna vertebral) de la <strong>Web 1.0</strong> y pone de relieve su importancia para el desarrollo de Internet alrededor del cambio de milenio. El notable éxito del servidor web reside en la sencilla arquitectura del software, si bien se basa en decisiones de diseño orientadas a una World Wide Web que no se puede comparar con la actual. Hace 20 años las páginas web tenían una estructura más simple, el ancho de banda era limitado y caro y, por el contrario, el tiempo de la CPU era en comparación más económico.&nbsp; </p>
+<p>Hoy en día estamos ante una World Wide Web de segunda generación que muestra una cara muy diferente: tanto el número de usuarios como el tráfico web mundial se han multiplicado y lo mismo se puede decir del tamaño medio de las páginas así como de la cantidad de componentes que los navegadores deben consultar y renderizar para poderlas representar. Una parte cada vez mayor de la comunidad en Internet ha crecido acostumbrada a las posibilidades de la <strong>Web 2.0</strong> y este grupo de usuarios no está habituado a esperar varios segundos y mucho menos minutos para descargar una página web. </p>
+<p>Estos cambios han supuesto en los últimos años un desafío cada vez mayor para el servidor HTTP Apache. Owen Garret señala como responsable a la <strong>arquitectura basada en procesos propia de Apache</strong>, que no se puede escalar adecuadamente a la vista de un tráfico cada vez más elevado. Esta debilidad fue una de las principales motivaciones para desarrollar nginx en el año 2002, que fue por unos derroteros diferentes debido a su <strong>arquitectura</strong><strong> </strong><strong>dirigida por eventos</strong>. nginx fue creado por el desarrollador de software ruso Igor Sysoev, se utiliza tanto como servidor web como <a title="Servidor proxy inverso: componente central de la seguridad" href="servidores/know-how/que-es-un-servidor-proxy-inverso/" class="internal-link">proxy inverso</a> o proxy de correo electrónico y está diseñado atendiendo a las necesidades del buscador ruso Rambler. </p>
+<p>A continuación te hablamos de la relación entre Apache y nginx y te informamos sobre las diferencias arquitectónicas, la configuración o las posibilidades de desarrollo, pero también sobre la compatibilidad, la documentación y la asistencia técnica. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+<div class="info-box orange">
+<div id="c111296">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+		<div class="headline h2 blue title"><i class="fa fa-lightbulb-o"></i> Consejo</div>
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class=" ce-textpic ce-right ce-intext">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p> Para obtener una introducción general sobre la instalación y configuración de ambos servidores web open source, visita nuestros artículos sobre <a title="Cómo instalar Apache en un PC Windows" href="servidores/configuracion/instala-apache-en-tu-pc/" class="internal-link">Apache</a> y <a title="nginx: el servidor web rápido y sostenible" href="servidores/configuracion/nginx-conceptos-basicos-instalacion-y-configuracion/" class="internal-link">NGINX</a>.</p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+</div>
+<div id="c111297">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+			
+
+	
+	
+		<h2 class="blue">Diferencias arquitectónicas</h2>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+		
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>Los servidores web Apache y nginx presentan <strong>diferencias en cuanto a la arquitectura del software</strong> en relación con la gestión de la conexión, la interpretación de las solicitudes de los clientes, el manejo de los contenidos web estáticos y dinámicos y la configuración. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+
+<div id="c111298">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+		<h3 class="blue title">Gestión de la conexión </h3>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-below">
+		
+
+		<div class="ce-bodytext">
+			
+			<p>En la comparación de nginx vs. Apache surgen diferencias básicas en la manera como manejan las <strong>solicitudes entrantes de los clientes (requests). </strong>Mientras que Apache parte de una arquitectura basada en procesos, la gestión de la conexión en nginx se erige sobre la base de un algoritmo de procesamiento dirigido por eventos, lo que permite procesar solicitudes ahorrando recursos incluso cuando entran en juego varias conexiones simultáneamente. Esto constituye, según los desarrolladores de nginx, una gran ventaja frente al servidor HTTP Apache, que desde la versión 2.4 ofrece la posibilidad de implementar eventos. Veamos a continuación las diferencias en detalle.</p>
+<p>El servidor web Apache adopta un enfoque en el que las solicitudes de los clientes se tramitan en un proceso o thread (hilo) separado. El <strong>single threading o proceso con un único hilo</strong>, el modo operativo original del Apache HTTP server, plantea problemas tarde o temprano con el <strong>bloqueo de I/O</strong>: los procesos que requieren operaciones de escritura o lectura se procesan estrictamente uno tras otro. Así, la solicitud posterior permanecerá en espera hasta que se haya respondido a la anterior. Esto se puede evitar iniciando varios procesos de single threading simultáneamente, una estrategia que conlleva un consumo elevado de recursos. </p>
+<p>Como alternativa pueden usarse mecanismos de <strong>multithreading o de multihilos</strong>. A diferencia del single threading, en el que en todo proceso hay disponible un thread para responder a las solicitudes de los clientes, el multithreading ofrece la posibilidad de ejecutar varios hilos en un mismo proceso. Como los hilos de Linux necesitan menos recursos que procesos, el multithreading permite compensar las amplias necesidades de recursos de la arquitectura basada en procesos del servidor HTTP Apache. </p>
+<p>Para integrar mecanismos que permitan el procesamiento paralelo de peticiones en Apache puede recurrirse a uno de estos tres <strong>módulos de multiprocesamiento (MPM):</strong> <em>mpm_prefork</em>, <em>mpm_worker</em>, <em>mpm_event</em>.</p><ul><li><strong>mpm_prefork:</strong> el módulo de Apache “prefork” garantiza la gestión multiproceso basándose en un <strong>mecanismo de single threading</strong>. El módulo crea un proceso padre que ofrece múltiples procesos hijo y en cada uno de ellos funciona un thread o hilo que permite responder a la solicitud del cliente. Siempre que haya más procesos single thread disponibles que peticiones entrantes de clientes, las requests se procesarán de manera inmediata.<br />El número de procesos de single threading disponibles se define con ayuda de las opciones de configuración del servidor “MinSpareServers” y “MaxSpareServers”. El módulo prefork alberga, sin embargo, los inconvenientes de rendimiento del single threading anteriormente mencionados, si bien la independencia de los procesos resulta ventajosa: si se pierde la conexión debido a un proceso defectuoso, por lo general esto no se refleja en las conexiones editadas en otros procesos.  </li></ul><ul><li><strong>mpm_worker</strong>: con el módulo “worker”, Apache ofrece a los usuarios un <strong>mecanismo de multithreading</strong> para el procesamiento paralelo de las solicitudes de los clientes. El número de threads que debe iniciarse por proceso puede determinarse con la opción de configuración del servidor “ThreadsPerChild”. El módulo prevé un thread por conexión TCP. &nbsp;Siempre que haya más procesos disponibles que solicitudes entrantes, las requests se procesan en paralelo. El proceso padre (<em>httpd</em>) vigila los threads desocupados.<br />Los usuarios pueden recurrir a los comandos “MinSpareThreads” y “MaxSpareThreads” para definir a partir de qué cantidad de hilos desocupados deben generarse nuevos threads o eliminarse de la memoria ciertos hilos en ejecución. El módulo worker <strong>no necesita tantos recursos</strong> como el prefork. Puesto que las conexiones no se procesan en procesos separados, un thread defectuoso pude repercutir en el procedimiento completo de multithreading y en todas las conexiones que se elaboran en él. Además, tanto worker como prefork son propensos a las sobrecargas a través de las llamadas conexiones Keep Alive (véase más abajo). </li></ul><ul><li><strong>mpm_event: </strong>desde la versión 2.4, el servidor HTTP Apache ofrece el tercer módulo de multiprocessing llamado event, que está destinado a un entorno productivo. Este es una variante del módulo worker y se ocupa de la distribución de carga entre los hilos iniciados. A ello se añade un <strong>listener thread</strong> por proceso de multithreading, que se encarga de las solicitudes de los clientes y asigna para ello tareas relacionadas en hilos del módulo worker. El módulo event fue desarrollado para optimizar la relación con las <strong>conexiones Keep Alive</strong>,<strong> </strong>es decir,<strong> </strong>conexiones TCP que no deben contener ningún tipo de fallos para posibilitar la transmisión de otras solicitudes de los clientes o de las respuestas de los servidores (responses). Si se recurre al clásico módulo worker, sus hilos mantienen las conexiones establecidas y, por lo tanto, se bloquean incluso si no se recibe ninguna otra solicitud, lo que, en caso de una gran cantidad de conexiones Keep Alive puede dar lugar a la sobrecarga del servidor. Por el contrario, el módulo event externaliza el mantenimiento de conexiones Keep Alive en el listener thread independiente. Así, los hilos de worker no se bloquean y están disponibles para procesar otras solicitudes. </li></ul><p>El siguiente gráfico muestra una presentación esquemática de la arquitectura basada en procesos del servidor web Apache utilizando el módulo worker:</p>
+		</div>
+
+		
+			
+
+	<div class="aligncenter ce-gallery" data-ce-columns="1" data-ce-images="1">
+		
+			<div class="ce-outer">
+				<div class="ce-inner">
+		
+
+		
+			<div class="ce-row">
+				
+					
+						<div class="ce-column">
+							
+									<figure>
+								
+							
+								
+								
+								
+									<!--
+	
+			
+					
+	<img title="Esquema de la arquitectura de Apache con mpm_worker" alt="Esquema de la arquitectura de Apache con mpm_worker" src="fileadmin/_processed_/3/b/csm_apache-architecture_9eb09e9c50.png" width="960" height="546" />
+
+				
+		
+-->
+									
+        <picture>
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="fileadmin/_processed_/3/b/csm_apache-architecture_dd2106a24f.png" media="(max-width: 767px)">
+            <source srcset='fileadmin/_processed_/3/b/csm_apache-architecture_43e14e01b9.png' media="(max-width: 1023px)">
+            <source srcset='fileadmin/DigitalGuide/Screenshots/apache-architecture.png'>
+            <!--[if IE 9]></video><![endif]-->
+            <img src="fileadmin/DigitalGuide/Screenshots/apache-architecture.png" alt="Esquema de la arquitectura de Apache con mpm_worker" title="Esquema de la arquitectura de Apache con mpm_worker">
+        </picture>
+    
+								
+							 
+
+							
+										<span class="img-caption">
+											El módulo mpm_worker provee a Apache de un mecanismo multithreading que permite procesar varias solicitudes de clientes de forma paralela
+										</span>
+									</figure>
+								
+						</div>
+					
+				
+			</div>
+		
+		
+				</div>
+			</div>
+		
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+		
+	</div>
+
+	
+
+
+</div>
+
+
+<div id="c111299">
+	
+		
+
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>Dependiendo del módulo utilizado, Apache soluciona el <strong>problema de la concurrencia </strong>(que también hace referencia a la respuesta simultánea a varias solicitudes de clientes) ya sea mediante procesos adicionales o mediante threads. Ambas estrategias van acompañadas de unos costes adicionales, lo que se convierte en un factor limitante a la hora de escalar un servidor Apache.</p>
+<p>La enorme necesidad de recursos del principio “un proceso por conexión” se debe al hecho de que para cada proceso adicional se tiene que facilitar un entorno de tiempo de ejecución propio, el cual requiere la asignación del tiempo de la CPU y de una memoria separada. Además, todo módulo de Apache que tenga que estar disponible en un proceso worker debe cargarse por separado. Por el contrario, los hilos comparten un entorno de ejecución (el programa) y un espacio para direcciones en la memoria. La sobrecarga de los hilos adicionales es, por lo tanto, inferior a la de los procesos. Sin embargo, el multithreading requiere muchos recursos en lo que a <strong>cambios de contexto</strong> <strong>(context switches)</strong> se refiere. </p>
+<p>Estos cambios de contexto hacen referencia al procedimiento por el que el sistema de un proceso o hilo se cambia por otro, para lo que tiene que protegerse el contexto del proceso o hilo finalizado y generarse o restablecerse el nuevo, convirtiéndose así en un procedimiento administrativo que requiere mucho tiempo y en el que tanto el registro de la CPU como las diversas tablas y listas han de cargarse y protegerse.</p>
+<p>El módulo <em>mpm_event </em>contiene un <strong>mecanismo event</strong> para el servidor HTTP Apache que externaliza la edición de las conexiones entrantes en un hilo listener. Este permite finalizar conexiones que ya no son necesarias (también las conexiones Keep Alive) y, así, reducir el consumo de recursos. Sin embargo, el problema de los cambios de contexto que requieren muchos recursos no se soluciona si el hilo listener traslada las requests de las conexiones mantenidas a hilos worker separados. </p>
+<p>Por el contrario, la <strong>arquitectura basada en eventos de nginx </strong>realiza la <strong>concurrencia </strong>sin<strong> </strong>que sea necesario un proceso o hilo adicional para cada conexión nueva, y es que un único procedimiento nginx es capaz de procesar miles de conexiones HTTP simultáneamente. Esto se lleva a cabo mediante un mecanismo de bucles conocido como <strong>event loop o bucle de eventos</strong>,<strong> </strong>que permite procesar<strong> </strong>las<strong> </strong>solicitudes de los clientes de manera asincrónica en un hilo.</p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+<div class="info-box orange">
+<div id="c111300">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+		<div class="headline h2 blue title"><i class="fa fa-lightbulb-o"></i> Consejo</div>
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class=" ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p> En teoría, nginx recurre al procesamiento de conexiones con un solo proceso de single threading. Por lo general, para poder sacar todo el provecho al hardware, el servidor web se inicia con un proceso worker por núcleo de procesador (CPU) de la máquina subyacente. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+</div>
+<div id="c111301">
+	
+		
+
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-below">
+		
+
+		<div class="ce-bodytext">
+			
+			<p>A diferencia del servidor web Apache, en el que se puede limitar el número de procesos o hilos activos con valores mínimos o máximos, nginx ofrece un <strong>modelo de procesos predecible</strong> que se ajusta con exactitud al hardware subyacente. Dicho modelo comprende un proceso maestro, los procesadores de ayuda cache loader y cache manager, así como un número de procesadores worker adaptados a los diferentes núcleos de procesadores y definidos claramente por medio de la configuración.</p><ul><li><strong>Proceso maestro:</strong> el proceso maestro es un proceso padre que ejecuta las operaciones básicas como, por ejemplo, la lectura de la configuración del servidor, la unión de puertos y la creación de todos los tipos de procesos siguientes.</li></ul><ul><li><strong>Procesos colaboradores: </strong>nginx utiliza dos procesos para gestionar el caché, es decir, el cache loader y el cache manager.<strong></strong><ul><li><strong>Cache loader: </strong>el cache loader es responsable de que el caché basado en el disco duro se cargue en la memoria.<strong></strong></li><li><strong>Cache manager</strong>: la tarea del cache manager es controlar que los registros del caché del disco duro muestren las dimensiones previamente configuradas y las restrinjan según las necesidades. Este proceso se activa periódicamente. </li></ul></li></ul><ul><li><strong>Proceso worker: </strong>los procesos worker son responsables del procesamiento de conexiones, del acceso de escritura y lectura en el disco duro y de la comunicación con servidores upstream (servidores que proporcionan servicios a otros servidores). En otras palabras, son los únicos procesos del modelo de procesos de nginx que están continuamente activos. </li></ul><p>El siguiente gráfico muestra una representación esquemática del modelo de procesos de nginx:&nbsp; </p>
+		</div>
+
+		
+			
+
+	<div class="aligncenter ce-gallery" data-ce-columns="1" data-ce-images="1">
+		
+			<div class="ce-outer">
+				<div class="ce-inner">
+		
+
+		
+			<div class="ce-row">
+				
+					
+						<div class="ce-column">
+							
+									<figure>
+								
+							
+								
+								
+								
+									<!--
+	
+			
+					
+	<img title="Representación esquemática de la arquitectura de nginx" alt="Representación esquemática de la arquitectura de nginx" src="fileadmin/_processed_/5/9/csm_nginx-architecture_313b4042b0.png" width="960" height="547" />
+
+				
+		
+-->
+									
+        <picture>
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="fileadmin/_processed_/5/9/csm_nginx-architecture_e8220a1fa9.png" media="(max-width: 767px)">
+            <source srcset='fileadmin/_processed_/5/9/csm_nginx-architecture_7b20c625d8.png' media="(max-width: 1023px)">
+            <source srcset='fileadmin/DigitalGuide/Screenshots/nginx-architecture.png'>
+            <!--[if IE 9]></video><![endif]-->
+            <img src="fileadmin/DigitalGuide/Screenshots/nginx-architecture.png" alt="Representación esquemática de la arquitectura de nginx" title="Representación esquemática de la arquitectura de nginx">
+        </picture>
+    
+								
+							 
+
+							
+										<span class="img-caption">
+											La arquitectura de procesos de nginx se basa en los procesos: maestro, worker, cache loader y cache manager
+										</span>
+									</figure>
+								
+						</div>
+					
+				
+			</div>
+		
+		
+				</div>
+			</div>
+		
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+		
+	</div>
+
+	
+
+
+</div>
+
+
+<div id="c111302">
+	
+		
+
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>Todos los procesos worker que inicia el proceso maestro de nginx en el marco de la configuración comparten un set de <strong>listener sockets</strong> (puntos finales de comunicación). En lugar de iniciar un proceso o hilo propio para cada conexión entrante, en cada proceso worker se ejecuta un <strong>event loop </strong>que posibilita<strong> </strong>el procesamiento asincrónico de varios miles de conexiones en un mismo hilo sin bloquear el proceso. Para ello, los procesos worker escuchan en los listener sockets atentamente a los eventos producidos a través de conexiones entrantes, los aceptan y ejecutan procesos de lectura y escritura en el socket durante el procesamiento de peticiones HTTP.&nbsp; </p>
+<p>En este contexto, nginx no provee de ningún mecanismo propio para la distribución de conexiones en procesos worker. En lugar de ello se utilizan las funciones centrales del sistema operativo. Los esquemas sobre cómo procesar las solicitudes entrantes se preparan a través de máquinas de estados (state machines) separadas para HTTP, raw TCP, SMTP, IMAP y POP3. </p>
+<p>En términos más generales, nginx puede ser denominado como administrador de eventos, ya que recibe datos sobre eventos del kernel y comunica al sistema operativo cómo tiene que gestionar las tareas relacionadas. El procesamiento asincrónico de tareas en el event loop se basa en <strong>notificaciones de eventos, devoluciones de llamada (callbacks) y</strong> <strong>temporizadores. </strong>Estos mecanismos<strong> </strong>permiten que un proceso worker delegue una operación tras otra en el sistema operativo sin tener que esperar con pasividad al resultado de la operación o a la respuesta de los programas cliente. Por lo tanto, nginx funciona como orquestador para el sistema operativo, que se encarga de leer y escribir bytes. </p>
+<p>Este tipo de gestión de la conexión solo genera una ligera sobrecarga para las conexiones adicionales. Todo lo que se necesita es un <strong>File Descriptor (FD)</strong> adicional y una mínima memoria adicional en el proceso worker. Por el contrario, los cambios de contexto que requieren una renderización intensiva se presentan cuando en un event loop no aparecen otros eventos. La efectividad a la hora de tramitar las solicitudes mediante un número elevado de conexiones predestina a nginx como distribuidor de carga para páginas web muy frecuentadas, como por ejemplo WordPress.com.</p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+<div class="info-box">
+<div id="c111303">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+		<div class="headline h2 blue title"><i class="fa fa-bars"></i> En resumen</div>
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class=" ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p> Con una arquitectura que soporta eventos, nginx ofrece una alternativa a la gestión de conexiones del servidor HTTP Apache basada en procesos, pero esta característica no es suficiente por sí misma para explicar por qué nginx saca tan buena nota en los tests Benchmark, pues desde la versión 2.4, Apache también soporta un mecanismo de procesamiento de las solicitudes de los clientes basado en eventos. En comparativas de servidores web del tipo Apache vs. nginx se debe prestar siempre atención, por ello, a los módulos utilizados por los servidores web para realizar los tests, a la configuración de los servidores y a las tareas que deben afrontarse. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+</div>
+<div id="c111304">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+		<h3 class="blue title">Gestión de los contenidos web estáticos y dinámicos </h3>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>En lo que respecta al manejo de los <strong>contenidos web dinámicos</strong>, nginx sigue una estrategia totalmente diferente a la del servidor HTTP Apache.</p>
+<p>En principio, para poder entregar contenidos web dinámicos, un servidor web debe recurrir a un <strong>intérprete</strong> que tenga la capacidad de procesar el lenguaje de programación necesario, como PHP, Perl, Python o Ruby. Para ello, Apache contiene diversos módulos como <em>mod_php</em>, <em>mod_perl</em>, <em>mod_python</em> o <em>mod_ruby, </em>que permiten cargar el intérprete correspondiente directamente en el servidor web, de forma que posee de entrada la habilidad de procesar contenidos web dinámicos. Las funciones para la provisión de contenidos estáticos se implementan por medio de los módulos MPM anteriormente mencionados. </p>
+<p>Por el contrario, nginx solo ofrece mecanismos para proporcionar contenidos web estáticos y la entrega de contenidos dinámicos se externaliza en <strong>servidores de aplicaciones</strong> especializados. En este caso, nginx hace de proxy entre el programa cliente y el servidor upstream. La comunicación tiene lugar a través de protocolos como HTTP, FastCGI, SCGI, uWSGI y Memcached. WebSphere, JBoss o Tomcat se erigen como posibles servidores de aplicaciones para la entrega de contenidos dinámicos, aunque también puede utilizarse el servidor HTTP Apache. </p>
+<p>Ambas estrategias presentan <strong>ventajas e inconvenientes</strong>. Un módulo como <em>mod_php </em>permite al servidor web ejecutar código PHP y no se necesita para ello un servidor de aplicaciones adicional, lo que hace más cómoda la administración de páginas web dinámicas. Los módulos intérprete para los lenguajes de programación dinámicos tienen que cargarse por separado en cada proceso worker, al que se le encomienda la entrega del contenido. Si se da un gran número de procesos worker, esto conlleva una clara <strong>sobrecarga</strong> que nginx puede reducir, ya que solo se recurre al intérprete externalizado en caso necesario. </p>
+<p>Mientras que nginx está orientado a la interacción con un intérprete externalizado, los usuarios de Apache pueden recurrir a ambas estrategias. Apache también puede emplearse para un servidor de aplicaciones que se encargue de la interpretación de contenidos web dinámicos. Por lo general, se utiliza el protocolo FastCGI, y la interfaz correspondiente se carga con el módulo <em>mod_proxy_fcgi.</em></p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+<div class="info-box">
+<div id="c111305">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+		<div class="headline h2 blue title"><i class="fa fa-bars"></i> En resumen</div>
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class=" ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p> En la comparación Apache vs. nginx ambos servidores web permiten entregar páginas web dinámicas. Mientras que Apache interpreta por sí mismo y ejecuta el código de programa utilizado con ayuda de módulos, nginx confía esta tarea a un servidor de aplicaciones externo. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+</div>
+<div id="c111306">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+		<h3 class="blue title">Interpretación de las solicitudes de los clientes</h3>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>Para responder satisfactoriamente a las peticiones de los programas cliente, los servidores deben determinar cuáles son los recursos solicitados y donde se encuentran basándose en la propia request. </p>
+<p>El servidor HTTP Apache fue concebido como servidor web. Por el contrario, <strong>nginx </strong>ofrece tanto <strong>funciones de servidor web como de servidor proxy, </strong>diferencia que se vuelve a manifestar sobre todo en la manera en que el software correspondiente interpreta las solicitudes de los clientes y clasifica los recursos en el servidor.&nbsp; </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+<div class="info-box orange">
+<div id="c111307">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+		<div class="headline h2 blue title"><i class="fa fa-exclamation"></i> Nota</div>
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class=" ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p> El servidor HTTP Apache se puede utilizar como servidor proxy con ayuda del módulo <em>mod_proxy.</em></p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+</div>
+<div id="c111308">
+	
+		
+
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>Tanto el servidor HTTP Apache como nginx cuentan con mecanismos que permiten interpretar requests entrantes como <strong>recursos físicos en el sistema de archivos </strong>o como <strong>URI </strong>(Uniform Resource Identifier). Mientras Apache trabaja normalmente en base a archivos, en nginx se da prioridad a los URI. </p>
+<p>Si llega una solicitud de cliente al servidor HTTP Apache, este presupone, por lo general, que se debe consultar un recurso específico del sistema de archivos del servidor. Debido a que con los <strong>VirtualHosts </strong>Apache ofrece la posibilidad de proporcionar diferentes contenidos web en un mismo servidor bajo diversos nombres de host, direcciones IP o números de puerto, se debe indicar a qué VirtualHost hace referencia la solicitud. Para ello, el servidor web coteja el nombre del host, la dirección IP y el número del puerto al principio del URI de la petición con los VirtualHosts definidos en el fichero de configuración principal <em>httpd.conf.</em></p>
+<p>El siguiente ejemplo de código muestra una <strong>configuración de Apache</strong> en la que los dos dominios <em>www.example.com</em> y <em>www.other-example.com</em> se operan bajo la misma dirección IP:</p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+
+<div id="c111309">
+	
+
+	
+
+
+	
+
+<pre class="language-mixed line-numbers" data-language="mixed">
+<code class="language-mixed">NameVirtualHost *:80
+
+&lt;VirtualHost *:80&gt;
+ServerName www.example.com
+ServerAlias example.com *.example.com
+DocumentRoot /data/www/example
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:80&gt;
+ServerName www.other-example.com
+DocumentRoot /data/www/other-example
+&lt;/VirtualHost&gt;</code>
+</pre>
+	
+
+	
+
+
+</div>
+
+<div id="c111310">
+	
+		
+
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>El asterisco (<em>*</em>) sirve como espaciador para cualquier dirección IP. Mediante la comparación del nombre de host incluido en la solicitud con la <strong>directiva ServerName </strong>Apache decide en qué <strong>DocumentRoot</strong> (directorio de inicio de un proyecto web) se debe buscar el recurso solicitado.</p>
+<p>Si Apache ha encontrado el servidor deseado, el URI de la solicitud se proyecta por defecto en el sistema de archivos del servidor (mapping). Para ello, Apache emplea la ruta de acceso incluida en el URI y, en combinación con el DocumentRoot, se genera la ruta del recurso.</p>
+<p>En una solicitud con el URI <em><a href="http://www.example.org:80/public_html/images/logo.gif" target="_blank">www.example.org/public_html/images/logo.gif</a>, </em>Apache &nbsp;buscaría (partiendo del ejemplo anterior) el recurso adecuado siguiendo la ruta de archivo que aparece a continuación :<em> </em></p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+
+<div id="c111311">
+	
+
+	
+
+
+	
+
+<pre class="language-mixed line-numbers" data-language="mixed">
+<code class="language-mixed">/data/www/example/public_html/images/logo.gif</code>
+</pre>
+	
+
+	
+
+
+</div>
+<div class="info-box orange">
+<div id="c111312">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+		<div class="headline h2 blue title"><i class="fa fa-exclamation"></i> Nota</div>
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class=" ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p> Debido a que 80 es el puerto estándar para HTTP, en la práctica normalmente se prescinde de este dato.</p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+</div>
+<div id="c111313">
+	
+		
+
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>Apache compara el URI de la solicitud con los <strong>bloques file y directory </strong>opcionales en la configuración. Estos permiten definir instrucciones especiales para las requests a las que se hace referencia en los archivos o directorios (incluidos los subdirectorios) seleccionados. </p>
+<p>En el siguiente ejemplo se definen instrucciones especiales para el directorio <em>public_html/images </em>y el fichero <em>private.html</em>:</p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+
+<div id="c111314">
+	
+
+	
+
+
+	
+
+<pre class="language-mixed line-numbers" data-language="mixed">
+<code class="language-mixed">&lt;VirtualHost *:80&gt;
+    ServerName www.example.com
+    ServerAlias example.com *.example.com
+    DocumentRoot /data/www/example
+      &lt;Directory var/www/example.com/public_html/images&gt;
+          Order Allow,Deny
+          Allow from all
+     &lt;/Directory&gt; 
+      &lt;Files public.html&gt;
+          Order Allow,Deny
+          Deny from all
+      &lt;/Files&gt;
+&lt;/VirtualHost&gt;</code>
+</pre>
+	
+
+	
+
+
+</div>
+
+<div id="c111315">
+	
+		
+
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>Además de este procedimiento habitual en la interpretación de las solicitudes de los clientes, con la directiva Alias Apache ofrece la posibilidad de indicar un directorio alternativo que tiene que analizar el recurso solicitado en lugar del DocumentRoot. Asimismo, el módulo <em>mod_rewrite </em>del<em> </em>servidor HTTP Apache permite a los usuarios describir o reenviar URL. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+<div class="info-box orange">
+<div id="c111316">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+		<div class="headline h2 blue title"><i class="fa fa-lightbulb-o"></i> Nota</div>
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class=" ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p> Puedes obtener más información sobre el módulo mod_rewrite en nuestro artículo sobre cómo <a title="Reescribir URL con mod_rewrite y otros RewriteEngine" href="hosting/cuestiones-tecnicas/conoces-mod-rewrite/" class="internal-link">reescribir URL con mod_rewrite</a>.</p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+</div>
+<div id="c111317">
+	
+		
+
+	
+
+
+	
+	<div class="text-row ce-textpic ce-right ce-intext">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>Cuando Apache tiene que consultar recursos depositados fuera del sistema de archivos del servidor, se utiliza la <strong>directiva Location </strong>(ubicación), que permite definir instrucciones para determinados URI. </p>
+<p>Lo que puede ser una excepción en Apache, se convierte en algo estándar en nginx, que analiza el URI de la solicitud y lo compara con los bloques server y location en la configuración del servidor web. Solo después puede tener lugar (si es necesario) el mapeo en el sistema de archivos y la combinación con el <strong>root</strong> (DocumentRoot del servidor Apache). </p>
+<p>Con ayuda de la <strong>directiva Server </strong>(servidor), nginx averigua qué host es el responsable de responder a la solicitud del cliente. El bloque server corresponde a un VirtualHost en la configuración de Apache. Para ello se deben sincronizar el nombre del host, la dirección IP y el número del puerto del URI de la solicitud con todos los bloques server en la configuración del servidor web. El siguiente ejemplo de código muestra tres bloques server en el <strong>fichero de configuración de nginx</strong> <em>nginx.conf</em>:</p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+
+<div id="c111318">
+	
+
+	
+
+
+	
+
+<pre class="language-mixed line-numbers" data-language="mixed">
+<code class="language-mixed">server {
+    listen 80;
+    server_name example.org www.example.org;
+    ...
+}
+
+server {
+    listen 80;
+    server_name example.net www.example.net;
+    ...
+}
+
+server {
+    listen 80;
+    server_name example.com www.example.com;
+    ...
+}</code>
+</pre>
+	
+
+	
+
+
+</div>
+<div class="info-box orange">
+<div id="c111319">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+		<div class="headline h2 blue title"><i class="fa fa-exclamation"></i> Nota</div>
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class=" ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p> Todos los bloques de servidor suelen contener una serie de bloques de ubicación. En el ejemplo actual estos se sustituyen por un espaciador (...). </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+</div>
+<div id="c111320">
+	
+		
+
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>La comparación entre el URI de la solicitud y los bloques location en un bloque server se realiza solo cuando se encuentra el servidor solicitado. Para ello, nginx lee los bloques de ubicación especificados y busca la ubicación más acorde con el URI de la solicitud. Los bloques location contienen instrucciones específicas que indican a nginx cómo se tiene que tramitar la solicitud correspondiente. </p>
+<p>Aquí se pueden definir las ubicaciones de manera que se interpreten como <strong>prefijo</strong> para una ruta, como coincidencia exacta o como <strong>expresión regular</strong> (Regular Expression, RegEx). En la sintaxis de la configuración del servidor se utilizan, entre otros, los siguientes <strong>modificadores</strong>: </p><table cellpadding="0" cellspacing="0" class="contenttable responsive ui-responsive">  <tbody><tr>   <td width="158"><p>Sin modificador</p></td>   <td width="456"><p>La directiva Location se interpreta como prefijo.   </p>   <p>Todas las requests cuyo URI muestra el prefijo   definido en la directiva Location son consideradas conforme a dicha location.   &nbsp;</p>   <p>Si no se encuentra una location específica, la   solicitud se procesa según los datos del bloque ubicación. </p></td>  </tr>  <tr>   <td width="158"><p>=</p></td>   <td width="456"><p>La directiva Location se interpreta como   correspondencia exacta.</p>   <p>Todas las requests con correspondencia exacta   cuyo URI coincida exactamente con la secuencia de caracteres de la directiva   Location se procesan según los datos en el bloque ubicación. </p></td>  </tr>  <tr>   <td width="158"><p>&nbsp;~</p></td>   <td width="456"><p>La directiva Location se interpreta como   expresión regular. </p>   <p>Todas las requests cuyo URI coincide con la   expresión regular se procesan según los datos del bloque ubicación. </p>   <p>Las mayúsculas y las minúsculas se evalúan en la   comparación (case sensitive).</p></td>  </tr>  <tr>   <td width="158"><p>~*</p></td>   <td width="456"><p>La directiva Location se interpreta como   expresión regular.&nbsp; </p>   <p>Todas las requests cuyo URI coincide con la   expresión regular se procesan según los datos del bloque ubicación. </p>   <p>Las mayúsculas y las minúsculas no se evalúan en   la comparación (case insensitive).</p>   <p>&nbsp;</p></td>  </tr> </tbody></table><p>&nbsp;</p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+
+<div id="c111321">
+	
+		
+
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>El siguiente ejemplo muestra tres bloques de ubicación que indican cómo se tienen que editar las solicitudes entrantes para los dominios <em>example.org </em>y <em>www.example.org</em>:</p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+
+<div id="c111322">
+	
+
+	
+
+
+	
+
+<pre class="language-mixed line-numbers" data-language="mixed">
+<code class="language-mixed">server {
+    listen 80;
+    server_name example.org www.example.org;
+    root /data/www;
+
+    location / {
+        index index.html index.php;
+    }
+
+    location ~* \.(gif|jpg|png)$ {
+        expires 30d;
+    }
+location ~ \.php$ {
+        fastcgi_pass localhost:9000;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }</code>
+</pre>
+	
+
+	
+
+
+</div>
+
+<div id="c111323">
+	
+		
+
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>Basándose en una solicitud de cliente con el URI &quot;<em><a href="http://www.example.org:80/logo.gif&amp;quot" target="_blank">www.example.org/logo.gif&amp;quot</a>;</em>,<em> </em>nginx procede de la siguiente manera para interpretar las siguientes peticiones y entregar los recursos deseados:</p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+
+<div id="c111324">
+	
+
+	
+
+
+	
+
+<pre class="language-mixed line-numbers" data-language="mixed">
+<code class="language-mixed">http://www.example.org:80/logo.gif
+
+http://www.example.org:80/index.php</code>
+</pre>
+	
+
+	
+
+
+</div>
+
+<div id="c111325">
+	
+		
+
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>Primero, nginx determina la <strong>ubicación específica del prefijo</strong>, para lo que el servidor web lee todas las Locations (ubicaciones) sin modificador de la lista y se para en la primera que coincida con la solicitud. A continuación se leen todas las Locations marcadas con el modificador <strong>RegEx</strong> <strong>(~­)</strong> y también se utiliza la primera opción. Si el servidor web no encuentra ninguna ubicación RegEx apropiada, este recurrirá a la primera ubicación de prefijo como último recurso. </p>
+<p>La solicitud<em>&nbsp;&quot;www.example.org:80/logo.gif&quot;&nbsp;</em>coincide tanto con la ubicación del prefijo <em>/ </em>como con la expresión regular <em>\.(gif|jpg|png)$. </em>En este caso<em> </em>nginx reproduciría la solicitud en combinación con el root en la ruta de archivo <em>/data/www/logo.gif </em>y entregaría el recurso correspondiente al cliente. El encabezado expires indica cuándo se queda obsoleta una respuesta: en el ejemplo actual tras 30 días, es decir, <em>expires 30d. </em></p>
+<p>La solicitud de la página PHP con el URI &quot;<em>www.example.org:80/</em><em>index.php&quot;&nbsp;</em>coincide tanto con la prefix location <em>/ </em>como con la RegEx location <em>~ \.php$</em>, a la que se da un tratamiento preferente. nginx entrega la solicitud a un servidor <strong>FastCGI</strong>, que escucha a un <em>localhost:9000 </em>y es responsable de la tramitación de contenidos web dinámicos. Así, la directiva <em>fastcgi_param </em>coloca el parámetro FastCGI<em> SCRIPT_FILENAME </em>en <em>/data/www/index.php. </em>A continuación se ejecuta el archivo en el servidor upstream. La variable <em>$document_root </em>corresponde a la directiva root, la variable <em>$fastcgi_script_name </em>a la parte del URI que le sigue al nombre del host y al número de puerto, es decir, <em>/</em><em>index.php.</em></p>
+<p>Este procedimiento de interpretación de solicitudes de clientes, que a simple vista puede ser algo complicado, guarda relación con los diferentes campos de aplicación en los que se utiliza nginx. En comparación con el procedimiento principal basado en archivos del Apache HTTP Server, la interpretación de requests basada en URI posibilita una <strong>mayor flexibilidad en cuanto al tratamiento de los diferentes modelos de solicitud</strong>. Esto es necesario, por ejemplo, cuando nginx no funciona como servidor web, sino como servidor proxy o de correo electrónico. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+<div class="info-box">
+<div id="c111326">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+		<div class="headline h2 blue title"><i class="fa fa-bars"></i> En resumen</div>
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class=" ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p> Apache se utiliza principalmente como servidor web e interpreta las solicitudes de los clientes basándose sobre todo en archivos. Por el contrario, nginx trabaja normalmente con URI y así es capaz de ajustarse a otros patrones de solicitudes. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+</div>
+<div id="c111327">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+		<h3 class="blue title">Configuración</h3>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>Frente al servidor HTTP Apache, a nginx se le atribuye una mayor <strong>velocidad</strong> al entregar contenidos web estáticos, lo que se debe, entre otros factores, a diferencias en la configuración. </p>
+<p>Además del fichero de configuración principal <em>httpd.conf, </em>el servidor web Apache ofrece a los administradores la posibilidad de <strong>gestionar los niveles de directorios</strong>, donde entran en juego los llamados ficheros <em>.htaccess. </em>En principio<em>, </em>estos archivos de configuración descentralizados pueden implementarse en cualquier directorio del servidor. Las instrucciones definidas en <em>.htaccess </em>hacen referencia al directorio que contiene el archivo de configuración así como a sus subdirectorios. En la práctica se utilizan los ficheros <em>.htaccess </em>para limitar el acceso a los directorios a unos usuarios determinados, para crear una protección por contraseña o para definir reglas para la navegación por los directorios, para los mensajes de error, las redirecciones o los contenidos alternativos.&nbsp; </p>
+<p>Es importante señalar que todo ello puede configurarse de un modo central en el fichero <em>httpd.conf. </em>Sin embargo, <em>.htaccess </em>es relevante en modelos de alojamiento web como el <strong>shared hosting o alojamiento compartido</strong>, en el que el acceso al archivo de configuración central queda reservado al proveedor del hosting. La configuración descentralizada vía <em>.htaccess</em> permite autorizar a los usuarios a administrar unas áreas determinadas del sistema de archivos del servidor como, por ejemplo, para directorios de proyectos seleccionados, sin otorgarles acceso a la configuración principal. Además, los cambios surten efecto inmediatamente y sin necesidad de reiniciar. </p>
+<p>Por el contrario, ngingx ofrece <strong>opciones fundamentales de configuración</strong> y todas las instrucciones se definen en el fichero <em>nginx.conf</em>. Accediendo a él, el usuario puede controlar todo el servidor. A diferencia de Apache, el acceso administrativo no puede restringirse a los directorios seleccionados, lo que tiene ventajas e inconvenientes. La configuración central de ngingx es menos flexible que el concepto del servidor HTTP Apache y ofrece una clara ventaja de seguridad: solo los usuarios con permisos de superusuario pueden realizar cambios en la configuración del servidor web. </p>
+<p>Sin embargo, la <strong>desventaja del rendimiento de la configuración</strong> descentralizada vía <em>.htaccess</em> es más importante que el argumento de la seguridad. En la <a href="https://httpd.apache.org/docs/current/howto/htaccess.html" title="Tutorial del Servidor Apache HTTP: ficheros .htaccess en httpd.apache.org" target="_blank" class="external-link-new-window">documentación del servidor HTTP Apache</a> los desarrolladores recomiendan evitar el uso de <em>.htaccess</em> siempre que sea posible acceder a <em>httpd.conf</em> debido principalmente al procedimiento por el que Apache lee e interpreta los archivos de configuración. </p>
+<p>Como ya se ha indicado anteriormente, Apache sigue un esquema basado en archivos para responder a las solicitudes de los clientes. Debido a que la arquitectura de Apache permite una configuración descentralizada, en el camino hacia el recurso solicitado, el servidor web busca el fichero <em>.htaccess </em>en todos los directorios a lo largo de la ruta del archivo y lee e interpreta todos los archivos de configuración que recorre, un esquema que ralentiza el servidor web considerablemente. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+<div class="info-box orange">
+<div id="c111328">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+		<div class="headline h2 blue title"><i class="fa fa-exclamation"></i> Nota</div>
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class=" ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p> En principio, los administradores de Apache pueden elegir si quieren recurrir a las posibilidades de configuración descentralizadas del servidor web y aceptar las ventajas e inconvenientes que implican. En la documentación, los desarrolladores ponen de relieve que todos los ajustes de <em>.htaccess </em>pueden realizarse mediante bloques de directorio en el fichero de configuración principal <em>httpd.conf.</em></p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+</div>
+<div id="c111329">
+	
+		
+
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>Para desactivar o restringir la configuración descentralizada en Apache se debe recurrir a la directiva <em>AllowOverride </em>en los bloques de directorio del fichero de configuración principal <em>httpd.conf </em>e indicar <em>None. </em>Esto señala al servidor web que ignore todos los ficheros <em>.htaccess </em>en directorios debidamente configurados. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+
+<div id="c111330">
+	
+
+	
+
+
+	
+
+<pre class="language-mixed line-numbers" data-language="mixed">
+<code class="language-mixed">&lt;VirtualHost *:80&gt;
+    ServerName example.com;
+    ...
+    DocumentRoot /data/www/example
+      &lt;Directory /data/www/example&gt;
+        AllowOverride None
+        ...
+      &lt;/Directory&gt;
+    ...
+&lt;/VirtualHost&gt;</code>
+</pre>
+	
+
+	
+
+
+</div>
+
+<div id="c111331">
+	
+		
+
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>La configuración del ejemplo ordena al servidor que ignore todos los ficheros <em>.htaccess</em> para el host <em>example.com</em>. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+<div class="info-box">
+<div id="c111332">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+		<div class="headline h2 blue title"><i class="fa fa-bars"></i> En resumen</div>
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class=" ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>A diferencia de nginx, que está configurado de forma centralizada, Apache ofrece con <em>.htaccess </em>una configuración descentralizada y basada en directorios. Si se utilizan ficheros <em>.htaccess, </em>el servidor web pierde velocidad </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+</div>
+<div id="c111333">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+			
+
+	
+	
+		<h2 class="blue">Posibilidades de extensión </h2>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+		
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>Los dos servidores web de nuestra comparativa se basan en un <strong>sistema modular</strong> en el que el software principal puede ampliarse con componentes adicionales en caso necesario. Hasta la versión 1.9.10, nginx siguió una estrategia de manejo de módulos diferente a la de su competidor.</p>
+<p>El Apache HTTP Server ofrece dos posibilidades para ampliar el software central: los módulos pueden o bien compilarse durante el desarrollo en los archivos binarios de Apache o cargarse de forma dinámica durante el tiempo de ejecución. </p>
+<p>Se pueden distinguir tres categorías de <strong>módulos de Apache</strong>: </p><ul><li><strong>Módulo básico:</strong> los módulos básicos de Apache comprenden todos los componentes que proveen las funciones principales del servidor web. </li></ul><ul><li><strong>Módulos de extensión:</strong> las extensiones son módulos de la Apache Foundation que se proporcionan como componente especial de la Apache Distribution. La <a href="https://httpd.apache.org/docs/2.4/es/mod/" title="Índice de módulos de Apache" target="_blank" class="external-link-new-window">documentación sobre Apache</a> ofrece una visión general sobre todos los módulos incluidos en la configuración estándar de la versión 2.4 de Apache. </li></ul><ul><li><strong>Módulos de proveedores externos:</strong> la Apache Foundation no ofrece estos módulos, sino proveedores externos o programadores autónomos. </li></ul><p>En nginx, sin embargo, la modularidad se restringe a componentes de extensión estáticos que se tienen que compilar en el archivo binario del software principal. Para los usuarios que no estaban acostumbrados a gestionar sus propios componentes de software sin el gestor de paquetes de la distribución correspondiente, este tipo de extensión de software limitó considerablemente la flexibilidad del servidor web. A este respecto, el equipo de desarrolladores ha introducido algunas mejoras: desde la versión 1.9.11 (<a href="http://nginx.org/en/CHANGES" title="Registro oficial de cambios de NGINX" target="_blank" class="external-link-new-window">Release 09.02.2016</a>), nginx soporta mecanismos que permiten convertir <strong>módulos estáticos en dinámicos </strong>para que estos puedan cargarse durante el tiempo de ejecución a través de archivos de configuración. En ambos casos se emplea la API del módulo del servidor. </p>
+<p>En relación con esto hay que tener en cuenta que no todos los módulos de nginx pueden convertirse en módulos dinámicos. Los módulos que parchean el código fuente del software de servidor no deben cargarse como módulos dinámicos. Además, en los ajustes básicos nginx limita a 128 el número de módulos dinámicos que pueden cargarse simultáneamente. Para aumentarlo, otorga el valor deseado a la constante en <em>NGX_MAX_DYNAMIC_MODULES </em>en el código fuente de nginx. </p>
+<p>Asimismo, para los módulos oficiales de la documentación de nginx los usuarios pueden recurrir a módulos de proveedores externos. </p><ul><li><a href="https://nginx.org/en/docs" title="Lista de módulos en la documentación de nginx" target="_blank" class="external-link-new-window">Módulos de extensión de nginx</a></li><li><a href="https://www.nginx.com/resources/wiki/modules" title="Módulos de otros proveedores para nginx en nginx.com/resources/wiki/modules/" target="_blank" class="external-link-new-window">Módulos de otros proveedores para nginx</a></li></ul>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+<div class="info-box">
+<div id="c111334">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+		<div class="headline h2 blue title"><i class="fa fa-bars"></i> En resumen</div>
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class=" ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p> Ambos servidores web pueden implementarse con módulos. Además de los estáticos, también existen módulos dinámicos que, en caso necesario, pueden cargarse en el programa en curso. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+</div>
+<div id="c111335">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+			
+
+	
+	
+		<h2 class="blue">Documentación y asistencia </h2>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+		
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>Ambos proyectos de software están bien documentados y ofrecen a los usuarios información de primera mano a través de <strong>wikis y blogs</strong>.</p><ul><li><strong>Apache HTTP server: <a href="https://wiki.apache.org/httpd/" title="Wiki oficial del Apache HTTP Server" target="_blank" class="external-link-new-window">Wiki</a></strong></li><li><strong><strong>NGINX: <a href="https://www.nginx.com/resources/wiki/" title="Wiki oficial de nginx" target="_blank" class="external-link-new-window">Wiki</a></strong></strong></li></ul><p>Mientras que la documentación de nginx solo está disponible en inglés y en ruso, el proyecto Apache se distingue por su material informativo en numerosos idiomas, aunque está desactualizado, por lo que es imprescindible recurrir a la versión en inglés. </p>
+<p>La <strong>comunidad </strong>de cada proyecto open source es el medio de ayuda en caso de problemas y las listas de correo hacen las veces de foros de debate. </p><ul><li><strong>Apache HTTP server: <a href="http://httpd.apache.org/lists.html" title="Listas de correo oficiales para el  Apache HTTP Server" target="_blank" class="external-link-new-window">Mailing lists</a></strong></li><li><strong><strong>NGINX: <a href="https://www.nginx.com/resources/more/" title="Listas de correo oficiales para el proyecto nginx" target="_blank" class="external-link-new-window">Mailing lists</a></strong></strong></li></ul><p>La transparencia sobre las posibles fechas de lanzamiento y las hojas de ruta ofrecen a los usuarios la posibilidad de adaptarse a los desarrollos futuros. Los errores en el software y las brechas de seguridad se recopilan y se reprocesan en un informe de bugs público.</p><ul><li><strong>Apache HTTP server: <a href="http://httpd.apache.org/bug_report.html" title="Informe oficial de bugs del Apache HTTP Server" target="_blank" class="external-link-new-window">Bug report</a></strong></li><li><strong><strong>NGINX: <a href="https://trac.nginx.org/nginx/wiki" title="Informe oficial de bugs del proyecto nginx" target="_blank" class="external-link-new-window">Bug report</a></strong></strong></li></ul><p>Además del proyecto open source NGINX, Nginx, Inc. ofrece el producto comercial <strong>NGINX Plus. </strong>Mediante el pago de una tarifa anual, los usuarios disfrutan de funciones adicionales y de la asistencia profesional del fabricante. En la página oficial existe una <a href="https://www.nginx.com/products/feature-matrix/" title="NGINX vs. NGINX Plus" target="_blank" class="external-link-new-window">matriz comparativa</a> de ambos productos. </p>
+<p>No existe una versión comercial del servidor HTTP Apache, aunque hay algunos proveedores externos que ofrecen servicios de asistencia de pago. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+<div class="info-box">
+<div id="c111336">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+		<div class="headline h2 blue title"><i class="fa fa-bars"></i> En resumen</div>
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class=" ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p> Tanto el servidor Apache HTTP como nginx están lo suficientemente documentados como para usarse de modo profesional en sistemas productivos. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+</div>
+<div id="c111337">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+			
+
+	
+	
+		<h2 class="blue">Compatibilidad y ecosistema</h2>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+		
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>El servidor Apache HTTP está presente en la World Wide Web desde hace más de dos décadas y, debido a su cuota de mercado, sigue siendo el estándar <em>de facto </em>para la puesta a disposición de contenidos web, a pesar de que nginx también lleva una trayectoria exitosa de 15 años. Ambos servidores destacan por una <strong>amplia compatibilidad de plataformas</strong>. Mientras que Apache se recomienda para todos los sistemas operativos de tipo UNIX y Windows, la documentación de nginx indica que soporta sistemas como FreeBSD, Linux, Solaris, IBM AIX, HP-UX, macOS y Windows.</p>
+<p>Como servidor estándar, Apache destaca por su gran <strong>compatibilidad con proyectos de proveedores externos. </strong>Todos los estándares web relevantes se integran mediante módulos y a ello hay que añadir que gran parte de los agentes de Internet están familiarizados con los conceptos de Apache. Generalmente, los administradores y desarrolladores web realizan sus primeros proyectos en plataformas de alojamiento compartido de pago que se basan, en su mayoría, en Apache y permiten una configuración descentralizada vía <em>.htaccess. </em>Asimismo, el Apache HTTP Server es parte de un paquete de programas de código abierto de desarrollo y pruebas de software como <a title="XAMPP: instalación y primeros pasos" href="servidores/herramientas/instala-tu-servidor-local-xampp-en-unos-pocos-pasos/" class="internal-link">XAMPP</a> o AMPPS.</p>
+<p>nginx también ofrece un amplio ecosistema de módulos. Además, el equipo de desarrolladores colabora con diversos proyectos de software de código abierto y propietarios, así como con proveedores de infraestructuras como Amazon Web Services, Windows Azure y HP.</p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+<div class="info-box">
+<div id="c111338">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+		<div class="headline h2 blue title"><i class="fa fa-bars"></i> En resumen</div>
+	
+	
+	
+	
+	
+	
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class=" ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p> Ambos servidores web disfrutan ya de una cierta reputación y sus usuarios pueden recurrir a un amplio ecosistema. En la relación ningx vs. Apache, este último tiene la ventaja de que en los últimos años una amplia comunidad de usuarios se ha familiarizado con los fundamentos del servidor web. Debido a que miles de administradores han examinado y mejorado el código fuente del código, ya no solo se aboga por la seguridad del servidor web. Asimismo, los usuarios nuevos se benefician del gran número de administradores de Apache experimentados que asisten a la comunidad en foros o en listas de correo. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+</div>
+<div id="c111339">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+			
+
+	
+	
+		<h2 class="blue">Apache vs. nginx: resumen de diferencias</h2>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+		
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>A pesar de las diferencias en la arquitectura del software, ambos servidores web ofrecen funciones parecidas. Apache y nginx se utilizan en escenarios similares, pero recurren a sus propios conceptos y estrategias para estar a la altura de las exigencias. La siguiente tabla recoge las características principales de ambos proyectos de software y muestra los puntos de intersección y divergencias.</p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+
+<div id="c111340">
+	
+		
+
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<table cellpadding="0" cellspacing="0" class="contenttable responsive ui-responsive">  <tbody><tr>   <td width="205"><p><strong>Característica</strong></p></td>   <td width="205"><p><strong>Apache </strong></p></td>   <td width="205"><p><strong>nginx</strong></p></td>  </tr>  <tr>   <td width="205"><p>Función</p></td>   <td width="205"><p>Servidor web</p>   <p>Servidor proxy</p>   <p>&nbsp;</p></td>   <td width="205"><p>Servidor web</p>   <p>Servidor proxy</p>   <p>Proxy de correo</p>   <p>Balanceador de carga</p></td>  </tr>  <tr>   <td width="205"><p>Lenguaje de programación </p></td>   <td width="205"><p>C</p></td>   <td width="205"><p>C</p></td>  </tr>  <tr>   <td width="205"><p>Sistema operativo</p></td>   <td width="205"><p>Todas las plataformas de tipo UNIX</p>   <p>Windows</p></td>   <td width="205"><p>FreeBSD</p>   <p>Linux</p>   <p>Solaris</p>   <p>IBM AIX</p>   <p>HP-UX</p>   <p>macOS</p>   <p>Windows</p></td>  </tr>  <tr>   <td width="205"><p>Publicación </p></td>   <td width="205"><p>1995</p></td>   <td width="205"><p>2002</p></td>  </tr>  <tr>   <td width="205"><p>Licencia</p></td>   <td width="205"><p>Apache License v2.0</p></td>   <td width="205"><p>Licencia BSD   (Berkeley Software Distribution)</p></td>  </tr>  <tr>   <td width="205"><p>Desarrollador</p></td>   <td width="205"><p>Apache Software Foundation</p></td>   <td width="205"><p>Nginx, Inc.</p></td>  </tr>  <tr>   <td width="205"><p>Arquitectura de software</p></td>   <td width="205"><p>Basada en procesos / hilos</p></td>   <td width="205"><p>Dirigida por eventos</p></td>  </tr>  <tr>   <td width="205"><p>Concurrencia </p></td>   <td width="205"><p>Multiprocesamiento</p>   <p>Multihilo</p></td>   <td width="205"><p>Bucle de eventos</p></td>  </tr>  <tr>   <td width="205"><p>Contenidos web estáticos</p></td>   <td width="205"><p>Sí</p></td>   <td width="205"><p>Sí</p></td>  </tr>  <tr>   <td width="205"><p>Contenidos web dinámicos</p></td>   <td width="205"><p>Sí</p></td>   <td width="205"><p>No</p></td>  </tr>  <tr>   <td width="205"><p>Interpretación de las solicitudes de los clientes</p></td>   <td width="205"><p>Principalmente basada en archivos</p></td>   <td width="205"><p>Basada en URI</p></td>  </tr>  <tr>   <td width="205"><p>Configuración </p></td>   <td width="205"><p>Configuración centralizada vía <em>httpd.conf</em></p>   <p>Configuración descentralizada vía .<em>htaccess</em></p>   <p>&nbsp;</p></td>   <td width="205"><p>Configuración centralizada vía <em>nginx.conf</em></p></td>  </tr>  <tr>   <td width="205"><p>Posibilidades de extensión</p></td>   <td width="205"><p>Módulos estáticos</p>   <p>Módulos dinámicos </p></td>   <td width="205"><p>Módulos estáticos</p>   <p>Módulos dinámicos</p></td>  </tr>  <tr>   <td width="205"><p>Documentación</p></td>   <td width="205"><p>Inglés </p>   <p>Español </p>   <p>Francés </p>   <p>Alemán</p>   <p>Danés&nbsp;&nbsp; </p>   <p>Japonés </p>   <p>Coreano &nbsp;</p>   <p>Portugués</p>   <p>Turco </p>   <p>Chino </p></td>   <td width="205"><p>Inglés </p>   <p>Alemán &nbsp;</p>   <p>&nbsp;</p></td>  </tr>  <tr>   <td width="205"><p>Asistencia de los desarrolladores</p></td>   <td width="205"><p>No </p></td>   <td width="205"><p>Sí (de pago en NGINX, Inc.)</p></td>  </tr>  <tr>   <td width="205"><p>Ayuda a la comunidad</p></td>   <td width="205"><p>Listas de correo</p>   <p>Wiki</p></td>   <td width="205"><p>Listas de correo</p>   <p>Wiki</p></td>  </tr> </tbody></table>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+
+<div id="c111341">
+	
+		
+
+	
+		
+				
+			
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+			
+
+	
+	
+		<h2 class="blue">En resumen </h2>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+		
+	
+
+
+
+		
+
+		
+
+
+
+
+		
+				
+			
+	
+
+
+	
+	<div class="text-row ce-textpic ce-center ce-above">
+		
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		<div class="ce-bodytext">
+			
+			<p>Apache y nginx son dos proyectos open source estables y seguros, pero ninguno de los dos se erige como claro ganador y ambos se basan en <strong>decisiones diferentes</strong> <strong>de diseño </strong>que, en función de cómo se utilice el software, plantean ventajas e inconvenientes. </p>
+<p>El <strong>servidor</strong> <strong>Apache HTTP</strong> ofrece un enorme repertorio de módulos que, junto a las flexibles posibilidades de configuración, establece numerosos campos de aplicación. Apache funciona como <strong>software estándar para escenarios de alojamiento compartido </strong>y<strong> </strong>en el futuro se impondrá en este sector de actividad frente a servidores web ligeros como nginx. La posibilidad de integrar en el servidor intérpretes para lenguajes de programación como PHP, Perl, Python o Ruby directamente a través de módulos permite la entrega de contenidos web dinámicos sin un servidor de aplicaciones separado. Esto convierte al servidor Apache HTTP en una solución cómoda para <strong>páginas de pequeña y mediana envergadura</strong> en las que los contenidos se generan de forma dinámica cuando se consultan. </p>
+<p>Por el contrario,<strong> nginx</strong> no permite ni procesar contenidos web de un modo nativo ni integrar los intérpretes correspondientes mediante módulos y, en cualquier caso, se necesita un servidor de aplicaciones separado, lo que puede suponer un gasto adicional innecesario para las páginas web de pequeña y mediana envergadura. En los <strong>proyectos web grandes</strong> y en casos de tráfico elevado es donde se ponen de relieve los puntos fuertes de una estructura de tales características.</p>
+<p>En general, algunos servidores de aplicaciones utilizan <strong>nginx como balanceador de carga. </strong>Este se encarga de las solicitudes entrantes y en función del tipo de requests decide si deben ser transmitidas a un servidor especializado. nginx entrega contenidos web estáticos directamente, pero si un cliente, por el contrario, solicita contenidos dinámicos, el balanceador de carga transmite la solicitud a un servidor de aplicaciones previsto para ello, el cual interpreta el lenguaje de programación, agrupa los contenidos solicitados para una página web y los devuelve al balanceador de carga, que los entrega al cliente. De este modo se pueden afrontar volúmenes de tráfico elevados. Además, nginx pone a disposición en el caché, y durante un período de tiempo determinado, contenidos ya entregados, de manera que el balanceador de carga pueda entregar de nuevo los contenidos dinámicos solicitados sin que nginx tenga que volver a recurrir a un servidor de aplicaciones. </p>
+<p>El traslado del intérprete a uno o varios servidores de backend separados tiene la ventaja de que el conjunto de servidores puede escalarse cómodamente, incluyendo si es necesario servidores de backend adicionales o desconectando sistemas innecesarios. En la práctica, ante una arquitectura de este tipo muchos usuarios apuestan por la <strong>combinación de nginx y Apache </strong>y<strong> </strong>se valen de las fortalezas de ambos servidores web. </p>
+		</div>
+
+		
+	</div>
+
+	
+
+
+</div>
+
+
+
+            
+<div class="article-meta">
+    <ul class="list-inline meta">
+        <li>
+            <time datetime=" 2017-12-19"><span class="icon-clock-o"></span>  19.12.17</time>
+        </li>
+        <li><a title="Know How" href="servidores/know-how/">Know How</a>
+        </li>
+    </ul>
+    <ul class="list-inline list-info">
+        <li>
+            
+                    
+
+    
+            
+<div class="star-rating">
+
+    <div class="star-rating__text">
+
+        <span class="text-info"
+             data-role="ratingsWording"
+              data-default="¿Te ha gustado el artículo?"
+             data-thanks="Muchas gracias por tu valoración">
+            ¿Te ha gustado el artículo?
+        </span>
+
+        <span class="star-rating__average" title="Nota promedio"
+             data-role="ratingsAverage">
+            0
+        </span>
+
+    </div>
+
+    <div class="star-rating__wrap">
+        <input class="star-rating__input" id="star-rating-5" type="radio" name="ratingbottom" value="5"
+               data-role="ratingStarInput5">
+        <label class="star-rating__ico" for="star-rating-5" data-role="star" data-amount="5">
+                    <span class="fa fa-stack fa-lg">
+                        <i class="fa fa-star fa-stack-1x"></i>
+                        <i class="fa fa-star-o fa-stack-1x"></i>
+                    </span>
+        </label>
+        <input class="star-rating__input" id="star-rating-4" type="radio" name="ratingbottom" value="4"
+               data-role="ratingStarInput4">
+        <label class="star-rating__ico" for="star-rating-4" data-role="star" data-amount="4">
+                    <span class="fa fa-stack fa-lg">
+                    <i class="fa fa-star fa-stack-1x"></i>
+                        <i class="fa fa-star-o fa-stack-1x"></i>
+                    </span>
+        </label>
+        <input class="star-rating__input" id="star-rating-3" type="radio" name="ratingbottom" value="3"
+               data-role="ratingStarInput3">
+        <label class="star-rating__ico" for="star-rating-3" data-role="star" data-amount="3">
+                    <span class="fa fa-stack fa-lg">
+                        <i class="fa fa-star fa-stack-1x"></i>
+                        <i class="fa fa-star-o fa-stack-1x"></i>
+                    </span>
+        </label>
+        <input class="star-rating__input" id="star-rating-2" type="radio" name="ratingbottom" value="2"
+               data-role="ratingStarInput2">
+        <label class="star-rating__ico" for="star-rating-2" data-role="star" data-amount="2">
+                    <span class="fa fa-stack fa-lg">
+                        <i class="fa fa-star fa-stack-1x"></i>
+                        <i class="fa fa-star-o fa-stack-1x"></i>
+                    </span>
+        </label>
+        <input class="star-rating__input" id="star-rating-1" type="radio" name="ratingbottom" value="1"
+               data-role="ratingStarInput1">
+        <label class="star-rating__ico" for="star-rating-1" data-role="star" data-amount="1">
+                    <span class="fa fa-stack fa-lg">
+                        <i class="fa fa-star fa-stack-1x"></i>
+                        <i class="fa fa-star-o fa-stack-1x"></i>
+                    </span>
+        </label>
+    </div>
+
+    <div class="star-rating__amount" data-role="ratingTotalAmount"
+         title="Total de reseñas">0
+    </div>
+
+    <div class="clearfix"></div>
+</div>
+
+        
+
+
+                
+
+        </li>
+        <li>
+            <ul class="list-inline social-networks">
+                <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.1and1.es/digitalguide/servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/" class="facebook"><span class="icon-facebook"></span></a></li>
+                <li><a target="_blank" href="https://twitter.com/intent/tweet?source=https://www.1and1.es/digitalguide/servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/&text=https://www.1and1.es/digitalguide/servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/%20%23DigitalGuide" class="twitter"><span class="icon-twitter"></span></a></li>
+                <li><a target="_blank" href="https://www.xing.com/spi/shares/new?url=https://www.1and1.es/digitalguide/servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/" class="xing"><span class="icon-xing"></span></a></li>
+                <li><a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=https://www.1and1.es/digitalguide/servidores/know-how/apache-vs-nginx-una-comparativa-de-servidores-web/" class="linkedin"><span class="icon-linkedin"></span></a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+            
+        <ul class="metatags-list list-inline list-unstyled">
+            
+                <li><a title="Red" href="tags/red/">Red</a></li>
+            
+                <li><a title="Digitalización" href="tags/digitalizacion/">Digitalización</a></li>
+            
+                <li><a title="HTTP" href="tags/http/">HTTP</a></li>
+            
+        </ul>
+    
+            </div>
+            
+              
+                <div class="gcsOptin" data-gcs-optin-opts="{&quot;text&quot;:{&quot;headline&quot;:&quot;NEWSLETTER&quot;,&quot;subheadline&quot;:&quot;Jetzt Newsletter abonnieren und kostenloses Whitepaper „Online-Marketing für lokale Anbieter“ sichern!  &quot;},&quot;id&quot;:&quot;447c180c9d9d6e25d3e68059482a18400e739114335e033b625cf38a3e0c9fc3&quot;,&quot;host&quot;:&quot;1u1.newsletter.global-communication.de&quot;,&quot;https&quot;:true,&quot;skipKnownUser&quot;:true,&quot;callback&quot;:&quot;&quot;}"></div>
+              
+            
+
+            
+
+            
+
+		<section class="container related-articles">
+			<strong class="h3 text-center">Artículos similares</strong>
+			<div class="row post-holder">
+				
+					<div class="col-sm-4">
+						<article class="info-post">
+    <div class="img-holder">
+        <a title="¿Qué es un servidor?" href="servidores/know-how/que-es-un-servidor-un-concepto-dos-definiciones/">
+            
+                
+        <picture>
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="fileadmin/_processed_/b/e/csm_was-ist-ein-server-t_b6c19df400.jpg" media="(max-width: 767px)">
+            <source srcset='fileadmin/_processed_/b/e/csm_was-ist-ein-server-t_2e63b0021b.jpg' media="(max-width: 1023px)">
+            <source srcset='fileadmin/DigitalGuide/Teaser/was-ist-ein-server-t.jpg'>
+            <!--[if IE 9]></video><![endif]-->
+            <img src="fileadmin/DigitalGuide/Teaser/was-ist-ein-server-t.jpg" alt="¿Qué es un servidor? Un concepto, dos definiciones" title="¿Qué es un servidor?">
+        </picture>
+    
+            
+        </a>
+    </div>
+    <h2 class="blue">
+        
+                <a title="¿Qué es un servidor?" href="servidores/know-how/que-es-un-servidor-un-concepto-dos-definiciones/">¿Qué es un servidor? Un concepto, dos definiciones</a>
+            
+    </h2>
+    <ul class="list-inline meta">
+        <li><time datetime="2016-05-30"><span class="icon-clock-o"></span> 30.05.2016</time></li>
+        <li><a title="Know How" href="servidores/know-how/">Know How</a></li>
+    </ul>
+    <p>Al hablar de alojamiento web es inevitable mencionar el término servidor y preguntarse en qué consiste o cómo funciona. En informática hay dos acepciones para definirlo y, por ello, es necesario diferenciar entre el significado original de servidor como software para los servicios de red y entre el significado más familiar de servidor como el hardware que se ejecuta en los programas de un&nbsp;[...]
+        <a title="¿Qué es un servidor?" href="servidores/know-how/que-es-un-servidor-un-concepto-dos-definiciones/">&nbsp;</span>&nbsp;</a>
+    </p>
+
+    <div class="social-block">
+        <ul class="list-inline social-networks">
+            <li><a target="_blank" href='https://www.facebook.com/sharer/sharer.php?u=https://www.1and1.es/digitalguide/servidores/know-how/que-es-un-servidor-un-concepto-dos-definiciones/' class="facebook"><span class="icon-facebook"></span></a></li>
+            <li><a target="_blank" href="https://twitter.com/intent/tweet?source=https://www.1and1.es/digitalguide/servidores/know-how/que-es-un-servidor-un-concepto-dos-definiciones/&text=https://www.1and1.es/digitalguide/servidores/know-how/que-es-un-servidor-un-concepto-dos-definiciones/%20%23DigitalGuide" class="twitter"><span class="icon-twitter"></span></a></li>
+            <li><a target="_blank" href="https://www.xing.com/spi/shares/new?url=https://www.1and1.es/digitalguide/servidores/know-how/que-es-un-servidor-un-concepto-dos-definiciones/" class="xing"><span class="icon-xing"></span></a></li>
+            <li><a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=https://www.1and1.es/digitalguide/servidores/know-how/que-es-un-servidor-un-concepto-dos-definiciones/" class="linkedin"><span class="icon-linkedin"></span></a></li>
+        </ul>
+    </div>
+
+</article>
+					</div>
+				
+					<div class="col-sm-4">
+						<article class="info-post">
+    <div class="img-holder">
+        <a title="nginx: el servidor web rápido y sostenible" href="servidores/configuracion/nginx-conceptos-basicos-instalacion-y-configuracion/">
+            
+                
+        <picture>
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="fileadmin/_processed_/1/6/csm_nginx-t_8bb0eb99b0.jpg" media="(max-width: 767px)">
+            <source srcset='fileadmin/_processed_/1/6/csm_nginx-t_a63c82c930.jpg' media="(max-width: 1023px)">
+            <source srcset='fileadmin/DigitalGuide/Teaser/nginx-t.jpg'>
+            <!--[if IE 9]></video><![endif]-->
+            <img src="fileadmin/DigitalGuide/Teaser/nginx-t.jpg" alt="nginx: conceptos básicos, instalación y configuración" title="nginx: el servidor web rápido y sostenible">
+        </picture>
+    
+            
+        </a>
+    </div>
+    <h2 class="blue">
+        
+                <a title="nginx: el servidor web rápido y sostenible" href="servidores/configuracion/nginx-conceptos-basicos-instalacion-y-configuracion/">nginx: conceptos básicos, instalación y configuración</a>
+            
+    </h2>
+    <ul class="list-inline meta">
+        <li><time datetime="2016-10-19"><span class="icon-clock-o"></span> 19.10.2016</time></li>
+        <li><a title="Configuración" href="servidores/configuracion/">Configuración</a></li>
+    </ul>
+    <p>Por muchos años, Apache fue la solución de servidor web por excelencia y la base de la mayoría de páginas web en la World Wide Web. Sin embargo, el aumento de los requisitos técnicos de modernos y ambiciosos proyectos online y las crecientes demandas de los usuarios de Internet han cambiado radicalmente esta situación. Es por esto que alternativas como nginx han ido ganando popularidad y se han&nbsp;[...]
+        <a title="nginx: el servidor web rápido y sostenible" href="servidores/configuracion/nginx-conceptos-basicos-instalacion-y-configuracion/">&nbsp;</span>&nbsp;</a>
+    </p>
+
+    <div class="social-block">
+        <ul class="list-inline social-networks">
+            <li><a target="_blank" href='https://www.facebook.com/sharer/sharer.php?u=https://www.1and1.es/digitalguide/servidores/configuracion/nginx-conceptos-basicos-instalacion-y-configuracion/' class="facebook"><span class="icon-facebook"></span></a></li>
+            <li><a target="_blank" href="https://twitter.com/intent/tweet?source=https://www.1and1.es/digitalguide/servidores/configuracion/nginx-conceptos-basicos-instalacion-y-configuracion/&text=https://www.1and1.es/digitalguide/servidores/configuracion/nginx-conceptos-basicos-instalacion-y-configuracion/%20%23DigitalGuide" class="twitter"><span class="icon-twitter"></span></a></li>
+            <li><a target="_blank" href="https://www.xing.com/spi/shares/new?url=https://www.1and1.es/digitalguide/servidores/configuracion/nginx-conceptos-basicos-instalacion-y-configuracion/" class="xing"><span class="icon-xing"></span></a></li>
+            <li><a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=https://www.1and1.es/digitalguide/servidores/configuracion/nginx-conceptos-basicos-instalacion-y-configuracion/" class="linkedin"><span class="icon-linkedin"></span></a></li>
+        </ul>
+    </div>
+
+</article>
+					</div>
+				
+					<div class="col-sm-4">
+						<article class="info-post">
+    <div class="img-holder">
+        <a title="Cómo instalar Apache en un PC Windows" href="servidores/configuracion/instala-apache-en-tu-pc/">
+            
+                
+        <picture>
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="fileadmin/_processed_/4/8/csm_san-storage-t_c35476d7f7.jpg" media="(max-width: 767px)">
+            <source srcset='fileadmin/_processed_/4/8/csm_san-storage-t_02ef9f461b.jpg' media="(max-width: 1023px)">
+            <source srcset='fileadmin/DigitalGuide/Teaser/san-storage-t.jpg'>
+            <!--[if IE 9]></video><![endif]-->
+            <img src="fileadmin/DigitalGuide/Teaser/san-storage-t.jpg" alt="Instala Apache en tu PC" title="Cómo instalar Apache en un PC Windows">
+        </picture>
+    
+            
+        </a>
+    </div>
+    <h2 class="blue">
+        
+                <a title="Cómo instalar Apache en un PC Windows" href="servidores/configuracion/instala-apache-en-tu-pc/">Instala Apache en tu PC</a>
+            
+    </h2>
+    <ul class="list-inline meta">
+        <li><time datetime="2017-05-26"><span class="icon-clock-o"></span> 26.05.2017</time></li>
+        <li><a title="Configuración" href="servidores/configuracion/">Configuración</a></li>
+    </ul>
+    <p>El servidor Apache HTTP es considerado el servidor web estándar para la entrega de documentos HTTP en Internet. También es posible instalar un servidor Apache de forma local en un ordenador Windows para evaluar el funcionamiento de páginas web o probar códigos. Todo lo que necesitas es descargar el paquete de software gratuito y un par de minutos para instalarlo y configurarlo. 
+        <a title="Cómo instalar Apache en un PC Windows" href="servidores/configuracion/instala-apache-en-tu-pc/">&nbsp;</span>&nbsp;</a>
+    </p>
+
+    <div class="social-block">
+        <ul class="list-inline social-networks">
+            <li><a target="_blank" href='https://www.facebook.com/sharer/sharer.php?u=https://www.1and1.es/digitalguide/servidores/configuracion/instala-apache-en-tu-pc/' class="facebook"><span class="icon-facebook"></span></a></li>
+            <li><a target="_blank" href="https://twitter.com/intent/tweet?source=https://www.1and1.es/digitalguide/servidores/configuracion/instala-apache-en-tu-pc/&text=https://www.1and1.es/digitalguide/servidores/configuracion/instala-apache-en-tu-pc/%20%23DigitalGuide" class="twitter"><span class="icon-twitter"></span></a></li>
+            <li><a target="_blank" href="https://www.xing.com/spi/shares/new?url=https://www.1and1.es/digitalguide/servidores/configuracion/instala-apache-en-tu-pc/" class="xing"><span class="icon-xing"></span></a></li>
+            <li><a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=https://www.1and1.es/digitalguide/servidores/configuracion/instala-apache-en-tu-pc/" class="linkedin"><span class="icon-linkedin"></span></a></li>
+        </ul>
+    </div>
+
+</article>
+					</div>
+				
+					<div class="col-sm-4">
+						<article class="info-post">
+    <div class="img-holder">
+        <a title="nginx tutorial: primeros pasos con nginx.conf" href="servidores/configuracion/nginx-tutorial-primeros-pasos-con-nginxconf/">
+            
+                
+        <picture>
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="fileadmin/_processed_/1/6/csm_nginx-t_8bb0eb99b0.jpg" media="(max-width: 767px)">
+            <source srcset='fileadmin/_processed_/1/6/csm_nginx-t_a63c82c930.jpg' media="(max-width: 1023px)">
+            <source srcset='fileadmin/DigitalGuide/Teaser/nginx-t.jpg'>
+            <!--[if IE 9]></video><![endif]-->
+            <img src="fileadmin/DigitalGuide/Teaser/nginx-t.jpg" alt="nginx tutorial: primeros pasos con nginx.conf" title="nginx tutorial: primeros pasos con nginx.conf">
+        </picture>
+    
+            
+        </a>
+    </div>
+    <h2 class="blue">
+        
+                <a title="nginx tutorial: primeros pasos con nginx.conf" href="servidores/configuracion/nginx-tutorial-primeros-pasos-con-nginxconf/">nginx tutorial: primeros pasos con nginx.conf</a>
+            
+    </h2>
+    <ul class="list-inline meta">
+        <li><time datetime="2017-07-17"><span class="icon-clock-o"></span> 17.07.2017</time></li>
+        <li><a title="Configuración" href="servidores/configuracion/">Configuración</a></li>
+    </ul>
+    <p>A diferencia de programas de servidor clásicos como Apache, nginx difiere significativamente en la manera de responder las solicitudes de sus clientes, por lo que demanda una familiarización con los procesos de configuración. En el siguiente nginx tutorial te mostramos cómo hacer cambios sin reiniciar por completo el software del servidor o cómo configurar, en pocos pasos, un servidor proxy simple&nbsp;[...]
+        <a title="nginx tutorial: primeros pasos con nginx.conf" href="servidores/configuracion/nginx-tutorial-primeros-pasos-con-nginxconf/">&nbsp;</span>&nbsp;</a>
+    </p>
+
+    <div class="social-block">
+        <ul class="list-inline social-networks">
+            <li><a target="_blank" href='https://www.facebook.com/sharer/sharer.php?u=https://www.1and1.es/digitalguide/servidores/configuracion/nginx-tutorial-primeros-pasos-con-nginxconf/' class="facebook"><span class="icon-facebook"></span></a></li>
+            <li><a target="_blank" href="https://twitter.com/intent/tweet?source=https://www.1and1.es/digitalguide/servidores/configuracion/nginx-tutorial-primeros-pasos-con-nginxconf/&text=https://www.1and1.es/digitalguide/servidores/configuracion/nginx-tutorial-primeros-pasos-con-nginxconf/%20%23DigitalGuide" class="twitter"><span class="icon-twitter"></span></a></li>
+            <li><a target="_blank" href="https://www.xing.com/spi/shares/new?url=https://www.1and1.es/digitalguide/servidores/configuracion/nginx-tutorial-primeros-pasos-con-nginxconf/" class="xing"><span class="icon-xing"></span></a></li>
+            <li><a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=https://www.1and1.es/digitalguide/servidores/configuracion/nginx-tutorial-primeros-pasos-con-nginxconf/" class="linkedin"><span class="icon-linkedin"></span></a></li>
+        </ul>
+    </div>
+
+</article>
+					</div>
+				
+					<div class="col-sm-4">
+						<article class="info-post">
+    <div class="img-holder">
+        <a title="Los sistemas operativos para servidores: historia y situación actual" href="servidores/know-how/los-sistemas-operativos-para-servidor-a-traves-del-tiempo/">
+            
+                
+        <picture>
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="fileadmin/_processed_/4/8/csm_san-storage-t_c35476d7f7.jpg" media="(max-width: 767px)">
+            <source srcset='fileadmin/_processed_/4/8/csm_san-storage-t_02ef9f461b.jpg' media="(max-width: 1023px)">
+            <source srcset='fileadmin/DigitalGuide/Teaser/san-storage-t.jpg'>
+            <!--[if IE 9]></video><![endif]-->
+            <img src="fileadmin/DigitalGuide/Teaser/san-storage-t.jpg" alt="Los sistemas operativos para servidor a través del tiempo" title="Los sistemas operativos para servidores: historia y situación actual">
+        </picture>
+    
+            
+        </a>
+    </div>
+    <h2 class="blue">
+        
+                <a title="Los sistemas operativos para servidores: historia y situación actual" href="servidores/know-how/los-sistemas-operativos-para-servidor-a-traves-del-tiempo/">Los sistemas operativos para servidor a través del tiempo</a>
+            
+    </h2>
+    <ul class="list-inline meta">
+        <li><time datetime="2016-11-29"><span class="icon-clock-o"></span> 29.11.2016</time></li>
+        <li><a title="Know How" href="servidores/know-how/">Know How</a></li>
+    </ul>
+    <p>Los sistemas operativos han cambiado drásticamente con el paso del tiempo. Mientras que, en sus comienzos, sus interfaces de usuario se basaban únicamente en texto, hoy se han convertido en complejos paquetes de software que sirven de mediadores entre las aplicaciones de software y hardware y cuentan con intuitivas interfaces gráficas. Hoy, los usuarios pueden operarlos con el teclado o el ratón,&nbsp;[...]
+        <a title="Los sistemas operativos para servidores: historia y situación actual" href="servidores/know-how/los-sistemas-operativos-para-servidor-a-traves-del-tiempo/">&nbsp;</span>&nbsp;</a>
+    </p>
+
+    <div class="social-block">
+        <ul class="list-inline social-networks">
+            <li><a target="_blank" href='https://www.facebook.com/sharer/sharer.php?u=https://www.1and1.es/digitalguide/servidores/know-how/los-sistemas-operativos-para-servidor-a-traves-del-tiempo/' class="facebook"><span class="icon-facebook"></span></a></li>
+            <li><a target="_blank" href="https://twitter.com/intent/tweet?source=https://www.1and1.es/digitalguide/servidores/know-how/los-sistemas-operativos-para-servidor-a-traves-del-tiempo/&text=https://www.1and1.es/digitalguide/servidores/know-how/los-sistemas-operativos-para-servidor-a-traves-del-tiempo/%20%23DigitalGuide" class="twitter"><span class="icon-twitter"></span></a></li>
+            <li><a target="_blank" href="https://www.xing.com/spi/shares/new?url=https://www.1and1.es/digitalguide/servidores/know-how/los-sistemas-operativos-para-servidor-a-traves-del-tiempo/" class="xing"><span class="icon-xing"></span></a></li>
+            <li><a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=https://www.1and1.es/digitalguide/servidores/know-how/los-sistemas-operativos-para-servidor-a-traves-del-tiempo/" class="linkedin"><span class="icon-linkedin"></span></a></li>
+        </ul>
+    </div>
+
+</article>
+					</div>
+				
+			</div>
+		</section>
+	
+          </div>
+          <!--TYPO3SEARCH_end-->
+
+          <div class="col-sm-4" id="sidebar">
+            <div class="gcsOptin" data-gcs-optin-opts="{&quot;text&quot;:{&quot;headline&quot;:&quot;NEWSLETTER&quot;,&quot;subheadline&quot;:&quot;anmelden und gratis Online-Marketing Whitepaper sichern.&quot;},&quot;id&quot;:&quot;7ccf889c34fccd13c4832d521089fa029f34e139a885c62a0bde339604ee7a6a&quot;,&quot;host&quot;:&quot;digitalguide.1und1.de&quot;,&quot;https&quot;:true,&quot;skipKnownUser&quot;:true,&quot;callback&quot;:&quot;&quot;}"></div>
+            
+        <div class="desktop-box">
+            <div class="side-block respon-block open-close">
+                <strong class="opener" data-responsive-accordion="1023">
+                    Artículos favoritos
+                    <span class="iconCloseOpen "></span>
+                </strong>
+                <div class="container-info-blog slide">
+                    
+                        <div class="info-blog">
+                            <div class="img-holder">
+                                <a title="Análisis y estadísticas: Instagram para empresas - parte 3" href="online-marketing/redes-sociales/exito-en-instagram-herramientas-de-analisis-estadisticas/">
+                                    <img alt="Éxito en Instagram: herramientas de análisis &amp;amp; estadísticas" src="fileadmin/_processed_/7/e/csm_instagram-fuer-unternehmen-s_faaff20c5a.jpg" width="200" height="105" />
+                                </a>
+                            </div>
+                            <h4 class="h5 blue"> <a title="Análisis y estadísticas: Instagram para empresas - parte 3" href="online-marketing/redes-sociales/exito-en-instagram-herramientas-de-analisis-estadisticas/">Éxito en Instagram: herramientas de análisis &amp; estadísticas</a></h4>
+                        </div>
+                    
+                        <div class="info-blog">
+                            <div class="img-holder">
+                                <a title="Raspberry Pi: versatilidad y amplitud en pequeñas dimensiones " href="servidores/know-how/un-vistazo-a-10-proyectos-basados-en-raspberry-pi/">
+                                    <img alt="Un vistazo a 10 proyectos basados en Raspberry Pi" src="fileadmin/_processed_/0/8/csm_platine-t_5135b53c76.jpg" width="200" height="105" />
+                                </a>
+                            </div>
+                            <h4 class="h5 blue"> <a title="Raspberry Pi: versatilidad y amplitud en pequeñas dimensiones " href="servidores/know-how/un-vistazo-a-10-proyectos-basados-en-raspberry-pi/">Un vistazo a 10 proyectos basados en Raspberry Pi</a></h4>
+                        </div>
+                    
+                        <div class="info-blog">
+                            <div class="img-holder">
+                                <a title="La firma de correo electrónico profesional: lo que debes saber" href="correo-electronico/e-mail-marketing/como-crear-una-firma-de-correo-electronico-profesional/">
+                                    <img alt="Cómo crear una firma de correo electrónico profesional" src="fileadmin/_processed_/0/f/csm_signtur-mail-t_2c67954103.jpg" width="200" height="105" />
+                                </a>
+                            </div>
+                            <h4 class="h5 blue"> <a title="La firma de correo electrónico profesional: lo que debes saber" href="correo-electronico/e-mail-marketing/como-crear-una-firma-de-correo-electronico-profesional/">Cómo crear una firma de correo electrónico profesional</a></h4>
+                        </div>
+                    
+                        <div class="info-blog">
+                            <div class="img-holder">
+                                <a title="Crea capturas de pantalla en Windows fácilmente" href="servidores/configuracion/como-crear-capturas-de-pantalla-en-windows/">
+                                    <img alt="Cómo crear capturas de pantalla en Windows" src="fileadmin/_processed_/c/9/csm_screenshot-erstellen-t_39496c0e0a.jpg" width="200" height="105" />
+                                </a>
+                            </div>
+                            <h4 class="h5 blue"> <a title="Crea capturas de pantalla en Windows fácilmente" href="servidores/configuracion/como-crear-capturas-de-pantalla-en-windows/">Cómo crear capturas de pantalla en Windows</a></h4>
+                        </div>
+                    
+                        <div class="info-blog">
+                            <div class="img-holder">
+                                <a title="¿Hay alternativas a Facebook? Descubre las redes sociales libres" href="online-marketing/redes-sociales/alternativas-a-facebook-cual-es-la-mejor/">
+                                    <img alt="Alternativas a Facebook: ¿cuál es la mejor?" src="fileadmin/_processed_/0/f/csm_alternativen-zu-facebook-t_9da60cfb5f.jpg" width="200" height="105" />
+                                </a>
+                            </div>
+                            <h4 class="h5 blue"> <a title="¿Hay alternativas a Facebook? Descubre las redes sociales libres" href="online-marketing/redes-sociales/alternativas-a-facebook-cual-es-la-mejor/">Alternativas a Facebook: ¿cuál es la mejor?</a></h4>
+                        </div>
+                    
+                        <div class="info-blog">
+                            <div class="img-holder">
+                                <a title="Linux vs. Windows: soluciones de alojamiento web " href="servidores/know-how/linux-vs-windows-el-gran-cuadro-comparativo/">
+                                    <img alt="Linux vs. Windows –El gran cuadro comparativo" src="fileadmin/_processed_/0/0/csm_betriebssysteme-t_d7cd474f1d.jpg" width="200" height="105" />
+                                </a>
+                            </div>
+                            <h4 class="h5 blue"> <a title="Linux vs. Windows: soluciones de alojamiento web " href="servidores/know-how/linux-vs-windows-el-gran-cuadro-comparativo/">Linux vs. Windows –El gran cuadro comparativo</a></h4>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+    
+            
+          </div>
+        </div>
+      </div>
+      <div class="mobile-box"></div>
+      <div class="container info-aside">
+        
+		<nav class="tag-cloud">
+		<h3 class="opener">Otros temas<span class="iconCloseOpen"></span></h3>
+		<ul class="list-inline tag-list slide">
+			
+				<li><a href="tags/base-de-datos/">Base de Datos</a>
+				</li>
+			
+				<li><a href="tags/big-data/">Big Data</a>
+				</li>
+			
+				<li><a href="tags/cifrado/">Cifrado</a>
+				</li>
+			
+				<li><a href="tags/copia-de-seguridad/">Copia de Seguridad</a>
+				</li>
+			
+				<li><a href="tags/codigo-abierto/">Código Abierto</a>
+				</li>
+			
+				<li><a href="tags/dns/">DNS</a>
+				</li>
+			
+				<li><a href="tags/digitalizacion/">Digitalización</a>
+				</li>
+			
+				<li><a href="tags/e-commerce/">E-Commerce</a>
+				</li>
+			
+				<li><a href="tags/ftp/">FTP</a>
+				</li>
+			
+				<li><a href="tags/glosario/">Glosario</a>
+				</li>
+			
+				<li><a href="tags/http/">HTTP</a>
+				</li>
+			
+				<li><a href="tags/herramientas/">Herramientas</a>
+				</li>
+			
+				<li><a href="tags/linux/">Linux</a>
+				</li>
+			
+				<li><a href="tags/mysql/">MySQL</a>
+				</li>
+			
+				<li><a href="tags/navegador/">Navegador</a>
+				</li>
+			
+				<li><a href="tags/nube/">Nube</a>
+				</li>
+			
+				<li><a href="tags/php/">PHP</a>
+				</li>
+			
+				<li><a href="tags/plug-ins/">Plug-ins</a>
+				</li>
+			
+				<li><a href="tags/proteccion-de-datos/">Protección de Datos</a>
+				</li>
+			
+				<li><a href="tags/protocolos/">Protocolos</a>
+				</li>
+			
+				<li><a href="tags/publico-objetivo/">Público Objetivo</a>
+				</li>
+			
+				<li><a href="tags/red/">Red</a>
+				</li>
+			
+				<li><a href="tags/ssl/">SSL</a>
+				</li>
+			
+				<li><a href="tags/seguridad/">Seguridad</a>
+				</li>
+			
+				<li><a href="tags/sistemas-operativos/">Sistemas Operativos</a>
+				</li>
+			
+				<li><a href="tags/sistemas-de-almacenamiento/">Sistemas de Almacenamiento</a>
+				</li>
+			
+				<li><a href="tags/tiempo-de-carga/">Tiempo de Carga</a>
+				</li>
+			
+				<li><a href="tags/tienda-online/">Tienda Online</a>
+				</li>
+			
+				<li><a href="tags/tutoriales/">Tutoriales</a>
+				</li>
+			
+				<li><a href="tags/windows/">Windows</a>
+				</li>
+			
+		</ul>
+		</nav>
+	
+      </div>
+    </div>
+  </main>
+
+<footer id="footer">
+	<div class="container footer-frame">
+		<ul class="list-inline social-networks contact">
+			
+				<li><a href="https://www.facebook.com/1and1.es" class="facebook" target="_blank"><span class="icon-facebook"></span></a></li>
+			
+			
+				<li><a href="https://twitter.com/1and1_es" class="twitter" target="_blank"><span class="icon-twitter"></span></a></li>
+			
+			
+				<li><a href="https://plus.google.com/104193717611969423812/posts" class="google-plus" target="_blank"><span class="icon-google"></span></a></li>
+			
+			
+				<li><a href="https://www.youtube.com/1and1es" class="youtube" target="_blank"><img src="fileadmin/templates/images/youtube.png" width="28" height="28" alt="youtube"></a></li>
+			
+			
+				<li><a href="https://www.linkedin.com/company/1%261-internet-ag" class="linkedin" target="_blank"><span class="icon-linkedin"></span></a></li>
+			
+			
+		</ul>
+	</div>
+
+	<div class="footer-holder">
+		<div class="container">
+			<ul class="list-inline list-footer"><li class="footer-nav-item"><a href="http://empresa.1and1.es" class="footer-nav-link" target="_blank">Empresa</a></li><li class="footer-nav-item"><a href="http://newsroom.1and1.es" class="footer-nav-link" target="_blank">Newsroom</a></li><li class="footer-nav-item"><a href="https://www.1and1.es/terms-privacy-cookies" class="footer-nav-link" target="_blank">Uso de Cookies</a></li><li class="footer-nav-item"><a href="https://www.1and1.es/terms-privacy" class="footer-nav-link" target="_blank">Privacidad</a></li><li class="footer-nav-item"><a href="http://ayuda.1and1.es/?hc=website" class="footer-nav-link" target="_blank">Centro de Ayuda</a></li><li class="footer-nav-item"><a href="http://www.1and1.es/casos-exito" class="footer-nav-link" target="_blank">Casos de éxito</a></li><li class="footer-nav-item"><span class="footer-nav-copyright">&copy; 2018 1&1 Internet España S.L.U.</span></li></ul>
+		</div>
+	</div>
+	<a href="#wrapper" class="btn btn-top" style="display: block; opacity: 1;"><span class="icon-angle-up"></span></a>
+
+</footer>
+
+</div>
+<script src="uploads/tx_t3jquery/jquery-2.1.x-1.10.x.js?1516355745" type="text/javascript"></script>
+<script src="typo3conf/ext/ciso_shop_includes/Resources/Public/Scripts/header.js?1513852454" type="text/javascript"></script>
+<script src="fileadmin/templates/ratgeberportal/Resources/Public/JavaScript/likes.js?1513598382" type="text/javascript"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="fileadmin/templates/ratgeberportal/Resources/Public/JavaScript/jquery.main.js?1513598382" type="text/javascript"></script>
+<script src="fileadmin/templates/ratgeberportal/Resources/Public/JavaScript/rainbow-custom.min.js?1513598382" type="text/javascript"></script>
+<script src="fileadmin/templates/ratgeberportal/Resources/Public/JavaScript/rainbow.linenumbers.min.js?1513598382" type="text/javascript"></script>
+<script src="typo3conf/ext/fs_code_snippet/Resources/Public/JavaScript/FsCodeSnippet.js?1497951464" type="text/javascript"></script>
+<script src="typo3conf/ext/toc/Resources/Public/Script/toc-script.js?1513598075" type="text/javascript"></script>
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" media="all"><script type="text/javascript">_satellite.pageBottom();</script><div class="tx-cisositecatalyst">
+		
+            <!-- SiteCatalyst code version: H.20.3. Copyright 1997-2009 Omniture, Inc. More info available at http://www.omniture.com -->
+            <script type="text/javascript">var s_account="iaglive,iaggloballive";</script>
+            <script type="text/javascript" src="typo3conf/ext/ciso_sitecatalyst/Resources/Public/JavaScript/s_code.js"></script>
+            <script type="text/javascript" src="typo3conf/ext/ciso_sitecatalyst/Resources/Public/JavaScript/utm.js"></script>
+            
+                    <script language="JavaScript" type="text/javascript"><!--
+                        function onRequest(data) {
+                            s.server = "1und1internetag.d3.sc.omtrdc.net";
+s.visitorNamespace = "1und1internetag";
+s.thisHost = window.location.host;
+s.currencyCode = "EUR";
+s.charSet = "UTF-8";
+s.trackDownloadLinks = true;
+s.trackExternalLinks = true;
+s.trackInlineStats = true;
+s.linkDownloadFileTypes = "exe,zip,wav,mp3,mov,mpg,avi,wmv,pdf,doc,docx,xls,xlsx,ppt,pptx";
+s.linkInternalFilters = "javascript:,.1und1.de,.1und1.at,.1and1.com,.1and1.ca,.1and1.co.uk,.1and1.es,.1and1.fr,.1and1.pl,.1and1.it,.1und1.info,.1and1.mx,.gmx.de,.web.de,united.domain,cinetic.de,schlund.de"+s.thisHost;
+s.linkLeaveQueryString = false;
+s.linkTrackVars = "None";
+s.linkTrackEvents = "None";
+s.usePlugins = true;
+s.prop11 = "New contract shop";
+s.eVar13 = "New contract shop";
+s.channel = "digitalguide";
+var cookieName = "ac-whorder-es";
+var searchString = document.location.search;
+// removing the '?' at the beginning
+if (searchString.length > 0) {
+  searchString = searchString.substring(1);
+}
+var searchStringParts = searchString.split('&');
+var actionCode = '';
+for (var i=0, j=searchStringParts.length; i<j; i++) {
+  if (searchStringParts[i].search('ac') != -1) {
+    // getting the value by removing the 'ac=' at the beginning
+    actionCode = searchStringParts[i].substring(3);
+  }
+}
+
+// if the actionCode is not in the URL check for the cookie
+if (typeof $.cookie != "undefined" && actionCode == '' && typeof $.cookie(cookieName) != "undefined") {
+  actionCode = $.cookie(cookieName);
+}
+
+if (actionCode != '') {
+  s.campaign = s.eVar23 = actionCode;
+}
+s.prop1 = "servidores_know-how_apache-vs-nginx-una-comparativa-de-servidores-web";
+s.prop5 = "dg-server";
+s.prop6 = "dg-es";
+s.prop7 = "www.1and1.es";
+s.prop17 = "es";
+s.prop23 = window.navigator.userAgent;
+s.eVar1 = "digitalguide";
+s.eVar2 = "servidores_know-how_apache-vs-nginx-una-comparativa-de-servidores-web";
+var currentDate = new Date();
+var day = currentDate.getDate();
+var formattedDay = day <= 9 ? "0" + day : day;
+var month = currentDate.getMonth();
+var formattedMonth = month <= 8 ? "0" + (month + 1) : (month + 1);
+var year = currentDate.getFullYear();
+var hours = currentDate.getHours();
+var formattedHours = hours <= 9 ? "0" + (hours) : hours;
+var minutes = currentDate.getMinutes();
+var formattedMinutes = minutes <= 9 ? "0" + (minutes) : minutes;
+
+var timeStamp = formattedDay + "/" + formattedMonth + "/" + year + "-" + formattedHours + ":" + formattedMinutes;
+s.eVar3 = timeStamp;
+s.eVar6 = "dg-server";
+s.eVar7 = "dg-es";
+s.eVar45 = "es";
+                        }
+                        $(window).ready(function() {
+
+                          // send the tracking for the page
+                          onRequest();
+
+                          /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+                          var s_code=s.t();
+                          if (s_code) document.write(s_code);                          
+                
+                        });
+                        //-->
+                    </script>
+                
+            <script type="text/javascript"><!--; if (navigator.appVersion.indexOf("MSIE")>=0) document.write(unescape("%3C")+"\!-"+"-"); //--></script>
+            <noscript>
+                <p><a href="http://www.omniture.com" title="Web Analytics"><img src="" height="1" width="1" alt="" /></a></p>
+            </noscript><!--/DO NOT REMOVE/-->
+<!-- End SiteCatalyst code version: H.20.3. -->
+            
+	</div>
+	
+<script type="text/javascript">
+   var page = 'Apache vs. nginx | Una comparativa de servidores web';
+   var pageId = '3';
+   var application = 'T3.DG.ES';
+</script>
+<script type="text/javascript" src="//cdn.optimizely.com/js/2365240165.js"></script>
+
+<script type="text/javascript" src="typo3conf/ext/ciso_tracking/Resources/Public/Scripts/performance/browser.js"></script>
+
+<script type="text/javascript" src="typo3conf/ext/ciso_tracking/Resources/Public/Scripts/performance/rum.js"></script>
+
+<!-- Google Code for Hauptliste -->
+<!-- Google Code for Remarketing Tag -->
+<!--------------------------------------------------
+Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+--------------------------------------------------->
+<script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1057374712;
+    var google_conversion_label = "tnTZCPDmzgQQ-IOZ-AM";
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1057374712/?value=1.00&amp;currency_code=EUR&amp;label=tnTZCPDmzgQQ-IOZ-AM&amp;guid=ON&amp;script=0"/>
+    </div>
+</noscript>
+<!--
+Start of DoubleClick Floodlight Tag: Please do not remove
+Activity name of this tag: HOT_ES_DigitalGuide
+URL of the webpage where the tag is expected to be placed: http://www.1and1.es/digitalguide
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 07/21/2016
+-->
+<iframe src="https://5879809.fls.doubleclick.net/activityi;src=5879809;type=hot_digi;cat=es;u1=digitalguide;u2=https://www.1and1.es/digitalguide%2F%2Fservidores%2Fknow-how%2Fapache-vs-nginx-una-comparativa-de-servidores-web%2F;u3=digitalguide;u4=;u5=;u6=;u7=;u8=;u9=;u10=;u11=;u12=;u13=;u14=;u15=;u16=;u17=;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+<!-- End of DoubleClick Floodlight Tag: Please do not remove -->
+<script type='text/javascript'>
+    var OB_ADV_ID = 48766;
+    window.onload = function () {
+        setTimeout(function () {
+            var script = document.createElement('script');
+            script.setAttribute('src', '//widgets.outbrain.com/obtp.js');
+            document.body.appendChild(script);
+        }, 30000);
+    }
+</script>
+<img src="//amplifypixel.outbrain.com/pixel?mid=001649abe8bf7b4d6841e1cae4cb770f72" width="1" height="1" alt=""/>
+<script type="text/javascript">
+        var naturalSearchTag = "https://ad.doubleclick.net/ddm/adj/N297201.197812NSO.CODESRV/B9496169.129093287;sz=1x2;ord=";
+
+    var randomNumber = Math.floor((Math.random() * 1000000000000) + 1);
+    var scriptTag = document.createElement("script");
+    scriptTag.src = naturalSearchTag + randomNumber + "?";
+    scriptTag.language = "JavaScript1.1";
+
+    var insertionNode = document.body.firstChild;
+    insertionNode.parentNode.insertBefore(scriptTag, insertionNode);
+</script>
+<script type="text/javascript">
+UNOUNO = window.UNOUNO || {};
+UNOUNO.tracking = UNOUNO.tracking || {};
+
+
+UNOUNO.tracking.genericTracking = function(siteCatalystParams, type, name, optFullSet) {
+  /*
+    use this API to track specific events independend from page related tracking
+    uses cases for this can be tracking a survey, a clicked link or search related tracking
+  */
+
+  /*
+    here is one code example of how to track events with SiteCatalyst
+    UNOUNO.tracking.genericTracking makes it possible to use a standardized API for all kinds of such tracking codes
+
+    Example (original code):
+
+    var s=s_gi('iagdev');
+    s.linkTrackVars='events,products';
+    s.linkTrackEvents='event7,event8,event9,event10,event11,event12';
+    s.events='event7,event8,event9,event10,event11,event12';
+    s.products=";;;;event7=25|event8=75|event9=100|event10=0|event11=1";
+    s.tl(this,'o','Linkname');
+
+    Standardized UNOUNO.tracking.genericTracking example:
+
+    UNOUNO.tracking.genericTracking({
+
+      events: 'event7,event8,event9,event10,event11,event12',
+
+      products: ';;;;event7=25|event8=75|event9=100|event10=0|event11=1'
+
+    });
+
+    See wiki for complete API: http://wiki.intranet.1and1.com/bin/view/UE/SitecatalystTracking#Tracking_Events
+
+  */
+
+  var s, key, linkTrackVars, linkTrackEvents;
+
+  if (typeof s_gi !== 'undefined' && typeof s_account !== 'undefined') {
+
+    // s_account is triggered by tag manager script and has values iagdev or iaglive
+
+    s = s_gi(s_account);
+
+    // generate linkTrackVars based on siteCatalystParams
+
+    linkTrackVars = '';
+    /* transactionId  */
+    
+    if ((typeof siteCatalystParams["list2"] != "undefined" && siteCatalystParams["list2"].indexOf("chat-angenommen") == 0  || typeof siteCatalystParams["prop60"] != "undefined" && siteCatalystParams["prop60"].indexOf("ct.btn.MobileZubehoerShop") > -1) && typeof siteCatalystParams["eVar35"] == "undefined"){
+      siteCatalystParams["eVar35"] = UNOUNO.tracking.transactionId;
+    }
+
+    for (key in siteCatalystParams) {
+
+      if (siteCatalystParams.hasOwnProperty(key)) {
+
+        linkTrackVars = linkTrackVars + key + ',';
+
+        if (key === 'events') {
+
+          // if the special param events is used, generate an additionally linkTrackEvents property
+
+          linkTrackEvents = siteCatalystParams[key];
+
+        }
+
+      }
+
+    }
+
+    if (linkTrackVars !== '') {
+
+      // remove trailing comma
+
+      linkTrackVars = linkTrackVars.substr(0, linkTrackVars.length - 1);
+
+      // server time in every request
+      linkTrackVars += ",eVar3";
+      
+      // copy generated linkTrackVars and optional linkTrackEvents to the s object
+      s.linkTrackVars = linkTrackVars;
+
+      if (linkTrackEvents) {
+
+        s.linkTrackEvents = linkTrackEvents;
+
+      }
+
+      // clone all siteCatalystParams to s object
+
+      for (key in siteCatalystParams) {
+
+        if (siteCatalystParams.hasOwnProperty(key)) {
+
+          s[key] = siteCatalystParams[key];
+
+        }
+
+      }
+
+      // finally send SiteCatalyst tracking request with type and name or their defaults
+
+      if(optFullSet == true){
+         s.t(this, type || 'o', name || 'generic-tracking');
+      }
+      else{
+         s.tl(this, type || 'o', name || 'generic-tracking');
+      }
+
+
+
+
+    }
+
+  }
+
+};
+</script>
+</body>
+</html>

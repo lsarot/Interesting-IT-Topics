@@ -1,0 +1,19 @@
+
+Las BBDD NoSQL son ideales cuando se manejan cantidades enormes de información.
+
+
+
+MongoDB,
+.Al no tener schema, pudiera ser más adecuado para modelos sencillos, ya que nos guiaremos por los beans para entender nuestro modelo. Aún así usando Compass podemos ver las colecciones (tablas) como tablas.
+.En MongoDB no hay hay tablas, hay colecciones de Documents, y en una colección pueden ser muy diferentes los documentos en cuanto a campos (o totalmente distintos).
+.MongoDB is a dynamic schema database which means your documents can have different schemas within a single collection.
+	Entonces en cuanto al mapeo hacia POJOs: Mapping all the documents from such a collection can be a challenge. So, sometimes, using the "old school" method and the Document class will be easier (than parsing to a specific object).
+.Nos aporta la funcionalidad completa de una bbdd relacional.
+.Es más complejo configurar un cluster multinodos, a menos que usemos Atlas (cloud), pero es costoso (al menos para un proyecto personal).
+
+
+
+Cassandra,
+.Se define un schema previo, aunque se partiría de un modelo normalizado que iremos desnormalizando en base a las queries que necesitemos hacer, buscando siempre duplicar data antes que necesitar revisar muchas particiones.
+.No aporta la funcionalidad completa de una bbdd relacional, pero hay formas de resolver por ejemplo las funciones de agregación (sum, avg, count, etc.) y simplificar relaciones usando collections (List, Set, Map).
+.Es sencillo configurar un cluster multinodos.

@@ -1,0 +1,137 @@
+CONFIGURE JNDI DATASOURCE ON SPRING
+
+1** Spring Boot : Steps to Configure JNDI DataSource with External Tomcat
+2** Spring Boot : Steps to Configure JNDI DataSource with Embedded Tomcat
+
+
+1** Spring Boot : Steps to Configure JNDI DataSource with External Tomcat
+
+0. Configure project to be able to run on external Tomcat
+
+1. Add a property spring.datasource.jndi-name=jdbc/myDataSource in application.properties
+
+2. Create new folder main/webapp/META-INF and add context.xml (LO PUSE Y MÁS BIEN DIÓ ERROR, no usarlo)
+
+<?xml version="1.0" encoding="UTF-8"?>
+<context>
+	<ResourceLink auth="Container" name="jdbc/myDataSource" global="jdbc/myDataSource" type="javax.sql.DataSource" />
+</context>
+
+3. Retrieve in some Spring @Configuration class the JNDI datasource
+
+.optionally add to some .properties jdbc.url=java:comp/env/jdbc/myDataSource
+@Bean public DataSource dataSource() throws NamingException {
+    return (DataSource) new JndiTemplate().lookup(env.getProperty("jdbc.url")); //"java:comp/env/jdbc/myDataSource"
+}
+
+4. If your project uses web.xml (older projects):
+ <resource-ref>
+    <description>My JNDI Datasource</description>
+    <res-ref-name>jdbc/myDataSource</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+</resource-ref>
+
+5. In the external Tomcat server we configure the JNDI resource
+
+.VER "CONFIGURE Tomcat+HikariCP.txt", se habla de configurar HikariCP en Tomcat que es mucho más eficiente que dbcp u otra.
+	.. y se habla de usar dataSourceClassName="org.postgresql.ds.PGSimpleDataSource" y no driverClassName="org.postgresql.Driver"
+
+.add to <tomcat_home>/conf/server.xml, inside <GlobalNamingResources>
+<Resource name="jdbc/myDataSource"
+	auth="Container"
+	type="javax.sql.DataSource"
+	driverClassName="org.postgresql.Driver"  ("org.h2.Driver")
+	url="jdbc:postgresql://localhost:5432/postgres"  ("jdbc:h2:mem:test1;DB_CLOSE_DELAY=-1;INIT=runscript from 'classpath:/h2db.sql'")
+	username="baeldung"
+	password="pass1234"
+	maxTotal="20"
+	maxActive="20"?? se probó sin estos (??) y funcionó, se dejan por si alguna versión usa esos
+	maxIdle="10"
+	maxWaitMillis="-1"
+	maxWait="-1"??
+	removeAbandoned="true"
+	removeAbandonedTimeout="90"
+	logAbandoned="true"/>
+
+.add to <tomcat_home>/conf/context.xml, inside <Context>
+<ResourceLink
+	auth="Container"??
+  	name="jdbc/myDataSource"
+  	global="jdbc/myDataSource"
+  	type="javax.sql.DataSource"/>
+
+.check tomcat/lib directory for jar file tomcat-dbcp.jar which is responsible for creating database connection pool inside tomcat server.
+.check tomcat/lib directory for ddbb driver jar.
+
+
+6. Generate a WAR and deploy into the external Tomcat Server
+mvn clean -Dmaven.test.skip=true install, war will be on target folder.
+
+
+-------------------------------------------------
+
+
+2** Spring Boot : Steps to Configure JNDI DataSource with Embedded Tomcat (Se despliega en el mismo contenedor, no será accesible sino por esta app)
+
+No need to add spring.datasource.jndi-name in application.properties
+No need to create webapp/META-INF and context.xml
+No need to generate WAR 
+
+@Configuration
+public class TomcatConfigs {
+	
+	/**
+	 * Creamos un managed Bean (que luego recuperamos en la creación del dataSource) al cual el contenedor le pasa la instancia del Tomcat, y le activamos el NamingService de JNDI.
+	 * Luego de que cargue el contexto, registramos un recurso, en este caso el data source.
+	 */
+	@Bean public TomcatEmbeddedServletContainerFactory tomcatFactory() {
+	        
+		return new TomcatEmbeddedServletContainerFactory() {
+	          
+	           	@Override
+	            protected TomcatEmbeddedServletContainer getTomcatEmbeddedServletContainer(Tomcat tomcat) {
+	                tomcat.enableNaming(); //
+	                return super.getTomcatEmbeddedServletContainer(tomcat);
+	            }
+	        	
+	            @Override
+	            protected void postProcessContext(Context context) {
+	                ContextResource resource = new ContextResource();
+	                resource.setType(DataSource.class.getName());
+	                resource.setName("myDataSource");
+	                resource.setProperty("factory", "org.apache.tomcat.jdbc.pool.DataSourceFactory");
+	                resource.setProperty("driverClassName", "com.mysql.jdbc.Driver");
+	                resource.setProperty("url", "jdbc:mysql://localhost/test");
+	                resource.setProperty("username", "user");
+	                resource.setProperty("password", "psw");
+	      
+	                context.getNamingResources().addResource(resource);
+	            }
+	       	};
+	    }
+	 
+	    @Bean public DataSource jndiDataSource() throws IllegalArgumentException, NamingException {
+	        JndiObjectFactoryBean bean = new JndiObjectFactoryBean();    
+	        bean.setJndiName("java:/comp/env/myDataSource");
+	        bean.setProxyInterface(DataSource.class);
+	        bean.setLookupOnStartup(false);
+	        bean.afterPropertiesSet();
+				//bean.setCache(true);
+				//bean.setExposeAccessContext(false);
+				//bean.setDefaultObject(null);
+				//bean.setBeanFactory(BeanFactory);
+				//bean.setBeanClassLoader(ClassLoader);
+				//Properties env = bean.getJndiEnvironment();
+				
+				//JndiTemplate jt = new JndiTemplate();
+				//InitialContext ctx = (InitialContext) jt.getContext();
+				//JndiTemplate jndiTemplate = bean.getJndiTemplate();
+				//InitialContext ctx = (InitialContext) jndiTemplate.getContext();
+				//ctx.bind("java:comp/env/jdbc/datasource", ds);
+				//DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/jndiDataSourceH2");
+
+	        return (DataSource) bean.getObject();
+	    }
+}
+

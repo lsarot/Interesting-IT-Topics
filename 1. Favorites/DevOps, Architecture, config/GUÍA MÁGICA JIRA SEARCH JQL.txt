@@ -1,0 +1,84 @@
+
+*** GUÍA MÁGICA JIRA SEARCH JQL ***
+--- PARA CREAR FILTROS
+
+
+Importantes:
+	Tareas > Buscar Incidencias
+	Tareas > Administrar Filtros
+
+* Agregar (filtros) a Favoritos y aparecerán en pestaña Tareas
+
+
+Ejemplo de consulta para buscar tareas bloqueadas en un proyecto:
+
+	1. ir a pestaña Tareas. Opción Buscar incidencias.
+	2. en el recuadro de la consulta agregar lo siguiente
+		project in ("NOMBRE_PROYECTO") and (status = "Blocked" or labels in ("Blocked", "Bloqueado")) ORDER BY duedate ASC
+
+	Ejemplo de si está bloqueada por alguna o bloquea a alguna:
+		... AND (issueFunction in hasLinks("is blocked by") or issueFunction in hasLinks("blocks"))
+
+
+Algunos de los campos que se pueden usar:
+	project = "TEST"
+	project in (JRA, CONF)		usar IN y no OR
+	assignee = currentUser()
+	assignee = "nombre"
+	resolution = Unresolved
+	resolution is EMPTY 
+	status=resolved 	blocked
+	status not in (Done)
+	labels in ("MyLabel", "Blocked", "Bloqueado")
+	order by updated DESC
+	ORDER BY duedate
+
+
+Campo 			Descripción 			Detalle descripción
+assignee		Asignado				Usuario de JIRA que tiene asignado el asunto
+category		Categoría				Categoría del proyecto
+comment			Comentario	
+component		Componente	
+created			Fecha de Creación	
+description		Descripción				Campo con la descripción
+duedate			Fecha de Entrega	
+level			Nivel de Seguridad	
+parent			Asunto Padre	
+priority		Prioridad	
+project			Proyecto				Clave o nombre del proyecto
+reporter		Informador				Usuario de JIRA que abre la incidencia
+resolution		Resolución				Código de resolución
+status			Estado					Estado en el que se encuentra el asunto dentro del flujo de trabajo
+summary			Resumen					Resumen del asunto
+updated			Fecha de Actualización	Última fecha en la que el asunto fue modificado
+
+
+Operadores:
+	AND
+	OR
+	NOT
+	EMPTY
+	NULL
+	ISNULL()
+	ORDER BY
+
+Otros operadores:
+	EQUALS: =
+	NOT EQUALS: !=
+	GREATER THAN: >
+	GREATER THAN EQUALS: >=
+	LESS THAN: <
+	LESS THAN EQUALS: <=
+	IN
+	NOT IN
+	CONTAINS: ~
+	DOES NOT CONTAIN: !~
+	IS
+	IS NOT
+	WAS
+	WAS IN
+	WAS NOT IN
+	WAS NOT
+	CHANGED
+
+

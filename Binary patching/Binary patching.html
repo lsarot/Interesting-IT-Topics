@@ -1,0 +1,108 @@
+<title>Binary patching</title>
+<link rel=stylesheet type="text/css" href="../blog.css">
+<h1>Binary patching</h1>
+<p>
+Hey, it sounds great, right? you have this huge app which costs people a lot of time to download and you would like to save 
+them time downloading it.
+<p>
+So why not calculate some difference and only send that?
+<p>
+<h3>Well... first, where does patching work?</h3>
+<p>
+Patching text files (esp source) works best for small localized changes.
+<p>
+Here's an example:
+<pre>
+Old:
+<code>const char message[]="Unable to load library because:%s";</code>
+New:
+<code>const char message[]="Unable to load library because: %s";</code>
+</pre>
+<p>
+OK, so how expensive is the diff for this change?
+probably less than five lines.
+<p>
+<h3>When is it not worth it to make this change?</h3>
+when the file is less than five lines.
+<p>
+<h3>When is it worth it?</h3>
+probably when the file has &gt;20 lines.
+<p>
+OK, so for small changes to source files it can be worth it.
+<p>
+<h3>What about changes to xml files?</h3>
+Well, let's look at a sample xml fragment (which could represent a xul document if you read 'a' as 'hbox', 'b' as 'label' and 
+'c' as 'vbox')
+<table border cellpadding=5><tr><th>old<th>new</tr>
+<tr><td><pre>
+&lt;a&gt;
+  &lt;b/&gt;
+&lt;/a&gt;
+<td><pre>
+&lt;c&gt;
+  &lt;a&gt;
+    &lt;b/&gt;
+  &lt;/a&gt;
+&lt;/c&gt;
+</table>
+<p>
+For your standard diff application, the patch is 10+ lines. and frequently a change like this affects the entire file 
+(ignoring the license which probably shouldn't have been shipped in the first place). So you have a 50 line file and a 110 
+line diff. This would of course never be worth it.
+<p>
+OK, so perhaps standard diff is bad. what about an xml xpath based diff application. especially if whitespace doesn't matter. 
+well, that's an interesting question. i can't answer it. i tried looking for such an app and couldn't find one.
+<p>
+<h3>What about binary files?</h3>
+<li>Changes to them come in two flavors, the simple change (fixing an off by one error, or adding/changing a letter in a 
+string) which is similar to the .c patch in the first case. and bigger changes which are more like the xml case. unlike the 
+xml case, you can't cheat on whitespace, everything is significant.
+<p>
+So how do changes happen in mozilla binary files? well frequently we change an API in xpcom or some other core library and all 
+users of it have to change. Now it's true that a change could be as simple as changing the spelling of a function, but 
+generally the API change affects the entire calling convention.
+<p>
+instead of:
+<pre>
+- void ProcessPendingReqests();
++ void ProcessPendingRequests();
+</pre>
+<p>
+and a few matching changes to the callers. we have things like:
+<p>
+<pre>
+nsresult nsIContent::GetDocument(nsIDocument **aDoc);
+nsIDocument * nsIContent::GetDocument();
+</pre>
+<p>
+Such a change will affect hundreds of files and significantly change both the source code and the generated binary code.
+<p>
+For some types of changes you can recycle patches (e.g. a change which says replace all instances of ' teh ' with ' the ', 
+or if you happen to shift the location of a global function by a certain amount) 
+but for the binary changes like the ones that change calling conventions the adjacent code is likely to be very different and 
+you won't be able to use a simple drop in replacement system.
+<p>
+OK, so that's nice. <h3>what about pictures?</h3> <h4>they're simple, right?</h4>
+well yes:
+<ul>
+<li>if a picture doesn't change, it's simple.
+<li>if it changes it's probably so small and the change so large that you 
+should just replace it.
+</ul>
+<p>
+<h3>So when does it make sense to make binary patches?</h3>
+When you have very few releases, a very big product, very few changes, and a very large user-base of people who don't make 
+other changes to your product.
+<p>
+<h3>Hrm, so where does mozilla fit?</h3>
+Well.
+<ul>
+<li>First, we follow the release early, release often philosophy. There is at least one binary per primary platform daily. 
+possibly closer to four. there are about four platforms like this (macosx-ppc, linux-x86, windows-x86, solaris-sparc), and 
+then there are possibly 20 other platforms (it's a rough number, probably low).
+<li>Second, our product really isn't that big.
+<li>Third, over the course of a milestone we make many large changes and have lots of people changing most modules/components.
+<li>Finally, our userbase tinkers, installs incompatible plug-ins, third party extensions, third party skins, and possibly 
+unsupported hacks to core components.
+</ul>
+<p>

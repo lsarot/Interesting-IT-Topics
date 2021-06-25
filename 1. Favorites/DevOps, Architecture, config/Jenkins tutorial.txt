@@ -1,0 +1,535 @@
+JENKINS TUTORIAL
+https://www.jenkins.io/doc/pipeline/tour/getting-started/
+https://www.guru99.com/continuous-integration.html
+
+Nos faltó cubrir:
+Configurar que al hacer un push a mi rama (master) se ejecute el Jenkins task, haciendo build, test, deploy.
+
+------------------- DOWNLOAD AND RUN
+
+DOWNLOAD
+	//para todas las distribuciones (ie. por SO o Docker)
+	https://www.jenkins.io/download/
+	//Generic Java package
+	http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+	//Docker image
+	docker pull jenkins/jenkins:lts
+
+RUN JENKINS (Generic Java package example):
+	cd /Applications
+	java -jar jenkins.war --httpPort=8080
+	Browse to http://localhost:8080
+
+USERS
+	leoadmin
+	Leo*Adm12#
+	leodev
+	Leo*Dev12#
+
+Configured URL for Jenkins resources:
+	http://localhost:8989/
+
+------------------- CREATE PROJECT AND EXECUTE PIPELINE
+
+https://www.jenkins.io/doc/pipeline/tour/hello-world/
+
+.Creamos un proyecto para el ejercicio (cualquier tecnología): (usamos uno SpringBoot)
+	curl https://start.spring.io/starter.zip -d bootVersion=2.3.0.M1 -d dependencies=web -o demo.zip
+.Configuramos para Jenkins multibranch pipeline:
+	creamos en la raíz del proyecto un Jenkinsfile
+.Configuramos git en el proyecto:
+	git init
+	git add -A //add all
+	git commit -m "first commit"
+	git remote add origin https://github.com/lsarot/firstjenkins-multibranch-pipeline.git
+	git push -u origin master
+.en Jenkins creamos new Task, add Source, configuramos git y listo para hacer Build!
+
+------------------- What is Jenkins Pipeline?
+In Jenkins, a pipeline is a group of events or jobs which are interlinked with one another in a sequence. 
+In a Jenkins pipeline, every job or event has some sort of dependency on at least one or more events.
+
+A continuous delivery pipeline in Jenkins contains a group of states called build, deploy, test and release. These events are interlinked with each other. Every state has its events, which work in a sequence called a continuous delivery pipeline. 
+
+------------------- The benefits of using JenkinsFile are:
+
+    You can create pipelines automatically for all branches and execute pull requests with just one JenkinsFile.
+    You can review your code on the pipeline
+    You can audit your Jenkins pipeline
+    This is the singular source for your pipeline and can be modified by multiple users.
+
+------------------- JenkinsFile can be defined by either Web UI or with a JenkinsFile.
+
+** JenkinsFile
+	Ejemplo en el proyecto jenkins-demo1
+
+** Web UI
+	Se hace a través de la webUI claro está
+	Pasos al final 
+
+Declarative versus Scripted pipeline syntax:
+//There are two types of syntax used for defining your JenkinsFile.
+Declarative:
+	Declarative pipeline syntax offers an easy way to create pipelines. It contains a predefined hierarchy to create Jenkins pipelines. It gives you the ability to control all aspects of a pipeline execution in a simple, straight-forward manner.
+Scripted:
+	Scripted Jenkins pipeline runs on the Jenkins master with the help of a lightweight executor. It uses very few resources to translate the pipeline into atomic commands. Both declarative and scripted syntax are different from each other and are defined totally differently.
+
+//ejemplos de https://www.jenkins.io/doc/pipeline/tour/hello-world/
+** Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent { docker { image 'maven:3.3.3' } }
+    stages {
+        stage('build') {
+            steps {
+                sh 'mvn --version' //Linux, BSD & UnixBased
+                bat 'mvn --version' //Windows
+            }
+        }
+    }
+}
+        ** Jenkinsfile (Scripted Pipeline)
+        /* Requires the Docker Pipeline plugin */
+        node('docker') {
+            checkout scm
+            stage('Build') {
+                docker.image('maven:3.3.3').inside {
+                    sh 'mvn --version'
+                }
+            }
+        }
+
+** ver más al fondo!!
+
+------------------- Jenkins Pipeline Concepts:
+TERM 			DESCRIPTION
+Pipeline 		The pipeline is a set of instructions given in the form of code for continuous delivery and consists of instructions needed for the entire build process. With pipeline, you can build, test, and deliver the application.
+Node 			The machine on which Jenkins runs is called a node. A node block is mainly used in scripted pipeline syntax.
+Stage 			A stage block contains a series of steps in a pipeline. That is, the build, test, and deploy processes all come together in a stage. Generally, a stage block is used to visualize the Jenkins pipeline process.
+Step 			A step is nothing but a single task that executes a specific process at a defined time. A pipeline involves a series of steps. 
+
+------------------- WebUI defined JenkinsFile (no se terminó de configurar!)
+Steps:
+	.Install 'Build Pipeline Plugin' in Jenkins
+	.Click on the "+" button on the left-hand side of your Jenkins dashboard to create a pipeline.
+	.Select Build a pipeline view under options
+	.Just accept the default settings, and make sure you choose the first job under the settings. (elige un initial job)
+	.Luego tenía que configurar otro proyecto y en triggers elegir build after other proyects build, eligiendo el job anterior para agregar a los pasos o algo similar!
+
+---------------------------------------
+---------------------------------------
+	 JenkinsFile PIPELINE EXAMPLES (JenkinsFile) (MOSTRAMOS 2 SINTAXIS: declarative y scripted)
+---------------------------------------
+https://www.jenkins.io/doc/book/pipeline/syntax/	FULL DOC
+https://www.jenkins.io/doc/pipeline/tour/hello-world/	QUICK-TOUR
+
++++ ---------- Pipelines with multiple steps
+https://www.jenkins.io/doc/pipeline/tour/running-multiple-steps/
+
+** Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'echo "Hello World"' //EN WINDOWS LA DIF SON LOS COMANDOS QUE SON DE CMD Y NO DE UNIX BASED SHELL
+                sh '''
+                    echo "Multiline shell steps works too"
+                    ls -lah
+                '''
+            }
+        }
+    }
+}
+        ** Jenkinsfile (Scripted Pipeline)
+        node {
+            stage('Build') {
+                sh 'echo "Hello World"'
+                sh '''
+                    echo "Multiline shell steps works too"
+                    ls -lah
+                '''
+            }
+        }
+
++++ ---------- Timeouts, retries and more
+
+** Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent any
+    stages {
+        stage('Deploy') {
+            steps {
+                retry(3) {
+                    sh './flakey-deploy.sh'
+                }
+
+                timeout(time: 3, unit: 'MINUTES') {
+                    sh './health-check.sh'
+                }
+
+                //OR COMBINED
+                timeout(time: 3, unit: 'MINUTES') {
+                    retry(5) {
+                        sh './flakey-deploy.sh'
+                    }
+                }
+            }
+        }
+    }
+}
+        ** Jenkinsfile (Scripted Pipeline)
+        node {
+            stage('Deploy') {
+                retry(3) {
+                    sh './flakey-deploy.sh'
+                }
+
+                timeout(time: 3, unit: 'MINUTES') {
+                    sh './health-check.sh'
+                }
+            }
+        }
+
+++ ---------- Finishing Up (post directive)
+When the Pipeline has finished executing, you may need to run clean-up steps or perform some actions based on the outcome of the Pipeline. These actions can be performed in the post section.
+
+pipeline {
+    agent any
+    stages {
+        stage('Test') {
+            steps {
+                sh 'echo "Fail!"; exit 1'
+            }
+        }
+    }
+    post {
+        always {
+            echo 'This will always run'
+        }
+        success {
+            echo 'This will run only if successful'
+        }
+        failure {
+            echo 'This will run only if failed'
+        }
+        unstable {
+            echo 'This will run only if the run was marked as unstable'
+        }
+        changed {
+            echo 'This will run only if the state of the Pipeline has changed'
+            echo 'For example, if the Pipeline was previously failing but is now successful'
+        }
+    }
+}
+
++++ ---------- Defining execution environments (agent directive)
+https://www.jenkins.io/doc/book/pipeline/syntax/#agent
+//The agent directive tells Jenkins where and how to execute the Pipeline, or subset thereof. As you might expect, the agent is required for all Pipelines.
+//Pipeline is designed to easily use Docker images and containers to run inside. This allows the Pipeline to define the environment and tools required without having to configure various system tools and dependencies on agents manually. This approach allows you to use practically any tool which can be packaged in a Docker container.
+//The agent section specifies where the entire Pipeline, or a specific stage, will execute in the Jenkins environment depending on where the agent section is placed. The section must be defined at the top-level inside the pipeline block, but stage-level usage is optional.
+
+** Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent {
+        docker { image 'node:7-alpine' }
+    }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
+        }
+    }
+}
+        ** Jenkinsfile (Scripted Pipeline)
+        node {
+            /* Requires the Docker Pipeline plugin to be installed */
+            docker.image('node:7-alpine').inside {
+                stage('Test') {
+                    sh 'node --version'
+                }
+            }
+        }
+
+
+Then we have:
+	Top level agent
+	Stage agent
+And inside we can use:
+	any
+	none
+	label
+	node
+	docker
+	dockerfile
+	kubernetes
+
+++ ---------- Using environment variables
+https://www.jenkins.io/doc/pipeline/tour/environment/
+
+At top level or on specific stage!
+
+//This approach to defining environment variables from within the Jenkinsfile can be very useful for instructing scripts, such as a Makefile, to configure the build or tests differently to run them inside of Jenkins.
+
+*??//Another common use for environment variables is to set or override "dummy" credentials in build or test scripts. Because it’s (obviously) a bad idea to put credentials directly into a Jenkinsfile, Jenkins Pipeline allows users to quickly and safely access pre-defined credentials in the Jenkinsfile without ever needing to know their values.
+	//se refiere a lo sig: en un stage (digamos 'Test'), podemos estar ejecutando un script que tenga dummy credentials, y en el Jenkinsfile sobreescribimos dichas credenciales por unas verdaderas (seteando o usando env variables), pero no pondremos esas credenciales directamente en el Jenkinsfile pq es inseguro, sino que serán accedidas pero seteadas previamente en otro lugar más seguro (ESE SETEO NO LO CUBRIMOS AQUÍ !).
+--> https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#handling-credentials
+
+** Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent {
+        label '!windows'
+    }
+    environment {
+        DISABLE_AUTH = 'true'
+        DB_ENGINE    = 'sqlite'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo "Database engine is ${DB_ENGINE}"
+                echo "DISABLE_AUTH is ${DISABLE_AUTH}"
+                sh 'printenv'
+            }
+        }
+    }
+}
+        ** Jenkinsfile (Scripted Pipeline)
+        node('!windows') {
+            withEnv(['DISABLE_AUTH=true',
+                     'DB_ENGINE=sqlite']) {
+                stage('Build') {
+                    echo "Database engine is ${DB_ENGINE}"
+                    echo "DISABLE_AUTH is ${DISABLE_AUTH}"
+                    sh 'printenv'
+                }
+            }
+        }
+
+++ ---------- Recording tests and artifacts (artifacts are the deployables, ie. .jar, .war)
+//https://www.jenkins.io/doc/pipeline/tour/tests-and-artifacts/
+
+Ruta del workspace:
+	/Users/Leo/.jenkins/workspace
+
+Jenkins can be allowed to keep track of test executions and artifacts created during pipeline execution!
+
+Jenkins typically comes bundled with the junit step, but if your test runner cannot output JUnit-style XML reports, there are additional plugins which process practically any widely-used test report format.
+To collect our test results and artifacts, we will use the post section.
+
+** Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent any
+    options { //https://www.jenkins.io/doc/book/pipeline/syntax/#options
+        timeout(time: 1, unit: 'HOURS')
+        retry(3)
+        skipStagesAfterUnstable() //en scripted syntax usamos:   if (currentBuild.currentResult == 'SUCCESS') {...}
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh './gradlew build'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh './gradlew check'
+            }
+        }
+    }
+    post {
+        always {
+            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            junit 'build/reports/**/*.xml'
+        }
+    }
+}
+        ** Jenkinsfile (Scripted Pipeline)
+        node {
+            try {
+                stage('Test') {
+                    sh './gradlew check'
+                }
+            } finally {
+                archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+                junit 'build/reports/**/*.xml'
+            }
+        }
+
+* This will always grab the test results and let Jenkins track them, calculate trends and report on them. A Pipeline that has failing tests will be marked as "UNSTABLE", denoted by yellow in the web UI. That is distinct from the "FAILED" state, denoted by red.
+** Pipeline execution will by default proceed even when the build is unstable.
+	To skip deployment after test failures in Declarative syntax, use the skipStagesAfterUnstable option. In Scripted syntax, you may check currentBuild.currentResult == 'SUCCESS'. 
+
+++ ---------- Cleaning up and notifications
+
+There are plenty of ways to send notifications, below are a few snippets demonstrating 
+how to send notifications about a Pipeline to an email, a Hipchat room, or a Slack channel.
+
+** Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent any
+    stages {
+        stage('No-op') {
+            steps {
+                sh 'ls'
+            }
+        }
+    }
+    post {
+        always {
+            echo 'One way or another, I have finished'
+            deleteDir() /* clean up our workspace */
+        }
+        success {
+            echo 'I succeeeded!'
+            /*SLACK CHANNEL*/ //Slack compró Hipchat, se lee que Hipchat será descontinuado!
+            slackSend channel: '#ops-room',
+                  color: 'good',
+                  message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
+        }
+        unstable {
+            echo 'I am unstable :/'
+        }
+        failure {
+            echo 'I failed :('
+            /*SEND EMAIL*/
+            mail to: 'team@example.com',
+            	subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+             	body: "Something is wrong with ${env.BUILD_URL}"
+            /*NOTIFY HIPCHAT ROOM*/
+            hipchatSend message: "Attention @here ${env.JOB_NAME} #${env.BUILD_NUMBER} has failed.",
+                color: 'RED'
+        }
+        changed {
+            echo 'Things were different before...'
+        }
+    }
+}
+        ** Jenkinsfile (Scripted Pipeline)
+        node {
+            try {
+                stage('No-op') {
+                    sh 'ls'
+                }
+            }
+            catch (exc) {
+                echo 'I failed'
+            }
+            finally {
+                if (currentBuild.result == 'UNSTABLE') {
+                    echo 'I am unstable :/'
+                } else {
+                    echo 'One way or another, I have finished'
+                }
+            }
+        }
+
+++ ---------- Deployment
+
+Continuous delivery (CD) is a software engineering approach in which teams produce software in short cycles, ensuring that the software can be reliably released at any time and, when releasing the software, doing so manually.[1][2] It aims at building, testing, and releasing software with greater speed and frequency. The approach helps reduce the cost, time, and risk of delivering changes by allowing for more incremental updates to applications in production. A straightforward and repeatable deployment process is important for continuous delivery.
+    CD contrasts with continuous deployment, a similar approach in which software is also produced in short cycles but through automated deployments rather than manual ones.
+
+The most basic continuous delivery pipeline will have, at minimum, three stages which should be defined in a Jenkinsfile:
+Build, Test, and Deploy.
+
+** Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent any
+    options {
+        skipStagesAfterUnstable()
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying'
+            }
+        }
+    }
+}
+        ** Jenkinsfile (Scripted Pipeline)
+        node {
+            stage('Build') {
+                echo 'Building'
+            }
+            stage('Test') {
+                echo 'Testing'
+            }
+            if (currentBuild.currentResult == 'SUCCESS') {
+                stage('Deploy') {
+                    echo 'Deploying'
+                }
+            }
+        }
+
+* --- USING Stages as Deployment Environments
+    One common pattern is to extend the number of stages to capture additional deployment environments, like "staging" or "production"
+
+En el sig ejemplo, se asume que lo que haga la ejecución del script './run-smoke-tests' será suficiente
+para validar un 'production release', a esto se le considera una implementación de 'continuous-deployment'.
+'Continuous-deployment' puede no ser ideal en todos los casos, por razones de negocio (tener fechas para lanzar features), pero podemos seguir haciendo 'continuous-delivery' (entrega del deployable).
+
+stage('Deploy - Staging') {
+    steps {
+        sh './deploy staging'
+        sh './run-smoke-tests'
+    }
+}
+stage('Deploy - Production') {
+    steps {
+        sh './deploy production'
+    }
+}
+
+* --- ASKING for human input to proceed
+
+//the "Sanity check" stage actually blocks for input and won’t proceed without a person confirming the progress.
+
+**Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent any
+    stages {
+        /* "Build" and "Test" stages omitted */
+        stage('Deploy - Staging') {
+            steps {
+                sh './deploy staging'
+                sh './run-smoke-tests'
+            }
+        }
+        stage('Sanity check') {
+            steps {
+                input "Does the staging environment look ok?"
+            }
+        }
+        stage('Deploy - Production') {
+            steps {
+                sh './deploy production'
+            }
+        }
+    }
+}
+        ** Jenkinsfile (Scripted Pipeline)
+        node {
+            /* "Build" and "Test" stages omitted */
+            stage('Deploy - Staging') {
+                sh './deploy staging'
+                sh './run-smoke-tests'
+            }
+            stage('Sanity check') {
+                input "Does the staging environment look ok?"
+            }
+            stage('Deploy - Production') {
+                sh './deploy production'
+            }
+        }
+
+

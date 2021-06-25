@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr"
+  xmlns:fb="http://ogp.me/ns/fb#"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xmlns:fb="http://ogp.me/ns/fb#"
+  xmlns:article="http://ogp.me/ns/article#"
+  xmlns:book="http://ogp.me/ns/book#"
+  xmlns:profile="http://ogp.me/ns/profile#"
+  xmlns:video="http://ogp.me/ns/video#"
+  xmlns:product="http://ogp.me/ns/product#">
+<head>
+<meta charset="utf-8" />
+<link rel="shortcut icon" href="http://cursohacker.es/sites/all/themes/responsive_blog/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="description" content="Solucionar problemas de conexión con los servidores FTP mediante el uso de comandos PORT y PASV. Uso de servidores FTP para hackear redes desde fuera." />
+<meta name="keywords" content="ftp, ftp server, port, pasv" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+<link rel="canonical" href="http://cursohacker.es/ftp-problemas-de-conexion-port-y-pasv" />
+<link rel="shortlink" href="http://cursohacker.es/node/17" />
+<link rel="publisher" href="https://plus.google.com/112234249243241556308/posts" />
+<link rel="author" href="https://plus.google.com/112234249243241556308/posts" />
+<meta property="og:site_name" content="cursohacker.es" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://cursohacker.es/ftp-problemas-de-conexion-port-y-pasv" />
+<meta property="og:title" content="FTP problemas de conexion, PORT y PASV" />
+<meta property="og:description" content="Uno de los problemas de los servidores FTP es el modo de trabajo en que se pensaron. Cuando estos servidores empezaron a proliferar en la red, hace ya algunos años, la gente se conectaba a internet de forma directa, sin routers, eran aquellos tiempos en los que los módems de 56k hacían que un pc se conectara directamente a internet sin IP privada, directamente con la IP pública." />
+<meta property="og:updated_time" content="2014-01-09T16:21:30+01:00" />
+<meta property="article:published_time" content="2013-12-19T14:39:17+01:00" />
+<meta property="article:modified_time" content="2014-01-09T16:21:30+01:00" />
+<meta name="dcterms.title" content="FTP problemas de conexion, PORT y PASV" />
+<meta name="dcterms.creator" content="admin" />
+<meta name="dcterms.description" content="Uno de los problemas de los servidores FTP es el modo de trabajo en que se pensaron. Cuando estos servidores empezaron a proliferar en la red, hace ya algunos años, la gente se conectaba a internet de forma directa, sin routers, eran aquellos tiempos en los que los módems de 56k hacían que un pc se conectara directamente a internet sin IP privada, directamente con la IP pública." />
+<meta name="dcterms.date" content="2013-12-19T14:39+01:00" />
+<meta name="dcterms.type" content="Text" />
+<meta name="dcterms.format" content="text/html" />
+<meta name="dcterms.identifier" content="http://cursohacker.es/ftp-problemas-de-conexion-port-y-pasv" />
+<meta name="dcterms.language" content="es" />
+<title>FTP problemas de conexion, PORT y PASV |➪ cursohacker.es ★</title>
+<link type="text/css" rel="stylesheet" href="http://cursohacker.es/sites/default/files/css/css_xE-rWrJf-fncB6ztZfd2huxqgxu4WO-qwma6Xer30m4.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://cursohacker.es/sites/default/files/css/css_YgETiPWIbAHwQf7iXv3YVc6dLrjGQUWV8xn6lLtUkQ0.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://cursohacker.es/sites/default/files/css/css_tnrPGGcT30CZypSf5tmT8kbwXlq-uBuD2cuD9ZMvuzc.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://cursohacker.es/sites/default/files/css/css_h5bKWtui6LVBKmseCZaILvgswrXYLaLcUHnpghGXNsQ.css" media="all" />
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-7323741522034236",
+    enable_page_level_ads: true
+  });
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+window.google_analytics_uacct = "UA-46044223-1";
+//--><!]]>
+</script>
+<script type="text/javascript" src="http://cursohacker.es/sites/default/files/js/js_mj8--jUKjR2GqRpB2rxGEcuQTBbR480BEkLzP0vXCws.js"></script>
+<script type="text/javascript" src="http://cursohacker.es/sites/default/files/js/js_zlHI3evLudgCoDsIyrBPxS7o3cJ0W0juR6sCjJU7KNM.js"></script>
+<script type="text/javascript" src="http://cursohacker.es/sites/default/files/js/js_VYZl-3S0T7spghygmECcKywlE8nuCkB4f-Mb_xBUaNg.js"></script>
+<script type="text/javascript" src="http://cursohacker.es/sites/default/files/js/js_J1GoyBdstfQ1hsv3_ROOxo0yJvoyuTmgSQmqKcxfIKg.js"></script>
+<script type="text/javascript" src="//apis.google.com/js/plusone.js"></script>
+<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+<script type="text/javascript" src="//platform.linkedin.com/in.js"></script>
+<script type="text/javascript" src="http://cursohacker.es/sites/default/files/js/js_rv_BKYv7yieH0IgHddhWHDC-bWGan8yiJbusyOpr0mw.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var _gaq = _gaq || [];_gaq.push(["_setAccount", "UA-46044223-1"]);_gaq.push(["_trackPageview"]);(function() {var ga = document.createElement("script");ga.type = "text/javascript";ga.async = true;ga.src = "http://cursohacker.es/sites/default/files/googleanalytics/dc.js?ozk40p";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ga, s);})();
+//--><!]]>
+</script>
+<script type="text/javascript" src="http://cursohacker.es/sites/default/files/js/js_a_XWH2S1EQaU85ypMDyQGiUfzPFez1IOZKxHnhGkv3E.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+function ccAddHtmlClass() {
+jQuery('html').addClass('cookies');
+}
+//--><!]]>
+</script>
+<script type="text/javascript" src="http://cursohacker.es/sites/default/files/js/js_Y9qAQ_aUVVAWt11FYldlmyby8xdq_pWE7BbnEDjHMWA.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"responsive_blog","theme_token":"yvBV8LfYoju_AlGW8-jOgMbBiqIP6BMeoU4doYldpX8","jquery_version":"1.7","js":{"0":1,"1":1,"2":1,"3":1,"4":1,"sites\/all\/modules\/jquery_update\/replace\/jquery\/1.7\/jquery.min.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/jquery_update\/replace\/ui\/external\/jquery.cookie.js":1,"sites\/all\/modules\/jquery_update\/replace\/misc\/jquery.form.min.js":1,"misc\/form.js":1,"misc\/ajax.js":1,"sites\/all\/modules\/jquery_update\/js\/jquery_update.js":1,"sites\/all\/modules\/contentanalysis\/contentanalysis.js":1,"sites\/all\/modules\/contentoptimizer\/contentoptimizer.js":1,"sites\/all\/modules\/cookiecontrol\/js\/cookieControl-5.1.min.js":1,"public:\/\/languages\/es_7wEDFWQ0CLwUSqytP80Tza7FSCrpSKpCj7NPDS9aDwU.js":1,"sites\/all\/themes\/responsive_blog\/js\/slide_width.js":1,"sites\/all\/libraries\/colorbox\/jquery.colorbox-min.js":1,"sites\/all\/modules\/colorbox\/js\/colorbox.js":1,"sites\/all\/modules\/colorbox\/styles\/stockholmsyndrome\/colorbox_style.js":1,"sites\/all\/modules\/colorbox\/js\/colorbox_load.js":1,"sites\/all\/modules\/colorbox\/js\/colorbox_inline.js":1,"sites\/all\/modules\/floating_block\/floating_block.js":1,"sites\/all\/libraries\/nivo-slider\/jquery.nivo.slider.pack.js":1,"sites\/all\/modules\/views_nivo_slider\/views_nivo_slider.js":1,"sites\/all\/modules\/views\/js\/base.js":1,"misc\/progress.js":1,"sites\/all\/modules\/views\/js\/ajax_view.js":1,"\/\/apis.google.com\/js\/plusone.js":1,"\/\/platform.twitter.com\/widgets.js":1,"\/\/platform.linkedin.com\/in.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"5":1,"misc\/collapse.js":1,"6":1,"sites\/all\/themes\/responsive_blog\/js\/main-menu.js":1,"sites\/all\/themes\/responsive_blog\/js\/pngfix.min.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"sites\/all\/modules\/simplenews\/simplenews.css":1,"modules\/comment\/comment.css":1,"sites\/all\/modules\/counter\/counter.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/poll\/poll.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"modules\/forum\/forum.css":1,"sites\/all\/modules\/views\/css\/views.css":1,"sites\/all\/modules\/ckeditor\/css\/ckeditor.css":1,"sites\/all\/modules\/colorbox\/styles\/stockholmsyndrome\/colorbox_style.css":1,"sites\/all\/modules\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/panels\/css\/panels.css":1,"sites\/all\/modules\/tagclouds\/tagclouds.css":1,"sites\/all\/libraries\/nivo-slider\/nivo-slider.css":1,"sites\/all\/libraries\/nivo-slider\/themes\/default\/default.css":1,"sites\/all\/modules\/views_nivo_slider\/views_nivo_slider.css":1,"sites\/all\/modules\/easy_social\/css\/easy_social.css":1,"sites\/all\/themes\/responsive_blog\/css\/dark.css":1,"sites\/all\/themes\/responsive_blog\/style.css":1}},"colorbox":{"opacity":"0.85","current":"{current} of {total}","previous":"\u00ab Prev","next":"Next \u00bb","close":"Close","maxWidth":"98%","maxHeight":"98%","fixed":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"floating_block":{"settings":{"#block-block-10":[]},"minWidth":0},"views_nivo_slider":{"views-nivo-slider-prueba-slider-2-block-1":{"startSlide":0,"effect":"random","slices":15,"animSpeed":500,"pauseTime":6000,"directionNav":true,"directionNavHide":true,"controlNav":true,"controlNavThumbs":true,"pauseOnHover":true,"manualAdvance":false,"captionOpacity":0.1,"beforeChange":"function(){}","afterChange":"function(){}","slideshowEnd":"function(){}","lastSlide":"function(){}","afterLoad":"function(){}"}},"views":{"ajax_path":"\/views\/ajax","ajaxViews":{"views_dom_id:604b6264e3596cd4178c5db19ade0931":{"view_name":"prueba_slider_2","view_display_id":"block_1","view_args":"","view_path":"node\/17","view_base_path":"prueba-slider-2","view_dom_id":"604b6264e3596cd4178c5db19ade0931","pager_element":0}}},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls|xml|z|zip"}});
+//--><!]]>
+</script>
+<!--[if lt IE 9]><script src="/sites/all/themes/responsive_blog/js/html5.js"></script><![endif]-->
+</head>
+<body class="html not-front not-logged-in one-sidebar sidebar-first page-node page-node- page-node-17 node-type-article white wide-sidebar">
+    <div id="wrapper">
+  <header id="header" class="clearfix">
+          <div id="site-logo"><a href="/" title="Inicio">
+        <img src="http://cursohacker.es/sites/all/themes/responsive_blog/logo.png" alt="Inicio" />
+      </a></div>                      <div class="social-profile">
+        <ul>
+                    <li class="twitter">
+            <a rel="nofollow" target="_blank" title="cursohacker.es in Twitter" href="http://www.twitter.com/cursohacker_es">cursohacker.es Twitter </a>
+          </li>          <li class="google-plus">
+            <a rel="nofollow" target="_blank" title="cursohacker.es in Google+" href="https://plus.google.com/112234249243241556308">cursohacker.es Google+ </a>
+          </li>                    <li class="rss">
+            <a rel="nofollow" target="_blank" title="cursohacker.es in RSS" href="/rss.xml">cursohacker.es RSS </a>
+          </li>
+        </ul>
+      </div>
+        <nav id="navigation" role="navigation">
+      <div id="main-menu">
+        <ul class="menu"><li class="first leaf"><a href="/" title="">Inicio</a></li>
+<li class="leaf"><a href="/hacking-herramientas-y-algo-mas" title="Descripción del objetivo del proyecto cursohacker.es">Hacking y algo +</a></li>
+<li class="leaf"><a href="/herramientas-de-hacker" title="Recopilación de herramientas utilizadas en el curso">Herramientas</a></li>
+<li class="expanded"><a href="/curso-hacking-online-completo" title="Curso hacker online completo gratis">Curso</a><ul class="menu"><li class="first last leaf"><a href="/nivel-basico-hacking-desde-0" title="Nivel básico cuso hacker para principiantes.">Nivel Basico, Hacking desde 0</a></li>
+</ul></li>
+<li class="leaf"><a href="/area-personal-alumno-seguimiento">Zona alumnos</a></li>
+<li class="leaf"><a href="/forum" title="Foro hacking y seguridad informática">Foro</a></li>
+<li class="leaf"><a href="/noticias-analisis-actualidad-hacking" title="Noticias y análisis sobre actualidad relaccionada con el mundo hacking">Actualidad hacking</a></li>
+<li class="last leaf"><a href="/contact" title="">Contacto</a></li>
+</ul>      </div>
+    </nav>
+  </header>
+
+<div class="region region-preface-first">
+  <div id="block-block-15" class="block block-block">
+
+      
+  <div class="content">
+    <div style="display: none; float:center;">
+<div id="MBL-Ads">
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- Derecho flotante grande --><ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-7323741522034236" data-ad-slot="6718434107"></ins>
+<script>
+<!--//--><![CDATA[// ><!--
+
+(adsbygoogle = window.adsbygoogle || []).push({});
+
+//--><!]]>
+</script></div>
+</div>
+
+<script>
+<!--//--><![CDATA[// ><!--
+
+jQuery(document).ready(function(){
+  jQuery('#MBL-Ads').appendTo(jQuery('#principal'));
+    });
+
+//--><!]]>
+</script>  </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+
+  <div id="preface-area" class="clearfix">
+        <div id="preface-block-wrap" class="clearfix in2">
+
+          </div>
+    
+      </div>
+
+  <div id="main" class="clearfix">
+    <div id="primary">
+      <section id="content" role="main">
+        
+        <div id="breadcrumbs"><nav class="breadcrumb"><a href="/">Inicio</a> » FTP problemas de conexion, PORT y PASV</nav></div>                <div id="content_top"><div class="region region-content-top">
+  <div id="block-block-11" class="block block-block">
+
+      
+  <div class="content">
+    <p>Bienvenido a <a href="http://cursohacker.es" target="_blank" title="curso hacker">cursohacker.es</a>. Puedes acceder a todo el contenido líbremente pero si deseas poder crear tus propios temas en el foro y que tus respuestas y comentarios se publiquen de forma automática regístrate como alumno <a href="http://cursohacker.es/user/register" rel="nofollow" target="_blank" title="registro alumno">aquí</a></p>  </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+</div>        <div id="content-wrap">
+                    <h1 class="page-title">FTP problemas de conexion, PORT y PASV</h1>                                                  <div class="region region-content">
+  <div id="block-system-main" class="block block-system">
+
+      
+  <div class="content">
+                        <span property="dc:title" content="FTP problemas de conexion, PORT y PASV" class="rdf-meta element-hidden"></span><span property="sioc:num_replies" content="23" datatype="xsd:integer" class="rdf-meta element-hidden"></span>  
+              <span class="submitted">
+	 <span property="dc:date dc:created" content="2013-12-19T14:39:17+01:00" datatype="xsd:dateTime" rel="sioc:has_creator">Enviado por <span class="username" xml:lang="" about="/Usuario/admin" typeof="sioc:UserAccount" property="foaf:name" datatype="">admin</span> el Jue, 19/12/2013 - 14:39</span>        </span>
+      
+    
+  <div class="content">
+    <div align="center">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Bloque Contenido Grande -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-7323741522034236"
+     data-ad-slot="5708098904"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded">
+<p>Uno de los problemas de los servidores FTP es el modo de trabajo en que se pensaron. Cuando estos servidores empezaron a proliferar en la red, hace ya algunos años, la gente se conectaba a internet de forma directa, sin routers, eran aquellos tiempos en los que los módems de 56k hacían que un pc se conectara directamente a internet sin <a href="http://cursohacker.es/direcciones-ips-nuestra-huella-en-la-red" target="_blank">IP privada, directamente con la IP pública</a>.</p>
+<p>En estos escenarios no había ningún problema en trabajar con servidores FTP, ya que se trabaja de forma directa entre tu IP pública y la IP pública del servidor FTP. Hoy, con el auge de las redes LAN y las IPs privadas el modelo de conexión con los servidores FTP han tenido ciertos problemas que han sido solucionados, pero que aún así debemos tener claro cómo se ha implantado la solución para aquellos casos en los que no somos capaces de trabajar correctamente con un servidor FTP. Una consecuencia directa de esta solución es la posibilidad de utilizar un servidor FTP como herramienta de hacking. Así que tanto si actúas desde el lado del <a href="http://cursohacker.es" target="_blank">hacking ético o eres un administrador de sistemas</a> deberías conocer este tema a fondo.</p>
+<h2>Protocolo de conexión en servidores FTP</h2>
+<p>Haciendo memoria de las últimas publicaciones sobre servidores y clientes FTP ya deberías saber que este tipo de servidores trabajan de forma estándar sobre el puerto 21. Esto significa que cuando nos conectamos a un servidor FTP se establece una conexión entre un puerto aleatorio de nuestro PC y el puerto 21 del servidor FTP. De este modo creamos un canal de conexión que podría representarse así:<br><img alt="socket FTP" src="/sites/default/files/styles/large/public/images/20131912152702.png?itok=kUasR_pi"></p>
+<p>Una vez establecido este canal ya estamos en disposición de trabajar con el servidor FTP al que nos hemos conectado. Nosotros emitimos comandos por este canal y el servidor nos devuelve la respuesta. Pero claro, ¿Qué ocurre cuando pedimos descargar un archivo? Muy sencillo, que el canal se ocuparía descargando el archivo y no podríamos seguir emitiendo más peticiones hasta completar la descarga. Esto es un problema que nos impediría trabajar en paralelo, poder descargar varios archivos a la vez o navegar por el servidor mientras descargamos archivos. Para soluciona esto, <strong>los servidores FTP cuando pedimos descargar un archivo "crean" un canal secundario</strong>. De esta forma el canal primario siempre queda disponible para lanzar órdenes y las descargas se hacen en canales secundarios, permitiendo así poder seguir trabajando con el servidor FTP aun estando descargando archivos u haciendo cualquier otra tarea.</p>
+<p>Aquí es donde se crea el problema, a la hora de crear el canal secundario. Cuando se trabaja con IPs públicas directamente, el servidor FTP conocía tu IP pública, y era capaz de conectar contigo de forma directa, hoy esto no es posible, ya que si estás en una red local y tienes una IP privada, el servidor FTP no conocerá tu IP privada y cuando intenta crear el canal secundario falla. Pero vamos a verlo con un ejemplo gráfico:<br><img alt="esquema conexión cliente FTP servidor FTP" src="/sites/default/files/styles/large/public/images/20131912155613.jpg?itok=QWzqwLGV"><br>
+Nosotros estamos trabajando en nuestro PC que es el que tiene la IP 192.168.1.2. Recordemos que esto es una IP privada, que solo "tiene validez" dentro de nuestra red local. El router se encargará de convertir nuestra IP privada en una IP pública, en nuestro ejemplo se convertirá nuestra IP privada 192.168.1.2 en la IP pública 80.5.63.7 y llegamos al servidor FTP que tiene la IP 87.25.67.5. Si en este punto mirásemos el log del servidor FTP veríamos que se ha conectado un usuario desde la IP 80.5.63.7 y no desde 192.168.1.2, esto es porque en internet nosotros aparecemos con nuestra IP pública. Así que a ojos del servidor FTP nosotros somos 80.5.63.7.</p>
+<p>Bien ya tenemos creado nuestro canal primario. Enviamos al <a href="http://cursohacker.es/servidor-ftp-c%C3%B3mo-funciona-y-comandos" target="_blank">servidor el comando para descargar un archivo</a> y este se dispone a crear el canal secundario para entregarnos este archivo por el canal secundario y que nosotros podamos seguir dándole ordenes por el canal primario. Entonces como para el servidor nosotros somos el cliente con IP 80.5.63.7 el servidor FTP intentará craear un canal secundario con la IP 80.5.63.7. Pero esta es la IP de nuestro router, y cuando detecta que un servidor intenta establecer una conexión no sabe qué hacer y no nos redirige la petición a nuestro PC 192.168.1.2, con lo cual el canal secundario nunca se establece y falla. Este es el motivo por el que parece que el servidor se queda colgado. Realmente no es que se haya quedado colgado es que por nuestra configuración de red el servidor FTP no ha sabido establecer con nosotros el canal secundario necesario para hacer la descarga del archivo.</p>
+<h2>Modo activo y modo pasivo, comando PORT y PASV</h2>
+<p>Para solucionar el problema descrito anteriormente tenemos comandos para indicar al servidor la arquitectura de nuestra red y así poder trabajar de forma correcta con el servidor, sin que el nuestra arquitectura sea un impedimento. El <strong>modo activo y el modo pasivo</strong> indican quien abre el canal secundario y quien espera la conexión. En modo pasivo las conexiones son siempre abiertas por el cliente, mientras que en modo<br>
+activo se abren por el que envía los datos, el servidor. En el ejemplo anterior el servidor (que por defecto tiene establecido el modo activo) es quien crea el canal secundario con nosotros encontrándose la dificultad del router, si nosotros habilitamos el modo pasivo seremos nosotros quienes crearemos el canal secundario y así evitamos que la conexión quede colgada en el router. Al igual que nosotros hemos sido capaces de establecer el canal primario también debemos ser capaces de craear el secundario si ningún firewall nos lo impide.</p>
+<h2>Solución comando PORT ftp server</h2>
+<p>Con este comando nosotros indicamos al servidor FTP dónde estamos esperando la conexión. ¿Cómo y en qué situaciones este comando nos puede ayudar? Supongamos que el administrador del firewall o cortafuegos que protege al servidor FTP ha denegado todas las nuevas conexiones que se le hagan por puertos distintos al 21, con esta configuración nosotros no podriamos establecer el canal secundario ya que su cortafuegos nos lo impediría. En este caso podemos hacer uso del comando PORT para indicar al servidor FTP cómo ha de conectarse a nosotros.</p>
+<p>En primer lugar. en nuestro router debemos de <em>mapear un puerto </em>(es un concepto que veremos mas adelante que consiste en hacer que cuando el router detecte una conexión en un puerto nos la envíe a nuestro PC). Así mapeando un puerto hacemos que cuando el servidor FTP se conecte con nuestro router para establecer el canal secundario en el puerto que le especifiquemos ésta conexión sea redirigida a nuestro PC y así no se queda "parada" en nuestro router. Supongamos que mapeamos el puerto 6970. A efectos práticos, toda conexión que llege a la IP pública de nuestro router (80.5.63.7) al puerto 6970 será redirigida a nuestra IP privada (192.168.1.2) al puerto 6970. Así que debemos indicar al servidor FTP que queremos que establezca el canal secundario con nuestra IP pública en el puerto 6970 (80.5.63.7:6970). Esto lo hacemos así:</p>
+<p><strong>PORT 80,5,63,7,27,58</strong></p>
+<p>Veamos con detalle de donde han salido estos números, los 4 primeros 80 5 63 y 7 hacen referencia a nuestra IP, los 2 siguientes 27 y 58 al puerto. ¿Cómo se han calculado? Así; queríamos indicar al servidor el puerto 6970 entonces hemos hecho lo siguiente: <strong>27</strong>x256=6912; 6912+<strong>58 </strong>= <strong>6970</strong> Si tu quieres calcular estas 2 componentes para cualquier puerto, primero divide el puerto entre 256 quédate con la parte entera, luego multiplica la parte entera por 256, el segundo número es al diferencia entre el resultado obtenido el y el puerto en cuestión.</p>
+<h2>Solución comando PASV ftp server</h2>
+<p>Si nos encontramos en una red local en la que nos es imposible configurar nuestro router para mapearnos un puerto entonces nuestra única solución será indicarle al servidor FTP que seremos nosotros quienes crearemos el canal secundario. Para esto primero pasamos el comando PASV sin parámetros para indicar al servidor esta condición. Seguidamente le pasamos un comando PORT para indicarle al puerto del servidor FTP al que deseamos conectarnos. Esta sería la secuencia</p>
+<p><strong>PASV</strong><br><strong>PORT 87,25,67,5,27,58</strong></p>
+<p>Primero hemos establecido el modo pasivo y luego le hemos dicho que nos vamos a conectar a su IP al puerto 6970, ahora cuando hagamos el comando GET para descargar el archivo se creará el canal secundario con la configuración indicada.</p>
+<p>Esto es todo por hoy, haced pruebas, en la próxima entrega utilizaremos estos comandos para hacer esas cosas que en principio no se deben hacer, pero que debes de saber cómo se hacen si quieres ser un buen administrador de redes y así proteger tu red.</p>
+</div></div></div><div class="field field-name-field-tags field-type-taxonomy-term-reference field-label-above"><div class="field-label">Tags:&nbsp;</div><div class="field-items"><div class="field-item even" rel="dc:subject"><a href="/tags/ftp" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">ftp</a></div><div class="field-item odd" rel="dc:subject"><a href="/tags/cliente-ftp" typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype="">cliente ftp</a></div></div></div><!--BACK-->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Final articulos -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7323741522034236"
+     data-ad-slot="6992618506"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>  </div>
+
+      <footer>
+      <ul class="links inline"><li class="comment-add first last"><a href="/comment/reply/17#comment-form" title="Comparta sus pensamientos y sus opciones sobre este envío.">Añadir nuevo comentario</a></li>
+</ul>    </footer>
+  
+  <div id="comments" class="comment-wrapper">
+          <h2 class="title">Comentarios</h2>
+      
+  <a id="comment-7"></a>
+<div class="comment comment-by-anonymous clearfix" about="/comment/7#comment-7" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" typeof="sioc:UserAccount" property="foaf:name" datatype="">Iván (no verificado)</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2013-12-21T13:03:43+01:00" datatype="xsd:dateTime">Sáb, 21/12/2013 - 13:03</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/7#comment-7" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/7#comment-7" class="permalink" rel="bookmark">Comandos</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Estos comandos, PASV y PORT, donde deben ser ejecutados exactamente? en la cmd una vez conectados al FTP? desde ahí me dice que tales comandos no existen.</p>
+<p>Y otra duda respecto a la entrega anterior, ¿es posible activar el comando SITE EXEC en tu propio servidor FTP?</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/7">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+
+<div class="indented"><a id="comment-8"></a>
+<div class="comment comment-by-node-author clearfix" about="/comment/8#comment-8" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" about="/Usuario/admin" typeof="sioc:UserAccount" property="foaf:name" datatype="">admin</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2013-12-21T13:11:00+01:00" datatype="xsd:dateTime">Sáb, 21/12/2013 - 13:11</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/8#comment-8" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/8#comment-8" class="permalink" rel="bookmark">Re: Comandos</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><span rel="sioc:reply_of" resource="/comment/7#comment-7" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Hola Ivan, ciertamente estos comandos se ejecutan desde la consola (CMD) una vez estás conectado al servidor. Ya que lo que estamos haciendo es trabajar con una sesión iniciada en el servidor FTP. En algunos servidores es necesario incluir el comando "literal" antes del comando a ejecutar, que es para que lo pase tal cual. Entonces, en vez de lanzar el comando:<br /><strong>PASV</strong><br />
+Lanza el comando de la siguiente forma:<br /><strong>literal pasv</strong><br /><a href="/sites/default/files/images/20132112131022.png" target=""><img alt="" src="/sites/default/files/styles/large/public/images/20132112131022.png?itok=cfg1TdkK" style="height:151px; width:400px" /></a><br />
+Y como puedes ver añadiendo "literal" el servidor acepta el comando perfectamente.</p>
+<p>Con respecto al comando SITE EXEC, la mayoría de los servidores FTP no lo incluyen, ya que se considera un agujero de seguridad, si deseas ejecutar comandos en un servidor remoto, espera a las entregas de TELNET y SSH, con ellos si podrás ejecutar comandos de forma segura.</p>
+<p>Saludos.</p></div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/8">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+
+<div class="indented"><a id="comment-9"></a>
+<div class="comment comment-by-anonymous clearfix" about="/comment/9#comment-9" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" typeof="sioc:UserAccount" property="foaf:name" datatype="">Ivan (no verificado)</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2013-12-21T14:19:28+01:00" datatype="xsd:dateTime">Sáb, 21/12/2013 - 14:19</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/9#comment-9" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/9#comment-9" class="permalink" rel="bookmark">Perfecto, que rapidez jajaja</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><span rel="sioc:reply_of" resource="/comment/8#comment-8" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Perfecto, que rapidez jajaja muchas gracias</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/9">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+</div></div><a id="comment-15"></a>
+<div class="comment comment-by-anonymous clearfix" about="/comment/15#comment-15" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" typeof="sioc:UserAccount" property="foaf:name" datatype="">Jaime (no verificado)</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2014-01-09T01:39:01+01:00" datatype="xsd:dateTime">Jue, 09/01/2014 - 01:39</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/15#comment-15" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/15#comment-15" class="permalink" rel="bookmark">Formato xxx,xxx,xxx.xxx,xxx</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>mi duda viene dada por el formato  de la dirección de red y el puerto para PORT y PASV... A que se debe ese formato? ¿Como es que no se utiliza el formato xxx.xxx.xxx.xxx:xxxx? muchas gracias y felicidades por el curso</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/15">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+
+<div class="indented"><a id="comment-16"></a>
+<div class="comment comment-by-node-author clearfix" about="/comment/16#comment-16" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" about="/Usuario/admin" typeof="sioc:UserAccount" property="foaf:name" datatype="">admin</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2014-01-09T09:08:21+01:00" datatype="xsd:dateTime">Jue, 09/01/2014 - 09:08</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/16#comment-16" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/16#comment-16" class="permalink" rel="bookmark">Formato de IP en PORT</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><span rel="sioc:reply_of" resource="/comment/15#comment-15" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Buenas Jaime. Esto es así debido a que el comando PORT está programado para recibir 6 parmetros separados por comas. Los cuatro primeros hacer referencia a los 4 octetos que forma la ip. Por ello pasar la IP 192.168.0.1 se pasaría como 192,168,0,1. Los otros 2 parámetros que faltan para llegar a 6 se utilizan para pasar el puerto en que establecerá el canal secundario y se pasa de la siguiente forma; primero divide el puerto entre 256 quédate con la parte entera, luego multiplica la parte entera por 256, el segundo número es al diferencia entre el resultado obtenido el y el puerto en cuestión. Viendo un ejemplo práctico si quierer por ejemplo pasar la dirección 192.168.0.1 y puerto 80 (192.168.0.1:80) Deberías pasar los siguientes parámetros PORT 192,168,0,1,0,80</p>
+<p>Saludos</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/16">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+
+<div class="indented"><a id="comment-17"></a>
+<div class="comment comment-by-anonymous clearfix" about="/comment/17#comment-17" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" typeof="sioc:UserAccount" property="foaf:name" datatype="">Jaime (no verificado)</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2014-01-09T12:49:27+01:00" datatype="xsd:dateTime">Jue, 09/01/2014 - 12:49</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/17#comment-17" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/17#comment-17" class="permalink" rel="bookmark">Pequeña errata</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><span rel="sioc:reply_of" resource="/comment/16#comment-16" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Hola admin,</p>
+<p>Genial, muchas gracias por la aclaración. Solo una pequeña cosa mas... y para evitar confusiones, ¿podeis corregir el pequeño errata que hay en PORT y PASV PORT en el ejemplo en negrita donde se ha colado un par de puntos en vez de comas? Un saludo y gran trabajo ;)</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/17">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+
+<div class="indented"><a id="comment-18"></a>
+<div class="comment comment-by-node-author clearfix" about="/comment/18#comment-18" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" about="/Usuario/admin" typeof="sioc:UserAccount" property="foaf:name" datatype="">admin</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2014-01-09T16:22:03+01:00" datatype="xsd:dateTime">Jue, 09/01/2014 - 16:22</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/18#comment-18" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/18#comment-18" class="permalink" rel="bookmark">Corregido</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><span rel="sioc:reply_of" resource="/comment/17#comment-17" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Gracias por el aviso ;)</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/18">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+</div><a id="comment-566"></a>
+<div class="comment clearfix" about="/comment/566#comment-566" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" about="/Usuario/richard" typeof="sioc:UserAccount" property="foaf:name" datatype="">Richard</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2015-02-28T02:21:00+01:00" datatype="xsd:dateTime">Sáb, 28/02/2015 - 02:21</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/566#comment-566" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/566#comment-566" class="permalink" rel="bookmark">¿Como limitar los puertos de la segunda conexión (Data Channel)?</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><span rel="sioc:reply_of" resource="/comment/16#comment-16" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Buenas tardes estimado!</p>
+<p>Estuve leyendo su publicación y está excelente! Gracias por ayudarnos!</p>
+<p>Pido de su ayuda, (aunque el error lo tengo identificado) tengo problema para establecer una conexión FTPS con un puerto definido 47555 y si establece la primera conexión, pero cuando se establece la segunda conexión (Data Channel) no, me muestra “Error al listar el directorio”, uso como FileZilla como cliente, Windows 2008R2 IIS7 como Servidor FTPS y entre ellos hay un ASA, donde logramos identificar que la segunda conexión usa otro puerto dinámico, ahí procedí a investigar un poco más para tratar de no usar tantos puertos estoy buscando la forma de usar uno solo y no tener tantos puertos abiertos, claro, si es posible, entonces encontré esto, los cuales se agregaron al ASA pero son muchos puertos dinamicos (49152 a 65535):</p>
+<p>“El intervalo de puertos dinámicos predeterminado para TCP/IP en Windows Server 2008</p>
+<p>Los números de puerto se dividen en tres categorías: los puertos conocidos, los puertos registrados, y los puertos dinámicos y/o privados. </p>
+<ul><li>Los puertos conocidos están comprendidos entre 0 y 1023.</li>
+<li>Los puertos registrados están comprendidos entre 1024 y 49151.</li>
+<li>Los puertos dinámicos y/o privados van de 49152 a 65535.</li>
+</ul><p>Puede ver el intervalo de puertos dinámicos en un equipo que está ejecutando Windows Vista o Windows Server 2008 con los comandos de netsh siguientes:</p>
+<ul><li>netsh int ipv4 show dynamicport tcp</li>
+<li>netsh int ipv4 show dynamicport udp</li>
+</ul><p>Este intervalo se ajusta mediante el comando:</p>
+<p>netsh int &lt; ipv4|ipv6 &gt; establece inicio dinámica &lt; tcp|udp &gt; =número num =intervalo</p>
+<p>Los siguientes son ejemplos de comandos</p>
+<ul><li>netsh int ipv4 set dynamicport tcp start=10000 num=1000</li>
+<li>netsh int ipv4 set dynamicport udp start=10000 num=1000</li>
+</ul><p>Este comando establece el intervalo de puertos dinámicos para TCP. El puerto de inicio es el númeroy el número total de puertos es el intervalo.”</p>
+<p>Mi pregunta es: ¿Es posible hacer esto? De usar un puerto definido para el Control y otro para Data Channel.</p>
+<p>Disculpas, si tienes alguna házmelo saber, igual agradezco tus comentarios.</p>
+<p>Saludos,</p>
+<p>Richard</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/566">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+</div></div><a id="comment-113"></a>
+<div class="comment clearfix" about="/comment/113#comment-113" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" about="/Usuario/forozco" typeof="sioc:UserAccount" property="foaf:name" datatype="">forozco</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2014-05-07T07:15:18+02:00" datatype="xsd:dateTime">Mié, 07/05/2014 - 07:15</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/113#comment-113" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/113#comment-113" class="permalink" rel="bookmark">Comando PASV</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Trate de usar el comando PASV pero me sale que es para IPv4 y que yo estoy usando IPv6 y que debo usar el comando EPSV, me podrian decir como lo debo usar,solo es el nombre del comando lo que cambia o debo usarlo de otra forma.</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/113">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+
+<div class="indented"><a id="comment-115"></a>
+<div class="comment comment-by-node-author clearfix" about="/comment/115#comment-115" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" about="/Usuario/admin" typeof="sioc:UserAccount" property="foaf:name" datatype="">admin</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2014-05-07T18:28:54+02:00" datatype="xsd:dateTime">Mié, 07/05/2014 - 18:28</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/115#comment-115" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/115#comment-115" class="permalink" rel="bookmark">RE: Comando PASV</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><span rel="sioc:reply_of" resource="/comment/113#comment-113" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Abre una consola de comandos (CMD) y ejecuta el comando <strong><em>ipconfig </em></strong>con ello podrás ver la IP con la que estás trabajado.</p>
+<p>Una vez lo tengas dinos que IP tienes para poder corregir el problema.</p>
+<p>Saludos.</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/115">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+
+<div class="indented"><a id="comment-159"></a>
+<div class="comment comment-by-anonymous clearfix" about="/comment/159#comment-159" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" typeof="sioc:UserAccount" property="foaf:name" datatype="">Koty (no verificado)</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2014-06-27T00:05:37+02:00" datatype="xsd:dateTime">Vie, 27/06/2014 - 00:05</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/159#comment-159" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/159#comment-159" class="permalink" rel="bookmark">Me pasa lo mismo</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><span rel="sioc:reply_of" resource="/comment/115#comment-115" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Hola, me pasa lo mismo y al usar el ipconfig me dice q uso ipv6 y una dirreccion hexagesimal enorme</p>
+<p>gracias</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/159">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+
+<div class="indented"><a id="comment-1936"></a>
+<div class="comment clearfix" about="/comment/1936#comment-1936" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" about="/Usuario/antonio-cervi" typeof="sioc:UserAccount" property="foaf:name" datatype="">Antonio Cervi</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2016-09-01T05:44:51+02:00" datatype="xsd:dateTime">Jue, 01/09/2016 - 05:44</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/1936#comment-1936" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/1936#comment-1936" class="permalink" rel="bookmark">Sintaxis de epsv</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><span rel="sioc:reply_of" resource="/comment/159#comment-159" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Para entrar a modo pasivo usando el protocolo ipv6 escribi en la consola el comando: </p>
+<p>literal epsv</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/1936">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+</div></div></div><a id="comment-240"></a>
+<div class="comment comment-by-anonymous clearfix" about="/comment/240#comment-240" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" typeof="sioc:UserAccount" property="foaf:name" datatype="">diego_p61 (no verificado)</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2014-09-29T17:46:00+02:00" datatype="xsd:dateTime">Lun, 29/09/2014 - 17:46</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/240#comment-240" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/240#comment-240" class="permalink" rel="bookmark">los comandos no funcionan en el servidor</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Hola muy interesante lo que publicas.</p>
+<p>Estoy teniendo problemas para enviar unas imagens por FTP a un seervidor externo , necsito hacerlo desde "cmd" pues de esta manera puedo programar una tarea enn Windows y ejecutarla periodicamente.</p>
+<p>En el anteror servidor que teneiamos alojada la web funcinaba sin problemas, pero en el nuevo servidor me conecta perfectamente e incluso me direcciono a la carpeta cerrecta con cd xxx/xxx, pero partir de aqui el comando mput para transferir las imagenes solamente responde 200 port command sucessfull y al cabo de un tiempo da conexion cerrada por el servidor remoto y no ejecuta nada.</p>
+<p>he probado a forzar el modo pasivo, el modo binario, pero todo sigue igual. ¿alguna idea o comentario?</p>
+<p>gracias</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/240">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+
+<div class="indented"><a id="comment-241"></a>
+<div class="comment comment-by-node-author clearfix" about="/comment/241#comment-241" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" about="/Usuario/admin" typeof="sioc:UserAccount" property="foaf:name" datatype="">admin</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2014-09-29T20:39:56+02:00" datatype="xsd:dateTime">Lun, 29/09/2014 - 20:39</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/241#comment-241" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/241#comment-241" class="permalink" rel="bookmark">RE:los comandos no funcionan en el servidor</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><span rel="sioc:reply_of" resource="/comment/240#comment-240" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Hola Diego.</p>
+<p>Mucho me temo que el problema es que se puede establecer el canal secundario. Si estás trabajando cun servidor FTP fuera de tu red local, es decir, en internet muy probablemente estén fallando los mapeos de los routers. Si por el contrario,si estás trabajando en red local lo que podría estar bloqueando la conexión secundaria de datos es el cortafuegos. </p>
+<p>Prueba a utilzar WinSCP, y ves la traza que hace. Luego trata de replicarla por comandos y podrás determinar el problema y hayar la solución.</p>
+<p>Un saludo.</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/241">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+</div><a id="comment-251"></a>
+<div class="comment comment-by-anonymous clearfix" about="/comment/251#comment-251" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" typeof="sioc:UserAccount" property="foaf:name" datatype="">El_Fummy (no verificado)</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2014-10-14T22:11:33+02:00" datatype="xsd:dateTime">Mar, 14/10/2014 - 22:11</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/251#comment-251" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/251#comment-251" class="permalink" rel="bookmark">PASV y PORT desde Ubuntu</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Buenas noches, he tratado de replicar lo explicado en este tema desde el terminal de Ubuntu y no soy capaz de usar el modo activo y modo pasivo desde el mismo ni siquiera usando el "literal" delante como hago desde la linea de comandos de windows donde si me funcionan si los precedo de esta palabra.</p>
+<p>Dependen estos comandos acaso del cliente que este usando o es que en linux estos comandos tienen una forma diferente de usarse? Pense que era el server el que determinaba que estos no funcionasen si no usaba el comando "literal" delante pero estoy tratando de conectarme con ambos al mismo servidor y no lo consigo.</p>
+<p>Gracias y un saludo</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/251">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+
+<div class="indented"><a id="comment-255"></a>
+<div class="comment comment-by-node-author clearfix" about="/comment/255#comment-255" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" about="/Usuario/admin" typeof="sioc:UserAccount" property="foaf:name" datatype="">admin</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2014-10-15T00:47:13+02:00" datatype="xsd:dateTime">Mié, 15/10/2014 - 00:47</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/255#comment-255" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/255#comment-255" class="permalink" rel="bookmark">Re:PASV y PORT desde Ubuntu</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><span rel="sioc:reply_of" resource="/comment/251#comment-251" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>En entornos basados en Debian, como es ubuntu no suele ser necesario utilizar el comando: "literal". Para ver con mas detalle tu problema puedes abrir un hilo en el foro con algunas capturas de pantalla y analizamos tu caso.</p>
+<p>Un saludo.</p></div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/255">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+
+<div class="indented"><a id="comment-268"></a>
+<div class="comment clearfix" about="/comment/268#comment-268" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" about="/Usuario/mavic" typeof="sioc:UserAccount" property="foaf:name" datatype="">mavic</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2014-10-23T11:06:56+02:00" datatype="xsd:dateTime">Jue, 23/10/2014 - 11:06</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/268#comment-268" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/268#comment-268" class="permalink" rel="bookmark">Gracias por compartir</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><span rel="sioc:reply_of" resource="/comment/255#comment-255" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Agradezco tu tiempo por compartir tus conocimientos, en verdad te estoy muy agradecido, muy bien explicado. Gracias</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/268">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+</div></div><a id="comment-337"></a>
+<div class="comment clearfix" about="/comment/337#comment-337" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" about="/Usuario/sawoner" typeof="sioc:UserAccount" property="foaf:name" datatype="">sawoner</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2015-01-03T18:22:41+01:00" datatype="xsd:dateTime">Sáb, 03/01/2015 - 18:22</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/337#comment-337" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/337#comment-337" class="permalink" rel="bookmark">Muchas gracias</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>De antemano enhorabuena y gracias por llevar a cabo este trabajo, supongo que no soy el unico que os estara eternamente agradecido por haberos atrevido a acercar de una forma tan participativa y paciente este mundo a un publico tan diverso. De nuevo gracias.</p>
+<p>Y ahora haceros una pregunta sobre un error. Escribo los siguientes comandos:</p>
+<p>(oreviamen,te le he indicado al servidor que escuche en el puerto que habeis usado vosotros, el 6970)</p>
+<p>literal pasv</p>
+<p>literal port 192,168,1,30,27,58</p>
+<p>literal retr XP.iso </p>
+<p> </p>
+<p>entonces habre un canal con el servidor, y este se queda colgado.Si hago un get simplemente sin el port, descarga el archivo sin ningun problema.</p>
+<p>Muchas gracias</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/337">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-1445"></a>
+<div class="comment comment-by-anonymous clearfix" about="/comment/1445#comment-1445" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" typeof="sioc:UserAccount" property="foaf:name" datatype="">javill (no verificado)</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2015-09-05T19:25:56+02:00" datatype="xsd:dateTime">Sáb, 05/09/2015 - 19:25</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/1445#comment-1445" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/1445#comment-1445" class="permalink" rel="bookmark">ftp-problemas-de-conexion</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Mil gracias. Es perfecto, claro y conciso. Realmente myu bueno..</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/1445">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+<a id="comment-1720"></a>
+<div class="comment comment-by-anonymous clearfix" about="/comment/1720#comment-1720" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" typeof="sioc:UserAccount" property="foaf:name" datatype="">Dagliohm (no verificado)</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2015-12-22T14:29:26+01:00" datatype="xsd:dateTime">Mar, 22/12/2015 - 14:29</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/1720#comment-1720" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/1720#comment-1720" class="permalink" rel="bookmark">CIERRE HOST REMOTO</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Buenas! Cada vez que ejecuto el comando:</p>
+<p>PASV</p>
+<p>y luego hago</p>
+<p>PORT 192,168,0,1,0,80</p>
+<p>el host me cierra la conexion, alguna sugerencia? Gracias!</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/1720">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+
+<div class="indented"><a id="comment-1899"></a>
+<div class="comment comment-by-anonymous clearfix" about="/comment/1899#comment-1899" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" typeof="sioc:UserAccount" property="foaf:name" datatype="">HFolk (no verificado)</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2016-08-02T03:51:02+02:00" datatype="xsd:dateTime">Mar, 02/08/2016 - 03:51</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/1899#comment-1899" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/1899#comment-1899" class="permalink" rel="bookmark">Sobre el puerto</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><span rel="sioc:reply_of" resource="/comment/1720#comment-1720" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Quería saber de donde sacan el número de puerto 6970 del ejemplo que luego dividen con 256, etc, etc</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/1899">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+
+<div class="indented"><a id="comment-1933"></a>
+<div class="comment comment-by-anonymous clearfix" about="/comment/1933#comment-1933" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" typeof="sioc:UserAccount" property="foaf:name" datatype="">Magik (no verificado)</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2016-08-30T09:52:43+02:00" datatype="xsd:dateTime">Mar, 30/08/2016 - 09:52</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/1933#comment-1933" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/1933#comment-1933" class="permalink" rel="bookmark">Sobre el puerto</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><span rel="sioc:reply_of" resource="/comment/1899#comment-1899" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Es un número aleatorio en el cual se creará el canal de transferencia de archivos entre el servidor y el cliente.</p>
+<p>La única condición para elegir un número de puerto es que no esté siendo utilizado por otro servicio. Para comprobarlo se puede hacer mediante comandos (diferentes en cada sistema operativo) o bien buscando google/wikipedia, ya que hay servicios con puertos 'tipicos'.</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/1933">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+</div></div><a id="comment-2124"></a>
+<div class="comment comment-by-anonymous clearfix" about="/comment/2124#comment-2124" typeof="sioc:Post sioct:Comment">
+
+  <div class="attribution">
+
+    
+    <div class="comment-submitted">
+      <p class="commenter-name">
+        <span rel="sioc:has_creator"><span class="username" xml:lang="" typeof="sioc:UserAccount" property="foaf:name" datatype="">Hernanes (no verificado)</span></span>      </p>
+      <p class="comment-time">
+        <span property="dc:date dc:created" content="2017-03-11T00:46:05+01:00" datatype="xsd:dateTime">Sáb, 11/03/2017 - 00:46</span>      </p>
+      <p class="comment-permalink">
+        <a href="/comment/2124#comment-2124" class="permalink" rel="bookmark">Enlace permanente</a>      </p>
+    </div>
+  </div>
+
+  <div class="comment-text">
+    <div class="comment-arrow"></div>
+
+    
+        <h3 property="dc:title" datatype=""><a href="/comment/2124#comment-2124" class="permalink" rel="bookmark">FTP NO ACTUALIZA AUTOMATICAMENTE</a></h3>
+    
+    <div class="content">
+      <span rel="sioc:reply_of" resource="/ftp-problemas-de-conexion-port-y-pasv" class="rdf-meta element-hidden"></span><div class="field field-name-comment-body field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><p>Cordial saludo... tengo un servidor FTP instalado en windows 7el cual no actualiza de forma autoamtica con mi servidor ( FTP ) , hay alguna solucion sin utilizar programas adicionales . Aclaro que mi servidor ftp reconoce cualquier cambio en la carpeta cliente , y el cliente solo ve lo del servidor si de doy F5 o actualizar .... espero me puedan ayudar .</p>
+</div></div></div>          </div> <!-- /.content -->
+
+    <ul class="links inline"><li class="comment-reply first last"><a href="/comment/reply/17/2124">responder</a></li>
+</ul>  </div> <!-- /.comment-text -->
+</div>
+
+  </div>
+  </div>
+  
+</div> <!-- /.block -->
+<div id="block-easy-social-easy-social-block-1" class="block block-easy-social">
+
+        <h2 >Si te ha sido de utilidad Compárteme</h2>
+    
+  <div class="content">
+    <div class="easy_social_box clearfix horizontal easy_social_lang_es">
+            <div class="easy_social-widget easy_social-widget-googleplus first"><div class="g-plusone" data-size="medium" data-annotation="bubble" data-href="http://cursohacker.es/ftp-problemas-de-conexion-port-y-pasv"></div></div>
+          <div class="easy_social-widget easy_social-widget-twitter"><a href="http://twitter.com/share" class="twitter-share-button"
+data-url="http://cursohacker.es/ftp-problemas-de-conexion-port-y-pasv"
+data-count="horizontal"
+data-lang = "es"
+data-via=""
+data-related=":Check it out!"
+data-text="cursohacker.es">Tweet</a></div>
+          <div class="easy_social-widget easy_social-widget-facebook"><iframe src="//www.facebook.com/plugins/like.php?locale=es_ES&amp;href=http%3A//cursohacker.es/ftp-problemas-de-conexion-port-y-pasv&amp;send=false&amp;layout=button_count&amp;width=120&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=&amp;height=21&amp;appId=" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:120px; height:21px;" allowTransparency="true"></iframe></div>
+          <div class="easy_social-widget easy_social-widget-linkedin last"><script type="in/share" data-url="http://cursohacker.es/ftp-problemas-de-conexion-port-y-pasv" data-counter="right"></script></div>
+  </div> <!-- /.easy_social_box -->  </div>
+  
+</div> <!-- /.block -->
+<div id="block-views-contenido-relacionado-ok-block" class="block block-views">
+
+        <h2 >Si has llegado hasta aquí también te puede interesar:</h2>
+    
+  <div class="content">
+    <div class="view view-contenido-relacionado-ok view-id-contenido_relacionado_ok view-display-id-block view-dom-id-d8f7c4c9ce2f601ed9384348c557609a">
+        
+  
+  
+      <div class="view-content">
+      <table class="views-view-grid cols-2">
+  
+  <tbody>
+          <tr class="row-1 row-first">
+                  <td class="col-1 col-first">
+              
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/servidor-ftp-que-es-instalacion-servidor-ftp">Servidor FTP qué es, instalando nuestro propio servidor</a></span>  </div>  
+  <div class="views-field views-field-field-image">        <div class="field-content"><img typeof="foaf:Image" src="http://cursohacker.es/sites/default/files/styles/medium/public/field/image/ftp-instalacion_0.png?itok=iODunX8l" width="220" height="100" alt="que es un servidor ftp, instalación configuración y securización filezilla" /></div>  </div>          </td>
+                  <td class="col-2 col-last">
+              
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/servidor-ftp-c%C3%B3mo-funciona-y-comandos">Servidor FTP cómo funciona y comandos</a></span>  </div>  
+  <div class="views-field views-field-field-image">        <div class="field-content"><img typeof="foaf:Image" src="http://cursohacker.es/sites/default/files/styles/medium/public/field/image/ftp-comandos-basicos.png?itok=RS59Bvvu" width="220" height="100" alt="Comandos básicos servidor FTP" /></div>  </div>          </td>
+              </tr>
+          <tr class="row-2">
+                  <td class="col-1 col-first">
+              
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/cliente-ftp-gratuito-portable-y-multiplataforma-winscp">Cliente FTP gratuito portable y multiplataforma (winSCP)</a></span>  </div>  
+  <div class="views-field views-field-field-image">        <div class="field-content"><img typeof="foaf:Image" src="http://cursohacker.es/sites/default/files/styles/medium/public/field/image/winscp-post.png?itok=JXXmUn_y" width="220" height="100" alt="tutorial de instalación y configuración WinSCP" /></div>  </div>          </td>
+                  <td class="col-2 col-last">
+              
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/securizar-ftp-windows-linux-y-mac">Securizar FTP windows, linux y mac</a></span>  </div>  
+  <div class="views-field views-field-field-image">        <div class="field-content"><img typeof="foaf:Image" src="http://cursohacker.es/sites/default/files/styles/medium/public/field/image/ftp-seguro.png?itok=AE7uYjqa" width="220" height="100" alt="Securizar un servidor FTP en Windows, linux y mac con SSL" /></div>  </div>          </td>
+              </tr>
+          <tr class="row-3 row-last">
+                  <td class="col-1 col-first">
+              
+  <div class="views-field views-field-title">        <span class="field-content"><a href="/ftp-hacking-bounce-attack-tutorial">FTP Hacking, bounce attack tutorial</a></span>  </div>  
+  <div class="views-field views-field-field-image">        <div class="field-content"><img typeof="foaf:Image" src="http://cursohacker.es/sites/default/files/styles/medium/public/field/image/ftp-bunce-attack.png?itok=H7F60CVb" width="220" height="100" alt="Ftp bounce attack tutorial nmap example" /></div>  </div>          </td>
+                  <td class="col-2 col-last">
+                      </td>
+              </tr>
+      </tbody>
+</table>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>  </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+        </div>
+      </section> <!-- /#main -->
+    </div>
+
+          <aside id="sidebar" role="complementary">
+       <div class="region region-sidebar-first">
+  <div id="block-menu-menu-lecciones-hacking-basico" class="block block-menu">
+
+        <h2 >Lecciones Hacking Básico</h2>
+    
+  <div class="content">
+    <ul class="menu"><li class="first leaf"><a href="/nivel-basico-hacking-desde-0" title="">0 - Hacking desde cero</a></li>
+<li class="leaf"><a href="/trucos-de-busqueda-avanzada-en-google" title="">1 - Busqueda avanzada Google</a></li>
+<li class="leaf"><a href="http://cursohacker.es/Hacking-en-1-minuto-postit-2.0" title="">2 - Google Hacking</a></li>
+<li class="leaf"><a href="http://cursohacker.es/direcciones-ips-nuestra-huella-en-la-red" title="">3 - ¿Qué es una IP?</a></li>
+<li class="leaf"><a href="http://cursohacker.es/que-hay-detras-de-una-ip" title="">4 - Redes TCP/IP</a></li>
+<li class="leaf"><a href="http://cursohacker.es/servidor-ftp-que-es-instalacion-servidor-ftp" title="">5 - FTP ¿Qué es?</a></li>
+<li class="leaf"><a href="http://cursohacker.es/servidor-ftp-c%C3%B3mo-funciona-y-comandos" title="">6 - FTP Comandos</a></li>
+<li class="leaf"><a href="http://cursohacker.es/ftp-problemas-de-conexion-port-y-pasv" title="">7 - FTP PORT y PASV a fondo</a></li>
+<li class="leaf"><a href="http://cursohacker.es/cliente-ftp-gratuito-portable-y-multiplataforma-winscp" title="">8 - FTP cliente de conexión</a></li>
+<li class="leaf"><a href="http://cursohacker.es/securizar-ftp-windows-linux-y-mac" title="">9 - FTP Securización SSL</a></li>
+<li class="leaf"><a href="http://cursohacker.es/ftp-hacking-bounce-attack-tutorial" title="">10- FTP bounce attack</a></li>
+<li class="leaf"><a href="/ingenieria-social-informatica" title="">11- Ingenería Social informática</a></li>
+<li class="leaf"><a href="/que-es-la-virtualizacion-ventajas" title="">12- Que es la virtualización</a></li>
+<li class="leaf"><a href="http://cursohacker.es/instalaci%C3%B3n-entorno-virtual-pentesting-virtualbox" title="">13- VirtualBox, configuración pentesting</a></li>
+<li class="leaf"><a href="/instalar-windows-en-virtualbox" title="">14- Tu primera máquina virtual</a></li>
+<li class="leaf"><a href="/instalaci%C3%B3n-lamp-ubuntu-server-virtualizado" title="">15- Instalación Servidor LAMP virtual</a></li>
+<li class="leaf"><a href="/formulario-html-primera-exploraci%C3%B3n" title="">16- Introducción formularios HTML</a></li>
+<li class="leaf"><a href="http://cursohacker.es/el-papel-de-javascript-en-el-hacking" title="">17- El papel de Javascript en el hacking</a></li>
+<li class="leaf"><a href="/curso-javascript-basico" title="">18- Curso Javascript básico</a></li>
+<li class="leaf"><a href="http://cursohacker.es/el-lenguaje-javascript-variables" title="">19- Lenguaje javascript, variables</a></li>
+<li class="leaf"><a href="http://cursohacker.es/estructuras-de-control-en-javascript" title="">20- Estructuras de control JavaScript</a></li>
+<li class="leaf"><a href="http://cursohacker.es/funciones-y-objetos-en-javascript" title="Análisis de las funciones y objetos soportados por javascript">21- Funciones y objetos en javascript</a></li>
+<li class="leaf"><a href="http://cursohacker.es/dom-y-javascript-controlando-una-p%C3%A1gina-web" title="">22- Accediendo al DOM con Javascript</a></li>
+<li class="leaf"><a href="/servidor-proxy-oculta-tu-identidad" title="">23 - Servidor proxy, ocultar identidad</a></li>
+<li class="leaf"><a href="http://cursohacker.es/deep-web-la-parte-oculta-de-internet" title="">24 - Explorando la deep web</a></li>
+<li class="last leaf"><a href="http://cursohacker.es/red-tor-descarga-e-instalaci%C3%B3n-para-deep-web" title="">25 - Cómo instalar TOR</a></li>
+</ul>  </div>
+  
+</div> <!-- /.block -->
+<div id="block-tagclouds-1" class="block block-tagclouds">
+
+        <h2 >Categorías</h2>
+    
+  <div class="content">
+    <span class='tagclouds-term'><a href="/tags/cliente-ftp" class="tagclouds level1" title="">cliente ftp</a></span>
+<span class='tagclouds-term'><a href="/tags/ftp" class="tagclouds level5" title="">ftp</a></span>
+<span class='tagclouds-term'><a href="/tags/hacking-con-google" class="tagclouds level3" title="">hacking con google</a></span>
+<span class='tagclouds-term'><a href="/tags/html" class="tagclouds level6" title="">HTML</a></span>
+<span class='tagclouds-term'><a href="/tags/internet" class="tagclouds level3" title="">internet</a></span>
+<span class='tagclouds-term'><a href="/tags/javascript" class="tagclouds level5" title="">javascript</a></span>
+<span class='tagclouds-term'><a href="/tags/red" class="tagclouds level1" title="">red</a></span>
+<span class='tagclouds-term'><a href="/tags/servidor-ftp" class="tagclouds level1" title="">servidor ftp</a></span>
+<span class='tagclouds-term'><a href="/tags/trucos" class="tagclouds level1" title="">Trucos</a></span>
+<span class='tagclouds-term'><a href="/tags/tutoriales" class="tagclouds level5" title="">tutoriales</a></span>
+<span class='tagclouds-term'><a href="/tags/virtualbox" class="tagclouds level1" title="">virtualbox</a></span>
+<span class='tagclouds-term'><a href="/tags/windows" class="tagclouds level1" title="">windows</a></span>
+<div class="more-link"><a href="/tagclouds/chunk/1" title="more tags">Más</a></div>  </div>
+  
+</div> <!-- /.block -->
+<div id="block-block-10" class="block block-block">
+
+      
+  <div class="content">
+    <div id="principal">
+</div>  </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+      </aside> 
+      </div>
+
+  <footer id="footer-bottom">
+    <div id="footer-area" class="clearfix">
+            
+          </div>
+
+    <div id="bottom" class="clearfix">
+      <div class="copyright">Copyright &copy; 2018, <a href="/">cursohacker.es</a> | <a href="/legal">Aviso legal</a></div>
+      <div class="credit"><a href="/user">Identificarse</a></div>
+    </div>
+  </footer>
+
+</div>
+
+
+
+
+
+
+  <script type="text/javascript">
+<!--//--><![CDATA[//><!--
+
+    jQuery(document).ready(function($) {
+    cookieControl({
+        introText: '<p>This site uses cookies to store information on your computer.</p>',
+        fullText: '<p>Some cookies on this site are essential, and the site won\'t work as expected without them. These cookies are set when you submit a form, login or interact with the site by doing something that goes beyond clicking on simple links.</p><p>We also use some non-essential cookies to anonymously track visitors or enhance your experience of the site. If you\'re not happy with this, we won\'t set these cookies but some nice features of the site may be unavailable.</p>',
+        theme: 'dark',
+        html: '<div id="cccwr"><div id="ccc-state" class="ccc-pause"><div id="ccc-icon"><button><span>Cookie Control</span></button></div><div class="ccc-widget"><div class="ccc-outer"><div class="ccc-inner"><h2>Cookie Control</h2><div class="ccc-content"><p class="ccc-intro"></p><div class="ccc-expanded"></div><div id="ccc-cookies-switch" style="background-position-x: 0;"><a id="cctoggle" href="#" style="background-position-x: 0;" name="cctoggle"><span id="cctoggle-text">Cookies test</span></a></div><div id="ccc-implicit-warning">(One cookie will be set to store your preference)</div><div id="ccc-explicit-checkbox"><label><input id="cchide-popup" type="checkbox" name="ccc-hide-popup" value="Y" /> Do not ask me again<br /></label> (Ticking this sets a cookie to hide this popup if you then hit close. This will not store any personal information)</div><p class="ccc-about"><small><a href="http://www.civicuk.com/cookie-law" target="_blank">About this tool</a></small></p><a class="ccc-icon" href="http://www.civicuk.com/cookie-law" target="_blank"title="About Cookie Control">About Cookie Control</a><button class="ccc-close">Close</button></div></div></div><button class="ccc-expand">leer más</button></div></div></div>',
+        position: 'left',
+        shape: 'triangle',
+        startOpen: true,
+        autoHide: 60000,
+        onAccept: function(cc){cookiecontrol_accepted(cc)},
+        onReady: function(){},
+        onCookiesAllowed: function(cc){cookiecontrol_cookiesallowed(cc)},
+        onCookiesNotAllowed: function(cc){cookiecontrol_cookiesnotallowed(cc)},
+        countries: '',
+        subdomains: true,
+        cookieName: 'cursohackeres_cookiecontrol',
+        iconStatusCookieName: 'ccShowCookieIcon',
+        consentModel: 'information_only'
+        });
+      });
+    
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+function cookiecontrol_accepted(cc) {
+ccAddHtmlClass();
+}
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+function cookiecontrol_cookiesallowed(cc) {
+ccAddHtmlClass();
+}
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+function cookiecontrol_cookiesnotallowed(cc) {
+
+}
+//--><!]]>
+</script>
+</body>
+</html>

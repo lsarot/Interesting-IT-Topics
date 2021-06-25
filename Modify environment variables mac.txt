@@ -1,0 +1,5 @@
+MODIFICAR FICHERO:
+/private/etc/profile
+
+#environment variables
+export key=value

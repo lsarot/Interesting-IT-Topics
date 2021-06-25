@@ -1,0 +1,499 @@
+------------------- DOCKER TERMINAL COMMANDS
+https://docs.docker.com/engine/reference/commandline/
+
+docker info
+
+--RUN AN IMAGE, (can be a remote image, docker will pull it)
+//-d - run the container in detached mode (in the background)
+//-p 80:80 - map port 80 of the host to port 80 in the container
+//docker/getting-started - the image to use
+docker run -d -p 8080:80 --name docker-tutorial docker101tutorial
+							 <container-name>		<image>
+
+Some flags:							 
+--rm //to remove container after shutdown
+-p <host>:<dest> -p <host>:<dest> //for multiple port opening
+-d //--detach, execute in background, desprende el proceso de este shell
+-i //--interactive, espera seguir recibiendo entradas del usuario en bash
+-t //--tty Asigna un pseudo-TTY
+
+other examples:
+docker run --rm -it ubuntu /bin/bash
+docker run --rm -it ubuntu /bin/bash -c "pwd"
+
+
+--STOP CONTAINER, VIEW CONTAINER AND IMAGES
+//containers are runtime instances of images
+
+docker stop <container-id or name>
+docker container rm <ID or name>
+
+docker container ls -aq //show only ID
+docker container ls -a //show all
+docker ps //show just running
+
+docker images //or image ls
+docker image rm <ID>
+
+docker logs <container-id>
+
+--CREATE TAG FOR IMAGE
+//realmente cuando usemos cmd 'docker images' veremos que se asigna es a la columna Repository y no Tag!.. el tag tendrá 'latest'
+//lo mismo pasa cuando hagamos build de la image
+//igual notar que la original y la nueva tienen el mismo IMAGE ID
+docker image tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+//para realmente agregar un tag, añadimos :myTag al final
+docker image tag leo/docker-app-demo {dockerHub-user}/docker-app-demo:v1 //v1 será el tag
+
+
+--PUSHING OUR IMAGE TO REPO (ver en DOCKER HUB)
+//hay que usar el repository name al inicio del tag.. {dockerHub-user}/
+docker tag  docker101tutorial<image> {userName}/docker101tutorial:v1
+docker push {userName}/docker101tutorial:v1
+
+docker login -u {dockerHub-user} //inicia sesión previamente, así no pide las credenciales luego!
+docker tag   getting-started   {dockerHub-user}/getting-started
+	//esto parece que hace una copia de la imagen, a partir de la existente getting-started, crea una con nombre {dockerHub-user}/get...
+	//podemos verla duplicada con    docker image ls
+docker push {dockerHub-user}/getting-started:<tagname> //si no usamos tagname, se usará el tag 'latest'
+
+
+--EXECUTE COMMAND ON CONTAINER
+Example for a mysql container
+docker exec -it <container-id or name> mysql -p
+then try: show databases;
+
+
+--BUILD AN IMAGE
+// -t para asignar tag, . is current directory
+docker build -t getting-started .
+docker build -t {userName}/{myTag} .
+
+//TO KEEP A VERSION CONTROL OVER THE IMAGE WHEN BUILDING
+docker commit -m "Message" -a "Author Name" [containername] [imagename]
+
+
+------------------- CON VSTUDIO CODE DOCKER PLUGIN PODEMOS HACER VARIAS COSAS
+attach shell, view log, start, stop, inspect, view volumes, networks..
+
+------------------- DOCKER EN MAC Y WINDOWS EJECUTA UNA VM.. para acceder al terminal de esta VM
+por eso vemos que ocupa considerable memoria (en mac y win)
+//si usamos Linux, se trabaja directamente sobre el SO Linux
+
+https://www.freecodecamp.org/news/where-are-docker-images-stored-docker-container-paths-explained/
+
+Docker is not natively compatible with macOS, so Hyperkit is used to run a virtual image. Its virtual image data is located in:  
+~/Library/Containers/com.docker.docker/Data/vms/0
+
+Within the virtual image, the path is the default Docker path /var/lib/docker.
+You can investigate your Docker root directory by creating a shell in the virtual environment:
+
+screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty
+
+You can kill this session by pressing Ctrl+a, followed by pressing k and y.
+
+Docker images are stored in 
+/var/lib/docker //whether on Linux or mac/win using the VM
+
+
+------------------- SSH INTO RUNNING DOCKER CONTAINER
+https://phoenixnap.com/kb/how-to-ssh-into-docker-container
+
+------------------- TUTORIAL EN DOCKER DESKTOP
+docker run -dp 8080:80 docker/getting-started
+
+OR in a browser:
+https://labs.play-with-docker.com/
+Then type the following command in your PWD terminal (in the browser):
+docker run -dp 8080:80 docker/getting-started:pwd
+
+
+------------------- CREATE VOLUME (named volume)
+docker volume create <vol-name>
+docker volume inspect <vol-name>
+
+then
+docker run -d -p 8080:80 -v <vol-name>:/path/to/map <image-name>
+
+Way of mounting: -v <vol-name>:/path/in/container
+Populates new volume with container contents: Yes
+Supports Volume Drivers: Yes
+
+------------------- BIND MOUNTS
+cuando queremos controlar la ubicación del volumen
+With bind mounts, we control the exact mountpoint on the host. We can use this to persist data, but is often used to provide additional data into containers. 
+When working on an application, we can use a bind mount to mount our source code into the container to let it see code changes, respond, and let us see the changes right away.
+//For Node-based applications, nodemon is a great tool to watch for file changes and then restart the application. There are equivalent tools in most other languages and frameworks.
+
+Way of mounting: -v /path/to/data:/path/to/map/in/container
+Populates new volume with container contents: No
+Supports Volume Drivers: No
+
+Bind mounts and named volumes are the two main types of volumes that come with the Docker engine. However, additional volume drivers are available to support other uses cases (SFTP, Ceph, NetApp, S3, and more).
+
+Bind mounts example: (getting-started image)
+docker run -dp 3000:3000
+    -w /app //"working directory" or the current directory that the command will run from
+    -v ${PWD}:/app //bind mount, project-working-dir maps to container's /app path
+    				//claro en este ejemplo la herramienta nodemon de node.js, está escuchando a cambios en x directorio y actualiza la app en el acto!
+						//si fuera un projecto Angular se actualiza automáticamente, pero aquí se usó React
+    node:12-alpine //the image to use.. nótese que es una image que teníamos ya, usamos Repository:image (ver con docker image ls), aunque realmente es <image-name>:<image-tag>
+    sh -c "yarn install && yarn run dev" //we're starting a shell using sh (alpine doesn't have bash)... If we look in the package.json, we'll see that the dev script is starting nodemon
+//Parecido al contenido del Dockerfile básico!
+
+then see the logs:
+docker logs -f <container-id>
+
+build the image:
+docker build -t getting-started .
+
+Using bind mounts is very common for local development setups. The advantage is that the dev machine (my container) does not need to have all of the build tools and environments installed. With a single docker run command, the dev environment is pulled (from the host) and ready to go.
+
+
+------------------- MULTI-CONTAINER APPS (CONTAINER NETWORKING)
+In general, each container should do one thing and do it well. A few reasons:
+    There's a good chance you'd have to scale APIs and front-ends differently than databases
+    Separate containers let you version and update versions in isolation
+    While you may use a container for the database locally, you may want to use a managed service for the database in production. You dont want to ship your database engine with your app then.
+    Running multiple processes will require a process manager (the container only starts one process), which adds complexity to container startup/shutdown
+
+Simply remember this rule...
+    If two containers are on the same network, they can talk to each other. If they aren't, they can't.
+    //a menos que usemos algo como Kubernetes, o comuniquemos las apps con un mecanismo distinto.
+
+3 steps:
+A. Create network if needed
+B. Attach at startup
+C. Connect to existing container (using same network)
+
+Steps:
+A.-----
+.create a docker network
+	docker network create todo-app
+B.-----	
+.run a mysql container
+	docker run -d \
+	    --network todo-app --network-alias mysql \ //network to attach
+	    -v todo-mysql-data:/var/lib/mysql \ //named volume not created before, docker will create it on the go
+	    -e MYSQL_ROOT_PASSWORD=secret \ //env variables needed
+	    -e MYSQL_DATABASE=todos \
+	    mysql:5.7 //image (will pull from repository Docker Hub)
+C.-----
+.[Optional test] we need to run another container in the same network
+we will make use of the 'nicolaka/netshoot' image, which ships with a lot of tools that are useful for troubleshooting or debugging networking issues.
+	docker run -it \
+		--network todo-app \ //same network than mysql container
+		nicolaka/netshoot
+
+	//inside this container do:
+	dig mysql //a useful DNS tool. We're going to look up the IP address for the hostname mysql.
+			Docker was able to resolve it ('mysql') to the IP address of the container that had that network alias 
+			Si usamos Docker desktop, o VSCode Docker Plugin, podemos ver fácilmente qué IP está usando el mysql container.. o usando docker network inspect <network-name>
+
+
+.the todo-app container connecting to the mysql container
+	docker run -dp 3000:3000 \
+		-w /app //the working dir
+		-v ${PWD}:/app \ //bind mount volume
+		--network todo-app \ //bind to network already created
+		//The todo app supports the setting of a few environment variables to specify MySQL connection settings
+			/* While using env vars to set connection settings is generally ok for development, it is HIGHLY DISCOURAGED when running applications in production.
+			A more secure mechanism is to use the secret support provided by your container orchestration framework (Kubernetes). In most cases, these secrets are mounted as files in the running container. You'll see many apps (including the MySQL image and the todo app) also support env vars with a _FILE suffix to point to a file containing the data.
+			As an example, setting the MYSQL_PASSWORD_FILE var will cause the app to use the contents of the referenced file as the connection password. Docker doesn't do anything to support these env vars. Your app will need to know to look for the variable and get the file contents.*/
+		-e MYSQL_HOST=mysql \
+		-e MYSQL_USER=root \
+		-e MYSQL_PASSWORD=secret \
+		-e MYSQL_DB=todos \
+		node:12-alpine \ //esta es la misma image de getting-started, pero eventualmente se montó con ese nombre porque se trajo de un repositorio para demostrar el uso de BIND MOUNTS
+		sh -c "yarn install && yarn run dev"
+
+
+------------------- DOCKER COMPOSE
+hasta ahora hemos utilizado muchos flags necesarios para levantar una app, hemos usado varios containers y se hace complejo de recordar o trasmitir a otro usuario.
+
+con Docker desktop ya tenemos docker-compose.. en Linux debemos instalar docker-compose
+try: docker-compose version
+
+ver fichero app/docker-compose.yml para info
+..en la ruta del fichero:
+
+docker-compose up -d
+
+docker-compose down
+
+En el Docker desktop veremos un group llamado 'app'
+	//the project name is simply the name of the directory that the docker-compose.yml was located in.
+Y 2 containers, usando esta nomenclatura:
+	<project-name>_<service-name>_<replica-number>
+
+
+* los named volumes no se eliminan usando docker-compose down, ni el desktop dashboard button.
+add the --volumes flag to remove volumes as well
+
+
+//en otro terminal
+docker-compose logs -f // f de follow, so will give you live output (all services combined) as it's generated.
+or
+docker-compose logs -f <service-name> //for a particular service.. defined in the docker-compose.yml
+
+
+* waiting for a container to be ready
+Waiting for the DB before starting the app
+	When my app is starting up, it actually sits and waits for MySQL to be up and ready before trying to connect to it.
+	Docker doesnt have any built-in support to wait for another container to be fully up, running, and ready before starting another container.
+	For Node-based projects, you can use the wait-port dependency (see package.json file). Similar projects exist for other languages/frameworks.
+
+
+------------------- IMAGE BUILDING BEST PRACTICES
+View layers created on an image... the command that was used to create each layer within an image.
+docker image history <image-name>
+//use --no-trunc flag to show untruncated lines
+
+Layering Cache
+Se refiere a evaluar las capas que más tiempo consumen al hacer un build y optimizar el Dockerfile para que sea más eficiente, usando caching.
+
+Ejemplo detallado en el Dockerfile de /docker-tutorial/app
+
+.luego de modificar hacemos un build:
+docker build -t getting-started .
+
+.hacemos un cambio al source code y hacemos build nuevamente.
+vemos como en el output indica 'Using cache'
+
+------------------- MULTI-STAGE BUILDS
+Básicamente reducir tamaño de las imágenes, guardando sólo lo necesario!
+Several advantages:
+    Separate build-time dependencies from runtime dependencies
+    Reduce overall image size by shipping only what your app needs to run
+
+2 ejemplos:
+
+1- Maven/Tomcat Example
+
+When building Java-based applications, a JDK is needed to compile the source code to Java bytecode. However, that JDK isnt needed in production. Also, you might be using tools like Maven or Gradle to help build the app. Those also arent needed in our final image. Multi-stage builds help.
+
+	FROM maven AS build
+	WORKDIR /app
+	COPY . . //separated by space, means copy root to root
+	RUN mvn package
+
+	FROM tomcat
+	COPY --from=build /app/target/file.war /usr/local/tomcat/webapps 
+
+In this example, we use one stage (called build) to perform the actual Java build using Maven.
+In the second stage (starting at FROM tomcat), we copy in files from the build stage.
+The final image is only the last stage being created (which can be overridden using the --target flag).
+
+2- React Example
+
+When building React applications, we need a Node environment to compile the JS code (typically JSX), SASS stylesheets, and more into static HTML, JS, and CSS. If we arent doing server-side rendering, we dont even need a Node environment for our production build. Why not ship the static resources in a static nginx container?
+
+	FROM node:12 AS build
+	WORKDIR /app
+	COPY package* yarn.lock ./
+	RUN yarn install
+	COPY public ./public
+	COPY src ./src
+	RUN yarn run build
+
+	FROM nginx:alpine
+	COPY --from=build /app/build /usr/share/nginx/html
+
+Here, we are using a node:12 image to perform the build (maximizing layer caching) and then copying the output into an nginx container.
+
+
+* la última será la que defina el image final, o podemos usar --target en otra
+
+------------------- BUILDING DOCKER IMAGES
+https://stackify.com/docker-build-a-beginners-guide-to-building-docker-images/
+
+A Container is a writable layer just on top of the Image layers.
+
+We will try with an express project.
+	npm install express-generator -g
+	express docker-app
+	npm install
+	npm start
+go to: localhost:3000
+
+We created 2 files:
+	Dockerfile
+	.dockerignore //hidden, what not to include in our image build
+
+//INFO en los Docker file de /docker-tutorial   /app y /docker-app
+
+docker build -t leo/docker-app-demo .
+docker run -dp 8081:3000 leo/docker-app-demo
+
+lets push this image to our repo:
+docker login -u {dockerHub-user}
+docker image tag leo/docker-app-demo {dockerHub-user}/docker-app-demo:v1
+docker push {dockerHub-user}/docker-app-demo:v1
+
+docker ps //view running containers
+docker inspect <container-id>
+docker logs <container-id>
+
+//podemos hacer inspect y ver logs desde VSCode Docker plugin
+//podemos usar Retrace para monitorizar containers!
+
+--------- MORE Dockerfile INFO AND STEPS IN LINUX & EXAMPLE
+https://www.howtoforge.com/tutorial/how-to-create-docker-images-with-dockerfile/
+
+FROM //The base image for building a new image. This command must be on top of the dockerfile.
+MAINTAINER //Optional, it contains the name of the maintainer of the image.
+RUN //Used to execute a command during the build process of the docker image.
+ADD //Copy a file from the host machine to the new docker image. There is an option to use a URL for the file, docker will then download that file to the destination directory.
+ENV //Define an environment variable.
+CMD //Used for executing commands when we build a new container from the docker image.
+ENTRYPOINT //Define the default command that will be executed when the container is running.
+WORKDIR //This is directive for CMD command to be executed.
+USER //Set the user or UID for the container created with the image.
+VOLUME //Enable access/linked directory between the container and the host machine.
+
+Now lets start to create our first dockerfile.
+
+... Step 1 - Installing Docker
+
+Login to your server and update the software repository.
+ssh root@192.168.1.248
+apt-get update
+
+Install docker.io with this apt command:
+apt-get install docker.io
+
+When the installation is finished, start the docker service and enable it to start at boot time:
+systemctl start docker
+systemctl enable docker
+
+Docker has been installed and is running on the system.
+
+... Step 2 - Create Dockerfile
+
+In this step, we will create a new directory for the dockerfile and define what we want to do with that dockerfile.
+Create a new directory and a new and empty dockerfile inside that directory.
+mkdir ~/myimages 
+cd myimages/
+touch Dockerfile
+
+Next, define what we want to do with our new custom image. In this tutorial, I will install Nginx and PHP-FPM 7 using an Ubuntu 16.04 docker image. Additionally, we need Supervisord, so we can start Nginx and PHP-FPM 7 both in one command.
+Edit the 'Dockerfile' with vim:
+nano Dockerfile
+
+---- THE COMPLETE Dockerfile EXAMPLE
+Here is the complete Dockerfile in one piece:
+/*------------------------------------------
+#Download base image ubuntu 16.04
+FROM ubuntu:16.04
+ 
+# Update Software repository
+RUN apt-get update
+ 
+# Install nginx, php-fpm and supervisord from ubuntu repository
+RUN apt-get install -y nginx php7.0-fpm supervisor && \
+    rm -rf /var/lib/apt/lists/*
+ 
+#Define the ENV variable
+ENV nginx_vhost /etc/nginx/sites-available/default
+ENV php_conf /etc/php/7.0/fpm/php.ini
+ENV nginx_conf /etc/nginx/nginx.conf
+ENV supervisor_conf /etc/supervisor/supervisord.conf
+ 
+# Enable php-fpm on nginx virtualhost configuration
+COPY default ${nginx_vhost}
+RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_conf} && \
+    echo "\ndaemon off;" >> ${nginx_conf}
+ 
+#Copy supervisor configuration
+COPY supervisord.conf ${supervisor_conf}
+ 
+RUN mkdir -p /run/php && \
+    chown -R www-data:www-data /var/www/html && \
+    chown -R www-data:www-data /run/php
+ 
+# Volume configuration
+VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
+ 
+# Configure Services and Port
+COPY start.sh /start.sh
+CMD ["./start.sh"]
+ 
+EXPOSE 80 443
+------------------------------------------*/
+
+------------------- BUILD IMAGE FOR SPRING BOOT APP
+https://spring.io/blog/2020/01/27/creating-docker-images-with-spring-boot-2-3-0-m1
+** Quick demo:
+		in terminal:
+			mkdir demo && cd demo
+			curl https://start.spring.io/starter.zip -d bootVersion=2.3.0.M1 -d dependencies=web -o demo.zip
+			unzip demo.zip
+
+
+		Old way (before SBoot 2.3.0):   //nótese que copia y wrapea todo el fat-jar del build output en un app.jar
+			#In Dockerfile
+			FROM openjdk:8-jdk-alpine
+			EXPOSE 8080
+			ARG JAR_FILE=target/demo-0.0.1-SNAPSHOT.jar
+			ADD ${JAR_FILE} app.jar
+			ENTRYPOINT ["java","-jar","/app.jar"]
+
+
+		New way (SBoot 2.3.0+):   //expone un Docker image directamente y nos permite hacer layered jars, para aligerar el jar final (layered jars)
+			./mvnw spring-boot:build-image  //nótese que no es la instrucción típica (docker build ...) sino un maven goal; claro no hizo falta un Dockerfile
+			docker run -it -p 8080:8080 demo:0.0.1-SNAPSHOT
+
+////Spring Boot 2.3.0.M1 includes buildpack support directly for both Maven and Gradle. This means you can just type a single command and quickly get a sensible image into your locally running Docker daemon. For Maven you can type mvn spring-boot:build-image, with Gradle it’s gradle bootBuildImage. The name of the published image will be your application name and the tag will be the version.
+
+Now, there is no Dockerfile, and we could be wanting to make
+LAYERED JARS (for multi-stage builds (slim image), to use cache feature (faster build) or anything else)
+
+/* CONCEPTO:
+Spring Boot has always supported its own "fat jar" format that allows you to create an archive that you can run using java -jar
+With Spring Boot 2.3.0.M1 we’re providing a new layout type called LAYERED_JAR (in maven is just a plugin)
+With it enabled, lib and classes folders have been split up and categorized into layers. There’s also a new layers.idx file that provides the order in which layers should be added.
+Look inside the fat jar and now we have (when enabled) these layers: dependencies, snapshot-dependencies, resources, application... Application code is more likely to change between builds so it is isolated in a separate layer.
+	Así usaremos la cache feature al hacer un docker build!
+Introducen la idea de "jar modes".. es un "invento" que según explican:
+	It allows the bootstrap code to run something entirely different from your application. For example, something that extracts the layers.
+Si hacemos (estando habilitado y compilado) java -Djarmode=layertools -jar my-app.jar, nos muestra que podemos usar list o extract (hablando de layers!)
+Manos a la obra: */
+
+First on pom.xml:
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<configuration>
+						<layout>LAYERED_JAR</layout>
+					</configuration>
+				</plugin>
+			</plugins>
+		</build>
+
+Then:
+	mvn clean package
+	java -Djarmode=layertools -jar target/demo-0.0.1-SNAPSHOT.jar list //tells us the layers and the order that they should be added:  dependencies, snapshot-dependencies, resources, application
+
+Then:
+	We can now craft a dockerfile that extracts and copies each layer (multi-stage dockerfile). Here’s an example:
+/*
+		FROM adoptopenjdk:11-jre-hotspot as builder
+		WORKDIR application
+		ARG JAR_FILE=target/*.jar
+		COPY ${JAR_FILE} application.jar
+		RUN java -Djarmode=layertools -jar application.jar extract
+
+		FROM adoptopenjdk:11-jre-hotspot
+		WORKDIR application
+		COPY --from=builder application/dependencies/ ./
+		COPY --from=builder application/snapshot-dependencies/ ./
+		COPY --from=builder application/resources/ ./
+		COPY --from=builder application/application/ ./
+		ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+*/
+Then: //classic Docker instruction to build (based on the Dockerfile)
+	docker build -t spring-docker-demo .
+	docker run -it -p 8080:8080 spring-docker-demo:latest
+

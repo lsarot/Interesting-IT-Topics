@@ -1,0 +1,1341 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta property="fb:admins" content="724580831" />
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="description" content="     FTP from Mac OS X"   />
+<meta name="keywords" content="OS X Daily, OSXDaily, Apple, Mac, iPhone, iPad, Mac OS X, iOS, Mac, tips, tricks, tutorials, news" />
+
+<link rel="shortcut icon" href="/images/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="http://cdn.osxdaily.com/wp-content/themes/osxdaily-left2/style.css" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://osxdaily.com/feed/" />
+<link rel="alternate" type="text/xml" title="RSS .92" href="http://osxdaily.com/feed/rss/" />
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://osxdaily.com/feed/atom/" />
+<link rel="pingback" href="http://osxdaily.com/xmlrpc.php" />
+
+
+
+<title>   FTP from Mac OS X   </title>
+
+
+
+
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="OS X Daily &raquo; FTP from Mac OS X Comments Feed" href="http://osxdaily.com/2011/02/07/ftp-from-mac/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/cdn.osxdaily.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.2"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='st-widget-css'  href='http://cdn.osxdaily.com/wp-content/plugins/share-this/css/style.css?ver=4.9.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-syntax-css-css'  href='http://cdn.osxdaily.com/wp-content/plugins/wp-syntax/css/wp-syntax.css?ver=1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='http://cdn.osxdaily.com/wp-content/plugins/jetpack/css/jetpack.css?ver=5.4' type='text/css' media='all' />
+<script type='text/javascript' src='http://cdn.osxdaily.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://cdn.osxdaily.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://cdn.osxdaily.com/wp-content/plugins/jetpack/modules/related-posts/related-posts.js?ver=20150408'></script>
+<link rel='https://api.w.org/' href='http://osxdaily.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://osxdaily.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://cdn.osxdaily.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='White iPhone 4 Labels Appear at Retailers' href='http://osxdaily.com/2011/02/07/white-iphone-4-labels-appear-at-retailers/' />
+<link rel='next' title='Buy an iPhone App Once and All Following Downloads of the App are Free' href='http://osxdaily.com/2011/02/07/buy-an-iphone-app-once-and-all-following-downloads-of-the-app-are-free/' />
+<link rel="canonical" href="http://osxdaily.com/2011/02/07/ftp-from-mac/" />
+<link rel='shortlink' href='http://osxdaily.com/?p=12472' />
+<link rel="alternate" type="application/json+oembed" href="http://osxdaily.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fosxdaily.com%2F2011%2F02%2F07%2Fftp-from-mac%2F" />
+<link rel="alternate" type="text/xml+oembed" href="http://osxdaily.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fosxdaily.com%2F2011%2F02%2F07%2Fftp-from-mac%2F&#038;format=xml" />
+<script type='text/javascript'>
+	(function () {
+		var pl_beacon = document.createElement('script');
+		pl_beacon.type = 'text/javascript';
+		pl_beacon.async = true;
+		var host = 'http://osxdaily.com';
+		if ('https:' == document.location.protocol) {
+			host = host.replace('http://', 'https://');
+		}
+		pl_beacon.src = host + '/un6up8Rl5Bi9.js?ts=' + Math.floor((Math.random() * 100000) + 1);
+		var first_script_tag = document.getElementsByTagName('script')[0];
+		first_script_tag.parentNode.insertBefore(pl_beacon, first_script_tag);
+	})();
+</script>
+<script type='text/javascript'>
+	(function () {
+		var adblock_beacon = document.createElement('script');
+		adblock_beacon.type = 'text/javascript';
+		adblock_beacon.async = true;
+		var host = 'http://osxdaily.com';
+		if ('https:' == document.location.protocol) {
+			host = host.replace('http://', 'https://');
+		}
+		adblock_beacon.src = host + '/ads-beacon.js?ts=' + Math.floor((Math.random() * 100000) + 1);
+		var first_script_tag = document.getElementsByTagName('script')[0];
+		first_script_tag.parentNode.insertBefore(adblock_beacon, first_script_tag);
+	})();
+</script><script charset="utf-8" type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'4c486867-b8be-47a6-abe2-abae2f3fb59a'});var st_type='wordpress';</script>
+<style type='text/css'>img#wpstats{display:none}</style>
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="FTP from Mac OS X" />
+<meta property="og:url" content="http://osxdaily.com/2011/02/07/ftp-from-mac/" />
+<meta property="og:description" content="Did you know that your Mac has a built-in FTP &amp; FTPS client? You don&#8217;t need to download any additional software or apps to connect to FTP sites from Mac OS X, instead you can connect to r…" />
+<meta property="article:published_time" content="2011-02-07T08:33:13+00:00" />
+<meta property="article:modified_time" content="2015-05-07T01:40:46+00:00" />
+<meta property="og:site_name" content="OS X Daily" />
+<meta property="og:image" content="http://cdn.osxdaily.com/wp-content/uploads/2011/02/ftp-from-mac.jpg" />
+<meta property="og:image:width" content="581" />
+<meta property="og:image:height" content="297" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@osxdaily" />
+<meta name="twitter:image" content="http://cdn.osxdaily.com/wp-content/uploads/2011/02/ftp-from-mac.jpg?w=640" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<script type="text/javascript">
+    var __st_loadLate=true; //if __st_loadLate is defined then the widget will not load on domcontent ready
+</script>
+<script type="text/javascript">var switchTo5x=false;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher:'fe5e0a84-1fac-40de-8014-9f89fc1cbe6a'});</script>
+</head>
+
+<body>
+
+
+<div id="wrap">
+
+<div id="header">
+
+<div id="topline">
+
+
+<div id="space">
+
+
+<div id="logobox">
+<a href="http://osxdaily.com"><img src="http://cdn.osxdaily.com/wp-content/themes/osxdaily-left2/img/osxdaily-logo-l.png" alt="OS X Daily"  border="0" width="250" height="75" /></a>
+</div>
+
+<div id="top_block">
+
+<script type="text/javascript"><!--
+	e9 = new Object();
+    e9.size = "728x90,468x60";
+//--></script>
+<script type="text/javascript" src="http://tags.expo9.exponential.com/tags/OSXDailycom/ROS/tags.js"></script>
+
+</div>
+
+
+<div id="top_wide_block">
+
+<div class="underlinemenu">
+<ul>
+
+<li style="margin-left:none !important;"><a href="/">Home</a></li>
+<li><a href="/category/mac-os-x/">Mac OS</a></li>
+<li><a href="/category/iphone/">iPhone</a></li>
+<li><a href="/category/ipad/">iPad</a></li>
+<li><a href="/category/tips-tricks/">Tips & Tricks</a></li>
+<li><a href="/tag/news/">News</a></li>
+<li><a href="/tag/ios/">iOS</a></li>
+<li><a href="/category/troubleshooting/">Troubleshooting</a></li>
+<li></li>
+<li style="border-right:none!important;"><div id="gsearch_box" style="width:220px;">
+
+<script>
+  (function() {
+    var cx = '000140732189139953166:WMX-1131898171';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:searchbox-only resultsUrl="//osxdaily.com/gsearch/"></gcse:searchbox-only>
+
+</div></li>
+</ul>
+</div>
+
+
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+</div>
+
+<div id="content">
+
+
+
+<div class="post">
+<h1>FTP from Mac OS X</h1>
+
+
+<div id="subhead_block">
+<span class="subhead_lefty">Feb 7, 2011 - <a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comments">53 Comments</a></span>
+<span class="subhead_righty"><ul class="share_list">
+<li><span  class='st_twitter_button' displayText='Tweet' st_url="http://osxdaily.com/2011/02/07/ftp-from-mac/" st_title="FTP from Mac OS X" st_via="osxdaily"></span><span  class='st_facebook_button' displayText='Facebook' st_url="http://osxdaily.com/2011/02/07/ftp-from-mac/" st_title="FTP from Mac OS X"></span><span  class='st_plusone_button' st_url="http://osxdaily.com/2011/02/07/ftp-from-mac/" st_title="FTP from Mac OS X"></span></li>
+</ul></span>
+</div>
+
+
+
+<div class="contenttext">
+<p><img src="http://cdn.osxdaily.com/wp-content/uploads/2011/02/ftp-mac.jpg" alt="FTP from a Mac" title="ftp-mac" width="150" height="150" class="alignright size-full wp-image-39151" /> Did you know that your Mac has a built-in FTP &#038; FTPS client? You don&#8217;t need to download any additional software or apps to connect to FTP sites from <a href="http://osxdaily.com/category/mac-os-x/">Mac OS X</a>, instead you can connect to remote servers directly from your desktop by using an excellent and little known feature. If you&#8217;ve never used the Mac FTP tools before, you will find them incredibly simple and quite familiar, because the connection utilities and server browsing are much like navigating through the normal Mac desktop. Let&#8217;s get started.</p>
+<p><span id="more-12472"></span></p>
+<!-- Quick Adsense WordPress Plugin: http://quickadsense.com/ -->
+<div style="float:left;margin:10px 10px 10px 0;">
+<div style="padding-right:20px;" ><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 336x280 in page article -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-7321635426958037"
+     data-ad-slot="4239339108"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+</div>
+
+<h2 style="font-size:1.5em;">How to FTP from your Mac</h2>
+<p>If you want to test this by connecting to a real server, use ftp://ftp.mozilla.org and login as a Guest. Regardless, here&#8217;s how to start an FTP connection from Mac OS X to a remote server:</p>
+<ol>
+<li>From your Mac desktop or Finder, hit Command+K to pull up the &#8220;Connect to Server&#8221; window (alternatively, you can access this from the &#8220;Go&#8221; menu)</li>
+<li>Enter the address of the ftp server in the following format: ftp://ftp.domain.com</li>
+<li>Optional: If you want to add a bookmark to &#8216;Favorite Servers&#8217; for repeated connections, click on the + icon next to the &#8220;Server Address&#8221; field</li>
+<li>Click on &#8220;Connect&#8221; and wait to connect to the remote server</li>
+<li>Enter the FTP username and password, or connect as &#8220;Guest&#8221; if the server allows guest connections and click on &#8220;Connect&#8221; again</li>
+</ol>
+<p>Here is what starting a standard FTP connection will look like:</p>
+<p><img src="http://cdn.osxdaily.com/wp-content/uploads/2011/02/ftp-from-mac.jpg" alt="ftp-from-mac" title="ftp-from-mac" width="581" height="297" class="aligncenter size-full wp-image-12473" srcset="http://cdn.osxdaily.com/wp-content/uploads/2011/02/ftp-from-mac.jpg 581w, http://cdn.osxdaily.com/wp-content/uploads/2011/02/ftp-from-mac-300x153.jpg 300w" sizes="(max-width: 581px) 100vw, 581px" /></p>
+<p>If you want to use a secured connection instead you just need to make a tiny modification, which we&#8217;ll discuss next.</p>
+<h3>Using FTPS for Secured Connections</h3>
+<p>If you want to connect to secured FTPS server, all you need to do is prefix the domain with ftps:// rather than ftp://. This is dependent on the remote server having SSL support and acceping FTPS connections, which most servers do. The minor difference is pointed out in the screenshot below:</p>
+<p><img src="http://cdn.osxdaily.com/wp-content/uploads/2011/02/ftps-secure-ftp-mac.jpg" alt="Use FTPS for a secured FTP connection in Mac OS X" title="ftps-secure-ftp-mac" width="497" height="240" class="aligncenter size-full wp-image-39150" /></p>
+<h4>FTPS vs SFTP</h4>
+<p>Something to keep in mind is that FTPS and SFTP are two different protocols; FTPS is FTP with a secure SSL layer, while SFTP uses SSH (yes, the same protocol that SSH servers are <a href="http://osxdaily.com/2011/09/30/remote-login-ssh-server-mac-os-x/">enabled by with Remote Login</a> in OS X). FTPS connections are supported directly in OS X&#8217;s built-in FTP functionality, while SFTP through SSH is not accessible through the same &#8220;Connect to Server&#8221; menu. Nonetheless, <em>OS X does include a native SFTP client</em> as well, and it&#8217;s accessible from the Terminal by typing &#8220;sftp username@host&#8221; at the command line. Because SFTP and SSH in general are generally command line based, that&#8217;s really a topic for another article, so we&#8217;ll keep things simple here and stick with FTP and FTPS.</p>
+<!-- Quick Adsense WordPress Plugin: http://quickadsense.com/ -->
+<div style="float:none;margin:10px 0 10px 0;text-align:center;">
+<!--- gads -->
+<div style="padding-right:20px;" id="lower_content_ad_box">
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-7321635426958037";
+/* 336x280, created 8/6/09 */
+google_ad_slot = "3803516584";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<h4>Navigating &#038; Transferring Files with FTP &#038; FTPS</h4>
+<p>Once you are connected to the FTP server, you can browse the remote server like any other local folder on your Mac, because the server is treated just like a normal file system window in the Finder. </p>
+<p>Copying files to the remote server, or downloading them to the Mac, is done easily with simple and familiar drag and drop. Navigate to the file or folder you want to copy, then just drag and drop it as if you were copying or moving any other file, and the items will being to transfer to/from the FTP server to the Mac, or vice versa.</p>
+<p><img src="http://cdn.osxdaily.com/wp-content/uploads/2011/02/connect-ftp-from-mac.jpg" alt="connect-ftp-from-mac" title="connect-ftp-from-mac" width="620" height="369" class="aligncenter size-full wp-image-12479" srcset="http://cdn.osxdaily.com/wp-content/uploads/2011/02/connect-ftp-from-mac.jpg 620w, http://cdn.osxdaily.com/wp-content/uploads/2011/02/connect-ftp-from-mac-300x178.jpg 300w, http://cdn.osxdaily.com/wp-content/uploads/2011/02/connect-ftp-from-mac-610x363.jpg 610w" sizes="(max-width: 620px) 100vw, 620px" /></p>
+<p>By default the window will show as a minified Finder window, but you can expand the window to your familiar Mac OS X Finder style by pulling down the &#8220;View&#8221; menu and choosing &#8220;Show Toolbar&#8221;. The main benefit to expanding the window is that you get the forward and back arrow navigation buttons, in addition to sorting options to browse through the FTP server by icon, name, date, lists, and the search functions.</p>
+<p>You can also <a href="http://osxdaily.com/2011/09/29/start-an-ftp-or-sftp-server-in-mac-os-x-lion/">start an SFTP server on any Mac</a> to be able to connect to it this way for downloading or transferring files.</p>
+<p>By the way, if you were wondering, I have my <a href="http://osxdaily.com/2007/12/02/show-full-directory-path-in-finder-window-title-bars/">titlebars set to display full directory paths</a> which is why you see the path on the remote server in the second screenshot. </p>
+<h4>What about third party FTP clients for Mac?</h4>
+<p>Since the Finder FTP function does not support some features users may wish to have on their Mac, there are plenty of third party OS X apps that can do the job instead, with full FTP, SFTP, FTPS support, downloads, uploads, queuing, permissions changing abilities, read/write support, and much more. In no particular order, here are a few free FTP apps for Mac OS X:</p>
+<ul>
+<li><a href="https://cyberduck.io/?l=en" target="_blank" rel="nofollow">CyberDuck</a></li>
+<li><a href="https://filezilla-project.org/" target="_blank" rel="nofollow">FileZilla</a></li>
+</ul>
+<p>There are many other options available, including simply using the command line on the Mac, which has full sftp support as well. Advanced users may wish to go with paid SFTP applications too, like Transmit or Yummy FTP.</p>
+<p>The FTP features in Mac OS X have been around since the earliest days of OS X, and they&#8217;re still around in OS X Yosemite, Mavericks, Mountain Lion, Snow Leopard, you name it, it&#8217;s supported. While incredibly useful, they are obviously not as developed as third party FTP clients like Transmit or Cyberduck, but if you&#8217;re in a bind and just need to quickly connect to a remote FTP to transfer some files back or forth, it&#8217;s more than adequate and it does not require downloading anything additional. If you need more advanced features, both of the aforementioned apps are fantastic and integrate well with other apps.</p>
+
+<div style="font-size:0px;height:0px;line-height:0px;margin:0;padding:0;clear:both"></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div>
+</div>
+
+
+
+
+<!--- social functionality -->
+
+<div style="clear:both;display:block;margin:20px 0;">
+
+<div style="clear:both;">
+<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffacebook.com%2Fosxdaily&amp;width=600&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:600px; height:35px;" allowTransparency="true"></iframe>
+</div>
+
+<form style="width: 560px; border: 12px solid #2266BB;padding: 10px;text-align:center;box-shadow: 0 1px 10px #444;" action="http://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('http://feedburner.google.com/fb/a/mailverify?uri=osxdaily', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+<p style="font-size: 18px;">Enjoy this tip? <strong>Subscribe to the OSXDaily newsletter</strong> to get more of our great Apple tips, tricks, and important news delivered to your inbox! Enter your email address below:</p>
+<p><input type="text" style="width:200px" name="email"></p>
+<input type="hidden" value="osxdaily" name="uri"><input type="hidden" name="loc" value="en_US"><input type="submit" value="Subscribe">
+</form>
+</div>
+
+
+
+
+
+
+<div id="social_sharing_widgets">
+
+<span class="st_facebook_vcount" ></span> 
+<span class="st_twitter_vcount" st_via="osxdaily"></span>
+<span class="st_fblike_vcount" ></span>
+<span class="st_plusone_vcount" st_url="http://osxdaily.com/2011/02/07/ftp-from-mac/"></span>
+
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">
+        stLight.options({
+                publisher:'fe5e0a84-1fac-40de-8014-9f89fc1cbe6a'
+        });
+</script>
+
+</div>
+
+<h3 style="margin-top:30px;">Related articles:</h3>
+<ul style="margin:0 0 0 20px;color:#555;font-size:1.1em;">
+<li>No related posts</li></ul>
+
+
+
+</div>
+
+<!--matched content-->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:inline-block;width:600px;height:400px"
+     data-ad-client="ca-pub-7321635426958037"
+     data-ad-slot="5790820468"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+<div style="margin:20px 0 30px 0;">
+<strong style="font-size:14px;color:#555 !important;padding-top:10px;paddin-bottom:10px;">Posted by: Paul Horowitz in <a href="http://osxdaily.com/category/mac-os-x/" rel="category tag">Mac OS X</a>, <a href="http://osxdaily.com/category/tips-tricks/" rel="category tag">Tips &amp; Tricks</a></strong>
+</div>
+
+
+<a name="comments"></a>
+
+
+<!-- You can start editing here. -->
+
+	<h4 id="comments">53 Comments</h4>
+<p class="smaller-font"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/feed/">&raquo; Comments RSS Feed</a></p>
+
+	<ol class="commentlist">
+			<li class="comment even thread-even depth-1" id="comment-168170">
+				<div id="div-comment-168170" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='http://freshfru.it/' rel='external nofollow' class='url'>warmz</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-168170">
+			February 7, 2011 at 4:44 am</a>		</div>
+
+		<p>sweet!</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=168170#respond' onclick='return addComment.moveForm( "div-comment-168170", "168170", "respond", "12472" )' aria-label='Reply to warmz'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-168193">
+				<div id="div-comment-168193" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Marc</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-168193">
+			February 7, 2011 at 5:34 am</a>		</div>
+
+		<p>Might add that there are several protocols available via this &#8220;tip&#8221;.</p>
+<p>smb://  &#8211;  for connecting to samba (Windows shares)<br />
+vnc://  &#8211;  for Apple&#8217;s Screen Sharing<br />
+afp://  &#8211;  apple file protocol<br />
+http://  &#8211;  I think this is for WebDAV</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=168193#respond' onclick='return addComment.moveForm( "div-comment-168193", "168193", "respond", "12472" )' aria-label='Reply to Marc'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1 parent" id="comment-168198">
+				<div id="div-comment-168198" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Nico</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-168198">
+			February 7, 2011 at 5:58 am</a>		</div>
+
+		<p>Nice. But how to change the read &amp; write permissions on the remote server&#8230;</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=168198#respond' onclick='return addComment.moveForm( "div-comment-168198", "168198", "respond", "12472" )' aria-label='Reply to Nico'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment odd alt depth-2 parent" id="comment-168246">
+				<div id="div-comment-168246" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Parakeet</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-168246">
+			February 7, 2011 at 9:36 am</a>		</div>
+
+		<p>If you are logged in you can make RWX changes through Get Info</p>
+<p>I&#8217;ll still use Transmit but this is a good tip</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=168246#respond' onclick='return addComment.moveForm( "div-comment-168246", "168246", "respond", "12472" )' aria-label='Reply to Parakeet'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment even depth-3" id="comment-209751">
+				<div id="div-comment-209751" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='http://tftb.net' rel='external nofollow' class='url'>tftb</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-209751">
+			July 8, 2011 at 7:11 am</a>		</div>
+
+		<p>Unfortunately you can&#8217;t change the read and write permissions and it seems its only read permissions via this FTP.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=209751#respond' onclick='return addComment.moveForm( "div-comment-209751", "209751", "respond", "12472" )' aria-label='Reply to tftb'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1 parent" id="comment-168220">
+				<div id="div-comment-168220" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">tenroc</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-168220">
+			February 7, 2011 at 8:18 am</a>		</div>
+
+		<p>Yeah, but the directory is read only on the FTP server.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=168220#respond' onclick='return addComment.moveForm( "div-comment-168220", "168220", "respond", "12472" )' aria-label='Reply to tenroc'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment even depth-2" id="comment-168263">
+				<div id="div-comment-168263" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Trench</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-168263">
+			February 7, 2011 at 11:02 am</a>		</div>
+
+		<p>Same problem here. I&#8217;m not getting the option to change read/write permissions.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=168263#respond' onclick='return addComment.moveForm( "div-comment-168263", "168263", "respond", "12472" )' aria-label='Reply to Trench'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1" id="comment-168621">
+				<div id="div-comment-168621" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">icebreaker</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-168621">
+			February 8, 2011 at 3:42 pm</a>		</div>
+
+		<p>You can not change read/write permissions from a windows based server on a mac. Just use remote desktop connection for mac from microsoft and login to the server and change it their. Would like to see this issue fixed.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=168621#respond' onclick='return addComment.moveForm( "div-comment-168621", "168621", "respond", "12472" )' aria-label='Reply to icebreaker'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="comment-168685">
+				<div id="div-comment-168685" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Don</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-168685">
+			February 8, 2011 at 10:17 pm</a>		</div>
+
+		<p>Of course you can use FTP from your Mac. The Mac is a Unix system, and all Unix systems have FTP built-in. You can use it from the command line (using the Terminal app). In this case, the GUI doesn&#8217;t make it any easier.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=168685#respond' onclick='return addComment.moveForm( "div-comment-168685", "168685", "respond", "12472" )' aria-label='Reply to Don'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="pingback odd alt thread-even depth-1" id="comment-169386">
+				<div id="div-comment-169386" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='http://www.tip4mac.com/2011/02/ftp-from-mac/' rel='external nofollow' class='url'>OS X 系统内置 FTP 工具</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-169386">
+			February 11, 2011 at 12:01 am</a>		</div>
+
+		<p>[&#8230;] via OSXDaily [&#8230;]</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=169386#respond' onclick='return addComment.moveForm( "div-comment-169386", "169386", "respond", "12472" )' aria-label='Reply to OS X 系统内置 FTP 工具'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="comment-173240">
+				<div id="div-comment-173240" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">David</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-173240">
+			February 21, 2011 at 1:25 am</a>		</div>
+
+		<p>It&#8217;s a bit unfortunate though that it doesn&#8217;t support sftp:// in finder, while it works just fine in the terminal (since it&#8217;s unix power..). Sticking with FileZilla for sftp atm.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=173240#respond' onclick='return addComment.moveForm( "div-comment-173240", "173240", "respond", "12472" )' aria-label='Reply to David'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="pingback odd alt thread-even depth-1" id="comment-173276">
+				<div id="div-comment-173276" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='http://osxdaily.com/2011/02/21/change-file-permissions-mac/' rel='external nofollow' class='url'>Change File Permissions in Mac OS X</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-173276">
+			February 21, 2011 at 4:53 am</a>		</div>
+
+		<p>[&#8230;] readers pointed out that you can use Get Info to adjust file permissions on remote files using the Mac OS X built-in FTP client, which is pretty convenient if you&#8217;re without a separate FTP [&#8230;]</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=173276#respond' onclick='return addComment.moveForm( "div-comment-173276", "173276", "respond", "12472" )' aria-label='Reply to Change File Permissions in Mac OS X'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="pingback even thread-odd thread-alt depth-1" id="comment-183115">
+				<div id="div-comment-183115" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='http://allgraphicsonline.com/wordpress/?p=15110' rel='external nofollow' class='url'>Connecting Mac To Mac | AllGraphicsOnline.com</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-183115">
+			March 17, 2011 at 8:56 am</a>		</div>
+
+		<p>[&#8230;] connect-ftp-from-mac osxdaily.com [&#8230;]</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=183115#respond' onclick='return addComment.moveForm( "div-comment-183115", "183115", "respond", "12472" )' aria-label='Reply to Connecting Mac To Mac | AllGraphicsOnline.com'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="pingback odd alt thread-even depth-1" id="comment-192640">
+				<div id="div-comment-192640" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='http://osxdaily.com/2011/04/23/quickly-connect-to-any-server-from-any-app-via-the-dock/' rel='external nofollow' class='url'>Quickly Connect to any Server from any App via the Dock</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-192640">
+			April 23, 2011 at 10:17 am</a>		</div>
+
+		<p>[&#8230;] on the Finder icon in the Dock and selecting &#8220;Connect to Server.&#8221; From here you can connect to FTP, SMB, local, or remote servers as usual &#8211; and yes they will open in the [&#8230;]</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=192640#respond' onclick='return addComment.moveForm( "div-comment-192640", "192640", "respond", "12472" )' aria-label='Reply to Quickly Connect to any Server from any App via the Dock'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="comment-192715">
+				<div id="div-comment-192715" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">John</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-192715">
+			April 23, 2011 at 6:01 pm</a>		</div>
+
+		<p>It&#8217;s not really FTP support if you can&#8217;t upload.  Does this really not support copying files to the FTP server?</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=192715#respond' onclick='return addComment.moveForm( "div-comment-192715", "192715", "respond", "12472" )' aria-label='Reply to John'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="pingback odd alt thread-even depth-1" id="comment-245743">
+				<div id="div-comment-245743" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='http://osxdaily.com/2011/09/29/start-an-ftp-or-sftp-server-in-mac-os-x-lion/' rel='external nofollow' class='url'>Start an FTP or SFTP Server in Mac OS X</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-245743">
+			September 29, 2011 at 10:32 am</a>		</div>
+
+		<p>[&#8230;] hasn&#8217;t finished starting yet or you didn&#8217;t enter the command properly. You can then FTP from other Macs via the same ftp command, or by using the &#8220;Connect to Server&#8221; option in the [&#8230;]</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=245743#respond' onclick='return addComment.moveForm( "div-comment-245743", "245743", "respond", "12472" )' aria-label='Reply to Start an FTP or SFTP Server in Mac OS X'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="comment-295931">
+				<div id="div-comment-295931" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Angel</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-295931">
+			December 7, 2011 at 10:50 am</a>		</div>
+
+		<p>Awesome&#8230;!! when I read about these little tips which are BIG TIPS I realize how much I need to learn more about my MAC.</p>
+<p>THANKS!!</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=295931#respond' onclick='return addComment.moveForm( "div-comment-295931", "295931", "respond", "12472" )' aria-label='Reply to Angel'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1 parent" id="comment-311167">
+				<div id="div-comment-311167" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Sarah</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-311167">
+			January 6, 2012 at 9:27 am</a>		</div>
+
+		<p>I don&#8217;t have a mac and filezilla is crap, so I&#8217;ve started to use Maytech.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=311167#respond' onclick='return addComment.moveForm( "div-comment-311167", "311167", "respond", "12472" )' aria-label='Reply to Sarah'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment even depth-2" id="comment-490163">
+				<div id="div-comment-490163" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">stuart</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-490163">
+			February 6, 2013 at 10:45 am</a>		</div>
+
+		<p>Whats crap about filezilla? , I&#8217;m just trying it as the normal client I use isn&#8217;t installed on the mac I&#8217;m working on and I&#8217;m much preferring it to the cyberDuck that I most often use on osx.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=490163#respond' onclick='return addComment.moveForm( "div-comment-490163", "490163", "respond", "12472" )' aria-label='Reply to stuart'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1 parent" id="comment-316900">
+				<div id="div-comment-316900" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Al</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-316900">
+			January 16, 2012 at 9:02 am</a>		</div>
+
+		<p>Thanks for posting this, but&#8230;</p>
+<p>I am running 10.6.8, and get an odd error when trying this route.  I can enter <a href="ftp://mysitename.com" rel="nofollow">ftp://mysitename.com</a> into my web browser (both Safari &amp; Firefox), enter the ftp login when prompted, and can view the directory.  However, when I try to do it from the Connect to Server prompt, I get &#8220;You have entered an invalid username or password&#8221;.  I have tried both <a href="ftp://ftp.mysitename.com" rel="nofollow">ftp://ftp.mysitename.com</a>, as well as <a href="ftp://mysitename.com" rel="nofollow">ftp://mysitename.com</a>, and get the same error either way.</p>
+<p>Any ideas?</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=316900#respond' onclick='return addComment.moveForm( "div-comment-316900", "316900", "respond", "12472" )' aria-label='Reply to Al'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment byuser comment-author-admin even depth-2 parent" id="comment-316933">
+				<div id="div-comment-316933" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Matt</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-316933">
+			January 16, 2012 at 10:39 am</a>		</div>
+
+		<p>It&#8217;s probably defaulting to your Mac user name, be sure to specify the appropriate name for the server</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=316933#respond' onclick='return addComment.moveForm( "div-comment-316933", "316933", "respond", "12472" )' aria-label='Reply to Matt'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment odd alt depth-3" id="comment-347429">
+				<div id="div-comment-347429" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">gena</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-347429">
+			February 29, 2012 at 1:56 pm</a>		</div>
+
+		<p>Hw do you do that?</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=347429#respond' onclick='return addComment.moveForm( "div-comment-347429", "347429", "respond", "12472" )' aria-label='Reply to gena'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-347477">
+				<div id="div-comment-347477" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Joe</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-347477">
+			February 29, 2012 at 2:50 pm</a>		</div>
+
+		<p>I can connect to an ftp server using terminal and ftp but when I try using Finder it says invalid user name or password.  Since I have a @ in my password and that messes up the <a href="ftp://username:password@address" rel="nofollow">ftp://username:password@address</a> form for entering an ftp address with user name and password, I am wondering if that is the problem?  If so, do I have to change the password or is there a way around this (maybe with a \@ or something like that?)?</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=347477#respond' onclick='return addComment.moveForm( "div-comment-347477", "347477", "respond", "12472" )' aria-label='Reply to Joe'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-369855">
+				<div id="div-comment-369855" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Peter</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-369855">
+			April 1, 2012 at 5:14 am</a>		</div>
+
+		<p>The GUI version is unusable as it&#8217;s read only &#8211; mught as well use the ftp:// scheme in a browser.<br />
+If you really want to *upload* files, why don&#8217;t you use the command-line client?<br />
+Open the Terminal and type:<br />
+ftp <a href="http://ftp.host.com" rel="nofollow">http://ftp.host.com</a><br />
+it will ask for your username and password (and in this case an @ in the address is not a problem).<br />
+then you can upload whatever you want with:<br />
+put filename<br />
+you don&#8217;t need to type the complete filename though &#8211; just the first letters and then press Tab for autocomplete<br />
+have fun!</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=369855#respond' onclick='return addComment.moveForm( "div-comment-369855", "369855", "respond", "12472" )' aria-label='Reply to Peter'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1 parent" id="comment-371719">
+				<div id="div-comment-371719" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Brandon</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-371719">
+			April 3, 2012 at 10:35 pm</a>		</div>
+
+		<p>Only problem?  This is read only.  Can&#8217;t copy files to the server.  Useless garbage.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=371719#respond' onclick='return addComment.moveForm( "div-comment-371719", "371719", "respond", "12472" )' aria-label='Reply to Brandon'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment odd alt depth-2" id="comment-1733792">
+				<div id="div-comment-1733792" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Loraine</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-1733792">
+			December 14, 2015 at 2:15 pm</a>		</div>
+
+		<p>Totally useless&#8230;</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=1733792#respond' onclick='return addComment.moveForm( "div-comment-1733792", "1733792", "respond", "12472" )' aria-label='Reply to Loraine'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="comment-378197">
+				<div id="div-comment-378197" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">jsherk</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-378197">
+			April 15, 2012 at 8:55 pm</a>		</div>
+
+		<p>Yes, I noticed the same thing on OS X Lion &#8230; read only! Would have been awesome if you could write as well!</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=378197#respond' onclick='return addComment.moveForm( "div-comment-378197", "378197", "respond", "12472" )' aria-label='Reply to jsherk'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1" id="comment-408372">
+				<div id="div-comment-408372" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='http://www.edwardbeckett.com' rel='external nofollow' class='url'>Edward Beckett</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-408372">
+			July 19, 2012 at 9:46 pm</a>		</div>
+
+		<p>ssh://<br />
+scp://<br />
+git:// </p>
+<p>What else do ya&#8217; need?</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=408372#respond' onclick='return addComment.moveForm( "div-comment-408372", "408372", "respond", "12472" )' aria-label='Reply to Edward Beckett'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="comment-418603">
+				<div id="div-comment-418603" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='http://www.terry-rehab.com' rel='external nofollow' class='url'>Guy Terry</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-418603">
+			August 18, 2012 at 10:13 pm</a>		</div>
+
+		<p>I also could not get it to accept my username and password combination.  I have verified that they are correct. I&#8217;m not sure what the deal is, but my username does have an @ in the password. I typed in the command in Terminal just as suggested above, and it said that I didn&#8217;t specify a file name. What else could be wrong?</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=418603#respond' onclick='return addComment.moveForm( "div-comment-418603", "418603", "respond", "12472" )' aria-label='Reply to Guy Terry'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1" id="comment-455346">
+				<div id="div-comment-455346" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='?' rel='external nofollow' class='url'>David J Pietz</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-455346">
+			November 23, 2012 at 5:49 pm</a>		</div>
+
+		<p>OK.  I command-K like above and browsed from there.  I saw the offending site and unmounted it.  I cant power down right now, but I guess my problem is solved.  Thanks</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=455346#respond' onclick='return addComment.moveForm( "div-comment-455346", "455346", "respond", "12472" )' aria-label='Reply to David J Pietz'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="comment-456664">
+				<div id="div-comment-456664" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Greg</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-456664">
+			November 25, 2012 at 4:48 pm</a>		</div>
+
+		<p>Doesn&#8217;t work for me. Not at all. Always says I&#8217;ve entered an invalid username or password. Guess I don&#8217;t really care, since it&#8217;s read-only anyway.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=456664#respond' onclick='return addComment.moveForm( "div-comment-456664", "456664", "respond", "12472" )' aria-label='Reply to Greg'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1 parent" id="comment-461184">
+				<div id="div-comment-461184" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">DFLAN</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-461184">
+			December 6, 2012 at 3:11 am</a>		</div>
+
+		<p>Ridiculous article &#8230; FTP in the Finder is useless : </p>
+<p>1. Doesn&#8217;t allow uploads<br />
+2. Unstable </p>
+<p>Advising people to use it is just irresponsible and misleading.</p>
+<p>I personally use Yummy FTP (<a href="http://www.yummysoftware.com" rel="nofollow">http://www.yummysoftware.com</a>) and it&#8217;s really easy to use and very reliable. But any other FTP client app will work better than the Finder!!</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=461184#respond' onclick='return addComment.moveForm( "div-comment-461184", "461184", "respond", "12472" )' aria-label='Reply to DFLAN'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment even depth-2 parent" id="comment-606334">
+				<div id="div-comment-606334" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='http://ecobeautyreviews.com' rel='external nofollow' class='url'>Erin</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-606334">
+			January 24, 2014 at 10:49 pm</a>		</div>
+
+		<p>Hello DFLAN,<br />
+Thanks for mentioning Yummy Software. I have been looking for an FTP client for Mac users. I am trying the trial version of Yummy FTP and so far it works great. :)</p>
+<p>Hello Paul,<br />
+I appreciate what you posted. However, it didn&#8217;t work on my Mac.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=606334#respond' onclick='return addComment.moveForm( "div-comment-606334", "606334", "respond", "12472" )' aria-label='Reply to Erin'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment odd alt depth-3" id="comment-682365">
+				<div id="div-comment-682365" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">donls</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-682365">
+			June 27, 2014 at 1:09 pm</a>		</div>
+
+		<p>I have been using Interarchy (and its predecessor Anarchy) for years, and am very happy with it. From time to time I try other clients (such as Flow, which I got in a bundle deal) but I keep coming back to Interarchy. Lots of extra features (most of which I don&#8217;t use), but usually very stable and reliable.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=682365#respond' onclick='return addComment.moveForm( "div-comment-682365", "682365", "respond", "12472" )' aria-label='Reply to donls'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="comment-503599">
+				<div id="div-comment-503599" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">nk</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-503599">
+			February 25, 2013 at 9:22 pm</a>		</div>
+
+		<p>Need to connect with the ftp address which contains only ip address.and when giving &#8220;ftp://ip&#8221; details it is giving error.please suggest&#8230;&#8230;</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=503599#respond' onclick='return addComment.moveForm( "div-comment-503599", "503599", "respond", "12472" )' aria-label='Reply to nk'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1" id="comment-559805">
+				<div id="div-comment-559805" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='http://www.policybox.co.uk' rel='external nofollow' class='url'>robin</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-559805">
+			November 7, 2013 at 5:25 am</a>		</div>
+
+		<p>I have a windows machine running FTP server and can connect ok from other pcs. My mac keeps giving me an error message saying incorrect ftp password even though I can logon from another pc on the same local network OK. I tried filezilla client on the mac too &#8211; it just gives timeout messages.<br />
+I&#8217;ll try command line(terminal app) next</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=559805#respond' onclick='return addComment.moveForm( "div-comment-559805", "559805", "respond", "12472" )' aria-label='Reply to robin'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1 parent" id="comment-605653">
+				<div id="div-comment-605653" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">WBKitty</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-605653">
+			January 22, 2014 at 1:08 pm</a>		</div>
+
+		<p>Thanks for this&#8211;worked like a charm. I have a Mac with Mountain Lion. I set up an FTP account through my Web Host. Command-K opened the FTP window. Initially, I also had trouble with the Username and Password. I expected that they would be the same combo I had just created to set up my FTP account. NOPE! A bit puzzling until I realized that I was encountering the security of my Web Host, not the FTP account. When I tried the Username and Password combo that I use to log into my Web Host account, everything worked like a charm. I was able to drag and drop the files and folders I needed. Thanks so much for making me aware of this great feature! OS X is much more powerful than I will ever know, and I love it that the Internet quickly provides answers to my needs. I was looking at third party software when I came across your post. Awesome!</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=605653#respond' onclick='return addComment.moveForm( "div-comment-605653", "605653", "respond", "12472" )' aria-label='Reply to WBKitty'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment odd alt depth-2 parent" id="comment-674379">
+				<div id="div-comment-674379" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Bill</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-674379">
+			May 27, 2014 at 5:26 am</a>		</div>
+
+		<p>Are you saying you can upload files to your web server this way?  I set this up and can download beautifully, but cannot drag and drop a file onto the server window to effect an upload. Everything I read says apple did not supply this capability with this interface.  Dis you manage to find a setting or defeat this?  I would LOVE to use this GUI to upload.</p>
+<p>Best and thanks,</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=674379#respond' onclick='return addComment.moveForm( "div-comment-674379", "674379", "respond", "12472" )' aria-label='Reply to Bill'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment byuser comment-author-admin even depth-3 parent" id="comment-674418">
+				<div id="div-comment-674418" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Paul</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-674418">
+			May 27, 2014 at 10:19 am</a>		</div>
+
+		<p>Yes you can use the file system as a simple FTP manager to upload files to remote servers.</p>
+<p>Simply use the FTP protocol from the Mac and the familiar drag &#038; drop within the file system to upload files to the remote FTP server.</p>
+<p>You can use secure ftp by prefixing with &#8220;ftps://domain&#8221;</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=674418#respond' onclick='return addComment.moveForm( "div-comment-674418", "674418", "respond", "12472" )' aria-label='Reply to Paul'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment odd alt depth-4" id="comment-677121">
+				<div id="div-comment-677121" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">clu</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-677121">
+			June 8, 2014 at 9:43 am</a>		</div>
+
+		<p>No it is read only. Cannot upload. Using OSX 10.9.3 Mavericks.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=677121#respond' onclick='return addComment.moveForm( "div-comment-677121", "677121", "respond", "12472" )' aria-label='Reply to clu'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even depth-4" id="comment-682364">
+				<div id="div-comment-682364" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">donls</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-682364">
+			June 27, 2014 at 1:06 pm</a>		</div>
+
+		<p>I found the same thing. FTP window (or ftps) is read-only. (running Mavericks)<br />
+I can connect just fine, using ssh credentials from my keychain, and I own the account on the other end. I just can&#8217;t write to it.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=682364#respond' onclick='return addComment.moveForm( "div-comment-682364", "682364", "respond", "12472" )' aria-label='Reply to donls'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1" id="comment-605740">
+				<div id="div-comment-605740" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">DDC</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-605740">
+			January 22, 2014 at 5:01 pm</a>		</div>
+
+		<p>I&#8217;ve tried accessing my printer&#8217;s ftp various ways (ftp link, their website, various browsers) &#8211; worked fine last time, not at all this month. Printer says it&#8217;s working fine on their end. I checked my Mac security and tried uploading via cmd+K and FileZilla. Neither worked. Can&#8217;t figure out what I&#8217;m doing wrong.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=605740#respond' onclick='return addComment.moveForm( "div-comment-605740", "605740", "respond", "12472" )' aria-label='Reply to DDC'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="comment-674491">
+				<div id="div-comment-674491" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Donnell</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-674491">
+			May 27, 2014 at 6:58 pm</a>		</div>
+
+		<p>Thank you</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=674491#respond' onclick='return addComment.moveForm( "div-comment-674491", "674491", "respond", "12472" )' aria-label='Reply to Donnell'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1" id="comment-731110">
+				<div id="div-comment-731110" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">megadr01d</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-731110">
+			November 18, 2014 at 9:32 am</a>		</div>
+
+		<p>Read/write FTP. That&#8217;s the whole point of this article.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=731110#respond' onclick='return addComment.moveForm( "div-comment-731110", "731110", "respond", "12472" )' aria-label='Reply to megadr01d'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="comment-868022">
+				<div id="div-comment-868022" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Andre</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-868022">
+			February 4, 2015 at 6:55 am</a>		</div>
+
+		<p>While I can DOWNLOAD from your FTP server to the Mac, I can not UPLOAD from your Mac to the FTP server.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=868022#respond' onclick='return addComment.moveForm( "div-comment-868022", "868022", "respond", "12472" )' aria-label='Reply to Andre'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1" id="comment-893361">
+				<div id="div-comment-893361" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Anson</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-893361">
+			February 11, 2015 at 4:00 am</a>		</div>
+
+		<p>Same here, trying to figure out how to change permission for MAC, since its only Read-Only permission (can&#8217;t Upload), while WINDOWS can Read/Write (Upload/Download).</p>
+<p>Please help.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=893361#respond' onclick='return addComment.moveForm( "div-comment-893361", "893361", "respond", "12472" )' aria-label='Reply to Anson'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1 parent" id="comment-1092942">
+				<div id="div-comment-1092942" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Rey</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-1092942">
+			April 13, 2015 at 4:36 pm</a>		</div>
+
+		<p>Whenever I try to press cmd+k on my desktop, nothing happens. I also can&#8217;t see the &#8220;Connect to server&#8221; option under the Go menu. How can I fix this?</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=1092942#respond' onclick='return addComment.moveForm( "div-comment-1092942", "1092942", "respond", "12472" )' aria-label='Reply to Rey'>Reply</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment odd alt depth-2" id="comment-1167892">
+				<div id="div-comment-1167892" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Josh</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-1167892">
+			May 6, 2015 at 6:07 pm</a>		</div>
+
+		<p>It only works when you&#8217;re in Finder. Open a Finder window and then press Command-K.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=1167892#respond' onclick='return addComment.moveForm( "div-comment-1167892", "1167892", "respond", "12472" )' aria-label='Reply to Josh'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-1677814">
+				<div id="div-comment-1677814" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='http://alawamiproductions.com/listen' rel='external nofollow' class='url'>Sarah Alawami</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-1677814">
+			November 25, 2015 at 8:01 pm</a>		</div>
+
+		<p>Here&#8217;s the odd thing. I got ftp working but ftpwho is not working. I&#8217;m wondering if this is linux specific or if ftpwho can work under unix as well as both are sort of the same.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=1677814#respond' onclick='return addComment.moveForm( "div-comment-1677814", "1677814", "respond", "12472" )' aria-label='Reply to Sarah Alawami'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-2325356">
+				<div id="div-comment-2325356" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='http://www.ceproductions.co.za' rel='external nofollow' class='url'>Natasha Xavier</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-2325356">
+			May 25, 2016 at 3:46 am</a>		</div>
+
+		<p>Im having trouble dragging a file into my FTP Server. I have done everything as it states above, but when i drag my file into the folder, it doesnt go. I have tried copy and paste but it doesnt work either. I have tried via Filezilla but it also doesnt work. What else can i try?</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=2325356#respond' onclick='return addComment.moveForm( "div-comment-2325356", "2325356", "respond", "12472" )' aria-label='Reply to Natasha Xavier'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-2944588">
+				<div id="div-comment-2944588" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">Hi∂∂en</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-2944588">
+			November 9, 2016 at 9:53 am</a>		</div>
+
+		<p>Double Commander is great for FTP/FTPS</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=2944588#respond' onclick='return addComment.moveForm( "div-comment-2944588", "2944588", "respond", "12472" )' aria-label='Reply to Hi∂∂en'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-3150778">
+				<div id="div-comment-3150778" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='http://provemath.org' rel='external nofollow' class='url'>Mareo Raft</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-3150778">
+			January 3, 2017 at 5:00 pm</a>		</div>
+
+		<p>I highly recommend Transmit.  It now supports mounting the disk, so that you can interact with your files directly in the Finder if you wish.  This includes the coveted write access.</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=3150778#respond' onclick='return addComment.moveForm( "div-comment-3150778", "3150778", "respond", "12472" )' aria-label='Reply to Mareo Raft'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-4772323">
+				<div id="div-comment-4772323" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn">James Bowery</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://osxdaily.com/2011/02/07/ftp-from-mac/#comment-4772323">
+			September 27, 2017 at 10:51 am</a>		</div>
+
+		<p>The fact that the command line FTP permits `put` operations but the Finder prevents write operations using the same credentials is a bug in the Finder.  Why won&#8217;t Apple fix its bugs?</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://osxdaily.com/2011/02/07/ftp-from-mac/?replytocom=4772323#respond' onclick='return addComment.moveForm( "div-comment-4772323", "4772323", "respond", "12472" )' aria-label='Reply to James Bowery'>Reply</a></div>
+				</div>
+		</li><!-- #comment-## -->
+	</ol>
+
+
+ 
+
+
+<div id="respond">
+
+<h3>Leave a Reply</h3>
+
+<div class="cancel-comment-reply">
+	<small><a rel="nofollow" id="cancel-comment-reply-link" href="/2011/02/07/ftp-from-mac/#respond" style="display:none;">Click here to cancel reply.</a></small>
+</div>
+
+
+<form action="https://osxdaily.com/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" aria-required='true' />
+<label for="author"><small>Name (required)</small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" aria-required='true' />
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+<label for="url"><small>Website</small></label></p>
+
+
+<p><textarea name="comment" id="comment" cols="58" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+<input type="hidden" name="comment_post_ID" value="12472" />
+
+<input type='hidden' name='comment_post_ID' value='12472' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p>
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="ed447ea25c" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="35"/></p>
+</form>
+
+
+</div>
+
+
+
+<div class="navigation">
+<div class="aleft">
+&laquo; <a href="http://osxdaily.com/2011/02/07/white-iphone-4-labels-appear-at-retailers/">White iPhone 4 Labels Appear at Retailers</a></div>
+<div class="aright">
+<a href="http://osxdaily.com/2011/02/07/buy-an-iphone-app-once-and-all-following-downloads-of-the-app-are-free/">Buy an iPhone App Once and All Following Downloads of the App are Free</a> &raquo;</div>
+</div> <!-- end navigation -->
+
+
+<p>&nbsp;</p>
+<span class="content_ad_head"><a target="_blank" rel="nofollow" href="http://www.amazon.com/gp/redirect.html?ie=UTF8&location=http%3A%2F%2Fwww.amazon.com%2FApple-Computers%2Fb%3Fie%3DUTF8%26node%3D565124&tag=oxd-20&linkCode=ur2&camp=1789&creative=390957">Shop for Apple & Mac Deals on Amazon.com</a><img src="https://www.assoc-amazon.com/e/ir?t=oxd-20&l=ur2&o=1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></span>
+
+
+</div>
+
+<div id="right_column">
+<div id="subscribe_box">
+<h3 class="sidebarstyle" id="subscribe_box_head">Subscribe to OSXDaily</h3>
+<a rel="nofollow" target="_blank" target="_blank" href="http://feeds.feedburner.com/osxdaily"><img src="http://cdn.osxdaily.com/wp-content/themes/osxdaily-left2/img/socialicons/rss-icon.png" border="0" height="48" width="48" alt="Subscribe to RSS" /></a>
+
+<a rel="nofollow" target="_blank" href="http://twitter.com/osxdaily"><img src="http://cdn.osxdaily.com/wp-content/themes/osxdaily-left2/img/socialicons/twitter-icon.png" border="0" height="48" width="48" alt="Subscribe to Twitter Feed" /></a>
+
+<a rel="nofollow" target="_blank" href="http://www.facebook.com/osxdaily"><img src="http://cdn.osxdaily.com/wp-content/themes/osxdaily-left2/img/socialicons/facebook-icon.png" border="0" height="48" width="48" alt="Follow on Facebook" /></a>
+
+<a rel="nofollow" target="_blank" href="http://feedburner.google.com/fb/a/mailverify?uri=osxdaily&amp;loc=en_US"><img src="http://cdn.osxdaily.com/wp-content/themes/osxdaily-left2/img/socialicons/mail-icon.png" border="0" height="48" width="48" alt="Subscribe to eMail Updates" /></a>
+
+<div style="padding:10px 0 20px 25px;">
+
+<div style="width:125px;float:left;">
+<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffacebook.com%2Fosxdaily&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>
+</div>
+
+<div style="width:100px;float:left;">
+<a href="https://twitter.com/OSXDaily" class="twitter-follow-button" data-show-count="false">Follow @OSXDaily</a>
+<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div style="margin:10px 0;">
+
+<!-- BuySellAds Zone Code -->
+<div id="bsap_1278263" class="bsarocks bsap_95cb8853ab792f424634d57b5de28eed"></div>
+<!-- End BuySellAds Zone Code -->
+
+<div style="margin:10px 0;">
+
+<!-- tf -->
+<script type="text/javascript"><!--
+	e9 = new Object();
+    e9.size = "300x250,160x600,300x600";
+//--></script>
+<script type="text/javascript" src="http://tags.expo9.exponential.com/tags/OSXDailycom/ROS/tags.js"></script>
+</div>
+
+</div>
+
+<div style="margin-top:10px;"></div>
+
+
+
+
+<div style="margin:10px 0;text-align:center;">
+<iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Ffacebook.com%2Fosxdaily&amp;width=300&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=true&amp;height=258" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:258px;" allowTransparency="true"></iframe>
+</div>
+
+
+<div style="margin:10px 0;">
+
+</div>
+
+<script type="text/javascript"><!--
+	e9 = new Object();
+    e9.size = "300x250,160x600,300x600";
+//--></script>
+<script type="text/javascript" src="http://tags.expo9.exponential.com/tags/OSXDailycom/ROS/tags.js"></script>
+
+
+<!-- matchedcontent -->
+<div style="margin:10px 0;">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-7321635426958037"
+     data-ad-slot="5553666864"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+
+
+<div style="margin:10px 0;">
+
+<!-- tf -->
+<script type="text/javascript"><!--
+	e9 = new Object();
+    e9.size = "300x250";
+    e9.noAd = 1;
+//--></script>
+<script type="text/javascript" src="http://tags.expo9.exponential.com/tags/OSXDailycom/ROS/tags.js"></script>
+
+</div>
+
+<h3 class="sidebarstyle">Recent Posts</h3>
+<ul>
+<li style="margin:16px 0;font-size:15px;">- <a style="font-weight:normal;color:#333;text-decoration:none;" href="http://osxdaily.com/?p=60185">Check Power Outage by Looking for Wi-Fi with iPhone, Mac, iPad</a> </li> <li style="margin:16px 0;font-size:15px;">- <a style="font-weight:normal;color:#333;text-decoration:none;" href="http://osxdaily.com/2018/02/05/hide-all-other-windows-apps-except-active-mac/">How to Hide All Other Windows Except Active App on Mac OS</a> </li> <li style="margin:16px 0;font-size:15px;">- <a style="font-weight:normal;color:#333;text-decoration:none;" href="http://osxdaily.com/?p=71311">How to Make iPhone Speaker Louder Sounding with EQ Settings</a> </li> <li style="margin:16px 0;font-size:15px;">- <a style="font-weight:normal;color:#333;text-decoration:none;" href="http://osxdaily.com/2018/02/04/show-geotagged-photos-map-mac/">How to Show a Map of All Geotagged Photos on Mac</a> </li> <li style="margin:16px 0;font-size:15px;">- <a style="font-weight:normal;color:#333;text-decoration:none;" href="http://osxdaily.com/2018/02/03/charge-iphone-listening-to-music-same-time-again/">How to Charge iPhone While Listening to Music Simultaneously via AUX Headphone Jack</a> </li> <li style="margin:16px 0;font-size:15px;">- <a style="font-weight:normal;color:#333;text-decoration:none;" href="http://osxdaily.com/2018/02/02/fix-copy-paste-not-working-mac/">Copy Paste Not Working on Mac? Here's How to Fix a Stuck Clipboard</a> </li> <li style="margin:16px 0;font-size:15px;">- <a style="font-weight:normal;color:#333;text-decoration:none;" href="http://osxdaily.com/?p=71217">How to Search Emoji on Mac</a> </li> <li style="margin:16px 0;font-size:15px;">- <a style="font-weight:normal;color:#333;text-decoration:none;" href="http://osxdaily.com/2018/02/01/remove-stickers-messages-ios/">How to Remove Stickers from Messages Conversations on iPhone or iPad</a> </li> <li style="margin:16px 0;font-size:15px;">- <a style="font-weight:normal;color:#333;text-decoration:none;" href="http://osxdaily.com/2018/01/31/use-windows-pc-keyboard-mac-remap-option-command-keys/">How to Use a Windows PC Keyboard on Mac by Remapping Command & Option Keys</a> </li> <li style="margin:16px 0;font-size:15px;">- <a style="font-weight:normal;color:#333;text-decoration:none;" href="http://osxdaily.com/2018/01/30/ios-capitalizing-random-words-workaround/">iPhone or iPad Capitalizing Random Words? Try This Workaround</a> </li> </ul>
+
+
+<div style="margin:10px auto;text-align:center;">
+<!-- wide amazon banner -->
+<iframe src="http://rcm-na.amazon-adsystem.com/e/cm?t=oxd-20&o=1&p=12&l=st1&mode=electronics&search=Apple&fc1=000000&lt1=_blank&lc1=3366FF&bg1=FFFFFF&f=ifr" marginwidth="0" marginheight="0" width="300" height="250" border="0" frameborder="0" style="border:none;" scrolling="no"></iframe>
+</div>
+
+
+
+
+
+</div>
+
+
+<div id="footer">
+
+<script type="text/javascript"><!--
+	e9 = new Object();
+    e9.size = "728x90,468x60";
+    e9.noAd = 1;
+//--></script>
+<script type="text/javascript" src="http://tags.expo9.exponential.com/tags/OSXDailycom/ROS/tags.js"></script>
+
+<div id="footer_item_container">
+
+
+
+<h4>OS X Daily</h4>
+<p>Email us: <a href="mailto:osxdailycom@gmail.com" target="_blank">osxdailycom@gmail.com</a></p>
+<p><a href="http://osxdaily.com/about/">About OSXDaily</a> | <a href="http://www.osxdaily.com/contact-os-x-daily/">Contact Us</a> | <a href="http://osxdaily.com/osxdailycom-privacy-policy/">Privacy Policy</a> | <a href="http://osxdaily.com/sitemap-all/">Sitemap</a> </p>
+<p>This website is unrelated to Apple Inc</p>
+<p>All trademarks and copyrights on this website are property of their respective owners.</p>
+
+
+</div>
+
+<div id="footer_text">
+<p>&copy; 2018 OS X Daily. All Rights Reserved. Reproduction without explicit permission is prohibited.</p>
+</div>
+
+
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-428992-6";
+urchinTracker();
+</script>
+
+
+
+<!-- Powered by WPtouch Pro: 3.8.3 -->	<div style="display:none">
+	</div>
+<script type='text/javascript' src='http://cdn.osxdaily.com/wp-includes/js/comment-reply.min.js?ver=4.9.2'></script>
+<script type='text/javascript' src='https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201806'></script>
+<script type='text/javascript' src='http://cdn.osxdaily.com/wp-content/plugins/wp-syntax/js/wp-syntax.js?ver=1.1'></script>
+<script type='text/javascript' src='http://cdn.osxdaily.com/wp-includes/js/wp-embed.min.js?ver=4.9.2'></script>
+<script type='text/javascript' src='http://cdn.osxdaily.com/wp-content/plugins/akismet/_inc/form.js?ver=4.0'></script>
+<script type='text/javascript' src='https://stats.wp.com/e-201806.js' async defer></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:5.4',blog:'6690815',post:'12472',tz:'-7',srv:'osxdaily.com'} ]);
+	_stq.push([ 'clickTrackerInit', '6690815', '12472' ]);
+</script>
+</div>
+
+</div>
+
+<!-- BuySellAds Ad Code -->
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = 'http://s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script>
+<!-- End BuySellAds Ad Code -->
+
+</body>
+</html>

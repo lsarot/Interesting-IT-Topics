@@ -1,0 +1,364 @@
+**************************************************
+******** MASTERING GIT - SmartGit & others *******
+**************************************************
+
+A common Git workflow in use today is Vincent Driessen’s “GitFlow”,
+consisting of a master branch, a develop branch, and some fluctuating number of feature, release, and hotfix branches.
+"When I’m working alone on a personal project, I often commit straight to the master branch. But on a large professional endeavor, GitFlow is used to help the code “flow” into the appropriate places at the appropriate times. You can see how Git branches are related to continuous integration and release management in general."
+
++++ INDEX +++
+FEATURE, RELEASE, HOTFIX
+CONFIGURACIÓN SmartGit
+GIT IGNORE
+Commit Messages GOOD PRACTICES
+GIT CLI GUIDE
+STANDARD NAMING CONVENTION FOR GIT TAGS
+TIPS
+
+
+-------------------------------------------------
+------------ FEATURE, RELEASE, HOTFIX -----------
+-------------------------------------------------
+
++++ GIT-FLOW WORKFLOW RESUMEN (ver 'GIT-FLOW WORKFLOW.jpg')
+* master branch is used for production releases
+* develop branch contains stable features for the next release
+* create as many feature branches as you like (feature/COIN-1)
+* integrate feature branches to develop when is stable and tested (con finish feature)
+* changes on develop branch must be merged back into not finished feature branches
+* use a release branch to isolate and stabilize the release (release/v0.1.0)
+* fix bugs if needed or found over this release branch (in N commits bugfix1,bugfix2,..) (esto no cambia versión de la release, es un simple fix o refactor previo)
+* finish release, will create a Tag (v0.1.0), impacts on master and develop
+* create a hotfix branch to patch a (production) release (hotfix/HF1), finish hotfix, impacts on master and develop. (Tag v0.1.1)
+
+
++++ FEATURE (DESARROLLO)
+*** WORKING PROPERLY ON ANOTHER BRANCH AND MERGING WORK
+
+*being already in my feature-branch ('FEAT-10')
+.stage and commit changes or stash (apartarlos) them
+.pull-merge|pull-rebase from Develop (traemos cambios de dev)
+.solve conflicts if exists, then commit again if it was the case
+.execute unit tests, if OK
+.push to origin/'FEAT-10' [optional]
+.finish feature (impacts on Develop)
+
+
++++ RELEASE (DESPLIEGUE)
+*** RELEASE CONTIENE TODO DE LA RAMA DEVELOP
+
+.Branch > GitFlow > StartRelease
+.se crea Release como si fuera una rama (release/v1.1.x)
+.fix if needed
+.finish release (impacts on develop and master)
+
+
++++ HOTFIX (CORRECCIÓN)
+*** CAMBIOS DE ÚLTIMA HORA EN PRODUCCIÓN SE HACEN COMO UN HOTFIX, NO UN FEATURE, ASÍ SE APLICA SOBRE DEVELOP Y MASTER DIRECTAMENTE
+
+*supongamos que existen N Tags, pero nos interesa el que esté en producción y el último, v1.1.0 (actual en producción) y v1.2.0 (última)
+.el hotfix es para producción y último release (Tags), debe crearse a partir de estos. Un Tag usa nombre de versión (ie v3.2.0)
+.hacemos checkout en cada uno de esos 2 Tags y hacemos new hotfix (no estoy claro de esto!)
+.1 para la versión última (v1.2.1)
+.1 para la versión en producción (v1.1.1)
+*SI SE HIZO COMO FEATURE, HACER LO SIG:
+.una vez creado el hotfix, hacemos checkout sobre este
+.vamos al log de commits y buscamos el commit con los cambios que queremos subir a la versión haciendo un cherry-pick
+.finish hotfix
+
+
+
+//extra
+*En Jenkins desplegábamos en entorno formación (en BME/Amaris)
+*Reiniciamos el sistema (ledcom restart) para que levante el nuevo despliegue
+*En HPE tenemos entornos DEV (desarrollo), UAT (user acceptance tests), INT (integración), PRO (producción)
+
+
+
+-------------------------------------------------
+------------- CONFIGURACIÓN SmartGit ------------
+-------------------------------------------------
+
+- Main Branches:
+dev, master
+
+Features (we start a new feature in SmartGit, this creates a local branch),
+Hotfixes, (we can delete them after finishing it, it will impact on dev and master branches. Will create a new Tag)
+Releases (will create a new Tag, based on Develop branch)
+
+origin: referred as what is in the remote side
+
+git@gitlab.grupobme.es:marketdata/led/devteam.git
+git@gitlab.grubobme.es:inntech/apa/backend.git
+
+Existen varios escenarios:
+
+*NUEVO PROYECTO CREADO POR MÍ
+1.creamos proyecto en gitlab, github u otro
+2.la herramienta nos dirá los pasos, pero aquí los colocamos
+cd [project_dir]
+git init
+git remote add origin git@gitlab.com:group/project-name.git
+git add .
+git commit -m "Initial commit"
+git push -u origin master
+3.en SmartGit
+Repository>Add or Create, elegimos la carpeta del proyecto
+Repository>Settings
+estamos en master, Pull (configuramos merge o rebase por defecto)
+Branch>Git-Flow>Git-Flow, Git-Flow type: Full (se creará rama develop)
+Push develop
+
+*PROYECTO EXISTENTE QUE QUEREMOS TRABAJAR
+1.en SmartGit
+Repository>Clone (colocamos url, elegimos ruta en local)
+Repository>Settings
+Ya deben estar las ramas master y develop, podemos trabajar
+Quizás configurar Git-Flow
+
+
+
+-------------------------------------------------
+------------------ GIT IGNORE -------------------
+-------------------------------------------------
+
+.gitignore //descarta estos directorios y ficheros (por ejemplo librerías)
+
+### macOS ###
+.DS_Store
+**/.DS_Store
+
+*Si ya hice commits con fichero .DS_Store incluido y quiero borrarlos del repositorio
+.hacerlo del repositorio sólo, desde el gitlab web editor o web ide (se hará un commit)
+.en local, en directorio del proyecto, borramos registro de dicho fichero del git
+
+find . -name .DS_Store -print0 | xargs -0 git rm --ignore-unmatch
+
+*al parecer se borraron de local también los .DS_Store al hacer pull
+
+
+
+-------------------------------------------------
+-------- Commit Messages GOOD PRACTICES ---------
+-------------------------------------------------
+
+type: Subject
+
+body (what and why, not how)(one blank line between paragraphs)
+
+footer (issue trackers id for example)
+
+------------------------
+feat: a new feature
+fix: a bug fix
+docs: changes to documentation
+style: formatting, missing semi colons, etc; no code change
+refactor: refactoring production code
+test: adding tests, refactoring test; no production code change
+chore: updating build tasks, package manager configs, etc; no production code change
+------------------------
+EXAMPLE:
+
+(HEADER)
+feat: Summarize changes in around 50 characters or less
+
+(BODY)
+More detailed explanatory text, if necessary. Wrap it to about 72
+characters or so. In some contexts, the first line is treated as the
+subject of the commit and the rest of the text as the body. The
+blank line separating the summary from the body is critical (unless
+you omit the body entirely); various tools like `log`, `shortlog`
+and `rebase` can get confused if you run the two together.
+
+Explain the problem that this commit is solving. Focus on why you
+are making this change as opposed to how (the code explains that).
+Are there side effects or other unintuitive consequenses of this
+change? Here is the place to explain them.
+
+Further paragraphs come after blank lines.
+
+ - Bullet points are okay, too
+
+ - Typically a hyphen or asterisk is used for the bullet, preceded
+   by a single space, with blank lines in between, but conventions
+   vary here
+
+(FOOTER)
+If you use an issue tracker, put references to them at the bottom,
+like this:
+
+Resolves: #123
+See also: #456, #789
+
+
+
+-------------------------------------------------
+----------------- GIT CLI GUIDE -----------------
+-------------------------------------------------
+
+
+COMMIT TEMPLATE
+En linux: git config --global commit.template ~/.gitmessage.txt 
+En windows: git config --global commit.template C:\\directorio_de_proyectos/.gitmessage.txt
+
+
+COMMON COMMANDS
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone      Clone a repository into a new directory
+   init       Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add        Add file contents to the index
+   mv         Move or rename a file, a directory, or a symlink
+   reset      Reset current HEAD to the specified state
+   rm         Remove files from the working tree and from the index
+
+examine the history and state (see also: git help revisions)
+   bisect     Use binary search to find the commit that introduced a bug
+   grep       Print lines matching a pattern
+   log        Show commit logs
+   show       Show various types of objects
+   status     Show the working tree status
+
+grow, mark and tweak your common history
+   branch     List, create, or delete branches
+   checkout   Switch branches or restore working tree files
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   merge      Join two or more development histories together
+   rebase     Reapply commits on top of another base tip
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch      Download objects and refs from another repository
+   pull       Fetch from and integrate with another repository or a local branch
+   push       Update remote refs along with associated objects
+
+------------------------
+
+//// LOS FICHEROS PUEDEN ESTAR EN: untracked, modified, staged, commited
+
+NUEVO PROYECTO:
+git init //estando en una carpeta
+
+USAR UN PROYECTO EXISTENTE EN GITLAB POR EJEMPLO:
+git clone https://gitlab.com/ldostoamaris/my-project-0.git destino_opcional_otra_carpeta
+//se descarga el proyecto. Faltarán directorios del .gitignore por supuesto
+
+SOME CONFIGS:
+git config --global(or --local or nothing) --list
+git config --global user.name ldostoamaris
+//user.email leonardo.sarmientoottati
+//core.editor "nano"
+//commit.template C:/Users/AmarisGuest3/Documents/Git directory/git_commit_template.txt
+//merge.tool vimdiff //quizás puedo setear nano
+
+
+ALGUNOS COMANDOS PARA TRABAJAR EN LOCAL:
+git branch -v //muestra ramas
+git checkout branch_name //cambia a rama
+git checkout -b mine master //crea rama mine a partir de rama master
+git checkout HEAD~2 //cambia el puntero a 2 commits atrás
+git status //estado, si hay cambios o algo en staged(add sin commit todavía)
+git add . //(ó add *), añade cambios a staged
+git commit -m 'comentario del commit'
+git commit //si hay un commit template, abrirá el editor con el template del commit message
+git merge rama_xs //en la rama actual, introduce cambios de la rama_xs
+git diff //diff entre working dir e index/staging
+git diff --staged / git diff HEAD //entre HEAD e index / entre HEAD y workingdir
+git diff --cached //creo que igual que --staged
+git diff commit1ID commit2ID
+git show commitID
+git rm file/dir -r -f -q //elimina del workingdir e index, -r es para recursividad, -f para forzar, -q suprime info de ficheros eliminados
+git rm --cached file/dir //elimina sólo del index
+git mv -v -f -n -k <source> <dest> //mueve o cambia nombre, -k evita si condujeran a un error
+git log -p --stat --pretty --graph //muestra últimos p commits, --stat muestra ficheros afectados, --pretty cada commit en una línea, --graph una especie de grafo
+git shortlog //resumen de commits
+gitk
+git gui
+
+add -u -A -n // -u agrega los que están siendo tracked(ya se ha hecho commit), -A trackeds y untrackeds, -n muestra qué pasaría si se hace
+commit -a // sin necesidad de hacer add, pero sólo afecta ficheros que ya estaban siendo tracked, no los nuevos
+commit --amend -m 'msj' // --amend permite corregir el último commit
+
+
+ALGUNOS COMANDOS PARA TRABAJAR CON REPO REMOTO
+git pull //trae cambios del remoto al local... git pull=git fetch + git merge
+git pull origin master
+git push origin master//sube cambios ya en commit al repo remoto, a la rama master
+
+git remote add origin(alias) https://gitlab.com/ldostoamaris/ejercicios_html_css.git
+//git enlazará al alias origin el repo remoto del url
+//con clone, git usará origin como alias del repo remoto
+git remote -v //muestra cómo está enlazado el proyecto actual al repo remoto
+git remote rm origin //remueve la ref al repo remoto con el alias origin
+git remote rename origin newalias
+git fetch //descarga commits desde repo remoto, pero no hace merge con el local. Se almacenen como ramas remotas
+git fetch <remote> <branch> //sólo descarga la rama especificada
+git merge origin/master //luego de fetch se suele hacer merge. Al alias origin, combinamos con rama master del remoto
+
+
+
+-------------------------------------------------
+---- STANDARD NAMING CONVENTION FOR GIT TAGS ----
+-------------------------------------------------
+
+https://stackoverflow.com/questions/2006265/is-there-a-standard-naming-convention-for-git-tags
+Version 1.0.0 of Semantic Versioning, by Tom Preston-Werner of GitHub fame, had a sub-specification addressing this:
+    Tagging Specification (SemVerTag)
+    This sub-specification SHOULD be used if you use a version control system (Git, Mercurial, SVN, etc) to store your code. Using this system allows automated tools to inspect your package and determine SemVer compliance and released versions.
+    1. When tagging releases in a version control system, the tag for a version MUST be "vX.Y.Z" e.g. "v3.1.0".
+
+
+
+-------------------------------------------------
+--------------------- TIPS ----------------------
+-------------------------------------------------
+
++++ CUANDO SUBIMOS DATOS SENSIBLES COMO PASSW EN UN COMMIT
+Make credentials short-lived.
+Los programadores siempre tendrán visibles las claves, basta que debugueen y verán lo que se le pasa a la config del controlador jdbc.
+SI EL PROYECTO LO ACABA DE SUBIR AL REPOSITORIO quito psw y vuelvo a crearlo.
+SI YA ESTÁ AVANZADO EL PROYECTO:
+1.Si fue hace muchos commits
+Cambiar passwords. Actualizar .gitignore para que no vuelva a subir fichero si es el caso.
+2.Si fue en un commit muy reciente
+Guardar snapshot/copia del proyecto en el último commit.
+Revertir al commit deseado donde no habían passwords.
+Aplicar últimos cambios y hacer un sólo commit con todo; o revisar uno a uno los cambios de cada commit y luego rehacerlos todos.
+
+
++++ PROTEGER REPOSITORIO DE ACCIONES INDEBIDAS
+Configurar Protected branches  https://docs.gitlab.com/ee/user/project/protected_branches.html
+Restrict branch access
+Merge request approvals
+Pull requests
+Sign commits with GPG
+
+
++++ INTERACTIVE REBASE & SQUASH COMMIT
+Wraps multiple commits into a single one to simplify history on destiny branch.
+https://stackoverflow.com/questions/35703556/what-does-it-mean-to-squash-commits-in-git
+
+
++++ MODO DE TRABAJO PROYECTO PROPIO
+-PODEMOS TRABAJAR SOBRE master DIRECTAMENTE
+PERO HACERLO SOBRE develop SOLO NOS COSTARÁ HACER UN RELEASE SOLAMENTE
+TRABAJAR CON FEATURES NOS PERMITIRÁ DIFERENCIAR BLOQUES DE DESARROLLO. (1 feature por HHUU, lo trabaja 1 persona solamente)
+
+-AL TENER 1 REPOSITORIO PARA CADA PROYECTO y una HHUU que implique a varios proyectos
+requiere 1 mismo feature en cada proyecto/repositorio involucrado
+
+-[OPCIONAL] PUSHEAR LAS FEATURE-BRANCH AL REPOSITORIO
+
+-FINISH FEATURE COMO SQUASH COMMIT (sobre develop), pero concatenar commit messages de más reciente a más antiguo
+
+-RELEASE AL HACER UNA VERSIÓN (ie v1.0.0)
+
+
++++ GIT-FLOW WORKFLOW IN 5 MINUTES
+https://www.youtube.com/watch?v=1SXpE08hvGs
+
+

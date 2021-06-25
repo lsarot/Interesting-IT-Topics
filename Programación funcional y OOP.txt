@@ -1,0 +1,87 @@
+Diferencias entre la programación funcional y Programación imperativa
+
+La programación funcional es una forma de programación declarativa
+
+La mayoría de lenguajes más populares, incluidos los lenguajes de programación orientada a objetos (OOP) como C#, C++ y Java, se han diseñado para admitir en primer lugar la programación imperativa (orientada a procedimientos) (más tradicional)
+
+=> 
+Funcional -> declarativa (orientada a funciones)
+OOP	-> imperativa (orientada a procedimientos)
+
+* la funcional puede ser utilizada dentro de la orientada a objetos!
+   lo que lo hace 'funcional' es la forma de desarrollar los métodos.
+
+   Ejemplo sencillo:
+   OOP:
+      int c;
+      c = a + b;
+   Funcional:
+      int c;
+      c.setearValor(a.sumar(b)); //es más legible por el humano!
+
+
+--------------------------
+
+Básicamente es encapsular tus implementaciones en funciones, de manera que sea más legible el código, pero implica más desarrollo.
+Si el lenguaje lo permite, pq sus librerías están ya desarrolladas así, pues es un extra.
+Es una capa encima de la programación imperativa, donde mi código dice detalladamente cómo resolver un problema (un algoritmo).
+
+PONGAMOS DE EJEMPLO:
+
+SUMAR LOS VALORES MAYORES DE 25 CONTENIDOS EN UN ARRAY (SU 80%): 
+
+- con Java < 8 (imperativa, algoritmica, verbosa)
+
+int sum = 0;
+for (Integer numero : numbers) {
+   if (numero > 25) {
+      sum += numero * 0.8;
+   }
+}
+
+- con Java < 8 (usando funciones ya proporcionadas por el JDK, ya permite algo de programación FUNCIONAL)
+
+BigDecimal sum = BigDecimal.ZERO;
+for (BigDecimal number : numbers) {
+   if (number.compareTo(BigDecimal.valueOf(25)) > 0) {
+      sum = sum.add(number.multiply(BigDecimal.valueOf(0.8)));
+   }
+}
+
+- con Java 8+ (FUNCIONAL)
+
+final BigDecimal sum =
+   numbers.stream()
+      .filter(number -> number.compareTo(BigDecimal.valueOf(25)) > 0) //aplicamos un filtro sobre cada item
+      .map(number -> number.multiply(BigDecimal.valueOf(0.8))) //si se cumple el filtro, llamamos a una función sobre cada item
+      .reduce(BigDecimal.ZERO, BigDecimal::add); //creo que sobre cada elemento que quede aplica la función add, partiendo del valor ZERO. 
+
+- con Scala (FUNCIONAL)
+
+val sum = numbers.filter(number > 25)
+      .map(number * 0.8)
+      .sum
+
+// AÚN ASÍ EN JAVA 8+ SE PUEDE ESCRIBIR MENOS QUE EN EL EJEMPLO, NO HABÍA NECESIDAD DE USAR number.compareTo ni number.multiply
+
+//SÓLO HAY QUE TOMAR LA IMPLEMENTACIÓN Y ENCAPSULARLA EN FUNCIONES, ASÍ SERÁ MÁS LEGIBLE CUANDO OTRA PERSONA TENGA QUE TOCAR EL CÓDIGO!
+
+
+
+-----------------------------------------------------------------
+
+UN DIAGRAMA DE TIPOS DE PROGRAMACIÓN
+
+								PROCEDIMENTAL (C)
+				IMPERATIVA
+								OOP (C++, Java)
+
+PROGRAMACIÓN
+
+								LÓGICA (Prolog)
+				DECLARATIVA
+								FUNCIONAL (Lisp, Scala, Java8+)
+
+
+
+La principal diferencia entre ambos paradigmas es que en la programación imperativa se describe paso a paso un conjunto de instrucciones que han de ejecutarse con la finalidad de variar el estado del programa y resolver un problema para hallar una solución. Y en la programación declarativa solo se describe el problema pero no los pasos necesarios para llegar a su solución, la cual es hallada mediante mecanismos internos de inferencia de información a partir de la descripción del problema en si.

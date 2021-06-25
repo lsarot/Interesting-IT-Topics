@@ -1,0 +1,63 @@
+CONFIGURATION ORDER IN SPRINGBOOT
+
+ESCENARIO:
+.se inicia el contexto spring en la main class, antes de continuar en la main class, spring instancia los beans configurados
+.digamos que tenemos 10 clases configuration, o que crean beans
+.queremos que sólo 1 se encargue de chequear que los parámetros iniciales se hayan encontrado
+.vamos a chequear en c/u de las clases que instancian beans, que los parámetros iniciales de la app existan ?? NO
+.queremos que una de las clases se inicie de primero
+.@DependsOn sirve, pero no queremos ponerlo en las 10 clases que levantan beans
+.no sirvió colocando clase de configuración más arriba en los paquetes o en ruta raíz del classpath
+.no sirvió con @Order, esto sirve para beans de un mismo tipo y al agregar a una lista por ejemplo
+.no sirvió @AutoConfigureBefore, debe utilizarse de la manera que describiremos abajo
+
+
+MANUAL DE SPRING (muy técnico y engorroso de entender)
+https://docs.spring.io/spring-boot/docs/2.1.12.RELEASE/reference/html/boot-features-developing-auto-configuration.html
+You can use the @AutoConfigureAfter or @AutoConfigureBefore annotations if your configuration needs to be applied in a specific order.
+If you want to order certain auto-configurations that should not have any direct knowledge of each other, you can also use @AutoConfigureOrder. 
+
+SOLUCIÓN ?
+https://stackoverflow.com/questions/44314418/order-of-configuration-in-springboot
+La A no funcionó!!
+La B no la probamos!!
+
+
+*** A) To define a specific order your Configuration classes will be handled (by the way, a Configuration class does not have to be annotated with @Configuration (so-called full definition), but it is enough to be annotated with @Component, @ComponentScan, @Import, @ImportResource or just have a method annotated with @Bean - so-called lite definition), you should
+
+1) add your Configuration Candidates to your SpringApplication's primarySource, for example, in your main method like that
+
+SpringApplication.run(
+   new Class[]{YourSpringBootApplication.class, Config1.class, Config2.class, ...},
+   args);
+
+2) and annotate each of your Configuration Candidates with @Order annotation, any other ordering means like Ordered interface, @DependsOn etc will be ignored by ConfigurationClassPostProcessor, the order in the primarySource array will also be ignored.
+
+Then ConfigurationClassPostProcessor will sort your Configuration Candidates and handle them according the @Order annotation value you specified.
+
+
+*** B) The precedence can also be achieved by defining your own AutoConfiguration classes. Although both Configuration and AutoConfiguration are handled by the same ConfigurationClassPostProcessor, they are essentially distinctive machineries. To do so
+
+1) define in your classpath /META-INF/spring.factories file and put in the EnableAutoConfiguration section of it your AutoConfiguration classes like that
+
+   org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+   your.package.AutoConfig1,your.package.AutoConfig2
+
+2) and annotate your AutoConfiguration classes with @AutoConfigureOrder, @AutoConfigureBefore, or @AutoConfigureAfter annotations, any other ordering means again will be ignored.
+
+Like @Strelok pointed out, AutoConfiguration classes, your own and provided e.g. by spring-boot-autoconfigure library alike, will be added to the end of the list of Configuration Candidates.
+
+Remember, however, that the order the Configuration Candidates will be handled by ConfigurationClassPostProcessor does not necessarily coincide with the order the beans defined by the Configuration classes will be created. For example, you might define your Configuration class that overrides TomcatServletWebServerFactory to make your own customization of Tomcat web server like
+
+@Configuration
+public class EmbeddedTomcatConfig {
+
+@Bean
+public TomcatServletWebServerFactory containerFactory() {
+    ...
+    return customizedTomcatWebServerFactory;
+}
+
+but this method will be called right at the moment when your Spring Boot application decides to create a Web server, regardless of how you defined the precedence for your EmbeddedTomcatConfig Configuration class.
+
+...

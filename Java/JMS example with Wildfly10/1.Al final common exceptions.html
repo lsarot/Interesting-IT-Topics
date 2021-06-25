@@ -1,0 +1,1034 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
+<title>Wildfly 8 based standalone JMS client code common issues and remedies ? &laquo;  JBoss</title>
+<meta name="generator" content="WordPress 4.9.3" />
+<meta name="robots" content="follow, all" />
+
+
+<!-- ************ Middleware Magic Favicon - STARTED ***************** -->
+
+<link rel="shortcut icon" href="http://middlewaremagic.com/weblogic/wp-admin/images/magic/MM_Favicon.ico"/>
+
+<!-- ************ Middleware Magic Favicon - ENDED ***************** -->
+
+
+<link rel="stylesheet" href="http://middlewaremagic.com/jboss/wp-content/themes/idream/style.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="JBoss RSS Feed" href="http://middlewaremagic.com/jboss/?feed=rss2" />
+<link rel="pingback" href="http://middlewaremagic.com/jboss/xmlrpc.php" />
+<!--[if IE]><link rel="stylesheet" href="http://middlewaremagic.com/jboss/wp-content/themes/idream/css/ie.css" type="text/css" media="screen" /><![endif]-->
+
+<link rel='dns-prefetch' href='//www.google.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="JBoss &raquo; Wildfly 8 based standalone JMS client code common issues and remedies ? Comments Feed" href="http://middlewaremagic.com/jboss/?feed=rss2&#038;p=2724" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/middlewaremagic.com\/jboss\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.3"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56692,8205,9792,65039],[55357,56692,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='wpsf_wpsf-css'  href='http://middlewaremagic.com/jboss/wp-content/plugins/wp-spam-fighter/css/wpsf.css?ver=0.5.1' type='text/css' media='all' />
+<link rel='stylesheet' id='socialize-css'  href='http://middlewaremagic.com/jboss/wp-content/plugins/socialize/frontend/css/socialize.css?ver=4.9.3' type='text/css' media='all' />
+<script type='text/javascript' src='http://middlewaremagic.com/jboss/wp-content/plugins/continuous-announcement-scroller/continuous-announcement-scroller.js?ver=4.9.3'></script>
+<script type='text/javascript' src='http://middlewaremagic.com/jboss/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://middlewaremagic.com/jboss/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='https://www.google.com/recaptcha/api.js?ver=4.9.3'></script>
+<script type='text/javascript' src='http://middlewaremagic.com/jboss/wp-content/plugins/socialize/frontend/js/floating.js?ver=4.9.3'></script>
+<link rel='https://api.w.org/' href='http://middlewaremagic.com/jboss/index.php?rest_route=/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://middlewaremagic.com/jboss/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://middlewaremagic.com/jboss/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='How to run jboss-cli using maven plugins in WildFly 10 CR3 ?' href='http://middlewaremagic.com/jboss/?p=2711' />
+<link rel='next' title='Writing java based JMS Client for WildFly10 default ActiveMQ Artemis broker.' href='http://middlewaremagic.com/jboss/?p=2739' />
+<meta name="generator" content="WordPress 4.9.3" />
+<link rel="canonical" href="http://middlewaremagic.com/jboss/?p=2724" />
+<link rel='shortlink' href='http://middlewaremagic.com/jboss/?p=2724' />
+<link rel="alternate" type="application/json+oembed" href="http://middlewaremagic.com/jboss/index.php?rest_route=%2Foembed%2F1.0%2Fembed&#038;url=http%3A%2F%2Fmiddlewaremagic.com%2Fjboss%2F%3Fp%3D2724" />
+<link rel="alternate" type="text/xml+oembed" href="http://middlewaremagic.com/jboss/index.php?rest_route=%2Foembed%2F1.0%2Fembed&#038;url=http%3A%2F%2Fmiddlewaremagic.com%2Fjboss%2F%3Fp%3D2724&#038;format=xml" />
+
+<!-- Start Simple Author Highlighter -->
+<style type="text/css">
+.bypostauthor {background-color:  !important; color:  ;}
+.comment-author- {background-color:  !important; color:  ;}
+</style>
+<!-- Stop Simple Author Highlighter -->
+<meta property="og:title" content="Wildfly 8 based standalone JMS client code common issues and remedies ?"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="http://middlewaremagic.com/jboss/?p=2724"/>
+<meta property="og:site_name" content="JBoss"/>
+<meta property="fb:page_id" content="on"/>
+		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+		<style type="text/css" media="screen">.socialize-floating { margin-left: -120px; }</style><style type="text/css" id="syntaxhighlighteranchor"></style>
+<link rel="icon" href="http://middlewaremagic.com/jboss/wp-content/uploads/2015/09/cropped-MiddlewareMagic_Logo-32x32.jpg" sizes="32x32" />
+<link rel="icon" href="http://middlewaremagic.com/jboss/wp-content/uploads/2015/09/cropped-MiddlewareMagic_Logo-192x192.jpg" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="http://middlewaremagic.com/jboss/wp-content/uploads/2015/09/cropped-MiddlewareMagic_Logo-180x180.jpg" />
+<meta name="msapplication-TileImage" content="http://middlewaremagic.com/jboss/wp-content/uploads/2015/09/cropped-MiddlewareMagic_Logo-270x270.jpg" />
+
+<script type="text/javascript" src="http://middlewaremagic.com/jboss/wp-content/themes/idream/js/jquery.pngFix.js"></script>
+
+<!-- this product is released under General Public License. Please see the attached file for details. You can also find details about the license at http://www.opensource.org/licenses/gpl-license.php -->
+<script type="text/javascript">
+/* <![CDATA[ */
+
+jQuery(document).ready(function(){ 
+    jQuery(document).pngFix(); 
+});
+
+jQuery(document).ready(function() { 
+jQuery("#dropmenu ul").css({display: "none"}); // Opera Fix 
+jQuery("#dropmenu li").hover(function(){ 
+        jQuery(this).find('ul:first').css({visibility: "visible",display: "none"}).show(268); 
+        },function(){ 
+        jQuery(this).find('ul:first').css({visibility: "hidden"}); 
+        });
+		 
+}); 
+/* ]]> */ 
+</script>
+
+</head>
+
+<body>
+
+<div id="wrapper" align="center">
+	<div id="layouttop"></div>
+    
+    <!-- Header Starts -->
+    <div id="header">
+    	<div id="headerleft">
+        	              	<h1><a href="http://middlewaremagic.com/jboss" class="nobar"><img src="http://middlewaremagic.com/jboss/wp-content/uploads/2015/09/MM-Banner-logo.png" alt="JBoss"></a></h1></h3>
+			             
+        </div>
+        <div id="headerright">
+        	<div id="rssboxo">
+            	<a href="http://middlewaremagic.com/jboss/?feed=rss2">RSS Feed</a>
+			</div>
+        </div>
+    </div>
+    <!-- Header Ends -->
+
+    
+    
+
+    	
+        <!-- Main nav Starts here -->
+        <div id="navouter">
+            <div id="nav">
+
+                <ul id="dropmenu">
+                <li class="page_item "><a href="http://middlewaremagic.com/jboss">Home</a></li>
+                <li class="page_item page-item-583"><a href="http://middlewaremagic.com/jboss/?page_id=583">Apache &#038; Cluster</a></li>
+<li class="page_item page-item-585"><a href="http://middlewaremagic.com/jboss/?page_id=585">Security</a></li>
+<li class="page_item page-item-595"><a href="http://middlewaremagic.com/jboss/?page_id=595">JMS</a></li>
+<li class="page_item page-item-597"><a href="http://middlewaremagic.com/jboss/?page_id=597">EJB &#038; JPA</a></li>
+<li class="page_item page-item-606"><a href="http://middlewaremagic.com/jboss/?page_id=606">Utility</a></li>
+<li class="page_item page-item-610"><a href="http://middlewaremagic.com/jboss/?page_id=610">WebService</a></li>
+<li class="page_item page-item-649"><a href="http://middlewaremagic.com/jboss/?page_id=649">General JBoss</a></li>
+<li class="page_item page-item-655"><a href="http://middlewaremagic.com/jboss/?page_id=655">MBeans</a></li>
+<li class="page_item page-item-1797"><a href="http://middlewaremagic.com/jboss/?page_id=1797">OpenShift</a></li>
+<li class="page_item page-item-900"><a href="http://middlewaremagic.com/jboss/?page_id=900">JDBC</a></li>
+<li class="page_item page-item-62"><a href="http://middlewaremagic.com/jboss/?page_id=62">Disclaimer</a></li>
+<li class="page_item page-item-1285 page_item_has_children"><a href="http://middlewaremagic.com/jboss/?page_id=1285">Weblogic to JBoss Migration</a>
+<ul class='children'>
+	<li class="page_item page-item-1360"><a href="http://middlewaremagic.com/jboss/?page_id=1360">Apache Migration</a></li>
+	<li class="page_item page-item-1419"><a href="http://middlewaremagic.com/jboss/?page_id=1419">EJBs Migration</a></li>
+	<li class="page_item page-item-1646"><a href="http://middlewaremagic.com/jboss/?page_id=1646">JMS Migration</a></li>
+</ul>
+</li>
+			
+                </ul>
+            
+            </div>
+        </div>
+        <!-- Main nav Ends -->
+	<div id="outerwrapper">
+    	<div id="innerwrapper">
+  
+<div id="maincol">
+		
+        <div class="postwrap">
+        
+        	<div class="postmeta2">
+            	<div class="meta2inner">
+                	<div class="pday">8</div>
+                    <div class="pmonth">Nov/15</div>
+                </div>
+            </div>        
+        
+          	<h2 class="posttitle"><a href="http://middlewaremagic.com/jboss/?p=2724">Wildfly 8 based standalone JMS client code common issues and remedies ?</a></h2>
+          	<div class="postmeta">by <a href="http://middlewaremagic.com/jboss/?author=1" title="Posts by JaySenSharma" rel="author">JaySenSharma</a> under <a href="http://middlewaremagic.com/jboss/?cat=26" rel="category">JMS</a>, <a href="http://middlewaremagic.com/jboss/?cat=172" rel="category">WildFly</a></div>
+            <div class="clr16"></div>
+          	<div class="postcontent"><div class="socialize-floating socialize-floating-bg"><div class="socialize-in-button socialize-in-button-left"><a href="http://twitter.com/share" class="twitter-share-button" data-url="http://middlewaremagic.com/jboss/?p=2724" data-text="Wildfly 8 based standalone JMS client code common issues and remedies ?" data-count="vertical" data-via="socializeWP" ><!--Tweetter--></a></div><div class="socialize-in-button socialize-in-button-left"><iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fmiddlewaremagic.com%2Fjboss%2F%3Fp%3D2724&amp;send=false&amp;layout=box_count&amp;width=45&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=65" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:45px; height:65px;" allowTransparency="true"></iframe></div><div class="socialize-in-button socialize-in-button-left"><script type="in/share" data-url="http://middlewaremagic.com/jboss/?p=2724" data-counter="top"></script></div><div class="socialize-in-button socialize-in-button-left"><div class="g-plusone" data-size="tall" data-href="http://middlewaremagic.com/jboss/?p=2724"></div></div><div class="socialize-in-button socialize-in-button-vertical"><a href="mailto:?subject=Wildfly+8+based+standalone+JMS+client+code+common+issues+and+remedies+%3F&body=http%3A%2F%2Fmiddlewaremagic.com%2Fjboss%2F%3Fp%3D2724" class="socialize-email-button">Email</a></div><div class="socialize-in-button socialize-in-button-vertical"><a href="javascript:window.print()" class="socialize-print-button">Print</a></div></div><p style="text-align: justify;">Hi,<br />
+<img class="size-full wp-image-5048 alignleft" src="http://middlewaremagic.com/jboss/wp-admin/images/magic/J_JBoss_MM_Logo.gif" alt="" width="160" height="160" /></p>
+<p style="text-align: justify;"> WildFly 8.x has become little bit old however it had bring some major changes in way we used to lookup resources in JBossAS7, hence as part of this article we will see what those changes were in the remoting based JNDI lookup approach.</p>
+<p style="text-align: justify;">In this article we will see what all different issues we may face while looking up a JMS resource from a Standalone java client and what al things we should keep in mind while doing so. We will also see what all jars are needed at the client classpath. Also how to creation the InitialContext object and which protocol should we use like &#8220;remoting&#8221; or &#8220;http-remoting&#8221; etc.</p>
+<p style="text-align: justify;"><strong>In this example we will be learning the following things:</strong></p>
+<p><strong>1.</strong> How to create a simple JMS Queue on WildFly 8.x<br />
+<strong>2.</strong> How to create a user in ApplicationRealm and assign it to &#8220;guest&#8221; role.<br />
+<strong>3.</strong> How to create the InitialContext on the standalone client side.<br />
+<strong>4.</strong> What all jars are needed on the client side in order to lookup the JNDI resources deployed on WildFly.<br />
+<strong>5.</strong> Some common issues which you might encounter while running such java code.</p>
+<h2>Creating A Simple JMS Queue on WildFly 8.2 side</h2>
+<p><strong>Step-1).</strong> Start the WildFly 8.2 &#8220;full&#8221; profile (which has messaging) as following:</p>
+<pre class="brush: java; title: ; wrap-lines: false; notranslate" title="">
+   $ cd /PATH/TO/wildfly-8.2.1.Final/bin
+   $ ./standalone.sh -c standalone-full.xml
+</pre>
+<p><strong>Step-2).</strong> Create a simple JMS user on WildFly 8.2 side and this user must belong to &#8220;guest&#8221; role. Please see the &#8220;messaging subsystem&#8221; configuration of &#8220;standalone-full.xml&#8221; to know more about &#8220;guest&#8221; role.<br />
+username: jmsuser<br />
+password: jmsuser@123<br />
+user role: guest<br />
+Realm: ApplicationRealm</p>
+<pre class="brush: java; title: ; wrap-lines: false; notranslate" title="">
+   $ cd /PATH/TO/wildfly-8.2.1.Final/bin
+   $ ./add-user.sh 
+
+What type of user do you wish to add? 
+ a) Management User (mgmt-users.properties) 
+ b) Application User (application-users.properties)
+(a): b
+
+Enter the details of the new user to add.
+Using realm 'ApplicationRealm' as discovered from the existing property files.
+Username : jmsuser
+Password recommendations are listed below. To modify these restrictions edit the add-user.properties configuration file.
+ - The password should not be one of the following restricted values {root, admin, administrator}
+ - The password should contain at least 8 characters, 1 alphabetic character(s), 1 digit(s), 1 non-alphanumeric symbol(s)
+ - The password should be different from the username
+Password :  jmsuser@123
+Re-enter Password :  jmsuser@123
+What groups do you want this user to belong to? (Please enter a comma separated list, or leave blank for none)[  ]: guest
+About to add user 'jmsuser' for realm 'ApplicationRealm'
+Is this correct yes/no? yes
+Added user 'jmsuser' to file '/PATH/TO/wildfly-8.2.1.Final/standalone/configuration/application-users.properties'
+Added user 'jmsuser' to file '/PATH/TO/wildfly-8.2.1.Final/domain/configuration/application-users.properties'
+Added user 'jmsuser' with groups guest to file '/PATH/TO/wildfly-8.2.1.Final/standalone/configuration/application-roles.properties'
+Added user 'jmsuser' with groups guest to file '/PATH/TO/wildfly-8.2.1.Final/domain/configuration/application-roles.properties'
+Is this new user going to be used for one AS process to connect to another AS process? 
+e.g. for a slave host controller connecting to the master or for a Remoting connection for server to server EJB calls.
+yes/no? yes
+To represent the user add the following to the server-identities definition &lt;secret value=&quot;am1zdXNlckAxMjM=&quot; /&gt;
+</pre>
+<p><strong>Step-3).</strong> Creating a simple JMS Queue using the WildFly CLI command line utility. NOTE the JNDI name should contain &#8220;java:/jboss/exported&#8221; prefix or else the JMS queue will can not be looked up remotely.</p>
+<pre class="brush: java; title: ; wrap-lines: false; notranslate" title="">
+   $ cd /PATH/TO/wildfly-8.2.1.Final/bin
+   $ ./jboss-cli.sh -c
+   
+   [standalone@localhost:9990 /] /subsystem=messaging/hornetq-server=default/jms-queue=TestQ/:add(entries=[&quot;java:/jboss/exported/jms/queue/TestQ&quot;],durable=false)
+     {&quot;outcome&quot; =&gt; &quot;success&quot;}
+     
+   [standalone@localhost:9990 /] :reload
+     {
+       &quot;outcome&quot; =&gt; &quot;success&quot;,
+       &quot;result&quot; =&gt; undefined
+     }
+</pre>
+<p>The generated XML snippet in the &#8220;standalone-full.xml&#8221; file will look like following:</p>
+<pre class="brush: xml; title: ; wrap-lines: false; notranslate" title="">
+    &lt;jms-destinations&gt;
+          &lt;jms-queue name=&quot;ExpiryQueue&quot;&gt;
+                &lt;entry name=&quot;java:/jms/queue/ExpiryQueue&quot;/&gt;
+          &lt;/jms-queue&gt;
+          &lt;jms-queue name=&quot;DLQ&quot;&gt;
+                &lt;entry name=&quot;java:/jms/queue/DLQ&quot;/&gt;
+          &lt;/jms-queue&gt;
+          &lt;jms-queue name=&quot;TestQ&quot;&gt;
+               &lt;entry name=&quot;java:/jboss/exported/jms/queue/TestQ&quot;/&gt;   &lt;!-- Added JMS Destination --&gt;
+          &lt;/jms-queue&gt;                   
+    &lt;/jms-destinations&gt;
+</pre>
+<p><strong>NOTE:</strong> The &#8220;java:/jboss/exported&#8221;  JNDI prefix is needed in the JNDI name here to ensure that a remote client (a client running outside of that JVM where the JNDI name is bound) can do the lookup.</p>
+<h2>Writing WildFly JMS Client</h2>
+<p><strong>Step-4).</strong> Create a directory somewhere in your filesystem to place the project WildFly kms client project.</p>
+<pre class="brush: java; title: ; wrap-lines: false; notranslate" title="">
+  $ mkdir WildFly_JMS_Client
+  $ mkdir -p WildFly_JMS_Client/src/client
+</pre>
+<p><strong>Step-5).</strong> Lets write the &#8220;WildFlyJmsQueueSender.java&#8221; program which will send some jms messages to the JMS Queue &#8220;TestQ&#8221; deployed on WildFly and Lets place  it inside the &#8220;WildFly_JMS_Client/src/client&#8221; as following:</p>
+<pre class="brush: java; title: ; wrap-lines: false; notranslate" title="">
+package client;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import java.util.Properties;
+
+//jms stuff
+import javax.jms.JMSException;
+import javax.jms.Queue;
+import javax.jms.QueueConnection;
+import javax.jms.QueueConnectionFactory;
+import javax.jms.QueueSender;
+import javax.jms.QueueSession;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import java.io.IOException;
+
+public class WildFlyJmsQueueSender {
+  public final static String JMS_CONNECTION_FACTORY_JNDI=&quot;jms/RemoteConnectionFactory&quot;;
+  public final static String JMS_QUEUE_JNDI=&quot;jms/queue/TestQ&quot;;
+  public final static String JMS_USERNAME=&quot;jmsuser&quot;;       //  The role for this user is &quot;guest&quot; in ApplicationRealm
+  public final static String JMS_PASSWORD=&quot;jmsuser@123&quot;;  
+  public final static String WILDFLY_REMOTING_URL=&quot;http-remoting://localhost:8080&quot;;
+
+  private QueueConnectionFactory qconFactory;
+  private QueueConnection qcon;
+  private QueueSession qsession;
+  private QueueSender qsender;
+  private Queue queue;
+  private TextMessage msg;
+
+  public static void main(String[] args) throws Exception {
+    InitialContext ic = getInitialContext();
+    WildFlyJmsQueueSender queueSender = new WildFlyJmsQueueSender();
+    queueSender.init(ic, JMS_QUEUE_JNDI);
+    readAndSend(queueSender);
+    queueSender.close();
+  }
+
+  public void init(Context ctx, String queueName) throws NamingException, JMSException {
+    qconFactory = (QueueConnectionFactory) ctx.lookup(JMS_CONNECTION_FACTORY_JNDI);
+    
+    //  If you won't pass jms credential here then you will get 
+    // [javax.jms.JMSSecurityException: HQ119031: Unable to validate user: null]    
+    qcon = qconFactory.createQueueConnection(this.JMS_USERNAME, this.JMS_PASSWORD);   
+    
+    qsession = qcon.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
+    queue = (Queue) ctx.lookup(queueName);
+    qsender = qsession.createSender(queue);
+    msg = qsession.createTextMessage();
+    qcon.start();
+  }
+
+  public void send(String message,int counter) throws JMSException {
+    msg.setText(message);
+    msg.setIntProperty(&quot;counter&quot;, counter);
+    qsender.send(msg);
+  }
+
+  public void close() throws JMSException {
+    qsender.close();
+    qsession.close();
+    qcon.close();
+  }
+
+  private static void readAndSend(WildFlyJmsQueueSender wildFlyJmsQueueSender) throws IOException, JMSException {
+    String line=&quot;Test Message Body with counter = &quot;;
+    for(int i=0;i&lt;10;i++) {
+          wildFlyJmsQueueSender.send(line+i,i);
+          System.out.println(&quot;JMS Message Sent: &quot;+line+i+&quot;\n&quot;);
+       }
+  }
+
+  private static InitialContext getInitialContext() throws NamingException {
+     InitialContext context=null;
+     try {
+           Properties props = new Properties();
+           props.put(Context.INITIAL_CONTEXT_FACTORY, &quot;org.jboss.naming.remote.client.InitialContextFactory&quot;);
+           props.put(Context.PROVIDER_URL, WILDFLY_REMOTING_URL);   // NOTICE: &quot;http-remoting&quot; and port &quot;8080&quot;
+           props.put(Context.SECURITY_PRINCIPAL, JMS_USERNAME);
+           props.put(Context.SECURITY_CREDENTIALS, JMS_PASSWORD);
+           //props.put(&quot;jboss.naming.client.ejb.context&quot;, true);
+           context = new InitialContext(props);	
+	       System.out.println(&quot;\n\tGot initial Context: &quot;+context);		
+      } catch (Exception e) {
+           e.printStackTrace();
+      }
+    return context;
+  }
+}
+</pre>
+<p><strong>Step-6).</strong> Lets write the &#8220;WildFlyJmsQueueReceive.java&#8221; program which will consume messages from the JMS Queue deployed in WildFly and Lets place it inside the &#8220;WildFly_JMS_Client/src/client&#8221; as following:</p>
+<pre class="brush: java; title: ; wrap-lines: false; notranslate" title="">
+package client;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import java.util.Properties;
+
+//jms stuff
+import javax.jms.JMSException;
+import javax.jms.MessageListener;
+import javax.jms.Queue;
+import javax.jms.QueueConnection;
+import javax.jms.QueueConnectionFactory;
+import javax.jms.QueueReceiver;
+import javax.jms.QueueSession;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+import javax.jms.Message;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import java.io.IOException;
+
+public class WildFlyJmsQueueReceive  implements MessageListener {
+  public final static String JMS_CONNECTION_FACTORY_JNDI=&quot;jms/RemoteConnectionFactory&quot;;
+  public final static String JMS_QUEUE_JNDI=&quot;jms/queue/TestQ&quot;;
+  public final static String JMS_USERNAME=&quot;jmsuser&quot;;       //  The role for this user is &quot;guest&quot; in ApplicationRealm
+  public final static String JMS_PASSWORD=&quot;jmsuser@123&quot;;  
+  public final static String WILDFLY_REMOTING_URL=&quot;http-remoting://localhost:8080&quot;;
+
+
+  private QueueConnectionFactory qconFactory;
+  private QueueConnection qcon;
+  private QueueSession qsession;
+  private QueueReceiver qReceiver;
+  private Queue queue;
+  private TextMessage msg;
+  private boolean quit = false;
+
+  public static void main(String[] args) throws Exception {
+    InitialContext ic = getInitialContext();
+    WildFlyJmsQueueReceive wildflyJmsQueueReceive = new WildFlyJmsQueueReceive();
+    wildflyJmsQueueReceive.init(ic, JMS_QUEUE_JNDI);
+    System.out.println(&quot;JMS Ready To Receive Messages (To quit, send a \&quot;quit\&quot; message from QueueSender.class).&quot;);
+    // Waiting until a &quot;quit&quot; message has been received.
+    synchronized(wildflyJmsQueueReceive) {
+         while (! wildflyJmsQueueReceive.quit) {
+             try {
+                   wildflyJmsQueueReceive.wait();
+             }
+             catch (InterruptedException ie) {
+                   ie.printStackTrace();
+             }
+         }
+     }
+     wildflyJmsQueueReceive.close();
+  }
+  
+  public void init(Context ctx, String queueName) throws NamingException, JMSException {
+    qconFactory = (QueueConnectionFactory) ctx.lookup(JMS_CONNECTION_FACTORY_JNDI);
+
+    //  If you won't pass jms credential here then you will get 
+    // [javax.jms.JMSSecurityException: HQ119031: Unable to validate user: null]    
+    qcon = qconFactory.createQueueConnection(this.JMS_USERNAME, this.JMS_PASSWORD);   
+    
+    qsession = qcon.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
+    queue = (Queue) ctx.lookup(queueName);
+    qReceiver = qsession.createReceiver(queue);
+    qReceiver.setMessageListener(this);
+    qcon.start();
+  }
+
+  public void onMessage(Message msg) {
+     try {
+           String msgText;
+           if (msg instanceof TextMessage) {
+              msgText = ((TextMessage)msg).getText();
+           } else {
+              msgText = msg.toString();
+           }
+           System.out.println(&quot;\n&lt;Msg_Receiver&gt; &quot;+ msgText );
+           if (msgText.equalsIgnoreCase(&quot;quit&quot;)) {
+             synchronized(this) {
+             	 quit = true;
+             	 this.notifyAll(); // Notify main thread to quit
+             }
+           }
+      } catch (JMSException jmse) {
+          jmse.printStackTrace();
+     }
+  }
+
+  public void close() throws JMSException {
+    qReceiver.close();
+    qsession.close();
+    qcon.close();
+  }
+  
+  private static InitialContext getInitialContext() throws NamingException {
+     InitialContext context=null;
+     try {
+           Properties props = new Properties();
+           props.put(Context.INITIAL_CONTEXT_FACTORY, &quot;org.jboss.naming.remote.client.InitialContextFactory&quot;);
+           props.put(Context.PROVIDER_URL, WILDFLY_REMOTING_URL);   // NOTICE: &quot;http-remoting&quot; and port &quot;8080&quot;
+           props.put(Context.SECURITY_PRINCIPAL, JMS_USERNAME);
+           props.put(Context.SECURITY_CREDENTIALS, JMS_PASSWORD);
+           //props.put(&quot;jboss.naming.client.ejb.context&quot;, true);
+           context = new InitialContext(props);	
+	   System.out.println(&quot;\n\tGot initial Context: &quot;+context);		
+      } catch (Exception e) {
+           e.printStackTrace();
+      }
+    return context;
+  }
+}
+</pre>
+<p><strong>Step-7).</strong> In order to run the above program easily we are going to use ANT, However users can also run the above programs manually by adding the &#8220;$JBOSS_HOME/bin/client/jboss-client.jar&#8221; in the class path of the client.  Here we will be writing the following ind of &#8220;build.xml&#8221; file inside the &#8220;WildFly_JMS_Client&#8221; as following:</p>
+<pre class="brush: xml; title: ; wrap-lines: false; notranslate" title="">
+&lt;project name=&quot;WildFly_Jms_Client&quot; default=&quot;runSender&quot;&gt;
+&lt;property name=&quot;jboss.home&quot; value=&quot;/Users/jsensharma/NotBackedUp/Installed/wildfly-8.2.1.Final&quot; /&gt;
+&lt;property name=&quot;jboss.module.dir&quot; value=&quot;${jboss.home}/modules&quot; /&gt;
+&lt;property name=&quot;basedir&quot; value=&quot;.&quot; /&gt;
+&lt;property name=&quot;tmp.dir&quot; value=&quot;tmp&quot; /&gt;
+&lt;property name=&quot;src.dir&quot; value=&quot;src&quot; /&gt;
+&lt;property name=&quot;output.dir&quot; value=&quot;build&quot; /&gt;
+&lt;property name=&quot;client.jar.name&quot; value=&quot;wildfly_jms_client.jar&quot; /&gt;
+
+        &lt;!-- Client Needs the following Jar to be present in the CLASSPATH including --&gt;
+        &lt;path id=&quot;jboss.new.client.classpath&quot;&gt;
+           &lt;fileset dir=&quot;${jboss.home}/bin/client&quot;&gt;
+               &lt;include name=&quot;jboss-client.jar&quot; /&gt;
+           &lt;/fileset&gt;  
+        &lt;/path&gt;
+
+        &lt;target name=&quot;runSender&quot;&gt;
+           &lt;delete dir=&quot;${tmp.dir}&quot; /&gt;
+           &lt;mkdir dir=&quot;${tmp.dir}&quot; /&gt;
+           &lt;javac srcdir=&quot;${src.dir}/client&quot; destdir=&quot;${tmp.dir}&quot;  includes=&quot;WildFlyJmsQueueSender.java&quot; classpathref=&quot;jboss.new.client.classpath&quot;/&gt; 
+           &lt;copy file=&quot;${src.dir}/client/WildFlyJmsQueueSender.java&quot; todir=&quot;${tmp.dir}/client&quot;/&gt;        
+           &lt;jar jarfile=&quot;${output.dir}/${client.jar.name}&quot; basedir=&quot;${tmp.dir}&quot; compress=&quot;true&quot; /&gt;
+           &lt;delete dir=&quot;${tmp.dir}&quot;/&gt;
+           &lt;java classname=&quot;client.WildFlyJmsQueueSender&quot; fork=&quot;true&quot; classpathref=&quot;jboss.new.client.classpath&quot;&gt;
+               &lt;classpath&gt;
+                  &lt;pathelement location=&quot;${output.dir}/${client.jar.name}&quot;/&gt;
+               &lt;/classpath&gt;
+           &lt;/java&gt;
+        &lt;/target&gt;     
+
+        &lt;target name=&quot;runReceive&quot;&gt;
+           &lt;delete dir=&quot;${tmp.dir}&quot; /&gt;
+           &lt;mkdir dir=&quot;${tmp.dir}&quot; /&gt;
+           &lt;javac srcdir=&quot;${src.dir}/client&quot; destdir=&quot;${tmp.dir}&quot;  includes=&quot;WildFlyJmsQueueReceive.java&quot; classpathref=&quot;jboss.new.client.classpath&quot;/&gt; 
+           &lt;copy file=&quot;${src.dir}/client/WildFlyJmsQueueReceive.java&quot; todir=&quot;${tmp.dir}/client&quot;/&gt;        
+           &lt;jar jarfile=&quot;${output.dir}/${client.jar.name}&quot; basedir=&quot;${tmp.dir}&quot; compress=&quot;true&quot; /&gt;
+           &lt;delete dir=&quot;${tmp.dir}&quot;/&gt;
+           &lt;java classname=&quot;client.WildFlyJmsQueueReceive&quot; fork=&quot;true&quot; classpathref=&quot;jboss.new.client.classpath&quot;&gt;
+               &lt;classpath&gt;
+                  &lt;pathelement location=&quot;${output.dir}/${client.jar.name}&quot;/&gt;
+               &lt;/classpath&gt;
+           &lt;/java&gt;
+        &lt;/target&gt;             
+&lt;/project&gt;
+</pre>
+<h2>Running the WildFly 8 JMS client</h2>
+<p><strong>Step-8).</strong> We can run the above ANT based kms client project simply by setting the ANT_HOME, JAVA_HOME and PATH as following :</p>
+<pre class="brush: java; title: ; wrap-lines: false; notranslate" title="">
+####### For  Unix Based OS:
+
+$ export ANT_HOME=/PATH/TO/apache_ant_1.9.2
+$ export JAVA_HOME=/PATH/TO/jdk1.8.0_60
+$ export PATH=$JAVA_HOME/bin:$ANT_HOME/bin:$PATH
+$ cd /PATH/TO/WildFly_JMS_Client
+
+
+######## For Windows Based OS
+$ set ANT_HOME=C:\PATH\TO\apache_ant_1.9.2
+$ set JAVA_HOME=C:\PATH\TO\jdk1.8.0_60
+$ set PATH=%JAVA_HOME%\bin;%ANT_HOME%\bin;%PATH%
+$ cd C:\WildFly_JMS_Client
+</pre>
+<p><strong>Step-9).</strong> In the same above command prompt, Lets run the &#8220;WildFlyJmsQueueSender.java&#8221; program which will send to messages to the &#8220;TestQ&#8221; present on WildFly 8 as following :</p>
+<pre class="brush: java; title: ; wrap-lines: false; notranslate" title="">
+$ ant runSender
+Buildfile: /Users/jsensharma/NotBackedUp/MM_Tests/WildFly/WildFly_JMS_Client/build.xml
+
+runSender:
+    [mkdir] Created dir: /Users/jsensharma/NotBackedUp/MM_Tests/WildFly/WildFly_JMS_Client/tmp
+    [javac] /Users/jsensharma/NotBackedUp/MM_Tests/WildFly/WildFly_JMS_Client/build.xml:20: warning: 'includeantruntime' was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds
+    [javac] Compiling 1 source file to /Users/jsensharma/NotBackedUp/MM_Tests/WildFly/WildFly_JMS_Client/tmp
+     [copy] Copying 1 file to /Users/jsensharma/NotBackedUp/MM_Tests/WildFly/WildFly_JMS_Client/tmp/client
+      [jar] Building jar: /Users/jsensharma/NotBackedUp/MM_Tests/WildFly/WildFly_JMS_Client/build/wildfly_jms_client.jar
+   [delete] Deleting directory /Users/jsensharma/NotBackedUp/MM_Tests/WildFly/WildFly_JMS_Client/tmp
+      Nov 08, 2015 12:31:22 PM org.xnio.Xnio &lt;clinit&gt;
+      INFO: XNIO version 3.3.0.Final
+      Nov 08, 2015 12:31:22 PM org.xnio.nio.NioXnio &lt;clinit&gt;
+      INFO: XNIO NIO Implementation Version 3.3.0.Final
+      Nov 08, 2015 12:31:22 PM org.jboss.remoting3.EndpointImpl &lt;clinit&gt;
+      INFO: JBoss Remoting version 4.0.7.Final
+      
+      	Got initial Context: javax.naming.InitialContext@aaf5002
+      Nov 08, 2015 12:31:23 PM org.jboss.ejb.client.remoting.VersionReceiver handleMessage
+      INFO: EJBCLIENT000017: Received server version 2 and marshalling strategies [river]
+      Nov 08, 2015 12:31:23 PM org.jboss.ejb.client.remoting.RemotingConnectionEJBReceiver associate
+      INFO: EJBCLIENT000013: Successful version handshake completed for receiver context EJBReceiverContext{clientContext=org.jboss.ejb.client.EJBClientContext@57a37ec1, receiver=Remoting connection EJB receiver [connection=Remoting connection &lt;e244821&gt;,channel=jboss.ejb,nodename=banl13bca644a-3]} on channel Channel ID fb329c1b (outbound) of Remoting connection 45106993 to localhost/127.0.0.1:8080
+      Nov 08, 2015 12:31:23 PM org.jboss.ejb.client.EJBClient &lt;clinit&gt;
+      INFO: JBoss EJB Client version 2.0.1.Final
+      JMS Message Sent: Test Message Body with counter = 0
+      
+      JMS Message Sent: Test Message Body with counter = 1
+      
+      JMS Message Sent: Test Message Body with counter = 2
+      
+      JMS Message Sent: Test Message Body with counter = 3
+      
+      JMS Message Sent: Test Message Body with counter = 4
+      
+      JMS Message Sent: Test Message Body with counter = 5
+      
+      JMS Message Sent: Test Message Body with counter = 6
+      
+      JMS Message Sent: Test Message Body with counter = 7
+      
+      JMS Message Sent: Test Message Body with counter = 8
+      
+      JMS Message Sent: Test Message Body with counter = 9
+      
+
+BUILD SUCCESSFUL
+Total time: 3 seconds
+</pre>
+<p><strong>Step-10).</strong> In the same above command prompt, Lets run the &#8220;WildFlyJmsQueueReceive.java&#8221; program which will receive the jms messages which are present in the &#8220;TestQ&#8221; present on WildFly 8 as following :</p>
+<pre class="brush: java; title: ; wrap-lines: false; notranslate" title="">
+$ ant runReceive
+Buildfile: /Users/jsensharma/NotBackedUp/MM_Tests/WildFly/WildFly_JMS_Client/build.xml
+
+runReceive:
+    [mkdir] Created dir: /Users/jsensharma/NotBackedUp/MM_Tests/WildFly/WildFly_JMS_Client/tmp
+    [javac] /Users/jsensharma/NotBackedUp/MM_Tests/WildFly/WildFly_JMS_Client/build.xml:34: warning: 'includeantruntime' was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds
+    [javac] Compiling 1 source file to /Users/jsensharma/NotBackedUp/MM_Tests/WildFly/WildFly_JMS_Client/tmp
+     [copy] Copying 1 file to /Users/jsensharma/NotBackedUp/MM_Tests/WildFly/WildFly_JMS_Client/tmp/client
+      [jar] Building jar: /Users/jsensharma/NotBackedUp/MM_Tests/WildFly/WildFly_JMS_Client/build/wildfly_jms_client.jar
+   [delete] Deleting directory /Users/jsensharma/NotBackedUp/MM_Tests/WildFly/WildFly_JMS_Client/tmp
+      Nov 08, 2015 12:33:39 PM org.xnio.Xnio &lt;clinit&gt;
+      INFO: XNIO version 3.3.0.Final
+      Nov 08, 2015 12:33:39 PM org.xnio.nio.NioXnio &lt;clinit&gt;
+      INFO: XNIO NIO Implementation Version 3.3.0.Final
+      
+      	Got initial Context: javax.naming.InitialContext@4a3e91e7
+      Nov 08, 2015 12:33:39 PM org.jboss.remoting3.EndpointImpl &lt;clinit&gt;
+      INFO: JBoss Remoting version 4.0.7.Final
+      Nov 08, 2015 12:33:39 PM org.jboss.ejb.client.remoting.VersionReceiver handleMessage
+      INFO: EJBCLIENT000017: Received server version 2 and marshalling strategies [river]
+      Nov 08, 2015 12:33:39 PM org.jboss.ejb.client.remoting.RemotingConnectionEJBReceiver associate
+      INFO: EJBCLIENT000013: Successful version handshake completed for receiver context EJBReceiverContext{clientContext=org.jboss.ejb.client.EJBClientContext@1c7f2b3c, receiver=Remoting connection EJB receiver [connection=Remoting connection &lt;526d2bf&gt;,channel=jboss.ejb,nodename=banl13bca644a-3]} on channel Channel ID db01bd53 (outbound) of Remoting connection 365655d3 to localhost/127.0.0.1:8080
+      Nov 08, 2015 12:33:40 PM org.jboss.ejb.client.EJBClient &lt;clinit&gt;
+      INFO: JBoss EJB Client version 2.0.1.Final
+      JMS Ready To Receive Messages (To quit, send a &quot;quit&quot; message from QueueSender.class).
+      
+      &lt;Msg_Receiver&gt; Test Message Body with counter = 0
+      
+      &lt;Msg_Receiver&gt; Test Message Body with counter = 1
+      
+      &lt;Msg_Receiver&gt; Test Message Body with counter = 2
+      
+      &lt;Msg_Receiver&gt; Test Message Body with counter = 3
+      
+      &lt;Msg_Receiver&gt; Test Message Body with counter = 4
+      
+      &lt;Msg_Receiver&gt; Test Message Body with counter = 5
+      
+      &lt;Msg_Receiver&gt; Test Message Body with counter = 6
+      
+      &lt;Msg_Receiver&gt; Test Message Body with counter = 7
+      
+      &lt;Msg_Receiver&gt; Test Message Body with counter = 8
+      
+      &lt;Msg_Receiver&gt; Test Message Body with counter = 9
+</pre>
+<p>.<br />
+.<br />
+<b>What next &#8230;&#8230; ? See below </b><br />
+.<br />
+.<br />
+.<br />
+.<br />
+.</p>
+<h1> Common Issues </h1>
+<p style="text-align: justify;"> In this section we will discuss some common issues which you will encounter while running this project:</p>
+<h3>Missing jboss-client.jar in classpath</h3>
+<p style="text-align: justify;">On the wildly client side we need to make sure that the &#8220;$JBOSS_HOME/bin/client/jboss-client.jar&#8221; is added to the classpath. Else we will see the following kind of exception:</p>
+<pre class="brush: java; title: ; wrap-lines: false; notranslate" title="">
+ javax.naming.NoInitialContextException: Cannot instantiate class: org.jboss.naming.remote.client.InitialContextFactory [Root exception is java.lang.ClassNotFoundException: org.jboss.naming.remote.client.InitialContextFactory]
+ 	at javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:674)
+ 	at javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:307)
+ 	at javax.naming.InitialContext.init(InitialContext.java:242)
+ 	at javax.naming.InitialContext.&lt;init&gt;(InitialContext.java:216)
+ 	at client.WildFlyJmsQueueSender.getInitialContext(Unknown Source)
+ 	at client.WildFlyJmsQueueSender.main(Unknown Source)
+ Caused by: java.lang.ClassNotFoundException: org.jboss.naming.remote.client.InitialContextFactory
+ 	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+ 	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+ 	at java.security.AccessController.doPrivileged(Native Method)
+ 	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+ 	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+ 	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:308)
+ 	at java.lang.ClassLoader.loadClass(ClassLoader.java:358)
+ 	at java.lang.Class.forName0(Native Method)
+ 	at java.lang.Class.forName(Class.java:274)
+ 	at com.sun.naming.internal.VersionHelper12.loadClass(VersionHelper12.java:72)
+ 	at com.sun.naming.internal.VersionHelper12.loadClass(VersionHelper12.java:61)
+ 	at javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:671)
+  	... 5 more
+ Exception in thread &quot;main&quot; java.lang.NullPointerException
+ 	at client.WildFlyJmsQueueSender.init(Unknown Source)
+ 	at client.WildFlyJmsQueueSender.main(Unknown Source)
+ Java Result: 1
+</pre>
+<h3> Incorrect protocol issue </h3>
+<p style="text-align: justify;">If you will use incorrect protocol to communicate with WildFly then while running the client you will receive the following kind of exception on the client side.  The following error indicates that user is trying to use the JBossAS7 specific &#8220;remote:&#8221; protocol in WildFly where as in WildFly it is changed to &#8220;http-remoting&#8221;.</p>
+<pre class="brush: java; title: ; wrap-lines: false; notranslate" title="">
+ Exception in thread &quot;main&quot; javax.naming.CommunicationException: Failed to connect to any server. Servers tried: [remote://localhost:4447 (java.net.ConnectException: Connection refused)]
+ 	at org.jboss.naming.remote.client.HaRemoteNamingStore.failOverSequence(HaRemoteNamingStore.java:244)
+ 	at org.jboss.naming.remote.client.HaRemoteNamingStore.namingStore(HaRemoteNamingStore.java:149)
+ 	at org.jboss.naming.remote.client.HaRemoteNamingStore.namingOperation(HaRemoteNamingStore.java:130)
+ 	at org.jboss.naming.remote.client.HaRemoteNamingStore.lookup(HaRemoteNamingStore.java:272)
+ 	at org.jboss.naming.remote.client.RemoteContext.lookup(RemoteContext.java:87)
+ 	at org.jboss.naming.remote.client.RemoteContext.lookup(RemoteContext.java:129)
+ 	at javax.naming.InitialContext.lookup(InitialContext.java:411)
+ 	at client.WildFlyJmsQueueSender.init(Unknown Source)
+ 	at client.WildFlyJmsQueueSender.main(Unknown Source)
+ Java Result: 1
+</pre>
+<h3> Incorrect InitialContext creation issue </h3>
+<p style="text-align: justify;">While using the Remoting based approach for JNDI lookup if users are not creating the JNDI name properly then they may see the following error, So users need to see how they are creating the InitialContext using appropriate Context Factory class and the protocols and making sure that the &#8220;jboss-client.jar&#8221; is added to the classpath of the client. So please check the above code and create the InitialContext as described above for WildFly 8. </p>
+<p style="text-align: justify;">If you are planning to use the &#8220;EJB Client API&#8221; based approach to invoke the EJBs deployed on WildFly then please have a look at :  <strong><a href="http://middlewaremagic.com/jboss/?p=2744" target="_blank">http://middlewaremagic.com/jboss/?p=2744</a></strong> to know how to create the InitialContext. </p>
+<p style="text-align: justify;">If you are planning to use the &#8220;Remote-Naming project&#8221; based approach to invoke the EJBs deployed on WildFly then please have a look at :  <strong><a href="http://middlewaremagic.com/jboss/?p=2704" target="_blank">http://middlewaremagic.com/jboss/?p=2704</a></strong> to know how to create the InitialContext. </p>
+<pre class="brush: java; title: ; wrap-lines: false; notranslate" title="">
+ Exception in thread &quot;main&quot; javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+ 	at javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:662)
+ 	at javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:307)
+ 	at javax.naming.InitialContext.getURLOrDefaultInitCtx(InitialContext.java:344)
+ 	at javax.naming.InitialContext.lookup(InitialContext.java:411)
+ 	at client.WildFlyJmsQueueSender.init(Unknown Source)
+ 	at client.WildFlyJmsQueueSender.main(Unknown Source)
+      Java Result: 1
+</pre>
+<h3>Not Passing the JMS user while getting JMS Connection</h3>
+<p style="text-align: justify;">If we are not passing the jams user name and password while creation the connection we will see the following kind of exception (Notice the &#8220;user: null&#8221; issue)</p>
+<p>So make sure to pass the JMS credentials while creation JMS Connection:</p>
+<p>    <strong> queueConnection = queueConnectionFactory(&#8220;jmsuser&#8221;, &#8220;jmsuser@123&#8221;); </strong></p>
+<pre class="brush: java; title: ; wrap-lines: false; notranslate" title="">
+WildFly Side
+############
+13:03:34,727 ERROR [org.hornetq.core.server] (default I/O-7) HQ224018: Failed to create session: HornetQSecurityException[errorType=SECURITY_EXCEPTION message=HQ119031: Unable to validate user: null]
+	at org.hornetq.core.security.impl.SecurityStoreImpl.authenticate(SecurityStoreImpl.java:143)
+	at org.hornetq.core.server.impl.HornetQServerImpl.createSession(HornetQServerImpl.java:1020)
+	at org.hornetq.core.protocol.core.impl.HornetQPacketHandler.handleCreateSession(HornetQPacketHandler.java:149)
+	at org.hornetq.core.protocol.core.impl.HornetQPacketHandler.handlePacket(HornetQPacketHandler.java:77)
+	at org.hornetq.core.protocol.core.impl.ChannelImpl.handlePacket(ChannelImpl.java:641)
+	at org.hornetq.core.protocol.core.impl.RemotingConnectionImpl.doBufferReceived(RemotingConnectionImpl.java:556)
+	at org.hornetq.core.protocol.core.impl.RemotingConnectionImpl.bufferReceived(RemotingConnectionImpl.java:532)
+	at org.hornetq.core.remoting.server.impl.RemotingServiceImpl$DelegatingBufferHandler.bufferReceived(RemotingServiceImpl.java:658)
+	at org.hornetq.core.remoting.impl.netty.HornetQChannelHandler.channelRead(HornetQChannelHandler.java:73)
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338)
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:153)
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338)
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:785)
+	at org.xnio.netty.transport.AbstractXnioSocketChannel$ReadListener.handleEvent(AbstractXnioSocketChannel.java:435)
+	at org.xnio.netty.transport.AbstractXnioSocketChannel$ReadListener.handleEvent(AbstractXnioSocketChannel.java:371)
+	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92) [xnio-api-3.3.0.Final.jar:3.3.0.Final]
+	at org.xnio.conduits.ReadReadyHandler$ChannelListenerHandler.readReady(ReadReadyHandler.java:66) [xnio-api-3.3.0.Final.jar:3.3.0.Final]
+	at org.xnio.nio.NioSocketConduit.handleReady(NioSocketConduit.java:88) [xnio-nio-3.3.0.Final.jar:3.3.0.Final]
+	at org.xnio.nio.WorkerThread.run(WorkerThread.java:539) [xnio-nio-3.3.0.Final.jar:3.3.0.Final]
+
+
+Client Side
+############
+ Exception in thread &quot;main&quot; javax.jms.JMSSecurityException: HQ119031: Unable to validate user: null
+  	at org.hornetq.core.protocol.core.impl.ChannelImpl.sendBlocking(ChannelImpl.java:399)
+  	at org.hornetq.core.client.impl.ClientSessionFactoryImpl.createSessionInternal(ClientSessionFactoryImpl.java:891)
+ 	at org.hornetq.core.client.impl.ClientSessionFactoryImpl.createSessionInternal(ClientSessionFactoryImpl.java:800)
+ 	at org.hornetq.core.client.impl.ClientSessionFactoryImpl.createSession(ClientSessionFactoryImpl.java:337)
+ 	at org.hornetq.jms.client.HornetQConnection.authorize(HornetQConnection.java:719)
+ 	at org.hornetq.jms.client.HornetQConnectionFactory.createConnectionInternal(HornetQConnectionFactory.java:762)
+ 	at org.hornetq.jms.client.HornetQConnectionFactory.createQueueConnection(HornetQConnectionFactory.java:181)
+ 	at org.hornetq.jms.client.HornetQConnectionFactory.createQueueConnection(HornetQConnectionFactory.java:176)
+ 	at client.WildFlyJmsQueueSender.init(Unknown Source)
+ 	at client.WildFlyJmsQueueSender.main(Unknown Source)
+ Caused by: HornetQSecurityException[errorType=SECURITY_EXCEPTION message=HQ119031: Unable to validate user: null]
+ 	... 10 more
+ Java Result: 1
+</pre>
+<h3>JMS user does not have correct role</h3>
+<p style="text-align: justify;">If JMS user which we created in the ApplicationRealm does not have the correct role (in our case default role &#8220;guest&#8221;) then we will see the following exception while sending/receiving messages to/from JMS destinations.</p>
+<pre class="brush: java; title: ; wrap-lines: false; notranslate" title="">
+ Exception in thread &quot;main&quot; javax.jms.JMSSecurityException: HQ119032: User: abcd doesnt have permission=SEND on address {2}
+ 	at org.hornetq.core.protocol.core.impl.ChannelImpl.sendBlocking(ChannelImpl.java:399)
+ 	at org.hornetq.core.client.impl.ClientProducerImpl.sendRegularMessage(ClientProducerImpl.java:334)
+ 	at org.hornetq.core.client.impl.ClientProducerImpl.doSend(ClientProducerImpl.java:304)
+ 	at org.hornetq.core.client.impl.ClientProducerImpl.send(ClientProducerImpl.java:135)
+	at org.hornetq.jms.client.HornetQMessageProducer.doSendx(HornetQMessageProducer.java:524)
+ 	at org.hornetq.jms.client.HornetQMessageProducer.send(HornetQMessageProducer.java:187)
+ 	at client.WildFlyJmsQueueSender.send(Unknown Source)
+ 	at client.WildFlyJmsQueueSender.readAndSend(Unknown Source)
+ 	at client.WildFlyJmsQueueSender.main(Unknown Source)
+ Caused by: HornetQSecurityException[errorType=SECURITY_EXCEPTION message=HQ119032: User: abcd doesnt have permission=SEND on address {2}]
+ 	... 9 more
+ Java Result: 1
+</pre>
+<p>So make sure that the user (in above case &#8220;abcd&#8221;) has the proper role (like &#8220;guest&#8221; and belongs to correct realm like ApplicationRealm), better see the wildly configuration &#8220;standalone-full.xml&#8221; to see </p>
+<pre class="brush: xml; title: ; wrap-lines: false; notranslate" title="">
+                &lt;security-settings&gt;
+                    &lt;security-setting match=&quot;#&quot;&gt;
+                        &lt;permission type=&quot;send&quot; roles=&quot;guest&quot;/&gt;
+                        &lt;permission type=&quot;consume&quot; roles=&quot;guest&quot;/&gt;
+                        &lt;permission type=&quot;createNonDurableQueue&quot; roles=&quot;guest&quot;/&gt;
+                        &lt;permission type=&quot;deleteNonDurableQueue&quot; roles=&quot;guest&quot;/&gt;
+                    &lt;/security-setting&gt;
+                &lt;/security-settings&gt;
+</pre>
+<p>The Source code of this demo can be found at:<br />
+<a href="https://github.com/jaysensharma/MiddlewareMagicDemos/tree/master/WildFly/JMS/WildFly_JMS_Client" target="_blank">https://github.com/jaysensharma/MiddlewareMagicDemos/tree/master/WildFly/JMS/WildFly_JMS_Client</a></p>
+<p>.<br />
+.</p>
+<p>Regards<br />
+Jay SenSharma</p>
+<div class="socialize-containter" style="background-color:#cc2926; border: 2px solid #ddd;"><div class="socialize-buttons"><div class="socialize-button"><a href="http://twitter.com/share" class="twitter-share-button" data-url="http://middlewaremagic.com/jboss/?p=2724" data-text="Wildfly 8 based standalone JMS client code common issues and remedies ?" data-count="vertical" data-via="socializeWP" ><!--Tweetter--></a></div><div class="socialize-button"><iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fmiddlewaremagic.com%2Fjboss%2F%3Fp%3D2724&amp;send=false&amp;layout=box_count&amp;width=45&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=65" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:45px; height:65px;" allowTransparency="true"></iframe></div><div class="socialize-button"><script type="in/share" data-url="http://middlewaremagic.com/jboss/?p=2724" data-counter="top"></script></div><div class="socialize-button"><div class="g-plusone" data-size="tall" data-href="http://middlewaremagic.com/jboss/?p=2724"></div></div></div><div class="socialize-text">If you enjoyed this post, please consider <a href="#comments">leaving a comment</a> or <a href="http://middlewaremagic.com/jboss/index.php/feed/" title="Syndicate this site using RSS">subscribing to the <abbr title="Really Simple Syndication">RSS</abbr> feed</a> to have future articles delivered to your feed reader.</div></div></div>
+          	<div class="clr"></div>
+          	<span class="linkpages"></span><div class="cleared"></div>
+          	
+			                    <div class="roubcornrcontent">
+            			<span class="posttags-single">No tags</span>
+                    	<div class="clr"></div>
+                    </div>
+			        	
+            <div class="clr"></div>
+        </div> <!-- Closes topPost -->
+		<small></small>
+
+		<div id="comments">
+			            <!-- WP 2.7 and above -->
+            <div class="roubcornrcontent">
+	 
+<div class="clr"></div>
+<div id="respond">
+<h3>Leave a Reply</h3>
+<div id="cancel-comment-reply">
+	<small><a rel="nofollow" id="cancel-comment-reply-link" href="/jboss/?p=2724#respond" style="display:none;">Click here to cancel reply.</a></small>
+</div>
+ 
+<p>You must be <a href="http://middlewaremagic.com/jboss/wp-login.php?redirect_to=http://middlewaremagic.com/jboss/?p=2724">logged in</a> to post a comment.</p></div>
+ 
+
+</div>            
+                    </div> <!-- Closes Comment -->
+
+<div id="extrastuff">
+<span id="rssleft"><a href="http://middlewaremagic.com/jboss/?feed=rss2&#038;p=2724"><abbr title="Really Simple Syndication">RSS</abbr> feed for this post (comments)</a></span>
+
+<span id="trackright"> &#183; <a href="http://middlewaremagic.com/jboss/wp-trackback.php?p=2724" rel="trackback">TrackBack <abbr title="Uniform Resource Identifier">URI</abbr></a></span>
+<div class="cleared"></div>
+</div>
+
+
+</div><!-- Closes Main -->
+
+
+<div id="rightcol">
+		    <div id="searchboxo">
+        		<form method="get" id="searchform" action="http://middlewaremagic.com/jboss/">
+    <input type="text" value="Search keywords" name="s" id="searchbox" onfocus="this.value=''" class="searchinput"/>
+    <input type="submit" class="submitbutton" value="Search" />
+</form> 
+                <div class="clr"></div>
+        </div>
+             
+        <!-- widget -->
+        <li id="text-2" class="sidebaritem widget_text"><div class="sidebarbox"><h2 class="widgettitle">Receive FREE Updates </h2>			<div class="textwidget"><form style="border:1px solid #ccc;padding:3px;text-align:center;" action="http://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('http://feedburner.google.com/fb/a/mailverify?uri=MiddlewareMagic-JBoss', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><BR><b>FREE Email updates of our new posts</b>
+
+<img class="aligncenter size-full wp-image-5989" title="RSSfeed" src="http://middlewaremagic.com/weblogic/wp-content/uploads/2009/08/RSSfeed.png" alt="" width="60" height="60" />
+
+Enter your email address:
+<input type="text" style="width:140px" name="email"/>
+
+<input type="hidden" value="MiddlewareMagic-JBoss" name="uri"/><br>
+
+<input type="hidden" name="loc" value="en_US"/><input type="submit" value="Subscribe" />
+<br>
+<br>
+<a href="http://feeds.feedburner.com/MiddlewareMagic-JBoss"><img src="http://feeds.feedburner.com/~fc/MiddlewareMagic-JBoss?bg=CC0000&amp;fg=FFFFFF&amp;anim=1" height="26" width="88" style="border:0" alt="" /></a>
+<br>
+<!-- Place this tag in the <head> of your document-->
+<link href="https://plus.google.com/107313421357952861131/" rel="publisher" />
+
+<!-- Place this tag where you want the badge to render-->
+<a href="https://plus.google.com/107313421357952861131/?prsrc=3" style="text-decoration: none;"><img src="https://ssl.gstatic.com/images/icons/gplus-32.png" width="32" height="32" style="border: 0;"/></a>
+
+<a href="http://www.facebook.com/middlewaremagic" target="_blank"><img class="alignnone size-thumbnail wp-image-3098" style="margin-top: 5px;" title="Middleware Magic" src="http://middlewaremagic.com/weblogic/wp-content/uploads/2009/08/facebook-icon.png" alt="" width="35" height="35" /> </a>
+
+<a href="http://twitter.com/#!/MiddlewareMagic" target="_blank"><img class="alignnone size-thumbnail wp-image-3098" style="margin-top: 5px;" title="Twitter Middleware Magic" src="http://middlewaremagic.com/weblogic/wp-content/uploads/2009/08/twittericon.png" alt="" width="35" height="35" /> </a>
+
+</form></div>
+		</div></li><li id="text-3" class="sidebaritem widget_text"><div class="sidebarbox"><h2 class="widgettitle">MiddlewareMagic Facebook</h2>			<div class="textwidget"><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like-box href="http://www.facebook.com/pages/MiddlewareMagic/113782642020174" width="260" height="340" show_faces="true" stream="false" header="false"></fb:like-box></div>
+		</div></li><li id="meta-2" class="sidebaritem widget_meta"><div class="sidebarbox"><h2 class="widgettitle">Meta</h2>			<ul>
+			<li><a href="http://middlewaremagic.com/jboss/wp-login.php?action=register">Register</a></li>			<li><a href="http://middlewaremagic.com/jboss/wp-login.php">Log in</a></li>
+			<li><a href="http://middlewaremagic.com/jboss/?feed=rss2">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://middlewaremagic.com/jboss/?feed=comments-rss2">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>			</ul>
+			</div></li>		<li id="recent-posts-2" class="sidebaritem widget_recent_entries"><div class="sidebarbox">		<h2 class="widgettitle">Recent Posts</h2>		<ul>
+											<li>
+					<a href="http://middlewaremagic.com/jboss/?p=2783">EJB3 over SSL in WildFly 10 automation using Apache Maven plugins.</a>
+									</li>
+											<li>
+					<a href="http://middlewaremagic.com/jboss/?p=2770">Server Side Java Script Nashorn, WildFly10, Undertow with MySQL (part-3)</a>
+									</li>
+											<li>
+					<a href="http://middlewaremagic.com/jboss/?p=2760">JDK8 Based Nashorn JavaScript &#038; Java to interact with MySQL Database. (part-2)</a>
+									</li>
+											<li>
+					<a href="http://middlewaremagic.com/jboss/?p=2751">Why Nashorn Java Scripting in Java8, Is it Poisonous for Java? (part-1)</a>
+									</li>
+											<li>
+					<a href="http://middlewaremagic.com/jboss/?p=2744">Why and How to use WildFly based EJB Client API for Client auto reconnect logic ?</a>
+									</li>
+					</ul>
+		</div></li><li id="recent-comments-2" class="sidebaritem widget_recent_comments"><div class="sidebarbox"><h2 class="widgettitle">Recent Comments</h2><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link"><a href='http://middlewaremagic.com' rel='external nofollow' class='url'>JaySenSharma</a></span> on <a href="http://middlewaremagic.com/jboss/?p=324#comment-1386">Monitoring Heap &#038; NonHeap Memory of JBoss using MBean code</a></li><li class="recentcomments"><span class="comment-author-link">priyanksharma</span> on <a href="http://middlewaremagic.com/jboss/?p=324#comment-1385">Monitoring Heap &#038; NonHeap Memory of JBoss using MBean code</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://middlewaremagic.com' rel='external nofollow' class='url'>JaySenSharma</a></span> on <a href="http://middlewaremagic.com/jboss/?p=2744#comment-1382">Why and How to use WildFly based EJB Client API for Client auto reconnect logic ?</a></li><li class="recentcomments"><span class="comment-author-link">v007</span> on <a href="http://middlewaremagic.com/jboss/?p=2744#comment-1381">Why and How to use WildFly based EJB Client API for Client auto reconnect logic ?</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://middlewaremagic.com' rel='external nofollow' class='url'>JaySenSharma</a></span> on <a href="http://middlewaremagic.com/jboss/?p=2760#comment-1367">JDK8 Based Nashorn JavaScript &#038; Java to interact with MySQL Database. (part-2)</a></li></ul></div></li> 
+
+        <div class="clr"></div>
+</div>
+<div class="clr"></div>
+
+
+
+
+    
+			<div id="bottompanel">
+    <div class="roundcornrrbox">
+        <div class="topleftcorner"><div class="toprightcorner"></div></div>
+        <div class="roundcrrcnt">
+        
+        	
+            <div class="col1">
+                
+					                    <h3>Recent Posts</h3>
+                    <ul>
+                                                    <li>
+                                <a href="http://middlewaremagic.com/jboss/?p=2783">EJB3 over SSL in WildFly 10 automation using Apache Maven plugins. </a>
+                            </li>
+                                                    <li>
+                                <a href="http://middlewaremagic.com/jboss/?p=2770">Server Side Java Script Nashorn, WildFly10, Undertow with MySQL (part-3) </a>
+                            </li>
+                                                    <li>
+                                <a href="http://middlewaremagic.com/jboss/?p=2760">JDK8 Based Nashorn JavaScript &#038; Java to interact with MySQL Database. (part-2) </a>
+                            </li>
+                                                    <li>
+                                <a href="http://middlewaremagic.com/jboss/?p=2751">Why Nashorn Java Scripting in Java8, Is it Poisonous for Java? (part-1) </a>
+                            </li>
+                                                    <li>
+                                <a href="http://middlewaremagic.com/jboss/?p=2744">Why and How to use WildFly based EJB Client API for Client auto reconnect logic ? </a>
+                            </li>
+                        			
+                    </ul>
+                    
+
+                            </div>
+            
+            <div class="col2">
+                      
+                    <h3>Archives</h3>
+                    <ul>
+                        	<li><a href='http://middlewaremagic.com/jboss/?m=201601'>January 2016</a></li>
+	<li><a href='http://middlewaremagic.com/jboss/?m=201511'>November 2015</a></li>
+	<li><a href='http://middlewaremagic.com/jboss/?m=201510'>October 2015</a></li>
+	<li><a href='http://middlewaremagic.com/jboss/?m=201505'>May 2015</a></li>
+	<li><a href='http://middlewaremagic.com/jboss/?m=201503'>March 2015</a></li>
+                    </ul>
+
+                            </div>
+            
+            <div class="col3">
+                                    <h3>Tags</h3>
+                    <ul>
+                    	<a href="http://middlewaremagic.com/jboss/?tag=apache" class="tag-cloud-link tag-link-61 tag-link-position-1" style="font-size: 8.4628099173554pt;" aria-label="Apache (6 items)">Apache</a>
+<a href="http://middlewaremagic.com/jboss/?tag=cli" class="tag-cloud-link tag-link-66 tag-link-position-2" style="font-size: 10.181818181818pt;" aria-label="CLI (12 items)">CLI</a>
+<a href="http://middlewaremagic.com/jboss/?tag=cluster" class="tag-cloud-link tag-link-67 tag-link-position-3" style="font-size: 8pt;" aria-label="Cluster (5 items)">Cluster</a>
+<a href="http://middlewaremagic.com/jboss/?tag=cxf" class="tag-cloud-link tag-link-75 tag-link-position-4" style="font-size: 8.7933884297521pt;" aria-label="CXF (7 items)">CXF</a>
+<a href="http://middlewaremagic.com/jboss/?tag=database" class="tag-cloud-link tag-link-76 tag-link-position-5" style="font-size: 8.7933884297521pt;" aria-label="Database (7 items)">Database</a>
+<a href="http://middlewaremagic.com/jboss/?tag=datasource" class="tag-cloud-link tag-link-77 tag-link-position-6" style="font-size: 9.7190082644628pt;" aria-label="Datasource (10 items)">Datasource</a>
+<a href="http://middlewaremagic.com/jboss/?tag=ejb3" class="tag-cloud-link tag-link-86 tag-link-position-7" style="font-size: 11.834710743802pt;" aria-label="ejb3 (22 items)">ejb3</a>
+<a href="http://middlewaremagic.com/jboss/?tag=hornetq" class="tag-cloud-link tag-link-90 tag-link-position-8" style="font-size: 9.1239669421488pt;" aria-label="HornetQ (8 items)">HornetQ</a>
+<a href="http://middlewaremagic.com/jboss/?tag=jboss" class="tag-cloud-link tag-link-99 tag-link-position-9" style="font-size: 9.9834710743802pt;" aria-label="jboss (11 items)">jboss</a>
+<a href="http://middlewaremagic.com/jboss/?tag=jboss-as6" class="tag-cloud-link tag-link-102 tag-link-position-10" style="font-size: 11.173553719008pt;" aria-label="JBoss AS6 (17 items)">JBoss AS6</a>
+<a href="http://middlewaremagic.com/jboss/?tag=jboss-as-6" class="tag-cloud-link tag-link-101 tag-link-position-11" style="font-size: 9.4545454545455pt;" aria-label="JBoss AS 6 (9 items)">JBoss AS 6</a>
+<a href="http://middlewaremagic.com/jboss/?tag=jboss-as7" class="tag-cloud-link tag-link-103 tag-link-position-12" style="font-size: 16pt;" aria-label="Jboss AS7 (96 items)">Jboss AS7</a>
+<a href="http://middlewaremagic.com/jboss/?tag=jbossas7" class="tag-cloud-link tag-link-111 tag-link-position-13" style="font-size: 15.867768595041pt;" aria-label="JBossAS7 (93 items)">JBossAS7</a>
+<a href="http://middlewaremagic.com/jboss/?tag=jboss-messaging" class="tag-cloud-link tag-link-104 tag-link-position-14" style="font-size: 8.7933884297521pt;" aria-label="JBoss Messaging (7 items)">JBoss Messaging</a>
+<a href="http://middlewaremagic.com/jboss/?tag=jms" class="tag-cloud-link tag-link-114 tag-link-position-15" style="font-size: 10.446280991736pt;" aria-label="JMS (13 items)">JMS</a>
+<a href="http://middlewaremagic.com/jboss/?tag=jmx" class="tag-cloud-link tag-link-115 tag-link-position-16" style="font-size: 9.1239669421488pt;" aria-label="JMX (8 items)">JMX</a>
+<a href="http://middlewaremagic.com/jboss/?tag=jspservlets" class="tag-cloud-link tag-link-120 tag-link-position-17" style="font-size: 9.1239669421488pt;" aria-label="JSP/Servlets (8 items)">JSP/Servlets</a>
+<a href="http://middlewaremagic.com/jboss/?tag=logging" class="tag-cloud-link tag-link-125 tag-link-position-18" style="font-size: 9.7190082644628pt;" aria-label="logging (10 items)">logging</a>
+<a href="http://middlewaremagic.com/jboss/?tag=mbeans" class="tag-cloud-link tag-link-128 tag-link-position-19" style="font-size: 10.644628099174pt;" aria-label="MBeans (14 items)">MBeans</a>
+<a href="http://middlewaremagic.com/jboss/?tag=monitoring" class="tag-cloud-link tag-link-134 tag-link-position-20" style="font-size: 8.7933884297521pt;" aria-label="monitoring (7 items)">monitoring</a>
+<a href="http://middlewaremagic.com/jboss/?tag=openshift" class="tag-cloud-link tag-link-139 tag-link-position-21" style="font-size: 10.97520661157pt;" aria-label="OpenShift (16 items)">OpenShift</a>
+<a href="http://middlewaremagic.com/jboss/?tag=security" class="tag-cloud-link tag-link-149 tag-link-position-22" style="font-size: 12.495867768595pt;" aria-label="security (28 items)">security</a>
+<a href="http://middlewaremagic.com/jboss/?tag=ssl" class="tag-cloud-link tag-link-155 tag-link-position-23" style="font-size: 8.4628099173554pt;" aria-label="SSL (6 items)">SSL</a>
+<a href="http://middlewaremagic.com/jboss/?tag=webservice" class="tag-cloud-link tag-link-168 tag-link-position-24" style="font-size: 10.644628099174pt;" aria-label="WebService (14 items)">WebService</a>                    </ul>
+                    
+                            </div>
+            <div class="clr"></div>
+        
+
+            <div class="clr"></div>
+        </div>
+        <div class="bottomleftcorner"><div class="bottomrightcorner"></div></div>
+    </div>
+</div>
+<!-- Bottom Panel ends -->
+
+
+	
+            <div class="copyr">Copyright © 2010-2012 Middleware Magic. All rights reserved. | <a href=Disclaimer</div>    
+        <div class="clr16"></div>
+        </div>
+    </div>
+    <div id="layoutbottom"></div>
+</div>
+
+<script type='text/javascript' src='http://platform.twitter.com/widgets.js?ver=4.9.3'></script>
+<script type='text/javascript' src='http://platform.linkedin.com/in.js?ver=4.9.3'></script>
+<script type='text/javascript' src='http://middlewaremagic.com/jboss/wp-content/plugins/socialize/frontend/js/plusone.js?ver=4.9.3'></script>
+<script type='text/javascript' src='http://middlewaremagic.com/jboss/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='http://middlewaremagic.com/jboss/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJava.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='http://middlewaremagic.com/jboss/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushXml.js?ver=3.0.9b'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://middlewaremagic.com/jboss/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://middlewaremagic.com/jboss/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+<script type='text/javascript' src='http://middlewaremagic.com/jboss/wp-includes/js/comment-reply.min.js?ver=4.9.3'></script>
+<script type='text/javascript' src='http://middlewaremagic.com/jboss/wp-content/plugins/wp-spam-fighter/javascript/wp-spamfighter.js?ver=0.5.1'></script>
+<script type='text/javascript' src='http://middlewaremagic.com/jboss/wp-includes/js/wp-embed.min.js?ver=4.9.3'></script>
+
+</body>
+</html><script type="text/javascript">(function (d, w) {var x = d.getElementsByTagName('SCRIPT')[0];var f = function () {var s = d.createElement('SCRIPT');s.type = 'text/javascript';s.async = true;s.src = "//np.lexity.com/embed/YW/10d0f4e1e2a3b8725b9b27a0dad68775?id=302f289b2382";x.parentNode.insertBefore(s, x);};w.attachEvent ? w.attachEvent('onload',f) :w.addEventListener('load',f,false);}(document, window));</script>

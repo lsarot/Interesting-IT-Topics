@@ -1,0 +1,15 @@
+*** CÓMO RECUPERAR SESIÓN ANTIGUA DE FIREFOX ***
+
+https://www.cyberseguridad.net/cybertruco-restaurar-sesion-antigua-de-firefox-a-partir-de-archivos-jsonlz4
+
+URL about:support > Ir a la carpeta de perfil
+/Users/Leo/Library/Application Support/Firefox/Profiles/neh7mbq5.default
+dentro de /sessionstore-backups
+Habrá fichero del tipo:
+upgrade.jsonlz4-20210318103112
+Podemos ver las fechas o revisar su contenido en https://www.jeffersonscher.com/ffu/scrounger.html
+Copiarlos a otro sitio para no equivocarnos
+Cambiarle el nombre a sessionstore.jsonlz4
+Pegar en la raíz de la carpeta del perfil
+Abrir Firefox
+Opción Abrir última sesión, aunque si está configurado, deberían abrirse automáticamente!

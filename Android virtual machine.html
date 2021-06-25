@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html>
+<head lang="es">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="https://www.jarroba.com/wp-content/uploads/2012/02/favicon.png" />
+
+
+    <!-- Carga de Bootstrap y JQuery-->
+    <script src="https://jarroba.com/wp-content/themes/jarrobav6/static/jQuery/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://jarroba.com/wp-content/themes/jarrobav6/static/bootstrap/css/bootstrap.min.css">
+    <script src="https://jarroba.com/wp-content/themes/jarrobav6/static/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <!-- Carga Google Analitics -->
+    <script async type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-29307293-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+    <!-- /Carga Google Analitics -->
+
+    <!-- Anuncios para móviles de tipo Viñeta-->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        $(document).ready(function(){ (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-8473876812850116",
+            enable_page_level_ads: true
+        }) });
+    </script>
+    <!-- /Anuncios para móviles de tipo Viñeta-->
+
+	<!-- Google WebMaster -->
+	<meta name="google-site-verification" content="TSvoXZJ9MNq_GsXG1gh7WjYvr5zC9m-_5iPE4TFHW9w" />
+	<!-- /Google WebMaster -->
+
+	<!-- Alexa WebMaster -->
+	<meta name="alexaVerifyID" content="JPKatoutc1cJ8Edyvd2Y9lCg5_A"/>
+	<!-- /Alexa WebMaster -->
+
+	<!-- Bing webmaster -->
+	<meta name="msvalidate.01" content="E3929CE5180F4C2B8B2BEECBB77FF72D" />
+	<!-- Bing webmaster -->
+
+	<!-- Pinterest webmaster -->
+	<meta name="p:domain_verify" content="1156fb287859647f902e3b58d17ea2a2"/>
+	<!-- Pinterest webmaster -->
+
+    <title>ART vs DALVIK, arquitectura Android</title>
+
+<!-- This site is optimized with the Yoast SEO plugin v5.2 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="Explicación de la arquitectura Android técnica y fácil. Comparación entre ART vs DALVIK. Contenido APK. Compilación AOT y JIT. Diferencia de Odex y Deodex."/>
+<link rel="canonical" href="https://jarroba.com/arquitectura-android-art-vs-dalvik/" />
+<link rel="publisher" href="https://plus.google.com/+JarrobaWebSite"/>
+<meta property="og:locale" content="es_ES" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="ART vs DALVIK, arquitectura Android" />
+<meta property="og:description" content="Explicación de la arquitectura Android técnica y fácil. Comparación entre ART vs DALVIK. Contenido APK. Compilación AOT y JIT. Diferencia de Odex y Deodex." />
+<meta property="og:url" content="https://jarroba.com/arquitectura-android-art-vs-dalvik/" />
+<meta property="og:site_name" content="Jarroba" />
+<meta property="article:publisher" content="https://www.facebook.com/jarrobaWeb" />
+<meta property="article:tag" content="Ahead-Of-Time" />
+<meta property="article:tag" content="Android" />
+<meta property="article:tag" content="AOT" />
+<meta property="article:tag" content="APK" />
+<meta property="article:tag" content="arquitectura" />
+<meta property="article:tag" content="ART" />
+<meta property="article:tag" content="compilar" />
+<meta property="article:tag" content="Dalvik" />
+<meta property="article:tag" content="Deodex" />
+<meta property="article:tag" content="dex2oat" />
+<meta property="article:tag" content="dexopt" />
+<meta property="article:tag" content="empaquetar" />
+<meta property="article:tag" content="herramientas" />
+<meta property="article:tag" content="JIT" />
+<meta property="article:tag" content="Just-In-Time" />
+<meta property="article:tag" content="Máquina virtual Dalvik" />
+<meta property="article:tag" content="Odex" />
+<meta property="article:section" content="Aplicaciones Móviles" />
+<meta property="article:published_time" content="2015-05-17T20:26:26+00:00" />
+<meta property="article:modified_time" content="2017-06-02T19:58:52+00:00" />
+<meta property="og:updated_time" content="2017-06-02T19:58:52+00:00" />
+<meta property="fb:app_id" content="1566603810239859" />
+<meta property="og:image" content="https://jarroba.com/wp-content/uploads/2015/03/Android-icono-www.Jarroba.com_.png" />
+<meta property="og:image:secure_url" content="https://jarroba.com/wp-content/uploads/2015/03/Android-icono-www.Jarroba.com_.png" />
+<meta property="og:image:width" content="1751" />
+<meta property="og:image:height" content="1751" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="Explicación de la arquitectura Android técnica y fácil. Comparación entre ART vs DALVIK. Contenido APK. Compilación AOT y JIT. Diferencia de Odex y Deodex." />
+<meta name="twitter:title" content="ART vs DALVIK, arquitectura Android" />
+<meta name="twitter:site" content="@jarrobaweb" />
+<meta name="twitter:image" content="https://jarroba.com/wp-content/uploads/2015/03/Android-icono-www.Jarroba.com_.png" />
+<meta name="twitter:creator" content="@jarrobaweb" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Jarroba &raquo; Feed" href="https://jarroba.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Jarroba &raquo; RSS de los comentarios" href="https://jarroba.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Jarroba &raquo; Arquitectura Android &#8211; ART vs Dalvik RSS de los comentarios" href="https://jarroba.com/arquitectura-android-art-vs-dalvik/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/jarroba.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.8.1"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,56826,8203,55356,56819),0,0),c=j.toDataURL(),b===c&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55358,56794,8205,9794,65039),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55358,56794,8203,9794,65039),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='front-estilos-css'  href='https://jarroba.com/wp-content/plugins/asesor-cookies-para-la-ley-en-espana/html/front/estilos.css?ver=4.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfifteen-fonts-css'  href='//fonts.googleapis.com/css?family=Noto+Sans%3A400italic%2C700italic%2C400%2C700%7CNoto+Serif%3A400italic%2C700italic%2C400%2C700%7CInconsolata%3A400%2C700&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='https://jarroba.com/wp-content/themes/jarrobav6/genericons/genericons.css?ver=3.2' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfifteen-style-css'  href='https://jarroba.com/wp-content/themes/jarrobav6/style.css?ver=4.8.1' type='text/css' media='all' />
+<style id='twentyfifteen-style-inline-css' type='text/css'>
+
+			.post-navigation .nav-previous { background-image: url(https://jarroba.com/wp-content/uploads/2015/04/Scraping_java_jarroba.png); }
+			.post-navigation .nav-previous .post-title, .post-navigation .nav-previous a:hover .post-title, .post-navigation .nav-previous .meta-nav { color: #fff; }
+			.post-navigation .nav-previous a:before { background-color: rgba(0, 0, 0, 0.4); }
+		
+			.post-navigation .nav-next { background-image: url(https://jarroba.com/wp-content/uploads/2015/05/Scraping_python_jarroba.png); }
+			.post-navigation .nav-next .post-title, .post-navigation .nav-next a:hover .post-title, .post-navigation .nav-next .meta-nav { color: #fff; }
+			.post-navigation .nav-next a:before { background-color: rgba(0, 0, 0, 0.4); }
+		
+</style>
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyfifteen-ie-css'  href='https://jarroba.com/wp-content/themes/jarrobav6/css/ie.css?ver=20141010' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentyfifteen-ie7-css'  href='https://jarroba.com/wp-content/themes/jarrobav6/css/ie7.css?ver=20141010' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='wpoa-style-css'  href='https://jarroba.com/wp-content/plugins/wp-oauth/wp-oauth.css?ver=4.8.1' type='text/css' media='all' />
+<script type='text/javascript' src='https://jarroba.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://jarroba.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var cdp_cookies_info = {"url_plugin":"https:\/\/jarroba.com\/wp-content\/plugins\/asesor-cookies-para-la-ley-en-espana\/plugin.php","url_admin_ajax":"https:\/\/jarroba.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://jarroba.com/wp-content/plugins/asesor-cookies-para-la-ley-en-espana/html/front/principal.js?ver=4.8.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wpoa_cvars = {"ajaxurl":"https:\/\/jarroba.com\/wp-admin\/admin-ajax.php","template_directory":"https:\/\/jarroba.com\/wp-content\/themes\/jarrobav6","stylesheet_directory":"https:\/\/jarroba.com\/wp-content\/themes\/jarrobav6","plugins_url":"https:\/\/jarroba.com\/wp-content\/plugins","plugin_dir_url":"https:\/\/jarroba.com\/wp-content\/plugins\/wp-oauth\/","url":"https:\/\/jarroba.com","logout_url":"https:\/\/jarroba.com\/wp-login.php?action=logout&_wpnonce=8a6857fade","show_login_messages":"","logout_inactive_users":"30","logged_in":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://jarroba.com/wp-content/plugins/wp-oauth/cvars.js?ver=4.8.1'></script>
+<script type='text/javascript' src='https://jarroba.com/wp-content/plugins/wp-oauth/wp-oauth.js?ver=4.8.1'></script>
+<link rel='https://api.w.org/' href='https://jarroba.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://jarroba.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://jarroba.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 4.8.1" />
+<link rel='shortlink' href='https://jarroba.com/?p=42746' />
+<link rel="alternate" type="application/json+oembed" href="https://jarroba.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fjarroba.com%2Farquitectura-android-art-vs-dalvik%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://jarroba.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fjarroba.com%2Farquitectura-android-art-vs-dalvik%2F&#038;format=xml" />
+<meta name="google-site-verification" content="TSvoXZJ9MNq_GsXG1gh7WjYvr5zC9m-_5iPE4TFHW9w" /><meta name="google-site-verification" content="TSvoXZJ9MNq_GsXG1gh7WjYvr5zC9m-_5iPE4TFHW9w" />		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+		<meta data-pso-pv="1.2.1" data-pso-pt="singlePost" data-pso-th="25796b3aa264e932be4930088aa8bf22"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script pagespeed_no_defer="" data-pso-version="20170502_060509">window.dynamicgoogletags={config:[]};dynamicgoogletags.config=["ca-pub-8473876812850116",[[]],[[[[null,[[120,139]],null,19,1,1],[null,[[280,299]],null,30,1,1],[null,[[360,399],[460,519]],null,33,1,1]],[[["DIV",null,"comments",[]],["10px","10px",1],0,[1],null,0,null,null,7],[["DIV",null,"respond",[]],["10px","10px",1],0,[1],null,0,null,null,8],[["DIV",null,"respond",[]],["10px","10px",1],3,[1],null,0,null,null,8],[["DIV",null,null,["footer-info"]],["10px","10px",1],0,[3],null,0,null,null,4],[["DIV",null,null,["footer-info"]],["10px","10px",1],1,[3],null,0,null,null,4],[["DIV",0,"jumpToEntryData",[],1],["15px","30px",0],0,[0],null,0,null,null,7],[["DIV",0,"jumpToEntryData",[],2],["15px","30px",0],0,[0],null,0,null,null,7],[["DIV",0,"jumpToEntryData",[],-1],["10px","30px",0],3,[0],null,0,null,null,12],[["DIV",null,null,["footer-info"]],["10px","10px",1],2,[5],null,0,null,null,4],[["DIV",null,null,["footer-info"]],["10px","10px",1],3,[5],null,0,null,null,4],[["BODY",0,null,[]],["10px","10px",1],2,[5],null,0,null,null,2],[["DIV",0,"jumpToEntryData",[],3],["15px","30px",0],0,[0],null,0,null,null,7]],["5338641588","6815374782","8292107983","9768841180","2245574385"],["DIV",null,"jumpToEntryData",[]],"20170214_040801",3]],"WordPressSinglePost","9637648785",null,0.01,null,[null,1494922081902],0.01,0,null,null,"http://jarroba.com"];(function(){var h=this,aa=function(a){var b=typeof a;if("object"==b)if(a){if(a instanceof Array)return"array";if(a instanceof Object)return b;var c=Object.prototype.toString.call(a);if("[object Window]"==c)return"object";if("[object Array]"==c||"number"==typeof a.length&&"undefined"!=typeof a.splice&&"undefined"!=typeof a.propertyIsEnumerable&&!a.propertyIsEnumerable("splice"))return"array";if("[object Function]"==c||"undefined"!=typeof a.call&&"undefined"!=typeof a.propertyIsEnumerable&&!a.propertyIsEnumerable("call"))return"function"}else return"null";
+else if("function"==b&&"undefined"==typeof a.call)return"object";return b},p=function(a){return"number"==typeof a},ba=function(a,b){var c=Array.prototype.slice.call(arguments,1);return function(){var b=c.slice();b.push.apply(b,arguments);return a.apply(this,b)}},r=function(a,b){function c(){}c.prototype=b.prototype;a.Sa=b.prototype;a.prototype=new c;a.prototype.constructor=a;a.Ua=function(a,c,f){for(var d=Array(arguments.length-2),e=2;e<arguments.length;e++)d[e-2]=arguments[e];return b.prototype[c].apply(a,
+d)}};var ca=document,da=window;var ea=String.prototype.trim?function(a){return a.trim()}:function(a){return a.replace(/^[\s\xa0]+|[\s\xa0]+$/g,"")},fa=function(a,b){return a<b?-1:a>b?1:0},ga=function(a){return String(a).replace(/\-([a-z])/g,function(a,c){return c.toUpperCase()})};var ha=Array.prototype.forEach?function(a,b,c){Array.prototype.forEach.call(a,b,c)}:function(a,b,c){for(var d=a.length,e="string"==typeof a?a.split(""):a,f=0;f<d;f++)f in e&&b.call(c,e[f],f,a)};var t;a:{var ia=h.navigator;if(ia){var ja=ia.userAgent;if(ja){t=ja;break a}}t=""}var v=function(a){return-1!=t.indexOf(a)};var ka=function(a){ka[" "](a);return a};ka[" "]=function(){};var ma=function(a,b){var c=la;Object.prototype.hasOwnProperty.call(c,a)||(c[a]=b(a))};var na=v("Opera"),w=v("Trident")||v("MSIE"),oa=v("Edge"),pa=v("Gecko")&&!(-1!=t.toLowerCase().indexOf("webkit")&&!v("Edge"))&&!(v("Trident")||v("MSIE"))&&!v("Edge"),qa=-1!=t.toLowerCase().indexOf("webkit")&&!v("Edge"),ra=function(){var a=h.document;return a?a.documentMode:void 0},sa;
+a:{var ta="",ua=function(){var a=t;if(pa)return/rv\:([^\);]+)(\)|;)/.exec(a);if(oa)return/Edge\/([\d\.]+)/.exec(a);if(w)return/\b(?:MSIE|rv)[: ]([^\);]+)(\)|;)/.exec(a);if(qa)return/WebKit\/(\S+)/.exec(a);if(na)return/(?:Version)[ \/]?(\S+)/.exec(a)}();ua&&(ta=ua?ua[1]:"");if(w){var va=ra();if(null!=va&&va>parseFloat(ta)){sa=String(va);break a}}sa=ta}
+var wa=sa,la={},xa=function(a){ma(a,function(){for(var b=0,c=ea(String(wa)).split("."),d=ea(String(a)).split("."),e=Math.max(c.length,d.length),f=0;0==b&&f<e;f++){var g=c[f]||"",k=d[f]||"";do{g=/(\d*)(\D*)(.*)/.exec(g)||["","","",""];k=/(\d*)(\D*)(.*)/.exec(k)||["","","",""];if(0==g[0].length&&0==k[0].length)break;b=fa(0==g[1].length?0:parseInt(g[1],10),0==k[1].length?0:parseInt(k[1],10))||fa(0==g[2].length,0==k[2].length)||fa(g[2],k[2]);g=g[3];k=k[3]}while(0==b)}return 0<=b})},ya;var za=h.document;
+ya=za&&w?ra()||("CSS1Compat"==za.compatMode?parseInt(wa,10):5):void 0;var Aa;if(!(Aa=!pa&&!w)){var Ba;if(Ba=w)Ba=9<=Number(ya);Aa=Ba}Aa||pa&&xa("1.9.1");w&&xa("9");var x=function(a,b,c,d){this.top=a;this.right=b;this.bottom=c;this.left=d};x.prototype.floor=function(){this.top=Math.floor(this.top);this.right=Math.floor(this.right);this.bottom=Math.floor(this.bottom);this.left=Math.floor(this.left);return this};var Da=function(){var a=Ca;try{var b;if(b=!!a&&null!=a.location.href)a:{try{ka(a.foo);b=!0;break a}catch(c){}b=!1}return b}catch(c){return!1}},Ea=function(a,b){for(var c in a)Object.prototype.hasOwnProperty.call(a,c)&&b.call(void 0,a[c],c,a)};var Fa=function(){var a=!1;try{var b=Object.defineProperty({},"passive",{get:function(){a=!0}});h.addEventListener("test",null,b)}catch(c){}return a}();var Ga=function(a){h.google_image_requests||(h.google_image_requests=[]);var b=h.document.createElement("img");b.src=a;h.google_image_requests.push(b)};var Ha=!!window.google_async_iframe_id,Ca=Ha&&window.parent||window;var Ia=function(a,b,c,d,e){this.ma=c||4E3;this.H=a||"&";this.ya=b||",$";this.T=void 0!==d?d:"trn";this.Ta=e||null;this.xa=!1;this.V={};this.Ka=0;this.L=[]},Ka=function(a,b,c,d,e){var f=[];Ea(a,function(a,k){(a=Ja(a,b,c,d,e))&&f.push(k+"="+a)});return f.join(b)},Ja=function(a,b,c,d,e){if(null==a)return"";b=b||"&";c=c||",$";"string"==typeof c&&(c=c.split(""));if(a instanceof Array){if(d=d||0,d<c.length){for(var f=[],g=0;g<a.length;g++)f.push(Ja(a[g],b,c,d+1,e));return f.join(c[d])}}else if("object"==
+typeof a)return e=e||0,2>e?encodeURIComponent(Ka(a,b,c,d,e+1)):"...";return encodeURIComponent(String(a))},Ma=function(a,b,c,d){b=b+"//"+c+d;var e=La(a)-d.length-0;if(0>e)return"";a.L.sort(function(a,b){return a-b});d=null;c="";for(var f=0;f<a.L.length;f++)for(var g=a.L[f],k=a.V[g],m=0;m<k.length;m++){if(!e){d=null==d?g:d;break}var l=Ka(k[m],a.H,a.ya);if(l){l=c+l;if(e>=l.length){e-=l.length;b+=l;c=a.H;break}else a.xa&&(c=e,l[c-1]==a.H&&--c,b+=l.substr(0,c),c=a.H,e=0);d=null==d?g:d}}f="";a.T&&null!=
+d&&(f=c+a.T+"="+(a.Ta||d));return b+f+""},La=function(a){if(!a.T)return a.ma;var b=1,c;for(c in a.V)b=c.length>b?c.length:b;return a.ma-a.T.length-b-a.H.length-1};var Pa=function(a,b,c,d){var e=Na;if((c?e.Qa:Math.random())<(d||e.Ba))try{if(b instanceof Ia)var f=b;else f=new Ia,Ea(b,function(a,b){var c=f,d=c.Ka++,e={};e[b]=a;a=[e];c.L.push(d);c.V[d]=a});var g=Ma(f,e.Na,e.Da,e.Ma+a+"&");g&&Ga(g)}catch(k){}};var Qa=function(a,b){this.events=[];this.Z=b||h;var c=null;b&&(b.google_js_reporting_queue=b.google_js_reporting_queue||[],this.events=b.google_js_reporting_queue,c=b.google_measure_js_timing);this.ja=null!=c?c:Math.random()<a;a:{try{var d=(this.Z||h).top.location.hash;if(d){var e=d.match(/\bdeid=([\d,]+)/);var f=e&&e[1]||"";break a}}catch(g){}f=""}a=f;b=this.Z.performance;this.sa=!!(b&&b.mark&&b.clearMarks&&a.indexOf&&0<a.indexOf("1337"))};
+Qa.prototype.disable=function(){this.sa&&ha(this.events,this.Aa,this);this.events.length=0;this.ja=!1};Qa.prototype.Aa=function(a){if(a&&this.sa){var b=this.Z.performance;b.clearMarks("goog_"+a.uniqueId+"_start");b.clearMarks("goog_"+a.uniqueId+"_end")}};var Na,y;if(Ha&&!Da()){var Ra="."+ca.domain;try{for(;2<Ra.split(".").length&&!Da();)ca.domain=Ra=Ra.substr(Ra.indexOf(".")+1),Ca=window.parent}catch(a){}Da()||(Ca=window)}y=Ca;var Sa=new Qa(1,y);Na=new function(){this.Na="http:"===da.location.protocol?"http:":"https:";this.Da="pagead2.googlesyndication.com";this.Ma="/pagead/gen_204?id=";this.Ba=.01;this.Qa=Math.random()};
+if("complete"==y.document.readyState)y.google_measure_js_timing||Sa.disable();else if(Sa.ja){var Ta=function(){y.google_measure_js_timing||Sa.disable()};y.addEventListener?y.addEventListener("load",Ta,Fa?void 0:!1):y.attachEvent&&y.attachEvent("onload",Ta)};var z=function(){},Ua="function"==typeof Uint8Array,B=function(a,b,c){a.a=null;b||(b=[]);a.Wa=void 0;a.M=-1;a.l=b;a:{if(a.l.length){b=a.l.length-1;var d=a.l[b];if(d&&"object"==typeof d&&"array"!=aa(d)&&!(Ua&&d instanceof Uint8Array)){a.R=b-a.M;a.G=d;break a}}a.R=Number.MAX_VALUE}a.Va={};if(c)for(b=0;b<c.length;b++)d=c[b],d<a.R?(d+=a.M,a.l[d]=a.l[d]||A):a.G[d]=a.G[d]||A},A=[],C=function(a,b){if(b<a.R){b+=a.M;var c=a.l[b];return c===A?a.l[b]=[]:c}c=a.G[b];return c===A?a.G[b]=[]:c},Wa=function(a){a=
+C(Va,a);return null==a?a:+a},D=function(a,b,c){b<a.R?a.l[b+a.M]=c:a.G[b]=c},E=function(a,b,c){a.a||(a.a={});if(!a.a[c]){var d=C(a,c);d&&(a.a[c]=new b(d))}return a.a[c]},F=function(a,b,c){a.a||(a.a={});if(!a.a[c]){for(var d=C(a,c),e=[],f=0;f<d.length;f++)e[f]=new b(d[f]);a.a[c]=e}b=a.a[c];b==A&&(b=a.a[c]=[]);return b},Xa=function(a,b,c){a.a||(a.a={});c=c||[];for(var d=[],e=0;e<c.length;e++)d[e]=G(c[e]);a.a[b]=c;D(a,b,d)},Ya=function(a){if(a.a)for(var b in a.a){var c=a.a[b];if("array"==aa(c))for(var d=
+0;d<c.length;d++)c[d]&&G(c[d]);else c&&G(c)}},G=function(a){Ya(a);return a.l};z.prototype.toString=function(){Ya(this);return this.l.toString()};var Za=function(a){var b;if("array"==aa(a)){for(var c=Array(a.length),d=0;d<a.length;d++)null!=(b=a[d])&&(c[d]="object"==typeof b?Za(b):b);return c}if(Ua&&a instanceof Uint8Array)return new Uint8Array(a);c={};for(d in a)null!=(b=a[d])&&(c[d]="object"==typeof b?Za(b):b);return c};var H=function(a){this.oa={};this.oa.c=a;this.o=[];this.u=null;this.v=[];this.fa=0};H.prototype.g=function(a){for(var b=0;b<this.o.length;b++)if(this.o[b]==a)return this;this.o.push(a);return this};var $a=function(a,b){a.u=a.u?a.u:b;return a};H.prototype.C=function(a){for(var b=0;b<this.v.length;b++)if(this.v[b]==a)return this;this.v.push(a);return this};
+H.prototype.getData=function(a){var b=this.oa,c={};for(d in b)c[d]=b[d];0<this.fa&&(c.t=this.fa);c.err=this.o.join();c.warn=this.v.join();if(this.u){c.excp_n=this.u.name;c.excp_m=this.u.message&&this.u.message.substring(0,512);if(b=this.u.stack){var d=this.u.stack;try{-1==d.indexOf("")&&(d="\n"+d);for(var e;d!=e;)e=d,d=d.replace(/((https?:\/..*\/)[^\/:]*:\d+(?:.|\n)*)\2/,"$1");b=d.replace(/\n */g,"\n")}catch(f){b=""}}c.excp_s=b}c.w=0<a.innerWidth?a.innerWidth:null;c.h=0<a.innerHeight?a.innerHeight:
+null;return c};var bb=function(a,b){ab(a,a.Ga,a.X,b)},ab=function(a,b,c,d){var e=d.u;d=d.getData(a.K);a.Ia?(d.type=b,a.K.console.log(d),e&&a.K.console.error(e)):0<c&&(d.r=c,Pa(b,d,"jserror"!=b,c))};var I=function(a){return a.dynamicgoogletags=a.dynamicgoogletags||{}};var J=function(a){B(this,a,cb)};r(J,z);var cb=[4];J.prototype.getId=function(){return C(this,3)};var K=function(a){B(this,a,null)};r(K,z);var db=function(a){B(this,a,null)};r(db,z);var L=function(a){return E(a,J,1)},M=function(a){B(this,a,eb)};r(M,z);var eb=[1];M.prototype.i=function(){return F(this,db,1)};M.prototype.qa=function(a){Xa(this,1,a)};var N=function(a){B(this,a,fb)};r(N,z);var fb=[2],gb=function(a){B(this,a,null)};r(gb,z);N.prototype.la=function(){return C(this,3)};N.prototype.ra=function(a){D(this,3,a)};var O=function(a){B(this,a,hb)};r(O,z);var hb=[1,2,3];O.prototype.i=function(){return F(this,db,2)};
+O.prototype.qa=function(a){Xa(this,2,a)};var P=function(a){B(this,a,ib)};r(P,z);var ib=[3],jb=function(a){B(this,a,null)};r(jb,z);P.prototype.A=function(){return C(this,1)};P.prototype.D=function(){return E(this,M,2)};P.prototype.O=function(){return C(this,4)};P.prototype.la=function(){return C(this,5)};P.prototype.ra=function(a){D(this,5,a)};P.prototype.N=function(){return E(this,jb,9)};var kb=function(a){this.m=a;this.ua=[]};kb.prototype.f=function(){return 0<F(this.m,O,3).length?F(this.m,O,3)[0]:null};var lb=function(a){var b=["adsbygoogle-placeholder"];a=a.className?a.className.split(/\s+/):[];for(var c={},d=0;d<a.length;++d)c[a[d]]=!0;for(d=0;d<b.length;++d)if(!c[b[d]])return!1;return!0};var mb=function(a,b){for(var c=0;c<b.length;c++){var d=b[c],e=ga(d.Xa);a[e]=d.value}},pb=function(a,b){var c=nb;b.setAttribute("data-adsbygoogle-status","reserved");b={element:b};(c=c&&c.Oa)&&(b.params=c);ob(a).push(b)},ob=function(a){return a.adsbygoogle=a.adsbygoogle||[]};var qb=function(a,b){if(!a)return!1;a=b.getComputedStyle?b.getComputedStyle(a,null):a.currentStyle;if(!a)return!1;a=a.cssFloat||a.styleFloat;return"left"==a||"right"==a},rb=function(a){for(a=a.previousSibling;a&&1!=a.nodeType;)a=a.previousSibling;return a?a:null},sb=function(a){return!!a.nextSibling||!!a.parentNode&&sb(a.parentNode)};var tb=function(a,b){var c=a.length;if(null!=c)for(var d=0;d<c;d++)b.call(void 0,a[d],d)};var ub=function(a,b,c,d){this.na=a;this.aa=b;this.ba=c;this.P=d};ub.prototype.query=function(a){var b=[];try{b=a.querySelectorAll(this.na)}catch(f){}if(!b.length)return[];a=b;b=a.length;if(0<b){for(var c=Array(b),d=0;d<b;d++)c[d]=a[d];a=c}else a=[];a=vb(this,a);p(this.aa)&&(b=this.aa,0>b&&(b+=a.length),a=0<=b&&b<a.length?[a[b]]:[]);if(p(this.ba)){b=[];for(c=0;c<a.length;c++){var d=wb(a[c]),e=this.ba;0>e&&(e+=d.length);0<=e&&e<d.length&&b.push(d[e])}a=b}return a};
+ub.prototype.toString=function(){return JSON.stringify({nativeQuery:this.na,occurrenceIndex:this.aa,paragraphIndex:this.ba,ignoreMode:this.P})};
+var vb=function(a,b){if(null==a.P)return b;switch(a.P){case 1:return b.slice(1);case 2:return b.slice(0,b.length-1);case 3:return b.slice(1,b.length-1);case 0:return b;default:throw Error("Unknown ignore mode: "+a.P);}},wb=function(a){var b=[];tb(a.getElementsByTagName("p"),function(a){100<=xb(a)&&b.push(a)});return b},xb=function(a){if(3==a.nodeType)return a.length;if(1!=a.nodeType||"SCRIPT"==a.tagName)return 0;var b=0;tb(a.childNodes,function(a){b+=xb(a)});return b},yb=function(a){return 0==a.length||
+isNaN(a[0])?a:"\\"+(30+parseInt(a[0],10))+" "+a.substring(1)};var zb=function(a,b){var c=0,d=C(a,6);if(void 0!==d)switch(d){case 0:c=1;break;case 1:c=2;break;case 2:c=3}var d=null,e=C(a,7);if(C(a,1)||a.getId()||0<C(a,4).length){var f=a.getId(),g=C(a,1),e=C(a,4),d=C(a,2);a=C(a,5);var k="";g&&(k+=g);f&&(k+="#"+yb(f));if(e)for(f=0;f<e.length;f++)k+="."+yb(e[f]);d=(e=k)?new ub(e,d,a,c):null}else e&&(d=new ub(e,C(a,2),C(a,5),c));return d?d.query(b):[]},Ab=function(a,b){if(a==b)return!0;if(!a||!b||C(a,1)!=C(b,1)||C(a,2)!=C(b,2)||a.getId()!=b.getId()||C(a,7)!=C(b,
+7)||C(a,5)!=C(b,5)||C(a,6)!=C(b,6))return!1;a=C(a,4);b=C(b,4);if(a||b)if(a&&b&&a.length==b.length)for(var c=0;c<a.length;c++){if(a[c]!=b[c])return!1}else return!1;return!0};var Bb=function(a){a=a.document;return("CSS1Compat"==a.compatMode?a.documentElement:a.body)||{}},Cb=function(a){return void 0===a.pageYOffset?(a.document.documentElement||a.document.body.parentNode||a.document.body).scrollTop:a.pageYOffset};var Db=function(a,b){b=L(b);if(!b)return null;a=zb(b,a);return 0<a.length?a[0]:null},Fb=function(a,b){b=Eb(a,b,!0);return p(b)&&!(b<=Bb(a).clientHeight)},Gb=function(a,b){return a.body?b-a.body.getBoundingClientRect().top:b},Eb=function(a,b,c){if(!c||!p(C(b,8))){var d=Db(a.document,b);if(d){var e=null!=E(b,K,2)?C(E(b,K,2),3):void 0;c=a.document.createElement("div");c.className="googlepublisherpluginad";var f=c.style;f.textAlign="center";f.width="100%";f.height="0px";f.clear=e?"both":"none";Hb(c,d,
+C(b,3));d=c.getBoundingClientRect().top+Cb(a);c.parentNode.removeChild(c);D(b,8,d)}}b=C(b,8);return p(b)?b-Cb(a):null},Ib={0:0,1:1,2:2,3:3},Jb={0:"auto",1:"horizontal",2:"vertical",3:"rectangle"},Kb=function(a,b){a.sort(function(a,d){a=Eb(b,a,!0);a=p(a)?a:Number.POSITIVE_INFINITY;d=Eb(b,d,!0);d=p(d)?d:Number.POSITIVE_INFINITY;return a-d})},Hb=function(a,b,c){switch(Ib[c]){case 0:b.parentNode&&b.parentNode.insertBefore(a,b);break;case 3:if(c=b.parentNode){var d=b.nextSibling;if(d&&d.parentNode!=c)for(;d&&
+8==d.nodeType;)d=d.nextSibling;c.insertBefore(a,d)}break;case 1:b.insertBefore(a,b.firstChild);break;case 2:b.appendChild(a)}if(1!=b.nodeType?0:"INS"==b.tagName&&lb(b))b.style.display="block"};var nb=new function(){this.ia="googlepublisherpluginad";this.Oa={google_tag_origin:"pso"}},Q=function(a){this.b=a;this.j=[];this.ea=0;this.o=[];this.v=[];this.Y=null;this.pa=!1},Lb=function(a,b){a=E(a.f(),J,4);if(!(a&&b&&C(b,1)==C(a,1)&&b.getId()==a.getId()&&p(C(b,2))&&p(C(b,5))))return!1;a=C(a,4);b=C(b,4);if(a.length!=b.length)return!1;for(var c=0;c<a.length;++c)if(b[c]!=a[c])return!1;return!0},Mb=function(a){var b=p(void 0)?void 0:20;var c=a.f();var d=c.i(),e=E(c,J,4);if(!(a.pa||0>=b)&&e&&0!=zb(e,
+a.b.document).length){a.pa=!0;for(var f=[],g=0;g<d.length;++g){var k=d[g];var m=L(k);Lb(a,m)&&(c=C(m,2),m=C(m,5),null!=c&&null!=m&&0<=c&&0<=m&&(!f[c]||C(L(f[c]),5)<m)&&(f[c]=k))}m=0;d=zb(e,a.b.document);for(c=0;c<f.length&&m<b;++c){var e=m,g=a,l=d[c],k=f[c];m=b-m;var u=g.f().i(),q=0;if(l&&k){l=wb(l).length;switch(C(L(k),6)){case 0:case 1:--l;break;case 2:l-=2}for(var n=C(L(k),5)+1;n<l&&q<m;++n){var Oa=new k.constructor(Za(G(k))),Hc=L(Oa);D(Hc,5,n);u.push(Oa);q++}}q&&g.f().qa(u);m=e+q}}};
+Q.prototype.g=function(a){for(var b=0;b<this.o.length;++b)if(this.o[b]==a)return;this.o.push(a)};Q.prototype.C=function(a){for(var b=0;b<this.v.length;++b)if(this.v[b]==a)return;this.v.push(a)};
+var Nb=function(a,b,c){var d=Ib[C(b,3)],e=Db(a.b.document,b);if(e){a:{var f=a.b;switch(d){case 0:f=qb(rb(e),f);break a;case 3:f=qb(e,f);break a;case 2:var g=e.lastChild;f=qb(g?1==g.nodeType?g:rb(g):null,f);break a}f=!1}if(!f&&(c||2!=d||sb(e))&&(c=1==d||2==d?e:e.parentNode,!c||(1!=c.nodeType?0:"INS"==c.tagName&&lb(c))||!(0>=c.offsetWidth)))a:if(C(b,7))a.C(8);else{b:if(C(b,5))c=C(b,5);else{if(c=R(a).f())if(c=C(c,3),a.ea<c.length){c=c[a.ea++];break b}a.g(4);c=null}if(null!=c){D(b,7,!0);d=[];(f=a.O())&&
+d.push(f);f=R(a).ua;for(g=0;g<f.length;++g)d.push(f[g]);p(C(b,9))&&d.push("pso-lv-"+C(b,9));var k=a.b.document;f=a.A();var g=C(b,6),g=null!=g?Jb[g]:g,m=E(b,K,2),l={};m&&(l.ta=C(m,1),l.ha=C(m,2),l.za=!!C(m,3));var m=c,u=nb,q=k.createElement("div"),n=q.style;n.textAlign="center";n.width="100%";n.height="auto";n.clear=l.za?"both":"none";l.La&&mb(n,l.La);k=k.createElement("ins");n=k.style;n.display="block";n.margin="auto";n.backgroundColor="transparent";l.ta&&(n.marginTop=l.ta);l.ha&&(n.marginBottom=
+l.ha);l.va&&mb(n,l.va);q.appendChild(k);k.setAttribute("data-ad-format",g?g:"auto");if(g=u&&u.ia)q.className=g;k.className="adsbygoogle";k.setAttribute("data-ad-client",f);m&&k.setAttribute("data-ad-slot",m);d.length&&k.setAttribute("data-ad-channel",d.join("+"));Hb(q,e,C(b,3));try{pb(a.b,k)}catch(Oa){C(b,5)!=c&&a.ea--;D(b,7,!1);a.C(6);q&&q.parentNode&&q.parentNode.removeChild(q);break a}a.j.push(q)}}}},Ob=function(a,b){for(var c=Number.POSITIVE_INFINITY,d=0;d<a.j.length;++d)var e=a.j[d].getBoundingClientRect().top,
+f=a.j[d].getBoundingClientRect().bottom,c=Math.min(c,b<e?e-b:f<b?b-f:0);return c},R=function(a){a=I(a.b).ps||null;if(!a)throw Error("No placementState");return a},Pb=function(a,b){var c=R(a).m;if(!c||!c.A())return a.g(5),!1;c=F(c,O,3)[0];return c?C(c,3).length<b?(a.g(4),a.g(5),!1):!0:(a.g(5),!1)};Q.prototype.A=function(){return R(this).m.A()||""};Q.prototype.O=function(){return R(this).m.O()||void 0};Q.prototype.D=function(){return R(this).m.D()||new M};
+Q.prototype.f=function(){var a=R(this).f();if(!a)throw Error("No mConfig");return a};var Qb=function(a){a=C(a.f(),6);return null!=a&&0<a};var Rb=function(){this.I=this.J=this.ca=null};var S=function(a){Q.call(this,a)};r(S,Q);S.prototype.apply=function(a){var b;(b=R(this).m)&&b.A()&&b.D()?b=!0:(this.g(5),b=!1);if(b){b=this.D().i();for(var c=0;c<b.length;c++){var d=b[c];C(d,7)||Nb(this,d,a)}}};S.prototype.B=function(){return(0==this.D().i().length||0<this.j.length)&&0==this.o.length};var Sb=function(a){Q.call(this,a);if(Pb(this,0)){a=this.D().i();for(var b=this.f().i(),c=0;c<a.length;c++){var d=a[c];a:{var e=d;var f=b;if(e&&L(e))for(var g=0;g<f.length;g++){var k=f[g];if(C(e,3)==C(k,3)&&Ab(L(e),L(k))){e=k;break a}}e=null}e&&E(e,K,2)&&(e=E(e,K,2),d.a||(d.a={}),f=e?G(e):e,d.a[2]=e,D(d,2,f))}}};r(Sb,S);var Ub=function(a,b){var c=void 0===b.pageXOffset?(b.document.documentElement||b.document.body.parentNode||b.document.body).scrollLeft:b.pageXOffset,d=Cb(b);if(a.getBoundingClientRect)return a=a.getBoundingClientRect(),Tb(a)?new x(a.top+d,a.right+c,a.bottom+d,a.left+c):new x(0,0,0,0);b=b.document.createRange();b.selectNodeContents(a);return b.collapsed?new x(0,0,0,0):b.getBoundingClientRect?(a=b.getBoundingClientRect(),Tb(a)?new x(a.top+d,a.right+c,a.bottom+d,a.left+c):new x(0,0,0,0)):new x(0,0,0,
+0)},Tb=function(a){return!!a&&p(a.top)&&!isNaN(a.top)&&p(a.right)&&!isNaN(a.right)&&p(a.bottom)&&!isNaN(a.bottom)&&p(a.left)&&!isNaN(a.left)};var Zb=function(a){this.K=a;this.Ha=Vb(a);this.wa=T("ins.adsbygoogle",a);this.ga=Wb(a);this.Pa=T("[__lsu_res=reserved]",a);this.U=[];a=Xb(this);for(var b=0;b<a.length;b++)this.U.push(new Yb(a[b]))},Vb=function(a){var b=a.googletag;if(!b||"function"!=typeof b.pubads)return T("div[id^=div-gpt-ad]",a);var c=[];try{for(var d=b.pubads().getSlots(),b=0;b<d.length;b++){var e=d[b].getSlotElementId(),f=a.document.getElementById(e);null!=f&&c.push(f)}}catch(g){Pa("ladd_evt",{ok:0,err:g.toString()},!0,.1)}return c},
+Wb=function(a){return T("iframe[id^=aswift_],iframe[id^=google_ads_frame]",a)},T=function(a,b){return Array.prototype.slice.call(b.document.querySelectorAll(a))},Xb=function(a){return[].concat(a.Ha,a.wa,a.ga,a.Pa)},Yb=function(a){this.Ea=a;this.W=null};var U=function(a){Q.call(this,a)};r(U,Q);U.prototype.apply=function(){};U.prototype.B=function(){if(Qb(this)){var a=this.b;var b=Vb(a);a=0<[].concat(b,T("ins.adsbygoogle",a),Wb(a),T("[__lsu_res=reserved]",a)).length}else a=!0;return a};var $b=function(a){Q.call(this,a);this.F=null};r($b,Q);
+$b.prototype.apply=function(a){if(a&&Pb(this,2)){Mb(this);a=Bb(this.b).clientHeight||640;null==this.F&&(this.F=new Zb(this.b));var b=this.F.ga.length;if(!(5<=b)){var b=Math.min(2,5-b),c=this.f().i();Kb(c,this.b);for(var d=0;d<c.length&&this.j.length<b;++d){var e=c[d];if(Fb(this.b,e)){var f=Eb(this.b,e,!0);if(void 0!==f){a:{var g=this.F;for(var k=a,m=f,l=0;l<g.U.length;l++){var u=m,q=k;var n=g.U[l];n.W||(n.W=Ub(n.Ea,g.K));n=n.W;if(n.top-q<u&&u<n.bottom+q){g=!0;break a}}g=!1}g||Ob(this,f)<a||Nb(this,
+e,!0)}}}0==this.j.length&&this.C(1)}}};$b.prototype.B=function(){return Qb(this)?0<Xb(this.F).length:!0};var ac=function(a){Q.call(this,a);this.$=!1};r(ac,U);
+ac.prototype.apply=function(a){if(a&&!this.$){a:{var b=this.b.document;var c=b.body;if(a&&c){a=this.A();var d=nb,e=b.createElement("div");e.style.display="block";if(d=d&&d.ia)e.className=d;b=b.createElement("ins");b.className="adsbygoogle";b.setAttribute("data-ad-client",a);b.setAttribute("data-reactive-ad-format","1");b.style.display="none";e.appendChild(b);Hb(e,c,2);try{pb(this.b,b)}catch(f){this.C(6);e&&e.parentNode&&e.parentNode.removeChild(e);c=5;break a}this.j.push(e);c=0}else c=4}this.$=0==
+c}};ac.prototype.B=function(){return this.$&&U.prototype.B.call(this)};var bc=function(a){Q.call(this,a);a=Bb(a).clientHeight;this.Ca=.1*a;this.Ja=.75*a};r(bc,Q);
+bc.prototype.apply=function(a){if(Pb(this,3)&&!this.B()){Mb(this);var b=this.f().i();Kb(b,this.b);var c=this.Ca;var d=document;d=d.querySelectorAll?d.querySelectorAll("header,#header,#masthead,.header,.site-header"):[];for(var e=d.length,f=0<e?d[0]:null,g=1;g<e;g++)d[g].getBoundingClientRect().top<f.getBoundingClientRect().top&&(f=d[g]);(d=f)&&(d=d.getBoundingClientRect())&&d.top!=d.bottom&&d.left!=d.right&&(c=Math.min(c,Gb(document,d.bottom)));for(d=0;d<b.length&&3>this.j.length;d++){e=b[d];var f=
+c,g=this.b.document,k=Eb(this.b,e,!1);!p(k)||Gb(g,k)<f?f=!1:(f=Ob(this,k),f=this.Ja<f);f&&(f=Fb(this.b,e),g=C(e,6)||0,f&&0==g&&D(e,6,3),!f&&a||Nb(this,e,a))}}};bc.prototype.B=function(){return 3==this.j.length};var V={};V[16]=S;V[17]=S;V[19]=U;V[29]=$b;V[33]=U;V[30]=ac;V[28]=bc;V[34]=bc;V[32]=Sb;V[1]=S;V[8]=U;V[11]=S;var cc=[19,29,33,30,16,32,17,34],dc=[16,19,33,30,17,1,6,8,11];var ec=function(a,b){a=a.google_ad_modifications=a.google_ad_modifications||{};(a.ad_channels=a.ad_channels||[]).push(b)};var fc=function(a){return 0>a||99<a?null:10>a?"0"+a:""+a};var gc=function(a,b){a=a.google_ad_modifications=a.google_ad_modifications||{};a=a.loeids=a.loeids||[];for(var c=0;c<b.length;c++)a.push(b[c])};var hc=function(a,b,c){this.ka=a;this.Fa=c?c:new jb};hc.prototype.N=function(){return this.Fa||new jb};var ic=function(a){if(!p(a))return!1;for(var b=0;b<cc.length;++b)if(a==cc[b])return!1;return!0},nc=function(){var a=W,b=jc,c=kc,d=b.f();if(!d)return lc(16);var e=null,f;a:{var g=F(d,N,1);for(f=0;f<g.length;++f){for(var k=!0,m=0;m<dc.length;++m)C(g[f],4)==dc[m]&&(k=!1);if(k){g=[];0==d.i().length&&g.push("PsoInvalidVariant");0==C(d,3).length&&g.push("PsoNoAdSlotCodes");f=g;break a}}f=[]}g=c.ka;if(0==f.length)a:{e=F(d,N,1);if(p(g))for(f=0;f<e.length;f++)if(k=e[f],V[C(k,4)])for(var m=F(k,gb,2),l=0;l<
+m.length;l++){var u=m[l],q=C(u,1),u=C(u,2);if(p(q)&&p(u)&&g>=q&&g<=u){e=k;break a}}e=null}else for(k=0;k<f.length;++k)b.ua.push(f[k]);if(!e){f=F(d,N,1);e={};for(k=0;k<f.length;k++)e[C(f[k],4)]=!0;f=null;e[19]||e[8]?f=19:e[16]||e[1]?f=16:0<d.i().length&&0<C(d,3).length&&e[34]&&(f=34);null!=f?(e=new N,D(e,6,3),D(e,4,f),16!=f&&19!=f&&e.ra("pso-ama-fallback")):e=null}(f=!e)||(!p(g)||800>g?f=!1:820>g?(gc(a,["26835111"]),f=!0):(840>g&&gc(a,["26835112"]),f=!1));if(f)return lc(16);(g=e.la())&&ec(a,g);g=!0;
+C(c.N(),2)&&(Date.now?Date.now():+new Date)<C(c.N(),2)||(ec(a,"pso-ama-exd"),g=!1);C(b.m,11)&&(ec(a,"pso-ama-stl-tmp"),g=!1);g&&ec(a,"pso-ama-elig");2==C(e,6)&&(b=C(e,1),null!=b&&gc(a,[""+b]));if(g&&(2==C(e,6)||1==C(e,6))){d=F(d,N,1);if(null===c.ka)c=[];else{b={};c=[];for(g=0;g<d.length;g++)f=mc(d[g]),null==f||b[f]||(b[f]=!0,c.push(f));b=mc(e);if(null!=b){d=[];b=fc(b);g=!1;if(b)for(f=0;f<c.length;f++)k=fc(c[f]),b==k&&(g=!0),k&&d.push("950"+b+k);g||(d=[]);c=d}else c=[]}gc(a,c)}a=new Rb;a.ca=C(e,5);
+a.J=C(e,4);return a},lc=function(a){var b=new Rb;b.J=a;return b},oc=function(a){a=a.google_ad_modifications=a.google_ad_modifications||{};a.remove_ads_by_default=!0;a.ad_whitelist=[{ad_tag_origin:"pso"}];a.ad_blacklist=[];a.space_collapsing="slot"},mc=function(a){switch(C(a,6)){case 1:var b=C(a,4);break;case 2:b=C(a,7)}return null!=b?b:null};var pc=function(a){this.document=a};var X=function(a){H.call(this,a)};r(X,H);X.prototype.getData=function(a){var b=X.Sa.getData.call(this,a);a:{var c=(new pc(a.document)).document.getElementsByTagName("script");for(var d=0;d<c.length;++d)if(c[d].hasAttribute("data-pso-version")){c=c[d].getAttribute("data-pso-version");break a}c=null}b.sv=c;if(d=I(a).ps||null){c=d.m;var d=d.f(),e=b.wpc;b.wpc=null!=e?e:c.A();b.su=C(c,14);b.tn=c.O();b.ev=d&&C(d,5)}if(a=I(a).ss||null)b.s=a.J,b.st=a.ca;return b};var qc=null,rc=!1,uc=function(a){var b=sc,c=tc;b.addEventListener?(a&&b.addEventListener("DOMContentLoaded",a,!1),c&&b.addEventListener("load",c,!1)):b.attachEvent&&c&&b.attachEvent("onload",c)},wc=function(a){p(qc)&&a.clearInterval&&(a.clearInterval(qc),qc=null);rc||vc(a,!1);vc(a,!0)},xc=function(a,b){try{wc(b);var c=I(b).ss||null;if(c&&c.I){var d=c.I,e=d.B(),f=d.o,g=d.v,k=d.Y,m=d.j.length;e||0!=m||f.push(6);for(var l=new X(m),c=0;c<g.length;c++)l.C(g[c]);if(e&&0==f.length&&null===k)ab(a,a.Ra,a.da,
+l);else{for(e=0;e<f.length;e++)l.g(f[e]);bb(a,$a(l,k))}}else bb(a,(new X(0)).g(2))}catch(u){bb(a,$a((new X(0)).g(1),u))}I(b).loaded=!0},vc=function(a,b){b||(rc=!0);if((a=I(a).ss||null)&&a.I){a=a.I;try{a.apply(b)}catch(c){a.g(1),null===a.Y&&(a.Y=c)}}},yc=function(){vc(window,!1)};var Y=new function(a){this.Ra="pso_success";this.Ga="pso_failure";this.X=this.da=.01;this.Ia=!1;this.K=a}(window);
+try{var W=window,Va,zc=I(W).config;Va=zc?new P(zc):null;if(!Va)throw Error("No config");var Ac=Wa(10),Bc=Wa(7);Y.da=null!=Ac?Ac:Y.da;Y.X=null!=Bc?Bc:Y.X;var jc=new kb(Va),Cc=jc;I(W).ps=Cc;var Z,kc;if(v("iPad")||v("Android")&&!v("Mobile")||v("Silk")||!(v("iPod")||v("iPhone")||v("Android")||v("IEMobile")))Z=lc(16);else{var Dc,Ec=/^#([^=]*)=(\d+)$/.exec(W.location.hash);if((Dc=Ec&&3==Ec.length&&"pso_strategy"==Ec[1]?+Ec[2]:null)&&V[Dc]){Z=lc(Dc);var Fc=W;ic(Dc)&&oc(Fc)}else{var Gc=W,Ic=jc.m.N(),Jc;try{var Kc=
+parseInt(Gc.localStorage.getItem("PSO_EXP0"),10);Jc=isNaN(Kc)?null:Kc}catch(a){Jc=null}if(null==Jc){var Lc=Jc=Math.floor(1024*Math.random());try{Gc.localStorage.setItem("PSO_EXP0",Lc.toString())}catch(a){}}kc=new hc(Jc,0,Ic);Z=nc()}if(1==Z.ca){var Mc=W;ic(Z.J)&&oc(Mc)}}if(!Z)throw Error("No strategyState created!");var Nc=Z;I(W).ss=Nc;var Oc=W,Pc=Z,Qc=Pc.J;if(p(Qc)){var Rc=V[Qc];Qc&&Rc&&(Pc.I=new Rc(Oc))}var sc=W,tc=ba(xc,Y,sc),Sc=ba(wc,sc);switch(sc.document.readyState){case "complete":tc();break;
+case "interactive":Sc();uc();break;default:var Tc=sc,Uc=ob(Tc);Uc.loaded||(Uc.onload=yc);qc=Tc.setInterval(yc,10);uc(Sc)}}catch(a){bb(Y,$a(new X(0),a))};})();
+</script>
+
+</head>
+
+<body>
+
+    <!--class container -->
+    <div class="container">
+
+        <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="navbar-header">
+                    	<div class="navbar-jarroba-icon-smallscreen">
+	                    	<a href="/" class="puntero">
+	                             <img class="logo" src="https://jarroba.com/wp-content/themes/jarrobav6/static/img/logojarroba.png" width="75px">
+	                        </a>
+                        </div>
+                        <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle navbar-buttons">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                                                <button id="idButtonShowEntryData" class="navbar-toggle btn-sm navbar-buttons" href="#"><i id="idButtonShowEntryData_Expand" class="fa fa-expand"></i><i id="idButtonShowEntryData_Compress" class="fa fa-compress" style="display: none;"></i> Info. Artículo</button>
+						
+                    </div>
+
+                    <div id="navbarCollapse" class="collapse navbar-collapse">
+                        <div id="menu">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                     	<li class="lang-item lang-item-335 lang-item-es lang-item-first current-lang"><a lang="es-ES" hreflang="es-ES" href="https://jarroba.com/arquitectura-android-art-vs-dalvik/"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFnSURBVHjaYvzPgAD/UNlYEUAAmuTYAAAQhAEYqF/zFbe50RZ1cMmS9TLi0pJLRjZohAMTGFUN9HdnHgEE1sDw//+Tp0ClINW/f0NIKPoFJH/9//ULyGaUlQXaABBALAx/Gf4zAt31F4i+ffj3/cN/XrFfzOx//v///f//LzACM/79ZmD8/e8TA0AAMYHdDVT958vXP38nMDB0s3x94/Tj5y+YahhiAKLfQKUAAcQEdtJfoDHMF2L+vPzDmFXLelf551tGFOOhev4A/QgQQExgHwAd8IdFT/Wz6j+GhlpmXSOW/2z///8Eq/sJ18Dw/zdQA0AAMQExxJjjdy9x2/76EfLz4MXdP/i+wsyGkkA3Aw3984cBIIAYfzIwMKel/bt3jwEaLNAwgZIQxp/fDH/+MqqovL14ESCAWICeZvr9h0FSEhSgwBgAygFDEMT+wwAhgQgc4kAEVAwQQIxfUSMSTxxDAECAAQAJWke8v4u1tAAAAABJRU5ErkJggg==" title="Español" alt="Español" /></a></li>
+<!--                                     -->                                </li>
+                                </li>
+                                <li>
+                                                                            <a href="https://jarroba.com/entradas/" class="puntero">Entradas</a>
+                                                                    </li>
+                                <li>
+                                                                            <a href="https://jarroba.com/foro/" class="puntero">¿Preguntas?</a>
+                                                                    </li>
+                                <li class="navbar-jarroba-icon-bigscreen" style="margin-top: 0px">
+                                    <a href="/" class="puntero">
+                                        <img class="logo" src="https://jarroba.com/wp-content/themes/jarrobav6/static/img/logojarroba.png" width="100px">
+                                    </a>
+                                </li>
+                                <li>
+                                                                            <a href="https://jarroba.com/videos/" class="puntero">Videos</a>
+                                                                    </li>
+
+                                <li>
+                                                                            <a href="https://jarroba.com/libros/" class="puntero">Libros</a>
+                                                                    </li>
+                                <li>
+                                    <a class="change-project" href="javascript:;">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                    <div class="hide" id="select-div">
+                                        <form method="get" id="searchform" action="/">
+                                            <div id="search">
+                                                <input type="text" value="" name="s" id="s"/>
+                                                                                                    <input type="submit" class="btn btn-success" id="searchsubmit" value="Buscar" />
+                                                                                            </div>
+                                        </form>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+<div class="container" name="jumpToEntryData" id="jumpToEntryData">
+
+    <div class="row rowPages">
+
+
+        
+            <!-- Barra lateral -->
+            <aside class="col-md-2 lateral-bar">
+
+                <!-- <a id="idButtonShowEntryData" class="btn btn-default btn-sm" href="#"><i class="fa fa-expand"></i> Datos</a> -->
+
+                <div class="row hide-on-smallscreen">
+
+                    <!-- Autor -->
+                    <div class="col-md-12 col-xs-6 row-fluid">
+                        <a href="https://jarroba.com/author/ramoninvarato/">
+                            <div class="row">
+                                <div class="col-md-12 col-xs-12 text-center">
+                                    <img alt='' src='https://secure.gravatar.com/avatar/e2b307d7640cf7fbbaf2bf6ea565b22a?s=120&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/e2b307d7640cf7fbbaf2bf6ea565b22a?s=240&amp;d=mm&amp;r=g 2x' class='avatar avatar-120 photo' height='120' width='120' />                                </div>
+                                <div class="col-md-12 col-xs-12 text-center" style="padding-top: 10px">
+							<span class="autorPost">
+								RamónInvarato							</span>
+                                    </br>
+                                    <span class="fechaPost">
+								17 - May - 2015							</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- /Autor -->
+
+                    <!-- Redes sociales -->
+                    <div class="col-md-12 col-xs-6 entry-share-lateral text-center">
+                                                    <div style="padding-bottom: 5px">Compartir en:</div>
+                                                <div class="groupShareButtons row-fluid">
+		
+					<span class="fa-stack fa-lg">
+						<a href="https://plus.google.com/share?url=https%3A%2F%2Fjarroba.com%2Farquitectura-android-art-vs-dalvik%2F"
+                           target="_blank" title="Compartir en Google+">
+                            <i class="fa fa-circle fa-stack-2x" style="color: #DD4B38;"></i>
+                            <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                        </a>
+					</span>
+
+                            <span class="fa-stack fa-lg">
+						<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fjarroba.com%2Farquitectura-android-art-vs-dalvik%2F&title=Arquitectura+Android+%26%238211%3B+ART+vs+Dalvik&source=jarroba.com"
+                           target="_blank" title="Compartir en Linkedin">
+                            <i class="fa fa-circle fa-stack-2x" style="color: #0077B5;"></i>
+                            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </a>
+					</span>
+
+                            <span class="fa-stack fa-lg">
+						<a href="https://www.facebook.com/share.php?u=https%3A%2F%2Fjarroba.com%2Farquitectura-android-art-vs-dalvik%2F&t=Arquitectura+Android+%26%238211%3B+ART+vs+Dalvik "
+                           target="_blank" title="Compartir en Facebook">
+                            <i class="fa fa-circle fa-stack-2x" style="color: #3C5A98;"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                        </a>
+					</span>
+
+                            <span class="fa-stack fa-lg">
+						<a href="https://twitter.com/home?status=Arquitectura+Android+%26%238211%3B+ART+vs+Dalvik - https%3A%2F%2Fjarroba.com%2Farquitectura-android-art-vs-dalvik%2F"
+                           target="_blank" title="Compartir en Twitter">
+                            <i class="fa fa-circle fa-stack-2x" style="color: #00ABF0;"></i>
+
+                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </a>
+					</span>
+
+                        </div>
+                    </div>
+                    <!-- /Redes sociales -->
+
+                </div>
+
+                <div class="row hide-on-smallscreen">
+                    <!-- Categorias -->
+                                            <div class="col-md-12 col-xs-6 entry-categories">
+                                                            <i class="fa fa-th fa-2x" style=" vertical-align: middle;"></i> Categoría:
+                                                        <div class="row">
+                                                                    <a class="col-md-12" href="https://jarroba.com/aplicaciones-moviles/"
+                                       rel="category tag">
+                                        <div class="row">
+                                            <!-- <div class="col-md-4 col-xs-3" > -->
+                                                                                        <!-- </div> -->
+                                            <!-- <div class="col-md-8 col-xs-9"> -->
+
+                                            <img class="col-md-4 col-xs-3"
+                                                 src="https://jarroba.com/wp-content/themes/jarrobav6/static/img/categorias/AplicacionesMoviles.png">
+                                            <!--    -->
+                                            <p class="col-md-8 col-xs-9">Aplicaciones Móviles</p>
+                                            <!-- </div> -->
+                                        </div>
+                                    </a>
+                                                                        <a class="col-md-12" href="https://jarroba.com/sistemas-operativos/"
+                                       rel="category tag">
+                                        <div class="row">
+                                            <!-- <div class="col-md-4 col-xs-3" > -->
+                                                                                        <!-- </div> -->
+                                            <!-- <div class="col-md-8 col-xs-9"> -->
+
+                                            <img class="col-md-4 col-xs-3"
+                                                 src="https://jarroba.com/wp-content/themes/jarrobav6/static/img/categorias/SistemasOperativos2.png">
+                                            <!--    -->
+                                            <p class="col-md-8 col-xs-9">Sistemas Operativos</p>
+                                            <!-- </div> -->
+                                        </div>
+                                    </a>
+                                                                </div>
+                        </div>
+                                            <!-- /Categorias -->
+
+                    <!-- tags -->
+                                            <div class="col-md-12 col-xs-6 entry-tags">
+                            <i class="fa fa-tags fa-2x" style="vertical-align: middle;"></i> Tags:
+                            </br>
+                                                            <a class="tags" href="https://jarroba.com/?tag=ahead-of-time-es" rel="tag"
+                                   style="background-color: #F7977A">
+                                    Ahead-Of-Time                                </a>
+                                                                <a class="tags" href="https://jarroba.com/?tag=android-es" rel="tag"
+                                   style="background-color: #F9AD81">
+                                    Android                                </a>
+                                                                <a class="tags" href="https://jarroba.com/?tag=aot-es" rel="tag"
+                                   style="background-color: #FDC68A">
+                                    AOT                                </a>
+                                                                <a class="tags" href="https://jarroba.com/?tag=apk-es" rel="tag"
+                                   style="background-color: #FFF79A">
+                                    APK                                </a>
+                                                                <a class="tags" href="https://jarroba.com/?tag=arquitectura-es" rel="tag"
+                                   style="background-color: #C4DF9B">
+                                    arquitectura                                </a>
+                                                                <a class="tags" href="https://jarroba.com/?tag=art-es" rel="tag"
+                                   style="background-color: #A2D39C">
+                                    ART                                </a>
+                                                                <a class="tags" href="https://jarroba.com/?tag=compilar-es" rel="tag"
+                                   style="background-color: #82CA9D">
+                                    compilar                                </a>
+                                                                <a class="tags" href="https://jarroba.com/?tag=dalvik-es" rel="tag"
+                                   style="background-color: #7BCDC8">
+                                    Dalvik                                </a>
+                                                                <a class="tags" href="https://jarroba.com/?tag=deodex-es" rel="tag"
+                                   style="background-color: #6ECFF6">
+                                    Deodex                                </a>
+                                                                <a class="tags" href="https://jarroba.com/?tag=dex2oat-es" rel="tag"
+                                   style="background-color: #7EA7D8">
+                                    dex2oat                                </a>
+                                                                <a class="tags" href="https://jarroba.com/?tag=dexopt-es" rel="tag"
+                                   style="background-color: #8493CA">
+                                    dexopt                                </a>
+                                                                <a class="tags" href="https://jarroba.com/?tag=empaquetar-es" rel="tag"
+                                   style="background-color: #8882BE">
+                                    empaquetar                                </a>
+                                                                <a class="tags" href="https://jarroba.com/?tag=herramientas-es" rel="tag"
+                                   style="background-color: #A187BE">
+                                    herramientas                                </a>
+                                                                <a class="tags" href="https://jarroba.com/?tag=jit-es" rel="tag"
+                                   style="background-color: #BC8DBF">
+                                    JIT                                </a>
+                                                                <a class="tags" href="https://jarroba.com/?tag=just-in-time-es" rel="tag"
+                                   style="background-color: #F49AC2">
+                                    Just-In-Time                                </a>
+                                                                <a class="tags" href="https://jarroba.com/?tag=maquina-virtual-dalvik-es" rel="tag"
+                                   style="background-color: #F6989D">
+                                    Máquina virtual Dalvik                                </a>
+                                                                <a class="tags" href="https://jarroba.com/?tag=odex-es" rel="tag"
+                                   style="background-color: #F7977A">
+                                    Odex                                </a>
+                                
+                        </div>
+                                            <!-- /tags -->
+                </div>
+
+
+                <!-- publicidad móvil -->
+                <div id="idAdsense" class="row ads-mobile">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- AnuncioAdaptable -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-8473876812850116"
+                         data-ad-slot="7393451986"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+                <div id="idAdsense" class="row ads-mobile">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- AnuncioAdaptable -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-8473876812850116"
+                         data-ad-slot="7393451986"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+                                <!-- /publicidad móvil -->
+
+
+                <!-- publicidad resto -->
+                
+                
+                
+                <div id="idAdsense" class="row ads-computer">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- AnuncioAdaptable -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-8473876812850116"
+                         data-ad-slot="7393451986"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+                <div id="idAdsense" class="row ads-computer">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- AnuncioAdaptable -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-8473876812850116"
+                         data-ad-slot="7393451986"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+                <div id="idAdsense" class="row ads-computer">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- AnuncioAdaptable -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-8473876812850116"
+                         data-ad-slot="7393451986"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+
+                <!-- <div id="idAdsense" class="row ads-mobile ads-computer" style="min-height: 1000px; margin: 10px; background-color: #857465"> -->
+                <!-- <div id="idAdsense" class="row ads-computer">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+                <!-- SuperiorMovil1 -->
+                <!-- <ins class="adsbygoogle ads"
+                     style="display:block"
+                     data-ad-client="ca-pub-8473876812850116"
+                     data-ad-slot="1209493180"
+                     data-ad-format="auto"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div> -->
+                <!-- /publicidad resto -->
+
+            </aside>
+            <!-- /Barra lateral -->
+
+
+            <!-- Contenido del artículo -->
+            <article class="col-md-10">
+                <h1 class="text-center" style=" margin-top: 0px; padding-bottom: 0px;">
+                    Arquitectura Android &#8211; ART vs Dalvik                </h1>
+
+                <div class="spacer"></div>
+                <br>
+                                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><p class="NormalAndroid" style="text-align: justify;">
+	Para hablar de ART vs DALVIK&nbsp;primero tenemos que remontarnos un poco m&aacute;s abajo en&nbsp;la arquitectura de Android.
+</p>
+<p class="NormalAndroid" style="text-align: justify;">
+	La arquitectura de Android no deja de ser como la de cualquier otro sistema operativo funcionando en un ordenador&nbsp;(como Windows, Mac&nbsp;o Linux). Un usario poco ducho en las profundidades de Android ver&iacute;a la arquitectura como la siguiente pila:
+</p>
+<p class="NormalAndroid" style="text-align: justify;">
+	<a href="https://jarroba.com/wp-content/uploads/2015/04/Arquitectura-Android-seg%C3%BAn-un-usuario-www.Jarroba.com_.png"><img alt="Arquitectura Android seg&uacute;n un usuario - www.Jarroba.com" class="aligncenter size-large wp-image-42784 img-responsive lazy" height="418" src="https://jarroba.com/wp-content/uploads/2015/04/Arquitectura-Android-seg%C3%BAn-un-usuario-www.Jarroba.com_-1024x649.png" width="660" srcset="https://jarroba.com/wp-content/uploads/2015/04/Arquitectura-Android-seg&uacute;n-un-usuario-www.Jarroba.com_-1024x649.png 1024w, https://jarroba.com/wp-content/uploads/2015/04/Arquitectura-Android-seg&uacute;n-un-usuario-www.Jarroba.com_-300x190.png 300w, https://jarroba.com/wp-content/uploads/2015/04/Arquitectura-Android-seg&uacute;n-un-usuario-www.Jarroba.com_-150x95.png 150w, https://jarroba.com/wp-content/uploads/2015/04/Arquitectura-Android-seg&uacute;n-un-usuario-www.Jarroba.com_.png 1075w" sizes="(max-width: 660px) 100vw, 660px"></a>
+</p>
+<p class="NormalAndroid" style="text-align: justify;">
+	El usuario medio tiene en su mano un rect&aacute;ngulo -que bien sabe llamar SmartPhone- y entiende que ejecuta Apps, el resto es "Magia" (<span style="line-height: 20.7999992370605px; text-align: justify;">es una broma de inform&aacute;ticos&nbsp;😛&nbsp;</span>). El usuario&nbsp;obvia el resto de la arquitectura&nbsp;y es normal pues se abstrae del funcionamiento interno, solo quiere que funcione y punto.&nbsp;Es un usuario que no quiere saber m&aacute;s sobre el funcionamiento, para eso lo ha comprado y lo utiliza como lo tiene que utilizar.
+</p>
+<p class="NormalAndroid" style="text-align: justify;">
+	Para alguien que quiera conocer los entresijos de Android la pila de arquitectura&nbsp;anterior&nbsp;se nos queda muy escasa y todo lo que entra dentro de la "Magia" se estiede;&nbsp;es donde millones de personas han&nbsp;trabajado durante decenas de a&ntilde;os -pudieramos hablar de casi un siglo-&nbsp;para llevar este rect&aacute;ngulo m&aacute;gico -Smartphone-&nbsp;al usuario.
+</p>
+<p class="NormalAndroid" style="text-align: justify;">
+	Android es un sistema operativo peculiar, pues trabaja sobre un n&uacute;creo Linux y todas sus aplicaciones compilan en Java (pero con compilaci&oacute;n propia de Android). Igualmente su arquitectura sigue la de cualquier otro ordenador en&nbsp;el mundo:
+</p>
+<p class="NormalAndroid" style="text-align: justify;">
+	<a href="https://jarroba.com/wp-content/uploads/2015/04/422px-Computer_abstraction_layers-es.svg_.png"><img alt="422px-Computer_abstraction_layers-es.svg" class="aligncenter size-medium wp-image-42772 img-responsive lazy" height="300" src="https://jarroba.com/wp-content/uploads/2015/04/422px-Computer_abstraction_layers-es.svg_-211x300.png" width="211" srcset="https://jarroba.com/wp-content/uploads/2015/04/422px-Computer_abstraction_layers-es.svg_-211x300.png 211w, https://jarroba.com/wp-content/uploads/2015/04/422px-Computer_abstraction_layers-es.svg_-150x213.png 150w, https://jarroba.com/wp-content/uploads/2015/04/422px-Computer_abstraction_layers-es.svg_.png 422w" sizes="(max-width: 211px) 100vw, 211px"></a>
+</p>
+<p class="NormalAndroid" style="text-align: center;">
+	<em>Imagen de arquitectura t&iacute;pica de computadores obtenida de la <a href="http://es.wikipedia.org/wiki/Arquitectura_de_computadoras">Wikipedia, del art&iacute;culo Arquitectura de computadores</a></em>
+</p>
+<p class="NormalAndroid" style="text-align: justify;">
+	&nbsp;
+</p>
+<p class="NormalAndroid">
+	Para que comprendas la magnitud que hay por debajo al trabajar con cualquier lenguaje de programaci&oacute;n (y al usar las aplicaciones), un dispositivo Android sigue las mismas pautas. Desde lo f&iacute;sico, el Hardware, que es el dispositivo en s&iacute;, al Smartphone o Tablet que sueles tener en la mano. Lejos del Hardware, como usuario y desarrollador de aplicaciones Android tan solo trabajaremos con la capa m&aacute;s superficial de la arquitectura de ordenadores, la de &ldquo;S.O. y aplicaciones&rdquo;.<p></p>
+</p>
+<p class="NormalAndroid" style="text-align: justify;">
+	<a href="https://jarroba.com/wp-content/uploads/2015/05/Pila-de-arquitectura-Android-www.Jarroba.com_.png"><img alt="Pila de arquitectura Android - www.Jarroba.com" class="aligncenter size-full wp-image-42854 img-responsive lazy" height="1659" src="https://jarroba.com/wp-content/uploads/2015/05/Pila-de-arquitectura-Android-www.Jarroba.com_.png" width="2131" srcset="https://jarroba.com/wp-content/uploads/2015/05/Pila-de-arquitectura-Android-www.Jarroba.com_.png 2131w, https://jarroba.com/wp-content/uploads/2015/05/Pila-de-arquitectura-Android-www.Jarroba.com_-300x234.png 300w, https://jarroba.com/wp-content/uploads/2015/05/Pila-de-arquitectura-Android-www.Jarroba.com_-1024x797.png 1024w, https://jarroba.com/wp-content/uploads/2015/05/Pila-de-arquitectura-Android-www.Jarroba.com_-150x117.png 150w" sizes="(max-width: 2131px) 100vw, 2131px"></a>
+</p>
+<p class="NormalAndroid">
+	&nbsp;
+</p>
+<p class="NormalAndroid">
+	Voy a explicar en detalle la arquitectura Android y cada una de sus partes (la siguiente imagen representa la pila de la arquitectura Android desde la cima que es el nivel de las aplicaciones, hasta la base del Hardware):
+</p>
+<ul><li>
+		<strong>Aplicaciones:</strong> cualquier tipo de aplicaci&oacute;n Android. Es la capa que utiliza el usuario.
+	</li>
+<li>
+		<strong>Framework de Android:</strong> Acceso al API de Android para reutilizar componentes o modificarlos. Es la capa en la que trabajaremos como desarrolladores Android (trabajaremos con SDK; veremos c&oacute;mo se utiliza). Todo en esta capa ser&aacute; una representaci&oacute;n exacta de la capa HAL.
+	</li>
+<li>
+		<strong>Bibliotecas nativas en C/C++:</strong> el desarrollador puede usarlas a trav&eacute;s del Framework. Es la capa en la que podremos trabajar como desarrolladores Android a bajo nivel (se trabaja con el NDK y se programa en C/C++).
+	</li>
+<li>
+		<strong>Runtime de Android:</strong> bibliotecas del lenguaje Java que se ejecutan sobre:
+	</li>
+</ul><p style="margin-left: 80px;">
+	-Una &uacute;nica instancia en la m&aacute;quina virtual Dalvik (antigua)
+</p>
+<p style="margin-left: 80px;">
+	<span style="line-height: 1.6;">-Sobre el entorno de ejecuci&oacute;n Android Runtime (o conocido por sus siglas ART)</span>
+</p>
+<ul><li>
+		<strong>Comunicaci&oacute;n ligada entre procesos (Binder IPC, Inter-Procces Communication):</strong> Mecanismo que permite al Framework ir m&aacute;s all&aacute; de un proceso y llamar a los servicios del sistema operativo Android. Lo que permite a las APIs interactuar con los servicios del sistema operativo Android. Estas comunicaciones est&aacute;n ocultas para el desarrollador en la capa de Framework (hablaremos m&aacute;s de esto en el cap&iacute;tulo de Services).
+	</li>
+<li>
+		<strong>Servicios del Sistema Android:</strong> Casi todas las funcionalidades en el API del Framework se comunicar&aacute;n con alg&uacute;n servicio (Service) del sistema para acceder a hardware implicado. Cada servicio se divide en componentes enfocados en funcionalidades. Los servicios se agrupan en:
+	</li>
+</ul><p style="margin-left: 80px;">
+	-System: Incluye gestores de ventanas, de notificaciones, etc
+</p>
+<p style="margin-left: 80px;">
+	-Media: Incluye aquellos involucrados en la reproducci&oacute;n y la grabaci&oacute;n multimedia (im&aacute;genes, audio, video, etc)
+</p>
+<ul><li>
+		<strong>Capa de abstracci&oacute;n del Hardware (HAL, Hardware Abstraction Layer): </strong>Interfaz que permite al sistema operativo Android llamar a la capa de drivers (controladores) del dispositivo.
+	</li>
+<li>
+		<strong>Kernel (n&uacute;cleo) Linux:</strong> Capa de abstracci&oacute;n del hardware y servicios de seguridad, gesti&oacute;n de memoria, de procesos, pila de red, modelo de los controladores, etc.
+	</li>
+<li>
+		<strong>Ensamblador:</strong> lenguaje de bajo nivel para circuitos integrados programables. Es una representaci&oacute;n mnemot&eacute;cnica del c&oacute;digo m&aacute;quina en binario y varias constantes para programar de una manera m&aacute;s sencilla que utilizar directamente el binario (m&aacute;s informaci&oacute;n en http://es.wikipedia.org/wiki/Lenguaje_ensamblador).
+	</li>
+<li>
+		<strong>Firmware: </strong>Instrucciones m&aacute;quina grabadas en un chip para prop&oacute;sitos espec&iacute;ficos (m&aacute;s informaci&oacute;n en http://es.wikipedia.org/wiki/Firmware)
+	</li>
+<li>
+		<strong>Hardware:</strong> Son las partes f&iacute;sicas y los componentes (m&aacute;s informaci&oacute;n en http://es.wikipedia.org/wiki/Hardware)
+	</li>
+</ul><p class="NormalAndroid">
+	&nbsp;
+</p>
+<h1 class="NormalAndroid" style="text-align: justify;">
+	<strong>Diferencia entre Dalvik y&nbsp;ART. ART vs DALVIK</strong><br></h1>
+<p class="NormalAndroid" style="text-align: justify;">
+	No nos importa a la hora de desarrollar aplicaciones Android, ya que nosotros trabajaremos con la capa de Framework (y si acaso con la capa de bibliotecas C/C++ si utilizamos el NDK). El resto es autom&aacute;tico y transparente para los desarrolladores de aplicaciones Android.
+</p>
+<p>
+	Es decir, que cuando ejecutemos una aplicaci&oacute;n desarrollada para ART tambi&eacute;n funcionar&aacute; para Dalvik, por retrocompatibilidad.
+</p>
+<p>
+	Dalvik estuvo vigente desde el nacimiento de Android, siendo sustituido por ART a partir de la versi&oacute;n 5.0 (en la versi&oacute;n 4.4 era opcional su uso).
+</p>
+<p>
+	Dalvik o ART se encuentra en todo dispositivo o emulador que ejecute Android (dependiendo de la versi&oacute;n de Android es Dalvik o ART).
+</p>
+<p class="NormalAndroid" style="text-align: justify;">
+	<p></p>
+</p>
+<p style="text-align: justify;">
+	&nbsp;
+</p>
+<h2 style="text-align: justify;">
+	<strong>Bytecode</strong><br></h2>
+<p>
+	En programaci&oacute;n en general, el bytecode es el resultado de realizar el pesado trabajo de procesar el c&oacute;digo fuente (el c&oacute;digo que has programado) y optimizarlo. Se obtiene como resultado el fichero llamado bytecode. Fichero que es portable entre arquitecturas. Ser&aacute; la m&aacute;quina virtual la encargada compilar (traducir) en tiempo de ejecuci&oacute;n a c&oacute;digo m&aacute;quina del sistema donde se despliega. Lo que resulta mucho m&aacute;s r&aacute;pido que realizar todo el trabajo desde el c&oacute;digo fuente, pues se ha realizado de antemano el trabajo.
+</p>
+<p>
+	<strong>En Android</strong> los programas est&aacute;n escritos normalmente en Java y compilados a bytecode por la m&aacute;quina virtual de Java.&nbsp;Luego es traducido a ficheros bytecode para Dalvik o para ART:
+</p>
+<ul><li>
+		<strong>DEX </strong>(Dalvik Executable Format, Formato Ejetucable para m&aacute;quinas virtuales Dalvik): Archivo de bytecode que siempre ser&aacute; llamado &ldquo;classes.dex&rdquo; comprimido dentro del fichero APK. Este fichero es general y no est&aacute; preparado para un Hardware en espec&iacute;fico, por lo que tiene que ser traducido al c&oacute;digo m&aacute;quina en cada dispositivo (para no tener que traducirlo cada vez que se ejecute la aplicaci&oacute;n se crear&aacute; o un fichero ODEX o un ELF). Es necesario tanto para la m&aacute;quina virtual Dalvik, como para ART.
+	</li>
+<li>
+		<strong>ODEX </strong>(Optimized DEX, fichero DEX Optimizado): Este fichero contiene el conjunto de instrucciones utilizado por la m&aacute;quina virtual Dalvik. Cada vez que la aplicaci&oacute;n se ejecuta en el dispositivo la m&aacute;quina virtual Dalvik traduce las partes utilizadas del fichero DEX din&aacute;micamente y lo guarda en el fichero ODEX; a medida que se va traduciendo m&aacute;s, se va guardando en el fichero ODEX. Se genera mediante la herramienta &ldquo;dexopt&rdquo; a partir de un fichero DEX. Es necesario para la m&aacute;quina virtual Dalvik.
+	</li>
+<li>
+		<strong>ELF</strong> (Executable and Linkable Format, Formato Ejecutable y Enlazable): El fichero ELF es un ejecutable para Linux; es un formato de archivo para ejecutables, c&oacute;digo objeto, bibliotecas compartidas y volcados de memoria. Es decir, el fichero bytecode DEX se traduce al fichero fichero ELF siendo &eacute;ste la traduci&oacute;n a c&oacute;digo m&aacute;quina del Hardware donde se va a ejecutar; de ah&iacute; que se compile en el mismo dispositivo en el momento de la instalaci&oacute;n (a diferencia de ODEX, ELF es la traducci&oacute;n completa de todo el fichero DEX en una sola vez durante la instalaci&oacute;n; ODEX es la suma de las partes que ha ido traduciendo la m&aacute;quina virtual Dalvik cada vez que se ejecut&oacute; la aplicaci&oacute;n). Se genera mediante la herramienta &ldquo;dex2oat&rdquo; a partir de un fichero DEX. Es necesario para ART (sustituye al fichero ODEX de la antigua m&aacute;quinva virtual Dalvik).
+	</li>
+</ul><p>
+	&nbsp;
+</p>
+<h2 style="text-align: justify;">
+	<strong>Empaquetar en APK un programa Android</strong><br></h2>
+<p class="NormalAndroid">
+	El Sistema de Construcci&oacute;n (Build System) combina el JDK de Java y las herramientas del SDK de Android. Las tareas de pruebas (testing) se realizan como comprobaci&oacute;n final, asegurando que la aplicaci&oacute;n funciona como se espera en condiciones reales. Con Gradle en Android Studio se compilar&aacute;, firmar&aacute;, optimizar&aacute; la aplicaci&oacute;n a la vez. Cuando se termine de preparar, se obtendr&aacute; una aplicaci&oacute;n APK firmada que se puede distribuir a los usuarios directamente o trav&eacute;s de la tienda de aplicaciones &ldquo;Google Play&rdquo;. El fichero APK resultante contendr&aacute;: c&oacute;digo fuente compilado, recursos, el fichero de manifiesto (AndroidManifest.xml), entre otros.<p></p>
+</p>
+<p class="NormalAndroid">
+	A continuaci&oacute;n describo los pasos que se siguien para crear un paquete APK (ver siguiente&nbsp;imagen). Va desde la zona m&aacute;s alta de la imagen, donde tendremos el c&oacute;digo que estamos programando con Android Studio y todos los recursos que a&ntilde;adamos a nuestra aplicaci&oacute;n; hasta la zona de abajo, donde obtendremos el fichero APK firmado.&nbsp;<p></p>
+</p>
+<p style="text-align: justify;">
+	<a href="https://jarroba.com/wp-content/uploads/2015/05/Diagrama-de-c%C3%B3mo-se-empaqueta-un-programa-en-un-fichero-APK-de-Android-www.Jarroba.com_.png"><img alt="Diagrama de c&oacute;mo se empaqueta un programa en un fichero APK de Android - www.Jarroba.com" class="aligncenter size-full wp-image-42858 img-responsive lazy" height="2274" src="https://jarroba.com/wp-content/uploads/2015/05/Diagrama-de-c%C3%B3mo-se-empaqueta-un-programa-en-un-fichero-APK-de-Android-www.Jarroba.com_.png" width="1874" srcset="https://jarroba.com/wp-content/uploads/2015/05/Diagrama-de-c&oacute;mo-se-empaqueta-un-programa-en-un-fichero-APK-de-Android-www.Jarroba.com_.png 1874w, https://jarroba.com/wp-content/uploads/2015/05/Diagrama-de-c&oacute;mo-se-empaqueta-un-programa-en-un-fichero-APK-de-Android-www.Jarroba.com_-247x300.png 247w, https://jarroba.com/wp-content/uploads/2015/05/Diagrama-de-c&oacute;mo-se-empaqueta-un-programa-en-un-fichero-APK-de-Android-www.Jarroba.com_-844x1024.png 844w, https://jarroba.com/wp-content/uploads/2015/05/Diagrama-de-c&oacute;mo-se-empaqueta-un-programa-en-un-fichero-APK-de-Android-www.Jarroba.com_-150x182.png 150w" sizes="(max-width: 1874px) 100vw, 1874px"></a>
+</p>
+<p>
+	Explico los pasos vistos en la imagen anterior, por herramienta utilizada (la mayor&iacute;a de estas herramientas las podemos encontrar como ejecutables dentro de la carpeta del SDK de Android, o el compilador de Java se usa el propio de Java. Recalcar que todo este proceso es autom&aacute;tico y no tiene que preocuparnos):
+</p>
+<ul><li>
+		<strong>aapt</strong> (Herramienta de empaquetado de activos Android, The Android Asset Packaging Tool): Compila el fichero &ldquo;AndroidManiest.xml&rdquo; y los ficheros XML de las Activities. Adem&aacute;s, genera el fichero &ldquo;R.java&rdquo; para referenciar los recursos desde el c&oacute;digo Java (M&aacute;s informaci&oacute;n en cap&iacute;tulos posteriores).
+	</li>
+<li>
+		<strong>aidl</strong> (Lenguaje para definir interfaces Android, Android Interface Definition Language): Convierte los interfaces &ldquo;.aidl&rdquo; (interfaces para comunicar servicios mediante la comunicaci&oacute;n entre procesos, IPC; entraremos en detalle en cap&iacute;tulos futuros) en interfaces Java.
+	</li>
+<li>
+		<strong>Compilador Java</strong>: toma todo el c&oacute;digo Java, incluidos los ficheros &ldquo;R.java&rdquo;, los interfaces de&ldquo;.aidl&rdquo;, y los compila en ficheros &ldquo;.class&rdquo;.
+	</li>
+<li>
+		<strong>dex</strong>: Convierte los ficheros &ldquo;.class&rdquo; en ficheros bytecode DEX. Adem&aacute;s, cualquier biblioteca importada, as&iacute; como otros ficheros &ldquo;.class&rdquo; que hayas incluido ser&aacute;n convertidos a ficheros DEX, incluyendo todas las clases de nuestro c&oacute;digo en un &uacute;nico fichero DEX. Para optimizar el espacio, los Strings duplicados y otras constantes repetidas se introducen una &uacute;nica vez en el fichero DEX.
+	</li>
+<li>
+		<strong>dexopt</strong>: Solo se aplica si se ejecuta en el emulador desde Android Studio. Convierte el fichero DEX al fichero compilado ODEX mediante una compilaci&oacute;n AOT (Ahead Of Time, Antes de Tiempo) para que funcione &uacute;nica y exclusivamente en el emulador (m&aacute;s informaci&oacute;n en preguntas posteriores). En este caso el ODEX no se empaqueta dentro del APK, sino que se pone al junto al APK.
+	</li>
+<li>
+		<strong>apkbuilder</strong>: im&aacute;genes, v&iacute;deos, y otros que no se pueden compilar, junto con los ficheros DEX son empaquetados en el fichero APK.
+	</li>
+<li>
+		<strong>Jarsigner</strong>: Firmamos el ficheros APK con una clave de desarrollo (debug) o de lanzamiento (release). El fichero APK resultante ya se puede instalar en cualquier dispositivo Android.
+	</li>
+<li>
+		<strong>Zipalign</strong>: Si el fichero APK se ha firmado con la clave de lanzamiento (release), el fichero se debe alinear (la alineaci&oacute;n de la estructura de datos consiste en desplazar los bits un m&uacute;ltiplo del tama&ntilde;o de la palabra que pueda controlar el procesador, y rellenar lo que falte; en Android normalmente son 4 bytes). El fichero APK alineado resultante aumenta el rendimiento del sistema de memoria debido a la forma en que el procesador gestiona la memoria en un dispositivo.
+	</li>
+</ul><p style="text-align: justify;">
+	&nbsp;
+</p>
+<h2 style="text-align: justify;">
+	<strong>Fichero APK</strong><br></h2>
+<p style="text-align: justify;">
+	<img src="file:///C:%5CUsers%5Cramon%5CAppData%5CLocal%5CTemp%5Cmsohtmlclip1%5C01%5Cclip_image001.png" class=" img-responsive lazy">Se puede deducir que va a contener el fichero APK resultante del anterior proceso. Los ficheros son:
+</p>
+<ul><li>
+		<strong>DEX</strong>: contiene todos los ficheros Java, como nuestros ficheros Java o el R.java
+	</li>
+<li>
+		<strong>Recursos compilados</strong>: ficheros XML, como el AndroidManifest.xml, o los Layouts
+	</li>
+<li>
+		<strong>Recursos No compilados:</strong> v&iacute;deos, im&aacute;genes, audios, etc
+	</li>
+</ul><p>
+	<a href="https://jarroba.com/wp-content/uploads/2015/05/Contenido-de-un-fichero-APK-de-Android-www.Jarroba.com_.png"><img alt="Contenido de un fichero APK de Android - www.Jarroba.com" class="aligncenter size-full wp-image-42867 img-responsive lazy" height="431" src="https://jarroba.com/wp-content/uploads/2015/05/Contenido-de-un-fichero-APK-de-Android-www.Jarroba.com_.png" width="1263" srcset="https://jarroba.com/wp-content/uploads/2015/05/Contenido-de-un-fichero-APK-de-Android-www.Jarroba.com_.png 1263w, https://jarroba.com/wp-content/uploads/2015/05/Contenido-de-un-fichero-APK-de-Android-www.Jarroba.com_-300x102.png 300w, https://jarroba.com/wp-content/uploads/2015/05/Contenido-de-un-fichero-APK-de-Android-www.Jarroba.com_-1024x349.png 1024w, https://jarroba.com/wp-content/uploads/2015/05/Contenido-de-un-fichero-APK-de-Android-www.Jarroba.com_-150x51.png 150w" sizes="(max-width: 1263px) 100vw, 1263px"></a>
+</p>
+<p>
+	Tambi&eacute;n recordar que el APK est&aacute; firmado y alineado.
+</p>
+<p>
+	Falta el fichero ELF para ART, que no se ha obtenido en el anterior proceso. Para convertir de un archivo DEX a un archivo ELF se realiza mediante la herramienta &ldquo;<strong>dex2oat</strong>&rdquo;. &Eacute;sta herramienta se encuentra dentro del sistema operativo Android. En cuanto instalemos el fichero APK en el sistema operativo Android, la herramienta &ldquo;dex2oat&rdquo; toma el fichero DEX y crea el fichero ELF.
+</p>
+<p>
+	En Dalvik se aplicaca la herramienta &ldquo;<strong>dexopt</strong>&rdquo; sobre las partes del fichero DEX que se est&eacute;n usando, para generar el fichero ODEX en el momento de la ejecuci&oacute;n por la m&aacute;quina virtual Dalvik.
+</p>
+<p style="text-align: justify;">
+	&nbsp;
+</p>
+<h2 style="text-align: justify;">
+	<strong>Instalaci&oacute;n del APK en el dispositivo</strong><br></h2>
+<p style="text-align: justify;">
+	El archivo DEX en su estado original se dice que est&aacute; en el estado Pre-dexopt.
+</p>
+<p>
+	En el momento de la instalaci&oacute;n de la aplicaci&oacute;n en el dispositivo, el fichero DEX es modificado:
+</p>
+<ul><li>
+		Se optimiza
+	</li>
+<li>
+		Se intercambia el orden de los bits seg&uacute;n el formato Endianness, de c&oacute;mo se almacenan los datos y la arquitectura con la que funciona el procesador (es decir, de c&oacute;mo se almacenen los datos en big-endian que es el orden natural, little-endian que es del menos relevante al m&aacute;s relevante, y middle-endian que es el soporte para los dos formatos anteriores)
+	</li>
+<li>
+		Se crean estructuras de datos simples
+	</li>
+<li>
+		Se enlazan las funciones de las bibliotecas inline (se insertan una copia del c&oacute;digo fuente de la funci&oacute;n en la secci&oacute;n del c&oacute;digo donde sea llamada)
+	</li>
+<li>
+		Los objetos de clases vac&iacute;as ser&aacute;n cortocircuitadas (short-circuited en ingl&eacute;s, referido en programaci&oacute;n a que no se evaluar&aacute; si no es necesario).
+	</li>
+</ul><p>
+	Si trabajamos con ART, cuando se instala la aplicaci&oacute;n se generar&aacute; el fichero ELF desde el DEX.
+</p>
+<p>
+	Si trabajamos con Dalvik, puede crearse el fichero ODEX al instalarse, aunque no ser&aacute; completo.
+</p>
+<p>
+	Una curiosidad que seguro que has notado cuando se actualiza tu dispositivo Android. Es que al terminar la actualizaci&oacute;n se tienen que actualizar todas las aplicaciones instaladas. Esta actualizaci&oacute;n de todas las aplicaciones instaladas es la compilaci&oacute;n de los bytecodes DEX dentro de tu dispositivo.
+</p>
+<p style="text-align: justify;">
+	&nbsp;
+</p>
+<h1 style="text-align: justify;">
+	<strong>M&aacute;quina virtual Dalvik</strong><br></h1>
+<p>
+	Es una m&aacute;quina virtual desarrollada por Google para Android.
+</p>
+<p>
+	Aunque es muy parecida a la m&aacute;quina virtual de Java, la maquina virtual Dalvik se diferencia en:
+</p>
+<ul><li>
+		Ocupa menos
+	</li>
+<li>
+		Es capaz de ejecutar 16 bits conjuntos de instrucciones, en vez de los 8 bits de la m&aacute;quina virtual de Java
+	</li>
+<li>
+		La tabla de constantes (constant pool) se ha modificado para utilizar solo &iacute;ndices de 32 bits para simplificar.
+	</li>
+</ul><p>
+	La m&aacute;quina virtual Dalvik se caracteriza por realizar compilaciones &ldquo;justo a tiempo&rdquo; (JIT, Just-In-Time). En resumen, cada vez que se ejecuta una aplicaci&oacute;n, el compilador de la m&aacute;quina virtual Dalvik traduce el bytecode de dicha aplicaci&oacute;n con la herramienta &ldquo;dexopt&rdquo; en tiempo de ejecuci&oacute;n a c&oacute;digo m&aacute;quina, y lo ejecuta (JIT, Just-In-Time. M&aacute;s informaci&oacute;n en sucesivas preguntas).
+</p>
+<p>
+	Cabe mencionar que cada aplicaci&oacute;n corre sobre su propia instancia de la m&aacute;quina virtual (habr&aacute; tantas m&aacute;quinas virtuales instanciadas como aplicaciones en ejecuci&oacute;n). De este modo, si se produce cualquier problema con la aplicaci&oacute;n, no afectar&iacute;a al resto de aplicaciones en ejecuci&oacute;n.
+</p>
+<p>
+	La m&aacute;quina virtual Dalvik abre el fichero APK y descomprime el fichero DEX del interior. Luego crear&aacute; en cach&eacute; o actualizar&aacute; el fichero ODEX si los permisos lo permiten, y luego lo ejecutar&aacute;.
+</p>
+<p style="text-align: justify;">
+	&nbsp;
+</p>
+<h2 style="text-align: justify;">
+	<img src="file:///C:%5CUsers%5Cramon%5CAppData%5CLocal%5CTemp%5Cmsohtmlclip1%5C01%5Cclip_image003.png" class=" img-responsive lazy">Compilaci&oacute;n JIT&nbsp;(Just-In-Time, Justo a tiempo)<br></h2>
+<p style="text-align: justify;">
+	La compilaci&oacute;n JIT es <strong>compilar el bytecode del programa en tiempo de ejecuci&oacute;n</strong>.
+</p>
+<p>
+	Para aclararlo pongamos un ejemplo para el caso que nos ocupa. Supongamos que tienes un m&oacute;vil con una aplicaci&oacute;n. De esta aplicaci&oacute;n solo est&aacute; el bytecode DEX dentro del fichero APK. Cuando pulsas el icono para acceder ejecutar la aplicaci&oacute;n por primera vez, en ese momento se realiza la compilaci&oacute;n se realiza la compilaci&oacute;n de la aplicaci&oacute;n en tu dispositivo por la m&aacute;quina virtual Dalvik, lo que convierte el bytecode a c&oacute;digo m&aacute;quina que es el fichier ODEX. Luego este c&oacute;digo ya es entendido por el Hardware. Es el momento en el que podemos decir que la aplicaci&oacute;n funciona de verdad.
+</p>
+<p>
+	Evidentemente este proceso de compilaci&oacute;n JIT consume tiempo y ser&iacute;a un poco est&uacute;pido repetirlo varias veces para el mismo c&oacute;digo de la misma aplicaci&oacute;n; por lo que no se compila cada vez que se ejecuta el mismo programa. Sino que se compila el bytecode DEX y se cachea el c&oacute;digo m&aacute;quina resultante en el fichero fichero ODEX. En siguientes ejecuciones de la misma aplicaci&oacute;n se reutiliza el c&oacute;digo ya cacheado del fichero ODEX.
+</p>
+<p>
+	Las <strong>razones para realizar una compilaci&oacute;n JIT</strong> son:
+</p>
+<ul><li>
+		Compilar el bytecode a c&oacute;digo m&aacute;quina optimizado para la CPU y el sistema operativo donde se va a ejecutar.
+	</li>
+<li>
+		El sistema puede recoger estad&iacute;sticas de la ejecuci&oacute;n de la aplicaci&oacute;n en una m&aacute;quina. De este modo, puede decidir recompilarla de otra manera para optimizar el rendimiento.
+	</li>
+<li>
+		El sistema puede realizar optimizaciones globales sin perder las ventajas del enlazamiento din&aacute;mico (el sistema operativo carga las bibliotecas compartidas a memoria RAM, y vincula las que necesite a la aplicaci&oacute;n; por ejemplo, si desarrollamos una aplicaci&oacute;n con la c&aacute;mara de fotos, Android nos cargar&aacute; la biblioteca de Camera a RAM y la vincular&aacute; a nuestra aplicaci&oacute;n para que la pueda utilizar).
+	</li>
+</ul><p style="text-align: justify;">
+	&nbsp;
+</p>
+<h2 style="text-align: justify;">
+	Herramienta "dexopt"<br></h2>
+<p>
+	Se verificar&aacute;n y optimizar&aacute;n todas las clases del fichero DEX cargando todas las clases en la m&aacute;quina virtual y ejecut&aacute;ndolas. En caso de que algo falle, no se verificar&aacute; ni optimizar&aacute;.
+</p>
+<p>
+	La herramienta &ldquo;dexopt&rdquo; efectuar&aacute; una inicializaci&oacute;n abreviada de la m&aacute;quina virtual, cargando cero o m&aacute;s ficheros DEX desde la ruta de la clase de arranque (bootstrap class path), y luego verificar y optimizar todo lo posible del fichero DEX objetivo. Al terminar, el proceso finaliza, liberando todos los recursos.
+</p>
+<p>
+	La herramienta &ldquo;dexopt&rdquo; puede generar ficheros ODEX desde ficheros DEX con uno de los siguientes casos (La letra precedente a la descripci&oacute;n corresponde en la imagen con la letra de cada aplicaci&oacute;n):
+</p>
+<p style="margin-left: 40px;">
+	A) <strong>Aplicaci&oacute;n de producci&oacute;n (para Google Play): El instalador de aplicaciones del sistema lo genera cuando la aplicaci&oacute;n se instala por primera vez</strong>. Esta aplicaci&oacute;n tiene privilegios para escribir en el directorio &ldquo;dalvik-cache&rdquo;. Si no se ha convertido todo el c&oacute;digo DEX a ODEX, se generar&aacute; cuando se ejecute la aplicaci&oacute;n.
+</p>
+<p style="margin-left: 40px;">
+	B) <strong>Aplicaci&oacute;n de desarrollo para el emulador: El Sistema de Contrucci&oacute;n (Build System) realiza una compilaci&oacute;n AOT </strong>(Ahead Of Time, Antes de Tiempo) en el momento en que el SDK de Android empaqueta el APK. Se extrae el fichero DEX y se elimina (el APK resultante no tendr&aacute; fichero DEX). El ODEX se almacena al lado del fichero comprimido original (no en el directorio &ldquo;dalvik-cache&rdquo;), formando parte de la imagen del sistema. Este caso requiere utilizar el emulador, forzar una compilaci&oacute;n JIT del fichero DEX, para extraer el fichero ODEX resultante al directorio &ldquo;dalvik-cache&rdquo;.
+</p>
+<p style="margin-left: 40px;">
+	C) <strong>Aplicaci&oacute;n de desarrollo para dispositivo f&iacute;sico: La m&aacute;quina virtual Dalvik realiza una compilaci&oacute;n JIT.</strong> La salida va a un directorio especial llamado &ldquo;dalvik-cache&rdquo;. Este m&eacute;todo solo est&aacute; permitido para desarrollo, donde los permisos del directorio &ldquo;dalvik-cache&rdquo; no est&aacute;n restringidos. En producci&oacute;n no est&aacute; permitido.
+</p>
+<p>
+	<a href="https://jarroba.com/wp-content/uploads/2015/05/M%C3%A1quina-Virtual-Dalvik-de-Android-www.Jarroba.com_.png"><img alt="M&aacute;quina Virtual Dalvik de Android - www.Jarroba.com" class="aligncenter size-full wp-image-42869 img-responsive lazy" height="1396" src="https://jarroba.com/wp-content/uploads/2015/05/M%C3%A1quina-Virtual-Dalvik-de-Android-www.Jarroba.com_.png" width="1520" srcset="https://jarroba.com/wp-content/uploads/2015/05/M&aacute;quina-Virtual-Dalvik-de-Android-www.Jarroba.com_.png 1520w, https://jarroba.com/wp-content/uploads/2015/05/M&aacute;quina-Virtual-Dalvik-de-Android-www.Jarroba.com_-300x276.png 300w, https://jarroba.com/wp-content/uploads/2015/05/M&aacute;quina-Virtual-Dalvik-de-Android-www.Jarroba.com_-1024x940.png 1024w, https://jarroba.com/wp-content/uploads/2015/05/M&aacute;quina-Virtual-Dalvik-de-Android-www.Jarroba.com_-150x138.png 150w" sizes="(max-width: 1520px) 100vw, 1520px"></a>El directorio &ldquo;dalvik-cache&rdquo; se localiza exactamente en la ruta &ldquo;$ANDROID_DATA/data/dalvik-cache&rdquo;.
+</p>
+<p>
+	Los archivos ODEX tendr&aacute;n un nombre derivado de la ruta donde se encuentra el fichero DEX. Solo se tiene permiso para leer &ndash;pero no modificar o eliminar- los ficheros DEX tanto de nuestra aplicaci&oacute;n como de otras. Las aplicaciones solo tienen permisos para acceder a su fichero ODEX.
+</p>
+<p>
+	La creaci&oacute;n ODEX desde DEX, en los casos donde &ldquo;Dalvik compila con JIT el fichero ODEX&rdquo; y &ldquo;el instalador de aplicaciones genera el fichero ODEX&rdquo;, sigue los siguientes pasos:
+</p>
+<p style="margin-left: 40px;">
+	1&ordm;&nbsp;Si no existe se crea el directorio &ldquo;dalvik-cache&rdquo;.
+</p>
+<p style="margin-left: 40px;">
+	2&ordm;&nbsp;El fichero DEX se descomprime del fichero APK. Y se reserva una peque&ntilde;a cantidad de espacio al inicio del fichero DEX para la cabecera del archivo ODEX.
+</p>
+<p style="text-align: justify; margin-left: 40px;">
+	3&ordm; El fichero se asigna a memoria para acceder a esta f&aacute;cilmente y se ajusta para el sistema en el que est&aacute;. Incluye el intercambio de bytes, la reordenaci&oacute;n de bytes, comprobaciones estructurales b&aacute;sicas (como asegurar que los offsets y los &iacute;ndices de los ficheros est&eacute;n dentro de rangos v&aacute;lidos), sin cambiar nada significativo del archivo DEX.
+</p>
+<p>
+	El proceso de <strong>verificaci&oacute;n </strong>del bytecode implica el escaneo de todas las instrucciones de cada m&eacute;todo en cada clase de un fichero DEX. El objetivo consiste en identificar las secuencias de instrucciones ilegales (un ejemplo de algo ilegal es: realizar una llamada desde un paquete a un m&eacute;todo de una clase de otro paquete diferente) para no tener que realizar las comprobaciones en tiempo de ejecuci&oacute;n. Muchos de los c&aacute;lculos son necesarios para la exacta recolecci&oacute;n de basura.
+</p>
+<p>
+	Por razones de rendimiento, la optimizaci&oacute;n asumir&aacute; que la verificaci&oacute;n se haya ejecutado correctamente. Por defecto, Dalvik verifica todas las clases, y solo optimiza las clases que han sido verificadas.
+</p>
+<p>
+	Una vez pasada la verificaci&oacute;n exitosamente, se pondr&aacute; un flag en el ODEX. De esta manera no se volver&aacute; a verificar cuando se recargue.
+</p>
+<p>
+	La <strong>optimizaci&oacute;n </strong>de Dalvik consta de lo siguiente:
+</p>
+<ul><li>
+		Para llamadas a m&eacute;todos virtuales, remplaza el &iacute;ndice de m&eacute;todo por una &iacute;ndice de vtable.
+	</li>
+<li>
+		Para instancias de campos get/put, remplaza el &iacute;ndice del campo por un byte offset. Tambi&eacute;n, fusiona las variante boolean / byte / char / short en una sola forma de 32 bits
+	</li>
+<li>
+		Remplaza las llamadas de alto volumen, como String.length(), con con remplazos en l&iacute;nea (inline). Se salta habitual llamada a m&eacute;todos sobrecargados, directamente se intercambia desde el int&eacute;rprete a la implementaci&oacute;n nativa.
+	</li>
+<li>
+		Poda los m&eacute;todos vac&iacute;os.
+	</li>
+<li>
+		A&ntilde;ade datos previamente calculados.
+	</li>
+</ul><p>
+	Con respecto a la optimizaci&oacute;n pueden darse los siguientes problemas:
+</p>
+<ul><li>
+		Los &iacute;ndices vtable y los byte offset est&aacute;n sujetos a cambios si se actualiza la m&aacute;quina virtual.
+	</li>
+<li>
+		Si la superclase (en herencia es la clase padre, de la que se hereda) pertenece a un fichero DEX diferente, y ese otro DEX con la clase padre se actualiza, habr&aacute; que asegurar que nuestros &iacute;ndices y offsets se actualicen tambi&eacute;n.
+	</li>
+</ul><p style="text-align: justify;">
+	&nbsp;
+</p>
+<h1 style="text-align: justify;">
+	<strong>Entorno de ejecuci&oacute;n ART</strong><br></h1>
+<p style="text-align: justify;">
+	ART (Android Runtime, Entorno de ejecuci&oacute;n Android), realiza una compilaci&oacute;n AOT en el momento de la instalaci&oacute;n para obtener el ejecutable ELF (sustituye al fichero ODEX de Dalvik).
+</p>
+<p>
+	<a href="https://jarroba.com/wp-content/uploads/2015/05/Entorno-de-Ejecuci%C3%B3n-ART-de-Android-www.Jarroba.com_.png" rel="" style="" target="" title=""><img alt="Entorno de Ejecuci&oacute;n ART de Android - www.Jarroba.com" class="aligncenter size-full wp-image-42870 img-responsive lazy" height="535" src="https://jarroba.com/wp-content/uploads/2015/05/Entorno-de-Ejecuci%C3%B3n-ART-de-Android-www.Jarroba.com_.png" style="" title="" width="445" srcset="https://jarroba.com/wp-content/uploads/2015/05/Entorno-de-Ejecuci&oacute;n-ART-de-Android-www.Jarroba.com_.png 741w, https://jarroba.com/wp-content/uploads/2015/05/Entorno-de-Ejecuci&oacute;n-ART-de-Android-www.Jarroba.com_-249x300.png 249w, https://jarroba.com/wp-content/uploads/2015/05/Entorno-de-Ejecuci&oacute;n-ART-de-Android-www.Jarroba.com_-150x180.png 150w" sizes="(max-width: 445px) 100vw, 445px"></a>ART mejora respecto a la m&aacute;quina virtual Dalvik:
+</p>
+<ul><li>
+		Mejora el rendimiento del recolector de basura
+	</li>
+<li>
+		Mejora la depuraci&oacute;n de aplicaciones
+	</li>
+<li>
+		Mejora los an&aacute;lisis de ayuda al desarrollo
+	</li>
+<li>
+		Consume menos energ&iacute;a
+	</li>
+<li>
+		Mejora el rendimiento general del sistema
+	</li>
+<li>
+		No hay cach&eacute; de c&oacute;digo en tiempo de ejecuci&oacute;n
+	</li>
+<li>
+		Al utilizar solo memoria RAM se puede paginar (Dalvik utilizaban memoria Cach&eacute; que no era paginable)
+	</li>
+<li>
+		Pre-inicializa el conjunto de clases en tiempo de compilaci&oacute;n lo que mejora el rendimiento de la memoria RAM
+	</li>
+<li>
+		Compilar con la herramienta &ldquo;dex2oat&rdquo; desde un fichero DEX a un ELF consume casi tres veces m&aacute;s de tiempo que, compilar con la herramienta &ldquo;dexopt&rdquo; de DEX a ODEX. Pese a esto, el resultado es una compilaci&oacute;n completa en los fichero ELF, al contrario que en los ODEX que solo se compilaba una parte
+	</li>
+</ul><p>
+	Como a&ntilde;adido en ART, se mantiene la retro-compatibilidad con Dalvik al utilizar sus mismos bytecode &ldquo;.dex&rdquo;. Pero ART no utiliza &ldquo;.odex&rdquo;, sino que los sustituye por los ejecutables &ldquo;ELF&rdquo;.
+</p>
+<p style="text-align: justify;">
+	&nbsp;
+</p>
+<h2 style="text-align: justify;">
+	compilaci&oacute;n AOT (Ahead-Of-Time, Antes de tiempo)<br></h2>
+<p>
+	La compilaci&oacute;n AOT es <strong>compilar el bytecode en c&oacute;digo m&aacute;quina antes de que se ejecute el programa.</strong>
+</p>
+<p>
+	En Android se compila el bytecode DEX en el momento en el que se instala la aplicaci&oacute;n en el dispositivo, convirti&eacute;ndose en el fichero ejecutable ELF.
+</p>
+<p>
+	Las <strong>razones para realizar una compilaci&oacute;n AOT</strong> son:
+</p>
+<ul><li>
+		La ejecuci&oacute;n se produce muy r&aacute;pido al tener ya compilados los programas y bibliotecas. Ahorra espacio en disco duro, en memoria RAM, y se reduce el tiempo en iniciarse. Al utilizar AOT se reduce el n&uacute;mero de compilaciones, se utiliza menos el procesador, por lo que se ahorra m&aacute;s bater&iacute;a; por esto es muy &uacute;til en dispositivos m&oacute;viles.
+	</li>
+<li>
+		En contraposici&oacute;n. Compilar &ldquo;justo a tiempo&rdquo; (JIT) es demasiado lento &ndash;por compilar mientras se ejecuta- cuando hay c&oacute;digo complejo y provoca latencia, cosa que no ocurre al compilar con AOT. Aunque con AOT no se permite realizar ciertas optimizaciones que s&iacute; se pueden hacer con JIT.
+	</li>
+</ul><p style="text-align: justify;">
+	&nbsp;
+</p>
+<h1>
+	Odex y Deodex (u Odexing y Deodexing)<br></h1>
+<p>
+	Posiblemente hayas escuchado estas palabras si has utilizado o visto algo de ROMs (ROM viene de &ldquo;Read Only Memory&rdquo;, es una memoria de solo lectura que guarda el sistema operativo; si te acuerdas de la &eacute;poca del CD-ROM, una ROM de Android es como el CD-ROM en el que viene el sistema operativo para instalarlo en un dispositivo). Es m&aacute;s, seguramente hayas escuchado estas palabras si te suena ROM cocinada o modificada (Una &ldquo;ROM cocinada&rdquo; quiere decir que el sistema operativo se ha modificado con apliciones, animaciones, temas, procesos internos, configuraciones, etc elegidos por su creador; y cuando la instalemos en nuestro dispositivo, se ver&aacute; como lo han modificado desde el principio).
+</p>
+<p>
+	Seguro que has ca&iacute;do en que las palabras &ldquo;Odex&rdquo; y &ldquo;Deodex&rdquo; se parecen al archivo ODEX. Como vimos anteriormente, ODEX es el bytecode que optimiza el inicio de las aplicaciones para cada dispositivo (es el DEX optimizado para la m&aacute;quina virtual Dalvik).
+</p>
+<p>
+	La problem&aacute;tica de los cocineros de ROMs, es que si modifican un fichero APK ya instalado en el dispositivo, y no refrescan el fichero ODEX, provoca errores. Por lo que tienen que &ldquo;deodexar&rdquo; el fichero APK antes de trabajar con &eacute;ste, para facilitar su tarea.
+</p>
+<p>
+	He utilizado &ldquo;Deodex&rdquo; como verbo, pues es la acci&oacute;n. Tenemos tipos de acciones con la conversi&oacute;n de los bytecode:
+</p>
+<ul><li>
+		<strong>Odex </strong>(Odexar): Es lo que ya vimos (lo &ldquo;normal&rdquo;), lo que se hace al crear desde el archivo DEX el fichero ODEX mediante la herramienta &ldquo;dexopt&rdquo;.
+	</li>
+<li>
+		<strong>Deodex </strong>(Deodexar): Implica elegir un fichero APK que queramos y buscar su fichero ODEX en la memor&iacute;a cach&eacute;, para introducirlo dentro de dicho APK. Con esto se consigue agilizar la programaci&oacute;n, al poder modificar los ficheros APK sin preocuparse de que el ODEX no est&eacute; actualizado por estar en la memoria cach&eacute;; asegurando la integridad de la aplicaci&oacute;n. Puede &ldquo;deodexarse&rdquo; toda una ROM entera, lo que implica la &ldquo;deodexaci&oacute;n&rdquo; de todos sus ficheros APK instalados.
+	</li>
+</ul><p>
+	Por tanto, para trabajar con ROMs cocinadas es mejor que hayan sido &ldquo;Deodexadas&rdquo;.
+</p>
+<p>
+	<strong>Otras</strong> <strong>dificultades </strong>son:
+</p>
+<ul><li>
+		El fichero ODEX tiene dependencias en cada fichero BOOTCLASSPATH que se carga cuando se genera. El fichero ODEX solo es v&aacute;lido cuando se utiliza exactamente ese fichero BOOTCLASSPATH. Dalvik fuerza esto al almacenar un checksum (suma de control) de cada fichero que el fichero ODEX. Lo que hace que sea dependiente de su checksum, asegurando que el checksum de cada fichero coincida con el fichero ODEX que sea cargado. El fichero BOOTCLASSPATH es un listado de APKs o JARs (los cuales son &ldquo;core.jar&rdquo;, &ldquo;ext.jar&rdquo;, &ldquo;framework.jar&rdquo;, &ldquo;android.policy.jar&rdquo; y &ldquo;services.jar&rdquo;, y pueden ser encontrados en el directorio &ldquo;/system/framework&rdquo;) desde donde las clases pueden ser cargadas. Sin embargo, algunas APKs tienen dependencias extras a otros APKs o JARs (adem&aacute;s de los 5 anteriores). Las dependencias de los ficheros ODEX complican la modficaci&oacute;n de aplicaciones ya instaladas. Esto se debe a que no se puede coger una APK con su fichero ODEX de una imagen del sistema, e intentar ejecutarla en otra imagen del sistema (a menos que utilicen exactamente los mismos ficheros del Framework, cosa casi imposible).
+	</li>
+<li>
+		Si se hace cualquier cambio en el fichero BOOTCLASSPATH, invalidar&aacute; todas las dependencias de los ficheros ODEX (lo que implica la invalidaci&oacute;n de todos los APKs y JARs del dispositivo).
+	</li>
+<li>
+		Los ficheros ODEX son dif&iacute;ciles de convertir a ficheros DEX.
+	</li>
+<li>
+		La primera vez que una aplicaci&oacute;n &ldquo;deodexada&rdquo; sea ejecutada por la m&aacute;quina virtual Dalvik, requerir&aacute; un tiempo superior de inicio. El resto de ejecuciones la aplicaci&oacute;n no tardar&aacute; m&aacute;s, pues ya habr&aacute; movido el fichero ODEX a la carpeta de cach&eacute;.
+	</li>
+</ul><p style="text-align: justify;">
+	&nbsp;
+</p>
+<h1 style="text-align: justify;">
+	<strong>Nota&nbsp;del autor</strong><br></h1>
+<p style="text-align: justify;">
+	Este art&iacute;culo -tanto texto como&nbsp;gr&aacute;ficos-&nbsp;ha sido un trabajo de recopilaci&oacute;n de informaci&oacute;n&nbsp;por diferentes medios durante varios meses, y una adaptaci&oacute;n propia de los mismos. Que si bien he intentado ser lo m&aacute;s fiel y preciso a nivel te&oacute;rico, de&nbsp;estar documentado por los diferentes medios que aportan la informaci&oacute;n m&aacute;s directa (fiable) y por el conocimiento del que dispongo. Es mi deber&nbsp;indicar&nbsp;que debido a incoherencias y contradiciones&nbsp;<span style="line-height: 20.7999992370605px;">en la documentaci&oacute;n oficial, adem&aacute;s&nbsp;</span><span style="line-height: 1.6;">debido a la evoluci&oacute;n propia de las arquitectura,</span><span style="line-height: 1.6;">&nbsp;pudiran no ajustarse con la realidad.</span>
+</p>
+<p style="text-align: justify;">
+	<span style="line-height: 1.6;">Con mis mejores deseos espero aclarar un mont&oacute;n de dudas, que sea un buen art&iacute;culo&nbsp;y que la informaci&oacute;n sea la m&aacute;s completa posible; para que no tengas que gastar tanto tiempo como yo en recopilarla, desgranarla y entenderla.</span>
+</p>
+<p style="text-align: justify;">
+	Cualquier cosa me lo pueden sugerir&nbsp;en los comentarios.
+</p>
+<p style="text-align: justify;">
+	Y si nunca has programado en Android y te ha picado el gusanillo, puedes&nbsp;aprender a programar en Android de una manera muy sencilla con&nbsp;nuestro libro gratuito en la siguiente direcci&oacute;n:&nbsp;<a href="https://jarroba.com/libro-android-100-gratis/">https://jarroba.com/libro-android-100-gratis/</a>
+</p>
+<p style="text-align: justify;">
+	&nbsp;
+</p>
+<h1 style="text-align: justify;">
+	<strong>Bibliograf&iacute;a</strong><br></h1>
+<ul><li>
+		<a href="http://en.wikipedia.org/wiki/Android_(operating_system)">http://en.wikipedia.org/wiki/Android_(operating_system)</a>
+	</li>
+<li>
+		<a href="http://source.android.com/devices/tech/dalvik/">http://source.android.com/devices/tech/dalvik/</a>
+	</li>
+<li>
+		<a href="http://source.android.com/devices/index.html">http://source.android.com/devices/index.html</a>
+	</li>
+<li>
+		<a href="https://source.android.com/source/index.html">https://source.android.com/source/index.html</a>
+	</li>
+<li>
+		<a href="http://en.wikipedia.org/wiki/Dalvik_(software)">http://en.wikipedia.org/wiki/Dalvik_(software)</a>
+	</li>
+<li>
+		<a href="http://en.wikipedia.org/wiki/Android_Runtime">http://en.wikipedia.org/wiki/Android_Runtime</a>
+	</li>
+<li>
+		<a href="http://developer.android.com/sdk/installing/studio-build.html">http://developer.android.com/sdk/installing/studio-build.html</a>
+	</li>
+<li>
+		<a href="http://developer.android.com/tools/publishing/preparing.html">http://developer.android.com/tools/publishing/preparing.html</a>
+	</li>
+<li>
+		<a href="http://tools.android.com/tech-docs/new-build-system/build-workflow">http://tools.android.com/tech-docs/new-build-system/build-workflow</a>
+	</li>
+<li>
+		<a href="http://en.wikipedia.org/wiki/Ahead-of-time_compilation">http://en.wikipedia.org/wiki/Ahead-of-time_compilation</a>
+	</li>
+<li>
+		<a href="http://en.wikipedia.org/wiki/Just-in-time_compilation">http://en.wikipedia.org/wiki/Just-in-time_compilation</a>
+	</li>
+<li>
+		<a href="https://code.google.com/p/smali/wiki/DeodexInstructions">https://code.google.com/p/smali/wiki/DeodexInstructions</a>
+	</li>
+<li>
+		<a href="https://android.googlesource.com/platform/dalvik/+/HEAD/docs/dexopt.html">https://android.googlesource.com/platform/dalvik/+/HEAD/docs/dexopt.html</a>
+	</li>
+<li>
+		<a href="https://software.intel.com/es-es/blogs/2014/06/18/art-vs-dalvik-introducing-the-new-android-x86-runtime">https://software.intel.com/es-es/blogs/2014/06/18/art-vs-dalvik-introducing-the-new-android-x86-runtime</a>
+	</li>
+<li>
+		<a href="https://software.intel.com/en-us/blogs/2014/07/23/will-my-android-app-still-run-with-art-instead-of-dalvik">https://software.intel.com/en-us/blogs/2014/07/23/will-my-android-app-still-run-with-art-instead-of-dalvik</a>
+	</li>
+</ul></body></html>
+            </article>
+            <!-- /Contenido del artículo -->
+
+
+            <div class="col-md-offset-2 col-md-10 text-center">
+
+                <!-- Redes Sociales -->
+                <div class="groupShareButtons">
+                                            <span>Comparte esta entrada en:</span>
+                                        </br>
+
+                    <span class="fa-stack fa-lg">
+					<a href="https://plus.google.com/share?url=https%3A%2F%2Fjarroba.com%2Farquitectura-android-art-vs-dalvik%2F" target="_blank"
+                       title="Compartir en Google+">
+                        <i class="fa fa-circle fa-stack-2x" style="color: #DD4B38;"></i>
+                        <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                    </a>
+				</span>
+
+                    <span class="fa-stack fa-lg">
+					<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fjarroba.com%2Farquitectura-android-art-vs-dalvik%2F&title=Arquitectura+Android+%26%238211%3B+ART+vs+Dalvik&source=jarroba.com"
+                       target="_blank" title="Compartir en Linkedin">
+                        <i class="fa fa-circle fa-stack-2x" style="color: #0077B5;"></i>
+                        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                    </a>
+				</span>
+
+                    <span class="fa-stack fa-lg">
+					<a href="https://www.facebook.com/share.php?u=https%3A%2F%2Fjarroba.com%2Farquitectura-android-art-vs-dalvik%2F&t=Arquitectura+Android+%26%238211%3B+ART+vs+Dalvik "
+                       target="_blank" title="Compartir en Facebook">
+                        <i class="fa fa-circle fa-stack-2x" style="color: #3C5A98;"></i>
+                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                    </a>
+				</span>
+
+                    <span class="fa-stack fa-lg">
+					<a href="https://twitter.com/home?status=Arquitectura+Android+%26%238211%3B+ART+vs+Dalvik - https%3A%2F%2Fjarroba.com%2Farquitectura-android-art-vs-dalvik%2F"
+                       target="_blank" title="Compartir en Twitter">
+                        <i class="fa fa-circle fa-stack-2x" style="color: #00ABF0;"></i>
+                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                    </a>
+				</span>
+
+                </div>
+                <!-- /Redes Sociales -->
+
+            </div>
+
+            <!--    Contenido relaccionado    -->
+            <div class="col-md-offset-2 col-md-10 text-center">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-format="autorelaxed"
+                     data-ad-client="ca-pub-8473876812850116"
+                     data-ad-slot="1346918387"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <!--    Contenido relaccionado    -->
+
+            <!-- Derechos de autor -->
+            <div class="col-md-offset-2 col-md-10 text-center background-color-soft-gray" style="display: inline-block">
+                <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/es/" target="_blank"><img
+                            src="https://www.jarroba.com/wp-content/uploads/2012/02/cc.png" align="middle"
+                            style="margin-top:3px;"></a>
+                <a href="https://www.safecreative.org/userfeed/1401310112503"
+                   target="08443056-e78e-3ae8-aa46-e946c099cd2c"><img
+                            src="https://resources.safecreative.org/userfeed/1401310112503/label/logo2-150"
+                            style="border:0;"
+                            alt="Safe Creative #1401310112503"/></a>
+                </br>
+                <a href="https://jarroba.com/arquitectura-android-art-vs-dalvik/" rel="bookmark">Arquitectura Android &#8211; ART vs Dalvik</a> por "www.jarroba.com" esta
+                bajo una licencia Creative Commons
+                </br>
+                Reconocimiento-NoComercial-CompartirIgual 3.0 Unported License.
+                </br>
+                Creado a partir de la obra en <a href="https://jarroba.com/arquitectura-android-art-vs-dalvik/" rel="bookmark">www.jarroba.com</a>
+            </div>
+            <!-- /Derechos de autor -->
+
+            <!-- Comentarios -->
+            <div class="col-md-offset-2 col-md-10">
+
+                
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			6 comentarios en &ldquo;Arquitectura Android &#8211; ART vs Dalvik&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-40252" class="comment even thread-even depth-1">
+			<article id="div-comment-40252" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/d580e2d16ac44daa0d8d3e987479207e?s=56&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/d580e2d16ac44daa0d8d3e987479207e?s=112&amp;d=mm&amp;r=g 2x' class='avatar avatar-56 photo' height='56' width='56' />						<b class="fn">denisse canete tapia</b> <span class="says">dice:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://jarroba.com/arquitectura-android-art-vs-dalvik/#comment-40252">
+							<time datetime="2016-06-14T21:18:02+00:00">
+								14/06/2016 a las 21:18							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>	me encant&oacute;</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://jarroba.com/arquitectura-android-art-vs-dalvik/?replytocom=40252#respond' onclick='return addComment.moveForm( "div-comment-40252", "40252", "respond", "42746" )' aria-label='Responder a denisse canete tapia'><i class="fa fa-comment"></i> Responder</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-32104" class="comment odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-32104" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/9a2c1fe3dc2c1c58021f76b568199d31?s=56&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/9a2c1fe3dc2c1c58021f76b568199d31?s=112&amp;d=mm&amp;r=g 2x' class='avatar avatar-56 photo' height='56' width='56' />						<b class="fn">Joan Serra</b> <span class="says">dice:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://jarroba.com/arquitectura-android-art-vs-dalvik/#comment-32104">
+							<time datetime="2016-01-26T16:42:12+00:00">
+								26/01/2016 a las 16:42							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>	Fant&aacute;stico art&iacute;culo</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://jarroba.com/arquitectura-android-art-vs-dalvik/?replytocom=32104#respond' onclick='return addComment.moveForm( "div-comment-32104", "32104", "respond", "42746" )' aria-label='Responder a Joan Serra'><i class="fa fa-comment"></i> Responder</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-29320" class="comment even thread-even depth-1">
+			<article id="div-comment-29320" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/ac750591ef742772e8b46abb77d369ad?s=56&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/ac750591ef742772e8b46abb77d369ad?s=112&amp;d=mm&amp;r=g 2x' class='avatar avatar-56 photo' height='56' width='56' />						<b class="fn">Carlos</b> <span class="says">dice:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://jarroba.com/arquitectura-android-art-vs-dalvik/#comment-29320">
+							<time datetime="2015-12-18T05:56:01+00:00">
+								18/12/2015 a las 05:56							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>	Y tambi&eacute;n las librer&iacute;as core, junto al runtime, saludos.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://jarroba.com/arquitectura-android-art-vs-dalvik/?replytocom=29320#respond' onclick='return addComment.moveForm( "div-comment-29320", "29320", "respond", "42746" )' aria-label='Responder a Carlos'><i class="fa fa-comment"></i> Responder</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-29317" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-29317" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/ac750591ef742772e8b46abb77d369ad?s=56&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/ac750591ef742772e8b46abb77d369ad?s=112&amp;d=mm&amp;r=g 2x' class='avatar avatar-56 photo' height='56' width='56' />						<b class="fn">Carlos</b> <span class="says">dice:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://jarroba.com/arquitectura-android-art-vs-dalvik/#comment-29317">
+							<time datetime="2015-12-18T05:36:04+00:00">
+								18/12/2015 a las 05:36							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>	Ser&iacute;a interesante agregar, masomenos entre HAL y las bibliotecas Nativas, los demonios y la consola.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://jarroba.com/arquitectura-android-art-vs-dalvik/?replytocom=29317#respond' onclick='return addComment.moveForm( "div-comment-29317", "29317", "respond", "42746" )' aria-label='Responder a Carlos'><i class="fa fa-comment"></i> Responder</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-29356" class="comment byuser comment-author-ramoninvarato bypostauthor even depth-2">
+			<article id="div-comment-29356" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/e2b307d7640cf7fbbaf2bf6ea565b22a?s=56&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/e2b307d7640cf7fbbaf2bf6ea565b22a?s=112&amp;d=mm&amp;r=g 2x' class='avatar avatar-56 photo' height='56' width='56' />						<b class="fn">Ramón [Admin Jarroba]</b> <span class="says">dice:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://jarroba.com/arquitectura-android-art-vs-dalvik/#comment-29356">
+							<time datetime="2015-12-20T11:56:20+00:00">
+								20/12/2015 a las 11:56							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>
+	Hola Carlos. La verdad es que lo que más trabajo hubo al realizar este artículo fue que no poner a lo que poner, para que fuera claro, con una explicación clara y fluida. Tomo nota de lo que nos comentas para una futura revisión del artículo; de cualquier manera ahí queda tu comentario para ayudar a quien lo necesite 🙂</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://jarroba.com/arquitectura-android-art-vs-dalvik/?replytocom=29356#respond' onclick='return addComment.moveForm( "div-comment-29356", "29356", "respond", "42746" )' aria-label='Responder a Ramón [Admin Jarroba]'><i class="fa fa-comment"></i> Responder</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-29316" class="comment odd alt thread-even depth-1">
+			<article id="div-comment-29316" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/ac750591ef742772e8b46abb77d369ad?s=56&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/ac750591ef742772e8b46abb77d369ad?s=112&amp;d=mm&amp;r=g 2x' class='avatar avatar-56 photo' height='56' width='56' />						<b class="fn">Carlos</b> <span class="says">dice:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://jarroba.com/arquitectura-android-art-vs-dalvik/#comment-29316">
+							<time datetime="2015-12-18T04:33:33+00:00">
+								18/12/2015 a las 04:33							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>	Gracias por la publicaci&oacute;n, la mejor informaci&oacute;n, correcta y adem&aacute;s actualizada que he visto !</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://jarroba.com/arquitectura-android-art-vs-dalvik/?replytocom=29316#respond' onclick='return addComment.moveForm( "div-comment-29316", "29316", "respond", "42746" )' aria-label='Responder a Carlos'><i class="fa fa-comment"></i> Responder</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Deja un comentario <small><a rel="nofollow" id="cancel-comment-reply-link" href="/arquitectura-android-art-vs-dalvik/#respond" style="display:none;">Cancelar respuesta</a></small></h3>			<form action="https://jarroba.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<p class="comment-notes"><span id="email-notes">Tu dirección de correo electrónico no será publicada.</span> Los campos obligatorios están marcados con <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comentario</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" aria-required="true" required="required"></textarea></p><p class="comment-form-author"><label for="author">Nombre <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" aria-required='true' required='required' /></p>
+<p class="comment-form-email"><label for="email">Correo electrónico <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" aria-required='true' required='required' /></p>
+<p class="comment-form-url"><label for="url">Web</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Publicar comentario" /> <input type='hidden' name='comment_post_ID' value='42746' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="801bca2017" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="202"/></p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+
+                <!--
+			<div class='wpoa-login-form wpoa-layout-buttons-column wpoa-layout-align-middle ' style='' data-logging-in-title='Iniciando sesión...' data-logging-out-title='Cerrando sesión...'><nav><p id='wpoa-title'>Puedes iniciar sesión con:</p><a id='wpoa-login-google' class='wpoa-login-button' href='https://jarroba.com?connect=google'><img src='https://jarroba.com/wp-content/plugins/wp-oauth/icons/hex/google.png' alt='Google' class='icon'></img> Google</a><a id='wpoa-login-facebook' class='wpoa-login-button' href='https://jarroba.com?connect=facebook'><img src='https://jarroba.com/wp-content/plugins/wp-oauth/icons/hex/facebook.png' alt='Facebook' class='icon'></img> Facebook</a><a id='wpoa-login-linkedin' class='wpoa-login-button' href='https://jarroba.com?connect=linkedin'><img src='https://jarroba.com/wp-content/plugins/wp-oauth/icons/hex/linkedin.png' alt='LinkedIn' class='icon'></img> LinkedIn</a><a id='wpoa-login-github' class='wpoa-login-button' href='https://jarroba.com?connect=github'><img src='https://jarroba.com/wp-content/plugins/wp-oauth/icons/hex/github.png' alt='GitHub' class='icon'></img> GitHub</a><a id='wpoa-login-windowslive' class='wpoa-login-button' href='https://jarroba.com?connect=windowslive'><img src='https://jarroba.com/wp-content/plugins/wp-oauth/icons/hex/windowslive.png' alt='Windows Live' class='icon'></img> Windows Live</a></nav></div>		 -->
+            </div>
+            <!-- /Comentarios -->
+
+
+            <!-- No existe el artículo -->
+                <!-- /No existe el artículo -->
+
+    </div>
+</div>
+
+<script>
+
+    function initialize() {
+
+        $('body').on('click', '#idButtonShowEntryData', function (event) {
+
+            if ($(".hide-on-smallscreen").is(":visible")) {
+                $(".hide-on-smallscreen").hide();
+                $("#idButtonShowEntryData_Expand").show();
+                $("#idButtonShowEntryData_Compress").hide();
+            } else {
+                $(".hide-on-smallscreen").show();
+                $("#idButtonShowEntryData_Compress").show();
+                $("#idButtonShowEntryData_Expand").hide();
+                window.location = '#jumpToEntryData';
+            }
+
+        });
+
+
+        $(window).resize(function () {
+
+            windowsize = $(window).width();
+
+            if (windowsize > 768 && $('.hide-on-smallscreen').css('display') != null) {
+                $(".hide-on-smallscreen").css("display", "");
+            }
+
+        });
+
+    }
+    ;
+
+    window.onload = initialize();
+
+
+</script>
+
+	</div>
+	<!-- / class container -->
+
+	<footer class="footer-page">
+		<div class="container">
+			<div class="row footer-extra">
+
+				<div class="col-md-offset-2 col-md-4 col-xs-12">
+					<a href="/" class="puntero">
+						<img src="https://jarroba.com/wp-content/themes/jarrobav6/static/img/logojarroba.png" width="200px">
+					</a>
+
+                                            <p class="pSiguenosEn">Siguenos en:</p>
+                    
+					<!-- Redes sociales -->
+					<a href="https://www.youtube.com/user/Jarrobaweb" target="_black" class="redesSocialesFooter">
+						<img src="https://jarroba.com/wp-content/uploads/2014/01/youTube.png" width="45" height="45">
+					</a>
+
+					<a href="https://twitter.com/JarrobaWeb" target="_black" class="redesSocialesFooter">
+						<img src="https://jarroba.com/wp-content/uploads/2014/01/twitter.png" width="45" height="45">
+					</a>
+
+					<a href="https://www.facebook.com/jarrobaWeb" target="_black" class="redesSocialesFooter">
+						<img src="https://jarroba.com/wp-content/uploads/2014/01/facebook.png" width="45" height="45">
+					</a>
+
+					<a href="https://github.com/jarroba?tab=repositories" target="_black" class="redesSocialesFooter">
+						<img src="https://jarroba.com/wp-content/uploads/2014/01/gitHub.png" width="45" height="45">
+					</a>
+
+					<a href="https://plus.google.com/103352032205227460108/" target="_black" class="redesSocialesFooter">
+						<img src="https://jarroba.com/wp-content/uploads/2014/01/google+.png" width="45" height="45">
+					</a>
+					<!-- /Redes sociales -->
+
+                                            <p class="pSiguenosEn">Contacto: <a href="mailto:jarrobaweb@gmail.com" target="_black">jarrobaweb@gmail.com</a></p>
+                    
+				</div>
+
+				<div class="col-md-offset-1 col-md-3 col-xs-12">
+					<ul class="submenuFooter text-uppercase text-center">
+
+						<li>
+							<a href="https://jarroba.com/faq/">
+                                                                    FAQ
+                                							</a>
+						</li>
+						<li>
+							<a href="https://jarroba.com/visitas/">
+                                                                    Visitas
+                                							</a>
+						</li>
+						<li>
+							<a href="#">
+                                                                    Gastos
+                                							</a>
+						</li>
+						<li>
+							<a href="https://jarroba.com/sitemap_index.xml">
+                                                                    Mapa del sitio
+                                							</a>
+						</li>
+                        <li>
+                            <a href="https://jarroba.com/tools/">
+                                                                    Herramientas
+                                                            </a>
+                        </li>
+
+					</ul>
+
+				</div>
+
+			</div>
+		</div>
+
+		<div class="footer-info">
+			<div class="row text-center">
+				<div class="col-xs-12 col-md-12">
+                                            <p>Copyright &copy; 2017 <a href="https://www.jarroba.com">Jarroba.com</a> - Todos los derechos reservados</p>
+                    					<p style="font-size: 32px; font-family: 'Parisienne', cursive;">By Reimon & Richard</p>
+				</div>
+			</div>
+		</div>
+
+	</footer>
+
+</div>
+<!-- .site -->
+
+<!-- HTML del pié de página -->
+<div class="cdp-cookies-alerta  cdp-solapa-ocultar cdp-cookies-tema-gris">
+	<div class="cdp-cookies-texto">
+		<h4 style="font-size:11px !important;line-height:11px !important">Uso de cookies</h4><p style="font-size:8px !important;line-height:8px !important">Este sitio web utiliza cookies para que usted tenga la mejor experiencia de usuario. Si continúa navegando está dando su consentimiento para la aceptación de las mencionadas cookies y la aceptación de nuestra <a href="http://jarroba.com/faq/" style="font-size:8px !important;line-height:8px !important">política de cookies</p>
+		<a href="javascript:;" class="cdp-cookies-boton-cerrar">ACEPTAR</a> 
+	</div>
+	<a class="cdp-cookies-solapa">Aviso de cookies</a>
+</div>
+ <div id='wpoa-result'></div><script type='text/javascript' src='https://jarroba.com/wp-content/themes/jarrobav6/js/skip-link-focus-fix.js?ver=20141010'></script>
+<script type='text/javascript' src='https://jarroba.com/wp-includes/js/comment-reply.min.js?ver=4.8.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"<span class=\"screen-reader-text\">expande el men\u00fa inferior<\/span>","collapse":"<span class=\"screen-reader-text\">plegar men\u00fa inferior<\/span>"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://jarroba.com/wp-content/themes/jarrobav6/js/functions.js?ver=20141212'></script>
+<script type='text/javascript' src='https://jarroba.com/wp-includes/js/wp-embed.min.js?ver=4.8.1'></script>
+<script type='text/javascript' src='https://jarroba.com/wp-content/plugins/akismet/_inc/form.js?ver=3.3.4'></script>
+
+</body>
+</html>
+
+    <!-- Carga de las fuentes de google y las nuestras -->
+    <link href='//fonts.googleapis.com/css?family=Macondo' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Parisienne' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://jarroba.com/wp-content/themes/jarrobav6/static/font-awesome/css/font-awesome.min.css">
+    <!-- /Carga de las fuentes de google y las nuestras -->
+
+    <!-- Carga del formateo del codigo fuente que ponemos en la web  -->
+    <script src="https://jarroba.com/wp-content/themes/jarrobav6/static/code-prettify-master/loader/run_prettify.js"></script>
+    <script src="https://jarroba.com/wp-content/themes/jarrobav6/static/code-prettify-master/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+    <script async src="https://www.google.com/jsapi"></script>
+    <!-- / Carga del formateo del codigo fuente que ponemos en la web  -->
+
+    <!-- Graficas de google -->
+        <!-- /Graficas de google -->
+
+
+	<!-- para el popover del buscador -->
+	<script type="text/javascript">
+		$(window).bind('ChangeView', function(e, data){
+			$('.change-project').popover({
+				placement : 'bottom',
+				trigger : 'click',
+				html : true,
+				content : function(){
+					var content = '';
+					content = $('#select-div').html();
+					return content;
+				}
+			}).on('shown.bs.popover', function(){
+			});
+
+			$(document).delegate('.btn-go','click', function(e){
+				e.preventDefault();
+				alert('Go Click');
+			});
+
+			$(document).delegate('.btn-cancel-option', 'click', function(e){
+				e.preventDefault();
+				var element = $(this).parents('.popover');
+				if(element.size()){
+					$(element).removeClass('in').addClass('out');
+				}
+			});
+		});
+		$(document).ready(function(){
+			$(window).trigger('ChangeView', {});
+		});
+	</script>
+	<!-- /para el popover del buscador -->

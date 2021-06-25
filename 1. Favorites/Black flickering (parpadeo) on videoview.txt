@@ -1,0 +1,34 @@
+// ESTO ES SOBRE EL PARPADEO NEGRO AL USAR FRAGMENTS Y VIDEOVIEW
+
+SOLUCIONADO!
+USAR TextureView
+
+
+En el layout del parent activity del fragment?-> to the first layout of your activity.
+It is VERY IMPORTANT that you add the surface view to the root view in your activity, not the immediate parent. Otherwise it won't work.
+
+I think I found the reason for the black flash. In my case I'm using a SurfaceView inside a Fragment and dynamically adding this fragment to the activity after some action. The moment when I add the fragment to the activity, the screen flashes black. I checked out grepcode for the SurfaceView source and here's what I found: when the surface view appears in the window the very fist time, it requests the window's parameters changing by calling a private IWindowSession.relayout(..) method. This method "gives" you a new frame, window, and window surface. I think the screen blinks right at that moment.
+
+The solution is pretty simple: if your window already has appropriate parameters it will not refresh all the window's stuff and the screen will not blink. The simplest solution is to add a 0px height plain SurfaceView to the first layout of your activity. This will recreate the window before the activity is shown on the screen, and when you set your second layout it will just continue using the window with the current parameters. I hope this helps.
+
+UPDATE: Looks like after years this behavior is still there. I would recommend to use TextureView instead of SurfaceView. This is literally a newer implementation of same thing that don't have this side effect as well as don't have a problem of black background when you moving it (for instance within ScrollView, ViewPager, RecyclerView etc). 
+
+EN XML
+<SurfaceView
+    android:layout_width="0px"
+    android:layout_height="0px"
+    android:visibility="gone" />
+
+EN CÓDIGO
+And here is a cleaner way to solve this problem, call this before you call setContentView(), just tested on my ViewPager with some Fragments containing VideoView, it works as good as adding zero-sized SurfaceView:
+getWindow().setFormat(PixelFormat.TRANSLUCENT);
+
+
+// Add a SurfaceView to prevent flickering when the video is loaded later.
+SurfaceView surfaceView = new SurfaceView(getActivity());
+surfaceView.setVisibility(View.GONE);
+container.addView(surfaceView, new ViewGroup.LayoutParams(0, 0));
+
+
+//algo leí sobre videoView
+videoView.setZOrderOnTop ?

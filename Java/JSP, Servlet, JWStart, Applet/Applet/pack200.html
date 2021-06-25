@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Java Applets in HTML5</title>
+  </head>
+  <body>
+    <h1>Java Applets in HTML5</h1>
+    <h2>A Sample Applet</h2>
+    <p>
+      Example of an applet that runs class <code>Sample</code> located in file <code>Sample.jar</code>
+      <br />
+      <strong>NOTE:</strong> Need Java 6 (or later version).
+    </p>
+    <p>
+      <object type="application/x-java-applet" height="300" width="550" >
+        <param name="code" value="Sample" />
+        <param name="archive" value="Sample.jar" />
+        <param name="java_arguments" value="-Djnlp.packEnabled=true"/>
+        Applet failed to run.  No Java plug-in was found.
+      </object>
+    </p>
+    <h2>Creating the Sample Applet</h2>
+    <p>
+      Create <a href="Sample.jar">Sample.jar</a> from <a href="Sample.java">Sample.java</a>, like so:
+    </p>
+<pre>
+::] javac -version
+javac 1.6.0_21
+
+::] javac Sample.java
+
+::] jar cvf Sample.jar *.class
+added manifest
+adding: Sample$1.class(in = 1087) (out= 607)(deflated 44%)
+adding: Sample$2.class(in = 1075) (out= 612)(deflated 43%)
+adding: Sample$3.class(in = 1259) (out= 739)(deflated 41%)
+adding: Sample$4.class(in = 900) (out= 547)(deflated 39%)
+adding: Sample$5.class(in = 1099) (out= 670)(deflated 39%)
+adding: Sample.class(in = 4193) (out= 2190)(deflated 47%)
+</pre>
+    <h2>Code to Add Sample Applet to HTML Page</h2>
+    <p>
+      <strong>OLD WAY:</strong> Java applet in HTML 4.01
+    </p>
+<pre>
+&lt;applet code="Sample" archive="Sample.jar" height="300" width="550"&gt;
+  Applet failed to run.  No Java plug-in was found.
+&lt;/applet&gt;
+</pre>
+    <p>
+      <strong>NEW WAY:</strong> Java Applet in HTML5 (uses <code>object</code> tag)
+    </p>
+<pre>
+&lt;object type="application/x-java-applet" height="300" width="550"&gt;
+  &lt;param name="code" value="Sample" /&gt;
+  &lt;param name="archive" value="Sample.jar" /&gt;
+  Applet failed to run.  No Java plug-in was found.
+&lt;/object&gt;
+</pre>
+    <h1>A Better Way</h1>
+    <h2><code>pack200</code> jar Compression</h2>
+    <p>
+      There is a way to <strong>GREATLY</strong> reduce the save of the downloaded jar file;
+      <br />
+      that way is to use
+      <a href="http://download.oracle.com/javase/7/docs/technotes/tools/share/pack200.html">
+        pack200
+      </a>
+      (
+      <a href="http://download.oracle.com/javase/6/docs/technotes/guides/deployment/deployment-guide/pack200.html">
+        pack200 and Compression
+      </a>
+      ).
+    </p>
+    <h2>Creating the Compressed jar File <code>Sample.jar.pack.gz</code></h2>
+    <p><strong>NOTE: </strong><code>wc -c</code> gives the size in bytes of a file</p>
+<pre>
+::] wc -c Sample.jar
+6426 Sample.jar
+
+::] pack200 -r Sample.jar
+
+::] wc -c Sample.jar
+6337 Sample.jar
+
+::] pack200 Sample.jar.pack.gz Sample.jar
+
+::] wc -c Sample.jar.pack.gz
+2113 Sample.jar.pack.gz
+</pre>
+    <h2>Why Use <code>pack200</code> and How to Use It in An Applet</h2>
+    <p>
+      <strong>NOTE:</strong> The command: <code>pack200 -r Sample.jar</code>,
+      <br />
+      repacks the <code>Sample.jar</code> file
+      <br />
+      (This produces a slightly smaller jar file. Old size was 6426 bytes; new size is 6337 bytes. (deflated 1%))
+    </p>
+    <p>
+      <strong>NOTE:</strong> The command: <code>pack200 Sample.jar.pack.gz Sample.jar</code>,
+      <br />
+      produces a compressed jar file named <a href="Sample.jar.pack.gz"><code>Sample.jar.pack.gz</code></a>
+      <br />
+      (Size of <code>Sample.jar.pack.gz</code> is 2113 bytes
+      (<strong>deflated 67%</strong> from original <code>Sample.jar</code>))
+    </p>
+    <p>
+      When the following line is added to the Java applet:
+      <br />
+      <code><strong>&lt;param name="java_arguments" value="-Djnlp.packEnabled=true"/&gt;</strong></code>
+      <br />
+      the Java plug-in will <strong>automatically</strong> download and try using the compressed jar file
+      (<code>Sample.jar.pack.gz</code>).
+      <br />
+      If the browser is unable to use the compressed jar file, the uncompressed jar file
+      (<code>Sample.jar</code>) will be downloaded.
+    </p>
+    <h2>Finally, the Best Way to Add A Java Applet to An HTML5 Document</h2>
+    <p>
+      <strong>BEST WAY:</strong> Java Applet in HTML5 (using <code>pack200</code> jar compression)
+    </p>
+<pre>
+&lt;object type="application/x-java-applet" height="300" width="550"&gt;
+  &lt;param name="code" value="Sample" /&gt;
+  &lt;param name="archive" value="Sample.jar" /&gt;
+  &lt;param name="java_arguments" value="-Djnlp.packEnabled=true"/&gt;
+  Applet failed to run.  No Java plug-in was found.
+&lt;/object&gt;
+</pre>
+    <div style="font-size: xx-small">
+      Copyright &#x00A9;<!-- &copy; -->
+      2017
+      Shayne Steele
+      &#x00A0;<!-- &nbsp; -->
+      <br />
+      Comments / Suggestions / Corrections to :
+      (<em>shayne.steele</em>
+      <span style="color: #fffffe; background-color: #ffffff;">&lt;</span>AT<span style="color: #fffffe; background-color: #ffffff;">&gt;</span>
+      <em>eyeasme</em>
+      <span style="color: #fffffe; background-color: #ffffff;">&lt;</span>DOT<span style="color: #fffffe; background-color: #ffffff;">&gt;</span>
+      <em>com</em>)
+      <br />
+      This document is licensed under the
+      <a href="http://www.gnu.org/licenses/fdl.html">GFDLv1.3</a>,
+      All software shown is licensed under the
+      <a href="http://www.gnu.org/licenses/lgpl.html">LGPLv3</a>.
+      <br />
+      Document last modified on
+      April 30, 2017 04:34 pm EDT.
+    </div>
+
+
+

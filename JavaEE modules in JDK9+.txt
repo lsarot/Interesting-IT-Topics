@@ -1,0 +1,75 @@
+The JAXB APIs are considered to be Java EE APIs, and therefore are no longer contained on the default class path in Java SE 9. In Java 11 they are completely removed from the JDK.
+
+Java 9 introduces the concepts of modules, and by default the java.se aggregate module is available on the class path (or rather, module path). As the name implies, the java.se aggregate module does not include the Java EE APIs that have been traditionally bundled with Java 6/7/8.
+
+Fortunately, these Java EE APIs that were provided in JDK 6/7/8 are still in the JDK, but they just aren't on the class path by default. The extra Java EE APIs are provided in the following modules:
+
+
+java.activation
+java.corba
+java.transaction
+java.xml.bind  << This one contains the JAXB APIs
+java.xml.ws
+java.xml.ws.annotation
+
+
+*******************
+*** Quick and dirty solution: (JDK 9/10 only)
+
+To make the JAXB APIs available at runtime, specify the following command-line option:
+--add-modules java.xml.bind
+
+But I still need this to work with Java 8!!!
+If you try specifying --add-modules with an older JDK, it will blow up because it's an unrecognized option. I suggest one of two options:
+
+You can set any Java 9+ only options using the JDK_JAVA_OPTIONS environment variable. This environment variable is automatically read by the java launcher for Java 9+.
+You can add the -XX:+IgnoreUnrecognizedVMOptions to make the JVM silently ignore unrecognized options, instead of blowing up. But beware! Any other command line args you use will no longer be validated for you by the JVM. This option works with Oracle/OpenJDK as well as IBM JDK (as of JDK 8sr4)
+
+
+*******************
+*** Alternate quick solution: (JDK 9/10 only)
+Note that you can make all of the above Java EE modules available at run time by specifying the --add-modules java.se.ee option. The java.se.ee module is an aggregate module that includes java.se.ee as well as the above Java EE API modules.
+
+
+*******************
+*** Proper long-term solution: (JDK 9 and beyond)
+
+The Java EE API modules listed above are all marked @Deprecated(forRemoval=true), because they are scheduled for removal in Java 11. So the --add-module approach will no longer work in Java 11 out of the box.
+
+What you will need to do in Java 11 and forward is include your own copy of the Java EE APIs on the class path or module path. For example, you can add the JAX-B APIs as a maven dependency like this:
+
+<dependency>
+    <groupId>javax.xml.bind</groupId>
+    <artifactId>jaxb-api</artifactId>
+    <version>2.2.11</version>
+</dependency>
+<dependency>
+    <groupId>com.sun.xml.bind</groupId>
+    <artifactId>jaxb-core</artifactId>
+    <version>2.2.11</version>
+</dependency>
+<dependency>
+    <groupId>com.sun.xml.bind</groupId>
+    <artifactId>jaxb-impl</artifactId>
+    <version>2.2.11</version>
+</dependency>
+<dependency>
+    <groupId>javax.activation</groupId>
+    <artifactId>activation</artifactId>
+    <version>1.1.1</version>
+</dependency>
+For full details on Java modularity, see JEP 261: Module System
+
+
+*******************
+*** For Gradle or Android Studio developer: (JDK 9 and beyond)
+
+Add the following dependencies to your build.gradle file:
+
+dependencies {
+    // JAX-B dependencies for JDK 9+
+    implementation "javax.xml.bind:jaxb-api:2.2.11"
+    implementation "com.sun.xml.bind:jaxb-core:2.2.11"
+    implementation "com.sun.xml.bind:jaxb-impl:2.2.11"
+    implementation "javax.activation:activation:1.1.1"
+}

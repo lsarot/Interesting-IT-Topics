@@ -1,0 +1,26 @@
+DEPLOY TO WEBLOGIC (with Maven)
+
+<plugin>
+	<groupId>com.oracle.weblogic</groupId>
+	<artifactId>weblogic-maven-plugin</artifactId>
+	<version>10.3.4</version>
+	<configuration>
+		<adminurl>hostname:port</adminurl>
+		<user>weblogic</user>
+		<password>password</password>
+		<upload>true</upload>
+		<action>deploy</action>
+		<remote>false</remote>
+		<verbose>true</verbose>
+		<source>/Users/User/projects/myproject.jar</source>
+		<name>My_Project_Name</name>
+	</configuration>
+	<executions>
+		<execution>
+			<phase>install</phase>
+			<goals>
+				<goal>deploy</goal>
+			</goals>
+		</execution>				
+	</executions>				
+</plugin>

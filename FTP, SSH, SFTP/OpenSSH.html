@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>OpenSSH - Wikipedia, la enciclopedia libre</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"OpenSSH","wgTitle":"OpenSSH","wgCurRevisionId":103584508,"wgRevisionId":103584508,"wgArticleId":166719,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Wikipedia:Artículos con datos locales","Wikipedia:Páginas con enlaces mágicos de ISBN","Berkeley Software Distribution","OpenBSD","Software criptográfico","Protocolos de Internet","Redes informáticas","Seguridad informática","Acrónimos de informática"],"wgBreakFrames":false,"wgPageContentLanguage":"es","wgPageContentModel":"wikitext","wgSeparatorTransformTable":[",\t."," \t,"],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"],"wgMonthNamesShort":["","ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"],"wgRelevantPageName":"OpenSSH","wgRelevantArticleId":166719,"wgRequestId":"Wm8vpApAMFUAADI2QlIAAABN","wgIsProbablyEditable":true,"wgRelevantPageIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgWikiEditorEnabledModules":[],"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":true,"wgPopupsShouldSendModuleToUser":true,"wgPopupsConflictsWithNavPopupGadget":false,"wgVisualEditor":{"pageLanguageCode":"es","pageLanguageDir":"ltr","pageVariantFallbacks":"es","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"es","wgMFExpandAllSectionsUserOption":false,"wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":true},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"español","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgWikibaseItemId":"Q847062","wgScoreNoteLanguages":{"arabic":"العربية","catalan":"català","deutsch":"Deutsch","english":"English","espanol":"español","italiano":"italiano","nederlands":"Nederlands","norsk":"norsk","portugues":"português","suomi":"suomi","svenska":"svenska","vlaams":"West-Vlams"},"wgScoreDefaultNoteLanguage":"nederlands","wgCentralAuthMobileDomain":false,"wgCodeMirrorEnabled":false,"wgVisualEditorToolbarScrollOffset":0,"wgVisualEditorUnsupportedEditParams":["undo","undoafter","veswitched"],"wgEditSubmitButtonLabelPublish":true});mw.loader.state({"ext.gadget.imagenesinfobox":"ready","ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"loading","user.tokens":"loading","ext.math.styles":"ready","ext.cite.styles":"ready","wikibase.client.init":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.options@0qprsob",function($,jQuery,require,module){mw.user.options.set({"variant":"es"});});mw.loader.implement("user.tokens@1dqfd7l",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/
+
+});mw.loader.load(["ext.math.scripts","ext.cite.a11y","site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.toc","mediawiki.searchSuggest","ext.gadget.a-commons-directo","ext.gadget.refToolbar","ext.centralauth.centralautologin","mmv.head","mmv.bootstrap.autostart","ext.popups","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.compactlinks","ext.uls.interface","ext.centralNotice.geoIP","ext.centralNotice.startUp","skins.vector.js"]);});</script>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=es&amp;modules=ext.cite.styles%7Cext.math.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector"/>
+<script async="" src="/w/load.php?debug=false&amp;lang=es&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=es&amp;modules=ext.gadget.imagenesinfobox&amp;only=styles&amp;skin=vector"/>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=es&amp;modules=site.styles&amp;only=styles&amp;skin=vector"/>
+<meta name="generator" content="MediaWiki 1.31.0-wmf.17"/>
+<meta name="referrer" content="origin-when-cross-origin"/>
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/0/03/X11_ssh_tunnelling.png"/>
+<link rel="alternate" href="android-app://org.wikipedia/http/es.m.wikipedia.org/wiki/OpenSSH"/>
+<link rel="alternate" type="application/x-wiki" title="Editar" href="/w/index.php?title=OpenSSH&amp;action=edit"/>
+<link rel="edit" title="Editar" href="/w/index.php?title=OpenSSH&amp;action=edit"/>
+<link rel="apple-touch-icon" href="/static/apple-touch/wikipedia.png"/>
+<link rel="shortcut icon" href="/static/favicon/wikipedia.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikipedia (es)"/>
+<link rel="EditURI" type="application/rsd+xml" href="//es.wikipedia.org/w/api.php?action=rsd"/>
+<link rel="license" href="//creativecommons.org/licenses/by-sa/3.0/"/>
+<link rel="canonical" href="https://es.wikipedia.org/wiki/OpenSSH"/>
+<link rel="dns-prefetch" href="//login.wikimedia.org"/>
+<link rel="dns-prefetch" href="//meta.wikimedia.org" />
+<!--[if lt IE 9]><script src="/w/load.php?debug=false&amp;lang=es&amp;modules=html5shiv&amp;only=scripts&amp;skin=vector&amp;sync=1"></script><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-OpenSSH rootpage-OpenSSH skin-vector action-view">		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+			<div id="siteNotice" class="mw-body-content"><!-- CentralNotice --></div><div class="mw-indicators mw-body-content">
+</div>
+<h1 id="firstHeading" class="firstHeading" lang="es">OpenSSH</h1>			<div id="bodyContent" class="mw-body-content">
+				<div id="siteSub" class="noprint">De Wikipedia, la enciclopedia libre</div>				<div id="contentSub"></div>
+								<div id="jump-to-nav" class="mw-jump">
+					Saltar a:					<a href="#mw-head">navegación</a>, 					<a href="#p-search">búsqueda</a>
+				</div>
+				<div id="mw-content-text" lang="es" dir="ltr" class="mw-content-ltr"><div class="mw-parser-output"><table class="infobox" style="width:22.7em; line-height: 1.4em; text-align:left; padding:.23em;">
+<tr>
+<th colspan="3" class="cabecera informática" style="text-align:center;background-color:#DCEAEC;color:black;">OpenSSH</th>
+</tr>
+<tr>
+<td colspan="3" style="text-align:center;"><a rel="nofollow" class="external text" href="http://www.openssh.com">www.openssh.com</a></td>
+</tr>
+<tr>
+<td colspan="3" style="text-align:center;"><a href="/wiki/Archivo:X11_ssh_tunnelling.png" class="image"><img alt="X11 ssh tunnelling.png" src="//upload.wikimedia.org/wikipedia/commons/thumb/0/03/X11_ssh_tunnelling.png/250px-X11_ssh_tunnelling.png" width="250" height="166" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/0/03/X11_ssh_tunnelling.png/375px-X11_ssh_tunnelling.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/0/03/X11_ssh_tunnelling.png/500px-X11_ssh_tunnelling.png 2x" data-file-width="583" data-file-height="386" /></a><br />
+<span style="font-size:smaller"><a href="/wiki/Xeyes" title="Xeyes">xeyes</a> a través de un túnel SSH.</span></td>
+</tr>
+<tr>
+<th colspan="3" style="text-align:center;background-color:#DCEAEC;">Información general</th>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;">Desarrollador(es)</th>
+<td colspan="2"><a href="/wiki/OpenBSD" title="OpenBSD">OpenBSD</a></td>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;">Lanzamiento inicial</th>
+<td colspan="2"><a href="/wiki/1_de_diciembre" title="1 de diciembre">1 de diciembre</a> de <a href="/wiki/1999" title="1999">1999</a></td>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;"><a href="/wiki/Fases_del_desarrollo_de_software" title="Fases del desarrollo de software">Última versión estable</a></th>
+<td colspan="2">7.5p1<br />
+<a href="/wiki/20_de_marzo" title="20 de marzo">20 de marzo</a> de <a href="/wiki/2017" title="2017">2017</a> (10 meses&#160;y&#160;9 días)</td>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;"><a href="/wiki/Anexo:G%C3%A9neros_de_software" title="Anexo:Géneros de software">Género</a></th>
+<td colspan="2"><a href="/wiki/Acceso_remoto" class="mw-redirect" title="Acceso remoto">Acceso remoto</a></td>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;"><a href="/wiki/Lenguaje_de_programaci%C3%B3n" title="Lenguaje de programación">Programado en</a></th>
+<td colspan="2"><a href="/wiki/C_(lenguaje_de_programaci%C3%B3n)" title="C (lenguaje de programación)">C</a></td>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;"><a href="/wiki/Sistema_operativo" title="Sistema operativo">Sistema operativo</a></th>
+<td colspan="2"><a href="/wiki/Multiplataforma" title="Multiplataforma">Multiplataforma</a></td>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;"><a href="/wiki/Licencia_de_software" title="Licencia de software">Licencia</a></th>
+<td colspan="2"><a href="/wiki/Licencia_BSD" title="Licencia BSD">BSD</a></td>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;"><a href="/wiki/Idioma_espa%C3%B1ol" title="Idioma español">En español</a></th>
+<td colspan="2">No</td>
+</tr>
+<tr>
+<td colspan="3" style="text-align:left;"><small>[<span class="plainlinks"><a href="https://www.wikidata.org/wiki/Q847062" class="extiw" title="d:Q847062">editar datos en Wikidata</a></span>]</small></td>
+</tr>
+</table>
+<p><b>OpenSSH</b> (<b>Open Secure Shell</b>) es un conjunto de <a href="/wiki/Aplicaci%C3%B3n_(inform%C3%A1tica)" class="mw-redirect" title="Aplicación (informática)">aplicaciones</a> que permiten realizar comunicaciones cifradas a través de una <a href="/wiki/Red_de_computadoras" title="Red de computadoras">red</a>, usando el <a href="/wiki/Protocolo_(inform%C3%A1tica)" class="mw-redirect" title="Protocolo (informática)">protocolo</a> <a href="/wiki/SSH" class="mw-redirect" title="SSH">SSH</a>. Fue creado como una alternativa libre y abierta al programa <a href="/wiki/Secure_Shell" title="Secure Shell">Secure Shell</a>, que es <a href="/wiki/Software_propietario" title="Software propietario">software propietario</a>. El proyecto está liderado por <a href="/wiki/Theo_de_Raadt" title="Theo de Raadt">Theo de Raadt</a>, residente en <a href="/wiki/Calgary" title="Calgary">Calgary</a>.</p>
+<p></p>
+<div id="toc" class="toc">
+<div class="toctitle" lang="es" dir="ltr" xml:lang="es">
+<h2>Índice</h2>
+</div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Historia"><span class="tocnumber">1</span> <span class="toctext">Historia</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Portabilidad"><span class="tocnumber">2</span> <span class="toctext">Portabilidad</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Aplicaciones_incluidas"><span class="tocnumber">3</span> <span class="toctext">Aplicaciones incluidas</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Túneles_seguros"><span class="tocnumber">4</span> <span class="toctext">Túneles seguros</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Autenticación"><span class="tocnumber">5</span> <span class="toctext">Autenticación</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#Libros"><span class="tocnumber">6</span> <span class="toctext">Libros</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Referencias"><span class="tocnumber">7</span> <span class="toctext">Referencias</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#Enlaces_externos"><span class="tocnumber">8</span> <span class="toctext">Enlaces externos</span></a></li>
+</ul>
+</div>
+<p></p>
+<h2><span class="mw-headline" id="Historia">Historia</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=OpenSSH&amp;action=edit&amp;section=1" title="Editar sección: Historia">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Sus desarrolladores aseguran que OpenSSH es más seguro que el original, lo cual es debido a la conocida reputación de los desarrolladores de <a href="/wiki/OpenBSD" title="OpenBSD">OpenBSD</a> por crear código limpio y perfectamente auditado, lo que contribuye a que sea más seguro. Su seguridad también es atribuible al hecho de que su <a href="/wiki/C%C3%B3digo_fuente" title="Código fuente">código fuente</a> se distribuya libremente con una <a href="/wiki/Licencia_BSD" title="Licencia BSD">licencia BSD</a>. Aunque todo el <a href="/wiki/C%C3%B3digo_fuente" title="Código fuente">código fuente</a> del SSH original también está disponible, existen restricciones con respecto a su uso y distribución, lo que convierte a OpenSSH en un proyecto mucho más atractivo para nuevos desarrolladores.</p>
+<p>La primera vez que apareció OpenSSH fue en la versión OpenBSD 2.6 y la primera versión independiente fue realizada en octubre de 1999.<sup id="cite_ref-1" class="reference separada"><a href="#cite_note-1"><span class="corchete-llamada">[</span>1<span class="corchete-llamada">]</span></a></sup>​</p>
+<p>Historia de las publicaciones&#160;:</p>
+<ul>
+<li>OpenSHH 7.5: 20 de marzo de 2017</li>
+<li>OpenSSH 7.3: 1 de agosto de 2016</li>
+<li>OpenSSH 7.2: 29 de febrero de 2016</li>
+<li>OpenSSH 7.1: 21 de agosto de 2015</li>
+<li>OpenSSH 7.0: 11 de agosto de 2015</li>
+<li>OpenSSH 6.9: 1 de julio de 2015</li>
+<li>OpenSSH 6.8: 18 de marzo de 2015</li>
+<li>OpenSSH 6.7: 6 de octubre de 2014</li>
+<li>OpenSSH 6.6: 15 de marzo de 2014</li>
+<li>OpenSSH 6.5: 30 de enero de 2014</li>
+<li>OpenSSH 6.4: 8 de noviembre de 2013</li>
+<li>OpenSSH 6.3: 13 de septiembre de 2013</li>
+<li>OpenSSH 6.2: 22 de marzo de 2013</li>
+<li>OpenSSH 6.1: 29 de agosto de 2012</li>
+<li>OpenSSH 6.0: 22 de abril de 2012</li>
+<li>OpenSSH 5.9: 6 de septiembre de 2011</li>
+<li>OpenSSH 5.8: 4 de febrero de 2011</li>
+<li>OpenSSH 5.7: 24 de enero de 2011</li>
+<li>OpenSSH 5.6: 23 de agosto de 2010</li>
+<li>OpenSSH 5.5: 16 de abril de 2010</li>
+<li>OpenSSH 5.4: 8 de marzo de 2010</li>
+<li>OpenSSH 5.3: 1 de octubre de 2009</li>
+<li>OpenSSH 5.2: 23 de febrero de 2009</li>
+<li>OpenSSH 5.1: 21 de junio de 2008</li>
+<li>OpenSSH 5.0: 3 de abril de 2008</li>
+<li>OpenSSH 4.9: 30 de marzo de 2008
+<ul>
+<li>Incorporó soporte <a href="/wiki/Chroot" title="Chroot">chroot</a> para sshd</li>
+</ul>
+</li>
+<li>OpenSSH 4.7: 4 de septiembre de 2007</li>
+<li>OpenSSH 4.6: 9 de marzo de 2007</li>
+<li>OpenSSH 4.5: 7 de noviembre de 2006</li>
+<li>OpenSSH 4.4: 27 de septiembre de 2006</li>
+<li>OpenSSH 4.3: 1 de febrero de 2006</li>
+<li>OpenSSH 4.2: 1 de septiembre de 2005</li>
+<li>OpenSSH 4.1: 26 de mayo de 2005</li>
+<li>OpenSSH 4.0: 9 de marzo de 2005</li>
+<li>OpenSSH 3.9: 17 de agosto de 2004</li>
+<li>OpenSSH 3.8: 24 de febrero de 2004</li>
+<li>OpenSSH 3.7.1: 16 de septiembre de 2003</li>
+<li>OpenSSH 3.7: 16 de septiembre de 2003</li>
+<li>OpenSSH 3.6.1: 1 de abril de 2003</li>
+<li>OpenSSH 3.6: 31 de marzo de 2003</li>
+<li>OpenSSH 3.5: 14 de octubre de 2002</li>
+<li>OpenSSH 3.4: 26 de junio de 2002</li>
+</ul>
+<h2><span class="mw-headline" id="Portabilidad">Portabilidad</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=OpenSSH&amp;action=edit&amp;section=2" title="Editar sección: Portabilidad">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Como OpenSSH es una <a href="/wiki/Aplicaci%C3%B3n_(inform%C3%A1tica)" class="mw-redirect" title="Aplicación (informática)">aplicación</a> de comunicación entre <a href="/wiki/Ordenador" class="mw-redirect" title="Ordenador">ordenadores</a>, debe funcionar en la mayor cantidad de <a href="/wiki/Sistema_Operativo" class="mw-redirect" title="Sistema Operativo">sistemas operativos</a> posibles, para lo que existe un equipo, llamado OpenSSH Portability Team que se responsabiliza de añadir el código necesario para portar el <a href="/wiki/Software" title="Software">software</a> a todas las plataformas posibles.</p>
+<h2><span class="mw-headline" id="Aplicaciones_incluidas">Aplicaciones incluidas</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=OpenSSH&amp;action=edit&amp;section=3" title="Editar sección: Aplicaciones incluidas">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>La <i>suite</i> OpenSSH incluye:</p>
+<ul>
+<li><i>ssh</i>, reemplaza a <a href="/wiki/Rlogin" title="Rlogin">rlogin</a> y <a href="/wiki/Telnet" title="Telnet">telnet</a> para permitir <a href="/w/index.php?title=Shell_(computing)&amp;action=edit&amp;redlink=1" class="new" title="Shell (computing) (aún no redactado)">shell</a> el acceso remoto a otra máquina. <code>ssh tero@ejemplo.com</code></li>
+<li><i>scp</i>, reemplaza a <a href="/w/index.php?title=Rcp&amp;action=edit&amp;redlink=1" class="new" title="Rcp (aún no redactado)">rcp</a> <code>scp tero@ejemplo.com:~/archivo .</code></li>
+<li><i>sftp</i>, reemplaza a <a href="/wiki/Ftp" class="mw-redirect" title="Ftp">ftp</a> para copiar archivos entre dos computadoras <code>sftp tero@ejemplo.com</code></li>
+<li><i>sshd</i>, el servidor <a href="/wiki/Demonio_(inform%C3%A1tica)" title="Demonio (informática)">demonio</a> SSH <code>sshd</code></li>
+<li><i>ssh-keygen</i>, una herramienta para inspeccionar y generar claves <a href="/wiki/RSA" title="RSA">RSA</a> y <a href="/wiki/Digital_Signature_Algorithm" class="mw-redirect" title="Digital Signature Algorithm">DSA</a> que son usadas para la <a href="/wiki/Autenticaci%C3%B3n" title="Autenticación">autenticación</a> del cliente o usuario.</li>
+<li><i>ssh-agent y ssh-add</i>, herramientas para autenticarse de manera más fácil, manteniendo las claves listas para no tener que volver a introducir la frase de acceso cada vez que utilice la clave.</li>
+<li><i>ssh-keyscan</i>, que escanea una lista de clientes y recolecta sus claves públicas.</li>
+</ul>
+<p>El servidor OpenSSH puede autenticar a los usuarios mediante todos los métodos estándar del protocolo <a href="/wiki/Ssh" class="mw-redirect" title="Ssh">ssh</a></p>
+<h2><span id="T.C3.BAneles_seguros"></span><span class="mw-headline" id="Túneles_seguros">Túneles seguros</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=OpenSSH&amp;action=edit&amp;section=4" title="Editar sección: Túneles seguros">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Muchas aplicaciones pueden ser securizadas con OpenSSH, haciendo de este sistema una potente alternativa para sistemas <a href="/wiki/Red_privada_virtual" title="Red privada virtual">VPN</a>.</p>
+<p>Cualquier aplicación que use conexiones por <a href="/wiki/TCP/IP" class="mw-redirect" title="TCP/IP">TCP</a> (preferiblemente con un sólo puerto tcp) puede ser utilizada a través de túnel seguro- Algunos ejemplos de aplicaciones fácilmente <i>tunelizables</i> son el <a href="/wiki/X_Window_System" class="mw-redirect" title="X Window System">X Window System</a>, <a href="/wiki/Http" class="mw-redirect" title="Http">http</a> usando un <a href="/wiki/Servidor_proxy" title="Servidor proxy">proxy</a> y <a href="/wiki/VNC" title="VNC">VNC</a>. El túnel para el X Window System se crea automáticamente entre dos ordenadores corriendo <a href="/wiki/Unix" title="Unix">Unix</a>, así que las aplicaciones con <a href="/wiki/Interfaz_gr%C3%A1fica_de_usuario" title="Interfaz gráfica de usuario">interfaces gráficas</a> pueden ser ejecutadas desde ordenadores remotos simplemente escribiendo sus nombres:</p>
+<pre>
+ ssh -Y tero@ejemplo.com
+ password:
+ $ xclock
+</pre>
+<p>Entre las aplicaciones cuya <i>tunelización</i> es posible, aunque compleja, se encuentran el <a href="/wiki/Ftp" class="mw-redirect" title="Ftp">ftp</a> (no es necesario, debido a la existencia de sftp) y <a href="/wiki/SMB" class="mw-disambig" title="SMB">SMB</a>.</p>
+<p>Algunas aplicaciones llaman a OpenSSH para crear el túnel, tales como <a href="/w/index.php?title=DistCC&amp;action=edit&amp;redlink=1" class="new" title="DistCC (aún no redactado)">DistCC</a>, <a href="/wiki/CVS" title="CVS">CVS</a>, <a href="/wiki/Rsync" title="Rsync">rsync</a> y <a href="/wiki/Fetchmail" title="Fetchmail">fetchmail</a>.</p>
+<p>Se pueden montar <a href="/wiki/Sistema_de_archivos" title="Sistema de archivos">sistemas de archivos</a> remotos a través de ssh usando <a href="/w/index.php?title=Shfs&amp;action=edit&amp;redlink=1" class="new" title="Shfs (aún no redactado)">shfs</a>, <a href="/w/index.php?title=Lufs&amp;action=edit&amp;redlink=1" class="new" title="Lufs (aún no redactado)">lufs</a> o <a href="/w/index.php?title=Podfuk&amp;action=edit&amp;redlink=1" class="new" title="Podfuk (aún no redactado)">podfuk</a>.</p>
+<h2><span id="Autenticaci.C3.B3n"></span><span class="mw-headline" id="Autenticación">Autenticación</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=OpenSSH&amp;action=edit&amp;section=5" title="Editar sección: Autenticación">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>El servidor OpenSSH autentica a los usuarios usando sus propios sistemas de autenticación, implementados en el propio software:</p>
+<ul>
+<li><a href="/wiki/Clave_p%C3%BAblica" class="mw-redirect" title="Clave pública">Clave pública</a> (id.rsa, authorized_keys)</li>
+<li><a href="/wiki/Contrase%C3%B1a" title="Contraseña">Contraseña</a></li>
+<li><a href="/wiki/Kerberos" title="Kerberos">Kerberos</a>/GSSAPI</li>
+</ul>
+<p>OpenSSH también puede usar <a href="/w/index.php?title=Pluggable_Authentication_Module&amp;action=edit&amp;redlink=1" class="new" title="Pluggable Authentication Module (aún no redactado)">PAM</a> para llevar a cabo la autenticación. PAM permite la selección de métodos de autenticación y su política en tiempo de ejecución, permitiendo métodos avanzados de autenticación tales como:</p>
+<ul>
+<li><a href="/w/index.php?title=OTPW&amp;action=edit&amp;redlink=1" class="new" title="OTPW (aún no redactado)">OTPW</a></li>
+<li><a href="/w/index.php?title=S/KEY&amp;action=edit&amp;redlink=1" class="new" title="S/KEY (aún no redactado)">S/KEY</a></li>
+<li><a href="/wiki/OPIE" class="mw-redirect" title="OPIE">OPIE</a></li>
+</ul>
+<p>Las versiones de OpenSSH más antiguas que la 3.7 deben ser ejecutadas como <a href="/wiki/Root" title="Root">root</a> siempre que el soporte PAM esté activado, ya que se requieren permisos de root para activar el PAM. Las versiones más recientes de OpenSSH permiten desactivar el uso de PAM estando en ejecución. Mediante este sistema usuarios normales pueden ejecutar instancias de sshd.</p>
+<h2><span class="mw-headline" id="Libros">Libros</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=OpenSSH&amp;action=edit&amp;section=6" title="Editar sección: Libros">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li>Michael Stahnke, <i><a rel="nofollow" class="external text" href="https://web.archive.org/web/20070609045205/http://www.apress.com/book/bookDisplay.html?bID=427">Pro OpenSSH.</a></i> (Inglés) <a href="/wiki/Especial:FuentesDeLibros/1590594762" class="internal mw-magiclink-isbn">ISBN 1-59059-476-2</a>.</li>
+<li>Daniel J. Barrett, Richard E. Silverman, and Robert G. Byrnes, <i><a rel="nofollow" class="external text" href="http://www.oreilly.com/catalog/sshtdg2/">SSH, The Secure Shell: The Definitive Guide, Second Edition.</a></i> <a href="/wiki/Especial:FuentesDeLibros/0596008953" class="internal mw-magiclink-isbn">ISBN 0-596-00895-3</a> (Inglés, primera edición <a href="/wiki/Especial:FuentesDeLibros/0596000111" class="internal mw-magiclink-isbn">ISBN 0-596-00011-1</a>).</li>
+</ul>
+<h2><span class="mw-headline" id="Referencias">Referencias</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=OpenSSH&amp;action=edit&amp;section=7" title="Editar sección: Referencias">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><a href="/wiki/Archivo:Heckert_GNU_white.svg" class="image" title="Ver el portal sobre Software libre"><img alt="Ver el portal sobre Software libre" src="//upload.wikimedia.org/wikipedia/commons/thumb/2/22/Heckert_GNU_white.svg/20px-Heckert_GNU_white.svg.png" width="20" height="20" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/2/22/Heckert_GNU_white.svg/30px-Heckert_GNU_white.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/2/22/Heckert_GNU_white.svg/40px-Heckert_GNU_white.svg.png 2x" data-file-width="535" data-file-height="523" /></a> <a href="/wiki/Portal:Software_libre" title="Portal:Software libre">Portal:Software libre</a>. Contenido relacionado con <b><a href="/w/index.php?title=Free_Software_Portal_Logo.svg&amp;action=edit&amp;redlink=1" class="new" title="Free Software Portal Logo.svg (aún no redactado)">Free Software Portal Logo.svg</a></b>.</li>
+</ul>
+<div class="listaref" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-1"><span class="mw-cite-backlink"><a href="#cite_ref-1">↑</a></span> <span class="reference-text">Freshmeat announcement: <a rel="nofollow" class="external text" href="http://freshmeat.net/projects/openssh/?branch_id=8267&amp;release_id=26745">Portable OpenSSH 1.0pre2</a></span></li>
+</ol>
+</div>
+<h2><span class="mw-headline" id="Enlaces_externos">Enlaces externos</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=OpenSSH&amp;action=edit&amp;section=8" title="Editar sección: Enlaces externos">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://web.archive.org/web/20081224023459/http://www.openssh.com/es/index.html">Página de OpenSSH</a> (Español)</li>
+<li><a rel="nofollow" class="external text" href="http://www.openssh.com/portable.html">Distribuciones portables</a> (Inglés)</li>
+<li><a rel="nofollow" class="external text" href="http://www.kootbox.com/component/option,com_remository/Itemid,27/func,fileinfo/id,15/">videotutorial de Open SSH</a> (Español)</li>
+</ul>
+
+
+<!-- 
+NewPP limit report
+Parsed by mw1250
+Cached time: 20180129142853
+Cache expiry: 3600
+Dynamic content: true
+CPU time usage: 0.388 seconds
+Real time usage: 0.482 seconds
+Preprocessor visited node count: 3219/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 10429/2097152 bytes
+Template argument size: 1863/2097152 bytes
+Highest expansion depth: 23/40
+Expensive parser function count: 0/500
+Lua time usage: 0.310/10.000 seconds
+Lua memory usage: 3 MB/50 MB
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  452.732      1 -total
+ 96.40%  436.454      1 Plantilla:Ficha_de_software
+ 95.51%  432.394      1 Plantilla:Ficha
+ 82.71%  374.476     15 Plantilla:Propiedad
+  9.58%   43.366     15 Plantilla:Reemplazar
+  8.49%   38.458      5 Plantilla:Y-e
+  6.19%   28.019      5 Plantilla:Desenlazar
+  2.84%   12.869      1 Plantilla:Fecha_de_lanzamiento
+  2.50%   11.332      1 Plantilla:Portal
+  2.19%    9.910      1 Plantilla:PortalIconos
+-->
+</div>
+<!-- Saved in parser cache with key eswiki:pcache:idhash:166719-0!canonical and timestamp 20180129142852 and revision id 103584508
+ -->
+<noscript><img src="//es.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" alt="" title="" width="1" height="1" style="border: none; position: absolute;" /></noscript></div>					<div class="printfooter">
+						Obtenido de «<a dir="ltr" href="https://es.wikipedia.org/w/index.php?title=OpenSSH&amp;oldid=103584508">https://es.wikipedia.org/w/index.php?title=OpenSSH&amp;oldid=103584508</a>»					</div>
+				<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="/wiki/Especial:Categor%C3%ADas" title="Especial:Categorías">Categorías</a>: <ul><li><a href="/wiki/Categor%C3%ADa:Berkeley_Software_Distribution" title="Categoría:Berkeley Software Distribution">Berkeley Software Distribution</a></li><li><a href="/wiki/Categor%C3%ADa:OpenBSD" title="Categoría:OpenBSD">OpenBSD</a></li><li><a href="/wiki/Categor%C3%ADa:Software_criptogr%C3%A1fico" title="Categoría:Software criptográfico">Software criptográfico</a></li><li><a href="/wiki/Categor%C3%ADa:Protocolos_de_Internet" title="Categoría:Protocolos de Internet">Protocolos de Internet</a></li><li><a href="/wiki/Categor%C3%ADa:Redes_inform%C3%A1ticas" title="Categoría:Redes informáticas">Redes informáticas</a></li><li><a href="/wiki/Categor%C3%ADa:Seguridad_inform%C3%A1tica" title="Categoría:Seguridad informática">Seguridad informática</a></li><li><a href="/wiki/Categor%C3%ADa:Acr%C3%B3nimos_de_inform%C3%A1tica" title="Categoría:Acrónimos de informática">Acrónimos de informática</a></li></ul></div><div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Categorías ocultas: <ul><li><a href="/wiki/Categor%C3%ADa:Wikipedia:Art%C3%ADculos_con_datos_locales" title="Categoría:Wikipedia:Artículos con datos locales">Wikipedia:Artículos con datos locales</a></li><li><a href="/wiki/Categor%C3%ADa:Wikipedia:P%C3%A1ginas_con_enlaces_m%C3%A1gicos_de_ISBN" title="Categoría:Wikipedia:Páginas con enlaces mágicos de ISBN">Wikipedia:Páginas con enlaces mágicos de ISBN</a></li></ul></div></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Menú de navegación</h2>
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Herramientas personales</h3>
+						<ul>
+							<li id="pt-anonuserpage">No has accedido</li><li id="pt-anontalk"><a href="/wiki/Especial:MiDiscusi%C3%B3n" title="Discusión sobre ediciones hechas desde esta dirección IP [n]" accesskey="n">Discusión</a></li><li id="pt-anoncontribs"><a href="/wiki/Especial:MisContribuciones" title="Una lista de modificaciones hechas desde esta dirección IP [y]" accesskey="y">Contribuciones</a></li><li id="pt-createaccount"><a href="/w/index.php?title=Especial:Crear_una_cuenta&amp;returnto=OpenSSH" title="Te recomendamos crear una cuenta e iniciar sesión; sin embargo, no es obligatorio">Crear una cuenta</a></li><li id="pt-login"><a href="/w/index.php?title=Especial:Entrar&amp;returnto=OpenSSH" title="Te recomendamos iniciar sesión, aunque no es obligatorio [o]" accesskey="o">Acceder</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Espacios de nombres</h3>
+						<ul>
+							<li id="ca-nstab-main" class="selected"><span><a href="/wiki/OpenSSH" title="Ver la página de contenido [c]" accesskey="c">Artículo</a></span></li><li id="ca-talk"><span><a href="/wiki/Discusi%C3%B3n:OpenSSH" rel="discussion" title="Discusión acerca del artículo [t]" accesskey="t">Discusión</a></span></li>						</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label">
+							<span>Variantes</span>
+						</h3>
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Vistas</h3>
+						<ul>
+							<li id="ca-view" class="collapsible selected"><span><a href="/wiki/OpenSSH">Leer</a></span></li><li id="ca-edit" class="collapsible"><span><a href="/w/index.php?title=OpenSSH&amp;action=edit" title="Editar esta página [e]" accesskey="e">Editar</a></span></li><li id="ca-history" class="collapsible"><span><a href="/w/index.php?title=OpenSSH&amp;action=history" title="Versiones anteriores de esta página [h]" accesskey="h">Ver historial</a></span></li>						</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 id="p-cactions-label"><span>Más</span></h3>
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Buscar</label>
+						</h3>
+						<form action="/w/index.php" id="searchform">
+							<div id="simpleSearch">
+								<input type="search" name="search" placeholder="Buscar en Wikipedia" title="Buscar en este wiki [f]" accesskey="f" id="searchInput"/><input type="hidden" value="Especial:Buscar" name="title"/><input type="submit" name="fulltext" value="Buscar" title="Busca páginas con este texto." id="mw-searchButton" class="searchButton mw-fallbackSearchButton"/><input type="submit" name="go" value="Ir" title="Ir a la página con este nombre exacto si existe" id="searchButton" class="searchButton"/>							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/Wikipedia:Portada"  title="Visitar la página principal"></a></div>
+						<div class="portal" role="navigation" id='p-navigation' aria-labelledby='p-navigation-label'>
+			<h3 id='p-navigation-label'>Navegación</h3>
+			<div class="body">
+								<ul>
+					<li id="n-mainpage-description"><a href="/wiki/Wikipedia:Portada" title="Visitar la página principal [z]" accesskey="z">Portada</a></li><li id="n-portal"><a href="/wiki/Portal:Comunidad" title="Acerca del proyecto, lo que puedes hacer, dónde encontrar información">Portal de la comunidad</a></li><li id="n-currentevents"><a href="/wiki/Portal:Actualidad" title="Encuentra información de contexto sobre acontecimientos actuales">Actualidad</a></li><li id="n-recentchanges"><a href="/wiki/Especial:CambiosRecientes" title="Lista de cambios recientes en el wiki [r]" accesskey="r">Cambios recientes</a></li><li id="n-newpages"><a href="/wiki/Especial:P%C3%A1ginasNuevas">Páginas nuevas</a></li><li id="n-randompage"><a href="/wiki/Especial:Aleatoria" title="Cargar una página al azar [x]" accesskey="x">Página aleatoria</a></li><li id="n-help"><a href="/wiki/Ayuda:Contenidos" title="El lugar para aprender">Ayuda</a></li><li id="n-sitesupport"><a href="//donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_es.wikipedia.org&amp;uselang=es" title="Apóyanos">Donaciones</a></li><li id="n-bug_in_article"><a href="/wiki/Wikipedia:Informes_de_error">Notificar un error</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-coll-print_export' aria-labelledby='p-coll-print_export-label'>
+			<h3 id='p-coll-print_export-label'>Imprimir/exportar</h3>
+			<div class="body">
+								<ul>
+					<li id="coll-create_a_book"><a href="/w/index.php?title=Especial:Libro&amp;bookcmd=book_creator&amp;referer=OpenSSH">Crear un libro</a></li><li id="coll-download-as-rdf2latex"><a href="/w/index.php?title=Especial:ElectronPdf&amp;page=OpenSSH&amp;action=show-download-screen">Descargar como PDF</a></li><li id="t-print"><a href="/w/index.php?title=OpenSSH&amp;printable=yes" title="Versión imprimible de esta página [p]" accesskey="p">Versión para imprimir</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-wikibase-otherprojects' aria-labelledby='p-wikibase-otherprojects-label'>
+			<h3 id='p-wikibase-otherprojects-label'>En otros proyectos</h3>
+			<div class="body">
+								<ul>
+					<li class="wb-otherproject-link wb-otherproject-commons"><a href="https://commons.wikimedia.org/wiki/Category:OpenSSH" hreflang="en">Wikimedia Commons</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-tb' aria-labelledby='p-tb-label'>
+			<h3 id='p-tb-label'>Herramientas</h3>
+			<div class="body">
+								<ul>
+					<li id="t-whatlinkshere"><a href="/wiki/Especial:LoQueEnlazaAqu%C3%AD/OpenSSH" title="Lista de todas las páginas del wiki que enlazan aquí [j]" accesskey="j">Lo que enlaza aquí</a></li><li id="t-recentchangeslinked"><a href="/wiki/Especial:CambiosEnEnlazadas/OpenSSH" rel="nofollow" title="Cambios recientes en las páginas que enlazan con esta [k]" accesskey="k">Cambios en enlazadas</a></li><li id="t-upload"><a href="//commons.wikimedia.org/wiki/Special:UploadWizard?uselang=es" title="Subir archivos [u]" accesskey="u">Subir archivo</a></li><li id="t-specialpages"><a href="/wiki/Especial:P%C3%A1ginasEspeciales" title="Lista de todas las páginas especiales [q]" accesskey="q">Páginas especiales</a></li><li id="t-permalink"><a href="/w/index.php?title=OpenSSH&amp;oldid=103584508" title="Enlace permanente a esta versión de la página">Enlace permanente</a></li><li id="t-info"><a href="/w/index.php?title=OpenSSH&amp;action=info" title="Más información sobre esta página">Información de la página</a></li><li id="t-wikibase"><a href="https://www.wikidata.org/wiki/Special:EntityPage/Q847062" title="Enlace al elemento conectado del repositorio de datos [g]" accesskey="g">Elemento de Wikidata</a></li><li id="t-cite"><a href="/w/index.php?title=Especial:Citar&amp;page=OpenSSH&amp;id=103584508" title="Información sobre cómo citar esta página">Citar esta página</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-lang' aria-labelledby='p-lang-label'>
+			<h3 id='p-lang-label'>En otros idiomas</h3>
+			<div class="body">
+								<ul>
+					<li class="interlanguage-link interwiki-ar"><a href="https://ar.wikipedia.org/wiki/%D8%A3%D9%88%D8%A8%D9%86_%D8%A5%D8%B3_%D8%A5%D8%B3_%D8%A5%D8%AA%D8%B4" title="أوبن إس إس إتش (árabe)" lang="ar" hreflang="ar" class="interlanguage-link-target">العربية</a></li><li class="interlanguage-link interwiki-bs"><a href="https://bs.wikipedia.org/wiki/OpenSSH" title="OpenSSH (bosnio)" lang="bs" hreflang="bs" class="interlanguage-link-target">Bosanski</a></li><li class="interlanguage-link interwiki-cs"><a href="https://cs.wikipedia.org/wiki/OpenSSH" title="OpenSSH (checo)" lang="cs" hreflang="cs" class="interlanguage-link-target">Čeština</a></li><li class="interlanguage-link interwiki-de"><a href="https://de.wikipedia.org/wiki/OpenSSH" title="OpenSSH (alemán)" lang="de" hreflang="de" class="interlanguage-link-target">Deutsch</a></li><li class="interlanguage-link interwiki-en"><a href="https://en.wikipedia.org/wiki/OpenSSH" title="OpenSSH (inglés)" lang="en" hreflang="en" class="interlanguage-link-target">English</a></li><li class="interlanguage-link interwiki-fa"><a href="https://fa.wikipedia.org/wiki/%D8%A7%D9%88%D9%BE%D9%86%E2%80%8C%D8%A7%D8%B3%E2%80%8C%D8%A7%D8%B3%E2%80%8C%D8%A7%DA%86" title="اوپن‌اس‌اس‌اچ (persa)" lang="fa" hreflang="fa" class="interlanguage-link-target">فارسی</a></li><li class="interlanguage-link interwiki-fr"><a href="https://fr.wikipedia.org/wiki/OpenSSH" title="OpenSSH (francés)" lang="fr" hreflang="fr" class="interlanguage-link-target">Français</a></li><li class="interlanguage-link interwiki-he"><a href="https://he.wikipedia.org/wiki/OpenSSH" title="OpenSSH (hebreo)" lang="he" hreflang="he" class="interlanguage-link-target">עברית</a></li><li class="interlanguage-link interwiki-it"><a href="https://it.wikipedia.org/wiki/OpenSSH" title="OpenSSH (italiano)" lang="it" hreflang="it" class="interlanguage-link-target">Italiano</a></li><li class="interlanguage-link interwiki-ja"><a href="https://ja.wikipedia.org/wiki/OpenSSH" title="OpenSSH (japonés)" lang="ja" hreflang="ja" class="interlanguage-link-target">日本語</a></li><li class="interlanguage-link interwiki-ka"><a href="https://ka.wikipedia.org/wiki/OpenSSH" title="OpenSSH (georgiano)" lang="ka" hreflang="ka" class="interlanguage-link-target">ქართული</a></li><li class="interlanguage-link interwiki-ko"><a href="https://ko.wikipedia.org/wiki/%EC%98%A4%ED%94%88SSH" title="오픈SSH (coreano)" lang="ko" hreflang="ko" class="interlanguage-link-target">한국어</a></li><li class="interlanguage-link interwiki-lv"><a href="https://lv.wikipedia.org/wiki/OpenSSH" title="OpenSSH (letón)" lang="lv" hreflang="lv" class="interlanguage-link-target">Latviešu</a></li><li class="interlanguage-link interwiki-nl"><a href="https://nl.wikipedia.org/wiki/OpenSSH" title="OpenSSH (neerlandés)" lang="nl" hreflang="nl" class="interlanguage-link-target">Nederlands</a></li><li class="interlanguage-link interwiki-no"><a href="https://no.wikipedia.org/wiki/OpenSSH" title="OpenSSH (noruego)" lang="no" hreflang="no" class="interlanguage-link-target">Norsk</a></li><li class="interlanguage-link interwiki-pl"><a href="https://pl.wikipedia.org/wiki/OpenSSH" title="OpenSSH (polaco)" lang="pl" hreflang="pl" class="interlanguage-link-target">Polski</a></li><li class="interlanguage-link interwiki-pt"><a href="https://pt.wikipedia.org/wiki/OpenSSH" title="OpenSSH (portugués)" lang="pt" hreflang="pt" class="interlanguage-link-target">Português</a></li><li class="interlanguage-link interwiki-ru"><a href="https://ru.wikipedia.org/wiki/OpenSSH" title="OpenSSH (ruso)" lang="ru" hreflang="ru" class="interlanguage-link-target">Русский</a></li><li class="interlanguage-link interwiki-sh"><a href="https://sh.wikipedia.org/wiki/OpenSSH" title="OpenSSH (serbocroata)" lang="sh" hreflang="sh" class="interlanguage-link-target">Srpskohrvatski / српскохрватски</a></li><li class="interlanguage-link interwiki-sk"><a href="https://sk.wikipedia.org/wiki/OpenSSH" title="OpenSSH (eslovaco)" lang="sk" hreflang="sk" class="interlanguage-link-target">Slovenčina</a></li><li class="interlanguage-link interwiki-sr"><a href="https://sr.wikipedia.org/wiki/OpenSSH" title="OpenSSH (serbio)" lang="sr" hreflang="sr" class="interlanguage-link-target">Српски / srpski</a></li><li class="interlanguage-link interwiki-sv"><a href="https://sv.wikipedia.org/wiki/OpenSSH" title="OpenSSH (sueco)" lang="sv" hreflang="sv" class="interlanguage-link-target">Svenska</a></li><li class="interlanguage-link interwiki-uk"><a href="https://uk.wikipedia.org/wiki/OpenSSH" title="OpenSSH (ucraniano)" lang="uk" hreflang="uk" class="interlanguage-link-target">Українська</a></li><li class="interlanguage-link interwiki-vi"><a href="https://vi.wikipedia.org/wiki/OpenSSH" title="OpenSSH (vietnamita)" lang="vi" hreflang="vi" class="interlanguage-link-target">Tiếng Việt</a></li><li class="interlanguage-link interwiki-zh"><a href="https://zh.wikipedia.org/wiki/OpenSSH" title="OpenSSH (chino)" lang="zh" hreflang="zh" class="interlanguage-link-target">中文</a></li>				</ul>
+				<div class="after-portlet after-portlet-lang"><span class="wb-langlinks-edit wb-langlinks-link"><a href="https://www.wikidata.org/wiki/Special:EntityPage/Q847062#sitelinks-wikipedia" title="Editar enlaces interlingüísticos" class="wbc-editpage">Editar enlaces</a></span></div>			</div>
+		</div>
+				</div>
+		</div>
+				<div id="footer" role="contentinfo">
+						<ul id="footer-info">
+								<li id="footer-info-lastmod"> Se editó esta página por última vez el 21 nov 2017 a las 09:29.</li>
+								<li id="footer-info-copyright">El texto está disponible bajo la <a rel="license" href="//es.wikipedia.org/wiki/Wikipedia:Texto_de_la_Licencia_Creative_Commons_Atribuci%C3%B3n-CompartirIgual_3.0_Unported">Licencia Creative Commons Atribución Compartir Igual 3.0</a><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" style="display:none;"></a>;
+pueden aplicarse cláusulas adicionales. Al usar este sitio, usted acepta nuestros <a href="//wikimediafoundation.org/wiki/Terms_of_Use">términos de uso</a> y nuestra <a href="//wikimediafoundation.org/wiki/Privacy_policy">política de privacidad</a>. <br/>Wikipedia&reg; es una marca registrada de la <a href="//www.wikimediafoundation.org/">Fundación Wikimedia, Inc.</a>, una organización sin ánimo de lucro.</li>
+							</ul>
+						<ul id="footer-places">
+								<li id="footer-places-privacy"><a href="https://meta.wikimedia.org/wiki/Privacy_policy/es" class="extiw" title="m:Privacy policy/es">Normativa de privacidad</a></li>
+								<li id="footer-places-about"><a href="/wiki/Wikipedia:Acerca_de" title="Wikipedia:Acerca de">Acerca de Wikipedia</a></li>
+								<li id="footer-places-disclaimer"><a href="/wiki/Wikipedia:Limitaci%C3%B3n_general_de_responsabilidad" title="Wikipedia:Limitación general de responsabilidad">Limitación de responsabilidad</a></li>
+								<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Desarrolladores</a></li>
+								<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement/es">Declaración de cookies</a></li>
+								<li id="footer-places-mobileview"><a href="//es.m.wikipedia.org/w/index.php?title=OpenSSH&amp;mobileaction=toggle_view_mobile" class="noprint stopMobileRedirectToggle">Versión para móviles</a></li>
+							</ul>
+										<ul id="footer-icons" class="noprint">
+										<li id="footer-copyrightico">
+						<a href="https://wikimediafoundation.org/"><img src="/static/images/wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" width="88" height="31" alt="Wikimedia Foundation"/></a>					</li>
+										<li id="footer-poweredbyico">
+						<a href="//www.mediawiki.org/"><img src="/static/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" width="88" height="31"/></a>					</li>
+									</ul>
+						<div style="clear: both;"></div>
+		</div>
+		<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.388","walltime":"0.482","ppvisitednodes":{"value":3219,"limit":1000000},"ppgeneratednodes":{"value":0,"limit":1500000},"postexpandincludesize":{"value":10429,"limit":2097152},"templateargumentsize":{"value":1863,"limit":2097152},"expansiondepth":{"value":23,"limit":40},"expensivefunctioncount":{"value":0,"limit":500},"entityaccesscount":{"value":1,"limit":400},"timingprofile":["100.00%  452.732      1 -total"," 96.40%  436.454      1 Plantilla:Ficha_de_software"," 95.51%  432.394      1 Plantilla:Ficha"," 82.71%  374.476     15 Plantilla:Propiedad","  9.58%   43.366     15 Plantilla:Reemplazar","  8.49%   38.458      5 Plantilla:Y-e","  6.19%   28.019      5 Plantilla:Desenlazar","  2.84%   12.869      1 Plantilla:Fecha_de_lanzamiento","  2.50%   11.332      1 Plantilla:Portal","  2.19%    9.910      1 Plantilla:PortalIconos"]},"scribunto":{"limitreport-timeusage":{"value":"0.310","limit":"10.000"},"limitreport-memusage":{"value":3142061,"limit":52428800}},"cachereport":{"origin":"mw1250","timestamp":"20180129142853","ttl":3600,"transientcontent":true}}});});</script><script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":562,"wgHostname":"mw1250"});});</script>
+	</body>
+</html>

@@ -1,0 +1,27 @@
+
+I have run into this very problem in my professional life. We used timestamp + random number and ran into serious issues when our applications scaled up (more clients, more servers, more requests). Granted, we (stupidly) used only 4 digits, and then change to 6, but you would be surprised how often that the errors still happen.
+
+Over a long enough period of time, you are guaranteed to get duplicate key errors. Our application is mission critical, and therefore even the smallest chance it could fail to due inherently random behavior was unacceptable. We started using UUIDs to avoid this issue, and carefully managed their creation.
+
+Using UUIDs, your index size will increase, and a larger index will result in poorer performance (perhaps unnoticeable, but poorer none-the-less).
+
+** However MySQL supports a native UUID type (never use varchar as a primary key!!), and can handle indexing, searching,etc pretty damn efficiently even compared to bigint.
+
+The biggest performance hit to your index is almost always the number of rows indexed, rather than the size of the item being index (unless you want to index on a longtext or something ridiculous like that).
+
+To answer your question:
+Bigint (with random numbers attached) will be ok if you do not plan on scaling your application/service significantly. If your code can handle the change without much alteration and your application will not explode if a duplicate key error occurs, go with it. Otherwise, bite-the-bullet and go for the more substantial option.
+
+Usar BINARY(16) en MySQL
+
+
+-----------------------
+Otra respuesta:
+
+Use the GUID as a unique index, but also calculate a 64-bit (BIGINT) hash of the GUID, store that in a separate NOT UNIQUE column, and index it. To retrieve, query for a match to both columns - the 64-bit index should make this efficient.
+
+What is good about this is that the hash:
+a. Does not have to be unique.
+b. Is likely to be well-distributed.
+
+The cost: extra 8-byte column and its index.

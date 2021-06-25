@@ -1,0 +1,95 @@
+
+*** POSSIBLE PROJECT STRUCTURE ***
+
+*here we see MVC separation, ordered by kind of hierarchy, inner types are used by the nearest outer type.
+
+Views
+Controller (could return a DTO, not Entities) (controller should use services, being just the entry point)
+	Service (service uses repos or daos)
+		Repository or Dao (repositories uses daos (to conform DTOs also), and represent more complex objects, domain/business objects)
+			Dao (one for each entity)
+				Entity (Bean concept in Java)
+			Dto
+
+
+.PACKAGES STRUCTURE:
+commons
+	.dto //to being able to serialize as they use same f.q.c.n in all projects
+	.misc
+	.other
+configuration
+	.cache
+		.local
+	.datasource
+	.retrytemplate
+	.security
+		.httpfilter
+	.smtp
+	.swagger
+	.threadpool
+	InitialConditionsConfig
+misc (Utils and unclassified)
+model
+	.dto
+	.persistence
+		.repository
+		.dao
+		.entity
+service
+--> then choose between:
+view (xml,fxml,etc)
+controller
+	.rest
+OR
+view
+	.views (xml,fxml,etc)
+	.controller
+		.rest (una vez se vió que rest controllers eran parte de la vista)
+
+::we can use in each one, if it applies, a folder named impl and/or interface.
+	MyClassImpl or MyClass, IMyClass
+
+
+.HIERARCHY OF USAGE:
+view <-> controller -> model
+
+model.
+repositories
+	daos
+  	    entities
+	dtos
+
+
+-----------------------------	
+
+
+La vista usa los Controllers
+Los Controllers usan los Services
+La capa de servicio, como su nombre lo indica, ofrece servicios a las diferentes aplicaciones de tu sistema (web, móvil, etc.).. 
+Esta usa repository-layer o DAO-layer.
+.repository-layer es una capa superior a la DAO-layer, usa DAOs para formar objetos de dominio y no trabajar con entidades propiamente.
+.Los DAOs acceden a los objetos tal como se guardan en la bbdd, los Entities.
+.Los DTOs son objetos a enviar en requests.
+.Los DomainObjects son objetos que engloban varios Entities, pueden ser vistos como DTOs.
+
+
+SOBRE EL PROYECTO DEL TUTORIAL DONDE APRENDÍ ESO:
+
+*** crea una capa de servicio, una clase por ej. ReservationService, este utiliza entities de diferentes tipos (guest, room, reservation), por lo que dice que deberíamos crear un domain object (objeto del dominio del negocio: RoomReservation), el cual es una combinación de las entidades participantes en el servicio y getters/setters ( la reservación tiene atributos de guest, room y reservation(date) ). ReservationService es quien sirve a las apps o a los controladores de la vista por ej. (ReservationService a ReservationController).
+
+*** the service layer may benefit you when your application serves different kinds of clients (web, mobile, desktop, etc).
+
+*** Controller is the main abstraction in the SpringMVC implementation.
+The request dispatcher responds to all request through a RequestMapping.
+ReservationController @Controller @RequestMapping("/url")
+ 
+web.application class ReservationController se encarga de manejar una vista. Contendrá funciones para una vista determinada, manejando métodos HTTP y usando el ThymeLeaf rendering engine entrega una vista html (guardar en templates) con sólo devolver el nombre de esta.
+
+*** Con Bootstrap hizo toda la parte visual
+
+*** iba a usar inMemoryDB, pero me arroja errores al crear la relación entre tablas, y en MySQL no da esos errores.
+
+*** @Autowired sobre constructor, método o atributo(este último en caso de que sea un Controller de vista porque dice que ocurren errores al seguir la especificación de un bean o algo así).
+
+
+

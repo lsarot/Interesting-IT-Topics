@@ -1,0 +1,54 @@
+SECURING ANDROID APP
+
+Here are few methods you can try:
+
+    .Use obfuscation and tools like ProGuard.
+    .Encrypt some part of source and data.
+    .Use a proprietary inbuilt checksum in the app to detect tampering.
+    .Introduce code to avoid loading in a debugger, that is, let the app have the ability to detect the debugger and exit / kill the debugger.
+    .Separate the authentication as an online service.
+    .Use application diversity
+    .Use the finger printing technique for e.g., hardware signatures of the devices from different subsystem before authenticating the device.
+    .Use ProGuard (Android), DexGuard (Android), DexProtector (Android & IOS), DashO (Java & Android)
+
+------------------------------
+
+At no point in the history of computing has it ever been possible to prevent reverse-engineering of software when you give a working copy of it to your attacker. Also, in most likelihood, it never will be possible.
+
+With that understood, there is an obvious solution: don't give your secrets to your attacker. While you can't protect the contents of your APK, what you can protect is anything you don't distribute. Typically this is server-side software used for things like activation, payments, rule-enforcement, and other juicy bits of code. You can protect valuable assets by not distributing them in your APK. Instead, set up a server that responds to requests from your app, "uses" the assets (whatever that might mean) and then sends the result back to the app. If this model doesn't work for the assets you have in mind, then you may want to re-think your strategy.
+
+Also, if your primary goal is to prevent app piracy: don't even bother. You've already burned more time and money on this problem than any anti-piracy measure could possibly ever hope to save you. The return on investment for solving this problem is so low that it doesn't make sense to even think about it.
+
+------------------------------
+
+    1. First rule of app security: Any machine to which an attacker gains unrestricted physical or electronic access now belongs to your attacker, regardless of where it actually is or what you paid for it.
+
+    2. Second rule of app security: Any software that leaves the physical boundaries inside which an attacker cannot penetrate now belongs to your attacker, regardless of how much time you spent coding it.
+
+    3. Third rule: Any information that leaves those same physical boundaries that an attacker cannot penetrate now belongs to your attacker, no matter how valuable it is to you.
+
+The foundations of information technology security are based on these three fundamental principles; the only truly secure computer is the one locked in a safe, inside a Farraday cage, inside a steel cage. There are computers that spend most of their service lives in just this state; once a year (or less), they generate the private keys for trusted root certification authorities (in front of a host of witnesses with cameras recording every inch of the room in which they are located).
+
+Now, most computers are not used under these types of environments; they're physically out in the open, connected to the Internet over a wireless radio channel. In short, they're vulnerable, as is their software. They are therefore not to be trusted. There are certain things that computers and their software must know or do in order to be useful, but care must be taken to ensure that they can never know or do enough to cause damage (at least not permanent damage outside the bounds of that single machine).
+
+You already knew all this; that's why you're trying to protect the code of your application. But, therein lies the first problem; obfuscation tools can make the code a mess for a human to try to dig through, but the program still has to run; that means the actual logic flow of the app and the data it uses are unaffected by obfuscation. Given a little tenacity, an attacker can simply un-obfuscate the code, and that's not even necessary in certain cases where what he's looking at can't be anything else but what he's looking for.
+
+Instead, you should be trying to ensure that an attacker cannot do anything with your code, no matter how easy it is for him to obtain a clear copy of it. That means, no hard-coded secrets, because those secrets aren't secret as soon as the code leaves the building in which you developed it.
+
+These key-values you have hard-coded should be removed from the application's source code entirely. Instead, they should be in one of three places; volatile memory on the device, which is harder (but still not impossible) for an attacker to obtain an offline copy of; permanently on the server cluster, to which you control access with an iron fist; or in a second data store unrelated to your device or servers, such as a physical card or in your user's memories (meaning it will eventually be in volatile memory, but it doesn't have to be for long).
+
+Consider the following scheme. The user enters their credentials for the app from memory into the device. You must, unfortunately, trust that the user's device is not already compromised by a keylogger or Trojan; the best you can do in this regard is to implement multi-factor security, by remembering hard-to-fake identifying information about the devices the user has used (MAC/IP, IMEI, etc), and providing at least one additional channel by which a login attempt on an unfamiliar device can be verified.
+
+The credentials, once entered, are obfuscated by the client software (using a secure hash), and the plain-text credentials discarded; they have served their purpose. The obfuscated credentials are sent over a secure channel to the certificate-authenticated server, which hashes them again to produce the data used to verify the validity of the login. This way, the client never knows what is actually compared to the database value, the app server never knows the plaintext credentials behind what it receives for validation, the data server never knows how the data it stores for validation is produced, and a man in the middle sees only gibberish even if the secure channel were compromised.
+
+Once verified, the server transmits back a token over the channel. The token is only useful within the secure session, is composed of either random noise or an encrypted (and thus verifiable) copy of the session identifiers, and the client application must send this token on the same channel to the server as part of any request to do something. The client application will do this many times, because it can't do anything involving money, sensitive data, or anything else that could be damaging by itself; it must instead ask the server to do this task. The client application will never write any sensitive information to persistent memory on the device itself, at least not in plain text; the client can ask the server over the secure channel for a symmetric key to encrypt any local data, which the server will remember; in a later session the client can ask the server for the same key to decrypt the data for use in volatile memory. That data won't be the only copy, either; anything the client stores should also be transmitted in some form to the server.
+
+Obviously, this makes your application heavily dependent on Internet access; the client device cannot perform any of its basic functions without proper connection to and authentication by the server. No different than Facebook, really.
+
+Now, the computer that the attacker wants is your server, because it and not the client app/device is the thing that can make him money or cause other people pain for his enjoyment. That's OK; you get much more bang for your buck spending money and effort to secure the server than in trying to secure all the clients. The server can be behind all kinds of firewalls and other electronic security, and additionally can be physically secured behind steel, concrete, keycard/pin access, and 24-hour video surveillance. Your attacker would need to be very sophisticated indeed to gain any kind of access to the server directly, and you would (should) know about it immediately.
+
+The best an attacker can do is steal a user's phone and credentials and log in to the server with the limited rights of the client. Should this happen, just like losing a credit card, the legitimate user should be instructed to call an 800 number (preferably easy to remember, and not on the back of a card they'd carry in their purse, wallet or briefcase which could be stolen alongside the mobile device) from any phone they can access that connects them directly to your customer service. They state their phone was stolen, provide some basic unique identifier, and the account is locked, any transactions the attacker may have been able to process are rolled back, and the attacker is back to square one.
+
+
+
+

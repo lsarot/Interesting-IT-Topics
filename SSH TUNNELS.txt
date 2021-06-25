@@ -1,0 +1,44 @@
+SSH TUNNELS
+
+
+PC1	--------------- PC2 ---------------- PC3
+        IP12:P22            IP23:P100
+
+
+1 si tiene acceso a 2
+2 si tiene acceso a 3
+1 no tiene acceso a 3
+
+
+- Hacemos conexión ssh entre 1 y 2 con Putty
+
+- Configuramos un tunnel, que funcionará cuando esta conexión 1-2 esté activa.
+Tunnel: Lxyz     IP23:P100
+
+- Al conectarme con 1 a localhost:xyz, la petición irá a 2, el cual la hará a 3 (IP23:P100).
+
+
+
+Ejemplo real:
+
+PCLSO no tiene acceso a IPs de Orange, pero HPGateway sí.
+
+HPGW tiene una página donde muestra los túneles creados (HOGW:80/tunnels).
+ie.                 listen		dest.Host	dest.Port
+1	GirosB	INT		15600		 A.B.C.D 	   100
+
+Esto se lee, que si nos conectamos a HOGW:15600 se redirige a A.B.C.D:100
+Entonces la conexión en PCLSO la hacemos hacia HPGW:15600, para acceder a A.B.C.D:100
+
+
+Si no tuvieramos hechos los túneles en HPGW, podemos hacerlos nosotros.
+Configuramos un túnel asociado a la conexión PCLSO - HPGW:port
+ie. LXY 	A.B.C.D:100
+
+Cualquier petición a localhost:XY, viajará a HPGW:port, y será retransmitida a A.B.C.D:100
+
+En este caso, la conexión en PCLSO la hacemos hacia localhost:XY.
+
+En este escenario que creamos los túneles nosotros, XY puede ser cualquier puerto.
+
+

@@ -1,0 +1,224 @@
+
+------------------------------------------------- TIPOS DE CACHÉ:
+
+-LOCAL O EN PROCESO
+	.comparten el mismo espacio dinámico de memoria. Ejemplos de este tipo de caché Guava, Cache2k, Caffeine, EhCache (EhCache acepta modo distribuido), etc.
+	.son librerías para un lenguaje específico.
+-SISTEMAS DISTRIBUIDOS
+	.puede estar desplegada en uno o varios nodos formando una gran caché lógica, puede ser externa a la aplicación o interna. Ejemplos de este tipo encontramos, por ejemplo, Redis, MongoDB in Memory, Memcached, etc.
+	.no aplican para un lenguaje específico
+
+Una caché local (cache2k, caffeine, guava, etc) comparte el espacio de memoria con mi aplicación, es una librería.
+Estas tienen la ventaja de poder guardar objetos de cualquier complejidad para el lenguaje usado, pero la desventaja de ie. depender del garbage collector para su gestión de memoria, además de que no podemos tomar cientos de GB de ram para la aplicación y que no se vea afectado el rendimiento del sistema.
+Una caché distribuida (redis, hazelcast, ehcache, etc) funciona en un nodo o cluster aparte (al menos una app aparte), y permite manejar grandes cantidades de datos en memoria.
+Estas tienen la ventaja de servir para múltiples lenguajes, pero no podemos almacenar directamente objetos de un lenguaje particular (convertir a json quizás no sea lo más eficiente), pero existen librerías para lenguajes que ya permiten manejar ciertos tipos de objetos complejos, ie. Redisson, Lettuce, Jedis, etc.
+
+
+------------------------------------------------- LOCALES O EN PROCESO
+
+En un benchmark: // https://cruftex.net/2017/09/01/Java-Caching-Benchmarks-Part-3.html
+1.Cache2k
+2.Caffeine
+3.Google Guava
+4.EhCache2 (muy inferior)
+
+LevelDB (key-value disk storage lib.) //Google proporciona comparación de prestaciones entre LevelDB y SQLite y Kyoto Cabinet en distintos escenarios.2​ LevelDB mejora SQLite y Kyoto Cabinet en operaciones de escritura y en lecturas secuenciales. LevelDB también las supera en escrituras por lotes, pero es más lenta que SQLite cuando maneja valores grandes (entradas de 100KB en el benchmark).
+		//LevelDB, SQLite3, Kyoto TreeDB benchmark:   http://www.lmdb.tech/bench/microbench/benchmark.html
+
+
+------------------------------------------------- DISTRIBUIDAS
+
+:::::::: REDIS ::::::::
+
+Remote Dictionary Server
+Redis, de Redis Lab, es un sistema de almacenamiento de estructura de datos en memoria de código abierto. Suele usarse como:
+	Caché de fragmentos de una web, sesiones de usuario, de base de datos, contadores, etc.
+	Base de datos
+	Broker de mensajería
+
+Según el ranking de db-engines, Redis es la BBDD más popular entre las clave-valor, la tercera entre las NoSQL, y la décima en el ranking global, que incluye también a las bases de datos relacionales.
+En sus inicios, haciendo honor a su nombre, fuese un simple diccionario remoto (REmote DIctionary Server).
+ElastiCache es el servicio gestionado de Redis en AWS.
+
+Tipo de caché:
+	caché para sistemas distribuidos y desacoplada de la aplicación.
+Tipos de datos:
+	strings, hashes, listas, sets, mapas de bits, índices geoespaciales, etc.
+Replicación/escalado:
+	incorpora replicación con replicación maestro-esclavo trivial a la configuración, con primera sincronización rápida sin bloqueo, autoconexión con resincronización parcial en la división de red.
+Alta disponibilidad:
+	soporta alta disponibilidad a través de Redis Sentinel y particiones automáticas con Redis Cluster.
+Cloud:
+	soporte cloud con un alto rendimiento garantizado, escalabilidad sin esfuerzo y características robustas de alta disponibilidad que incluyen persistencia, replicación crosszone/region/datacenter y failover automático instantáneo, sin pérdida de datos. Disponible en Openshift, Amazon Web Services, Microsoft Azure, Google Cloud Platform, IBM SoftLayer, Heroku, Pivotal Web Services, etc.
+Seguridad:
+	soporta autenticación básica, pero no encriptación de datos.
+Redis no ofrece características de near cache, pero desde Redis recomiendan su implementación mediante la librería Redisson.
+
+
+Comparando 2 librerías Java para Redis: https://redisson.org/feature-comparison-redisson-vs-jedis.html
+
+
+Redis benefits over EhCache(in distributed conf):
+    -It uses time proven gossip protocol for Node discovery and synchronization.
+    -Availability of fully managed services like AWS ElastiCache, Azure Redis Cache. Such services offers full automation, support and management of Redis, so developers can focus on their applications and not maintaining their databases.
+    -Correct large memory amount handling (we all know that Redis can manage with hundreds of gigabytes of RAM on single machine). It does not have problems with Garbage collection like Java.
+And finally existence of Java Developer friendly Redis client - Redisson.
+Redisson provides many Java friendly objects on top of Redis, like:
+    Set, ConcurrentMap, List, Queue, Deque, BlockingQueue, BlockingDeque, ReadWriteLock, Semaphore, Lock, AtomicLong, CountDownLatch, Publish / Subscribe, ExecutorService
+    and many more...
+Redisson supports local cache for Map structure which cold give you 45x performance boost for read operations.
+
+I ended up using Redis and later switched to Hazelcast (I find redisson similar to hazelcast though - support of java friendly objects etc).
+
+Redis macOS server on Applications folder, type:
+	src/redis-server (boostrap server)
+	src/redis-cli (cli client)
+
+Redis alcanzó un hito importante con la versión 5.0, que incluye diversos avances y mejoras. Lo importante aquí es la presentación de Streams, la primera estructura de datos totalmente nueva en Redis desde HyperLogLog. Esta versión también presenta más comandos para conjuntos ordenados y nuevas capacidades para API de módulos.
+	HyperLogLogs: una estructura de datos probabilísticos para estimar los elementos únicos en un conjunto de datos.
+
+Redis simplifica el manejo de estructuras de datos, a diferencia de cachés key-value más simplistas.
+
+Elasticache (AWS Redis|Memcached).
+
+https://aws.amazon.com/es/redis/
+https://aws.amazon.com/es/elasticache/redis-vs-memcached/?nc=sn&loc=3&dn=3
+https://aws.amazon.com/es/elasticache/what-is-redis/
+https://www.amazonaws.cn/en/elasticache/
+https://aws.amazon.com/es/elasticache/pricing/
+
+
+:::::::: HAZELCAST ::::::::
+
+Hazelcast es un sistema de almacenamiento distribuido, de código abierto, que ayuda a administrar sus datos y distribuir el procesamiento utilizando el almacenamiento en memoria.
+In-memory data grid, distributed computing platform.
+Aparentemente es más rápida que Redis.
+
+Tipo de caché:
+	caché para sistemas distribuidos e integrada en las aplicaciones.
+Tipos de datos:
+	set, listas, map, multimap, queues, lock, idGenerator (para la generación de identificadores únicos a través de las aplicaciones del cluster), etc.
+Replicación/escalado:
+	Hazelcast es un grid elásticamente escalable, permite escalar de forma predecible las aplicaciones al proporcionar acceso en memoria a los datos utilizados con frecuencia. Permite que cualquier red de máquinas agrupe y agrupe dinámicamente tanto la memoria como los procesadores para acelerar el rendimiento de la aplicación.
+Alta disponibilidad:
+	escalabilidad elástica, basta con añadir más servidores y ellos se registran en el cluster.
+Cloud:
+	Hazelcast IMDG AWS (cloud module para ayudar a los miembros del cluster a descubrirse, compatible con IAM role y la conexión con clientes del cluster fuera de la nube), Hazelcast IMDG tiene soporte con Apache jclouds API, Azure Cloud Discovery, Pivotal Cloud Froundy, Openshift Container Platform.
+Seguridad:
+	dispone de una suite de seguridad disponible para Hazelcast IMDG enterprise HD Hazelcast IMDG enterprise. Soporta autenticación y autorización, así como diferentes algoritmos de encriptación.
+Según la versión y licencia utilizada dispone de herramientas para la gestión del cluster.
+Es posible configurar near caché para optimizar las consultas remotas.
+
+Hazelcast al igual que Redis, soporta computación distribuida, estructuras de datos, message-broker, etc.
+
+
+:::::::: INFINISPAN ::::::::
+
+Tipo de caché:
+	caché para sistemas distribuidos e integrada en las aplicaciones o desacoplada de la aplicación. 
+	(Desacoplada con JBoss Data Grid, (JDG) which is Red Hat`s officially supported version of Infinispan)
+... no estaba en la lista del artículo, pero no puede faltar!
+
+https://infinispan.org/
+
+
+:::::::: MongoDB IN MEMORY ::::::::
+
+Tipo de caché:
+	caché para sistemas distribuidos y desacoplada de la aplicación.
+Tipos de datos:
+	documentos en formato JSON.
+Replicación/escalado:
+	conjunto de réplicas o como parte de un clúster fragmentado.
+Alta disponibilidad:
+	escalado horizontal y distribuida. Soporta replica set.
+Cloud:
+	Amazon Web Services, Microsoft Azure, Google Cloud Platform, Openstack.
+Seguridad:
+	soporta autenticación/autorización, whitelist, TLS/SSL, etc.
+
+
+:::::::: COUCHBASE ::::::::
+
+Couchbase dispone de una solución para caché que ofrece un alto rendimiento, es fácil de implementar, escalar y administrar.
+Es una base de datos open source, distribuida, NoSQL orientada a documentos.
+
+Expone una caché clave-valor para consultas rápidas 
+y un potente motor de consultas para consultas de tipo SQL. ('A PESAR DE SER NoSQL')
+Para entornos móviles e Internet de las Cosas (IoT) Couchbase también puede ejecutarse nativamente en el dispositivo y gestionar la sincronización con el servidor.
+
+Couchbase Inc es una compañía privada de software que desarrolla y proporciona paquetes comerciales y soporte para Couchbase Server y Couchbase Lite ambos de código abierto, NoSQL, multimodelo, base de datos orientada a documentos, almacena documentos en formato JSON o base de datos como clave-valor.
+
+Tipo de caché:
+	caché para sistemas distribuidos y desacoplada de la aplicación.
+Tipos de datos:
+	documentos en formato JSON y key-value.
+Replicación/escalado:
+	intra-cluster replication (replicación entre nodos del clúster) y Replicación Cross DataCenter (XDCR, para la replicación de datos entre clústeres). *Rack-ZoneAwareness *(replicación por zonas, permite habilitar agrupaciones lógicas de servidores en un clúster donde cada grupo de servidores pertenece físicamente a un rack o zona de disponibilidad, sólo disponible en la versión Enterprise Edition).
+Alta disponibilidad:
+	escalado elástico bajo demanda *(sin puntos únicos de fallo); *escalado multi-dimensional *(escalar o ampliar servicio de base de datos individuales, como datos, consultas, índices, búsquedas para utilizar de forma más eficientes distintos tipos de instancias en la nube.
+Cloud:
+	Amazon Web Services, Microsoft Azure, Google Cloud Platform Live, Joyent, Docker, Red hat, Openshift.
+La tecnología Couchbase Cross Datacenter Replication (XDCR) está diseñada para la nube, con características como el filtrado de datos, detección de cambios en la topología e integra tolerancia de fallos. Se puede migrar datos distribuidos a través de clusters y nubes de forma fácil.
+Seguridad:
+	proporciona seguridad de datos a todos los niveles: infraestructura, como aplicación como de base de datos: autenticación, autorización, auditoría, encriptación.
+
+
+:::::::: MEMCACHED ::::::::
+
+Memcached es un sistema de almacenamiento en memoria distribuida, open source, de alto rendimiento y de uso general.
+
+Tipo de caché:
+	caché para sistemas distribuidos y desacoplada de la aplicación.
+Tipos de datos:
+	strings, objetos pequeños.
+Replicación/escalado:
+	no existe la replicación, sincronización ni broadcasting por defecto, aunque se apoya en otras herramientas de terceros como Repcached para la replicación de los datos entre nodos.
+Cloud:
+	Amazon ElastiCache (permite escalado horizontal y vertical), *Memcached Cloud *(alto rendimiento, escalabilidad sin esfuerzo, replicación crosszone/region/datacenter y failover automático instantáneo, sin pérdida de datos. Memcached de Redis Labs Cloud, Amazon Web Services, Microsoft Azure, Google Cloud Platform, IBM SoftLayer, Openshift...
+Recomendado para el almacenamiento pequeño de datos.
+
+
+:::::::: EHCACHE ::::::::
+
+Ehcache es un sistema de caché clave-valor.
+Es usada en diferentes tipologías:
+Standalone
+	se mantiene en un sólo nodo, sin comunicación entre nodos. Si hay varias instancias de una aplicación, entonces existe coherencia débil entre ellos.
+Distribuido
+	los datos se mantienen a través de un conjunto de servidores Terracotta y dispone de un conjunto de modos de consistencia.
+Replicado
+	los datos se mantienen en todos los nodos y se replican en el clúster sin bloqueo, replicación síncrona o asíncrona. Consistencia débil en esta topología.
+
+Tipo de caché:
+	caché local o en proceso.
+Tipos de datos:
+	estructura de datos distribuida, NoSQL, schema-less.
+Replicación/escalado:
+	fácil escalado añadiendo nuevos servidores. Replicación con RMI, replicación con JGroups, replicación con JMX.
+Alta disponibilidad:
+	en la última versión fortalece sus capacidades de caché distribuida a través de la generación de servidores Terracota. Facilita el escalado desde el almacenamiento en proceso, o un mixto con despliegue en proceso y fuera con cachés de tamaño de terabytes.
+Seguridad:
+	no aplica, aunque los servidores sí que permiten utilizar mecanismos de autenticación y autorización.
+
+
+------------------------------------------------- JCACHE
+
+JCache is the standard caching API for the Java programming language. Developers can use JCache to temporarily cache Java objects using the CachingProvider interface.
+JCache is formally known as "JSR107," a Java Specification Request that describes a certain part of the Java platform.
+
+Since JCache is a specification and not an implementation, developers have multiple versions to choose from, including:
+    The JCache reference implementation
+    Hazelcast
+    Terracotta Ehcache
+    Oracle Coherence
+    Infinispan
+
+Note that the JCache reference implementation is not intended for production use - only as a proof of concept. For example, it lacks features and optimizations such as tiered storage and distributed caching.
+
+VER MÁS EN PROYECTO BackToBasics
+
+
+
+
+

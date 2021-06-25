@@ -1,0 +1,149 @@
+
+Some sources:
+https://containerjournal.com/topics/container-ecosystems/kubernetes-vs-docker-a-primer/
+https://docs.docker.com/engine/reference/commandline/container/
+https://www.sumologic.com/blog/kubernetes-vs-docker/
+
+Docker: container platform
+Kubernetes: container orchestrator (for container platforms such as Docker)
+
+Docker is great for businesses of all sizes. When you are working on a piece of code in a small team,
+it eliminates the “but it works on my machine” problem. 
+
+Kubernetes is a comprehensive system for automating deployment, scheduling and scaling of containerized applications.
+
+How do you package and distribute an application ?? Docker
+How do you scale, run and monitor an application ?? Kubernetes
+
+
+----------------------------- WHEN NOT TO USE DOCKER ?
+//https://www.freecodecamp.org/news/7-cases-when-not-to-use-docker/
+(mejor ver detalles en página!)
+
+1. if You Need to Boost Speed
+2. if You Prioritize Security
+3. if You Develop a Desktop GUI Application
+4. if You Want to Light Up Development and Debugging
+5. if You Need to Use Different Operating Systems or Kernels
+6. if You Have a Lot of Valuable Data to Store
+7. if You Are Looking for The Easiest Technology to Manage
+
+
+----------------------------- DOCKER & KUBERNETES
+
+Both can work separately, but both benefit on working together.
+
+Kubernetes automates the process of scaling, managing, updating and removing containers. 
+In other words, it is a container orchestration platform.
+While Docker is at the heart of the containerization, it enables us to have containers in the first place.
+
+A collection of nodes that is managed by a single Kubernetes instance is referred to as a Kubernetes cluster.
+
+Con Docker creo contenedores en N servidores (físicos o virtuales), 
+con Kubernetes facilito la creación y gestión de contenedores.
+
+
+----------------------------- DOCKER ALTERNATIVES ??
+
+Rkt
+Linux containers
+RunC
+Cri-o
+Containerd
+
+----------------------------- KUBERNETES ALTERNATIVES ??
+
+Docker Swarm
+	//pero la misma Docker admite que Kubernetes tiene más mercado, por ello incluye una distribución de Kubernetes junto a Docker
+Mesos
+
+----------------------------- DOCKER Vs VMs
+
+Traditionally, cloud service providers used virtual machines to isolate running applications from one another. A hypervisor, or host operating system, provides virtual CPU, memory and other resources to many guest operating systems. Each guest OS works as if it is running on an actual physical hardware and it is, ideally, unaware of other guests running on the same physical server.
+
+However there are several problems with virtualization. First, the provisioning of resources takes time. Each virtual disk image is large and bulky and getting a VM ready for use can take up to a minute. Second—and a more important issue—system resources are used inefficiently. OS kernels are control freaks that want to manage everything that’s supposedly available to them. So when a guest OS thinks 2GB of memory is available to it, it takes control of that memory even if the applications running on that OS uses only half of it.
+
+On the other hand, when we run containerized applications, we virtualize the operating system (your standard libraries, packages, etc.) itself, not the hardware. Now, instead of providing virtual hardware to a VM, you provide a virtual OS to your application. You can run multiple applications and impose limitations on their resource utilization if you want, and each application will run oblivious to the hundreds of other containers it is running alongside.
+
+    Traditional Hypervisor                    A Docker Host
+
+       VM1     |     VM2               Container1    |    Container2
+       App1    |     App1                    App1    |     App1
+    Bins,Libs  |   Bins,Libs              Bins,Libs  |   Bins,Libs
+     GuestOS   |    GuestOS                       
+           HYPERVISOR                             DOCKER
+           HOST SYSTEM                           HOST SYSTEM
+          INFRASTRUCTURE                        INFRASTRUCTURE
+
+----------------------------- SOME FACTS
+
+Docker Apt, the package manager, still uses tar under the hood, but users never have to worry about it. Similarly, while using Docker we never have to worry about the package manager, although it is present.
+
+A Docker container is a runtime instance of a Docker image.
+
+Docker wasn’t pitched as an OS-level virtualization software; it is marketed as a software packaging and delivery mechanism. The sole reason Docker containers got more attention than its competition is because of this software delivery approach.
+
+Kubernetes has freed containers from being stuck on a single computer, making cloud an ever more enticing a place for this technology. 
+Slowly but surely, containerization will become the norm for every cloud dependent service; therefore, it’s important to adopt this technology earlier rather than later. Doing so would minimize migration costs and associated risks.
+
+
+----------------------------- KUBERNETES ARQUITECTURE (brief overview)
+
+Pod:
+A pod is a collection of related Docker containers that need to coexist (commonly just 1). For example, your web server may need to be deployed with a redis caching server so you can encapsulate the two of them into a single pod. Kubernetes deploys both of them side by side.
+	In a Kubernetes cluster, limits are set for pods which define what resources, CPU and memory, they need to run. The scheduler uses this definition to decide on which nodes to place the pods. 
+	If there is more than one container in a pod, it is difficult to estimate the required resources and the scheduler will not be able to appropriately place pods. 
+
+Nodes:
+there are two types of nodes.
+Master Node, where the heart of Kubernetes is installed. It controls the scheduling of pods across various worker nodes (a.k.a just nodes).. The master node’s job is to make sure that the desired state of the cluster is maintained.
+	There are multiple components in the control plane that help facilitate that orchestration. Etcd for storage, the API server for communication between components, the scheduler which decides which nodes pods should run on, and the controller manager, responsible for checking the current state against the desired state. 
+Worker nodes, where your application actually runs.
+
+
+How does Kubernetes work?
+It is easy to get lost in the details of Kubernetes, but at the end of the day, what Kubernetes is doing is pretty simple. Cheryl Hung of the CNCF describes Kubernetes as a control loop. 
+"Declare how you want your system to look (3 copies of container image a and 2 copies of container image b) and Kubernetes makes that happen. Kubernetes compares the desired state to the actual state, and if they aren’t the same, it takes steps to correct it". 
+
+
+----------------------------- Docker in Production
+
+The answer is simple when it comes to adopting Docker. Especially, if you are adopting a microservices-based architecture for your software you should definitely use Docker containers for each microservice.
+
+The technology is quite mature and very little can be said against it. 
+Keep in mind, merely containerizing your code won’t make it better for you. 
+Try avoiding monolithic designs and go for microservices if you actually want to make use of containerization platform.
+
+
+----------------------------- Kubernetes in Production
+
+Mmmmh... not always necessary. Recomiendan utilizar una solución cloud que maneje tal complejidad.
+
+Docker is commonly used without Kubernetes, in fact this is the norm. While Kubernetes offers many benefits, it is notoriously complex and there are many scenarios where the overhead of spinning up Kubernetes is unnecessary or unwanted. 
+
+In development environments it is common to use Docker without a container orchestrator like Kubernetes. 
+In production environments often the benefits of using a container orchestrator do not outweigh the cost of added complexity. 
+Additionally, many public cloud services like AWS, GCP, and Azure provide some orchestration capabilities making the tradeoff of the added complexity unnecessary. 
+
+
+First, most organizations blindly jump without any understanding of the basic concepts of a distributed system. 
+They try to set up their own Kubernetes cluster and use it to host simple websites or a small scalable application. 
+This is quite risky if you don’t have an in-depth knowledge of the system. Things can break down easily.
+
+Second, Kubernetes is rapidly evolving, and other organizations are adding their own special sauce to it, such as service mesh, networking plugins, etc. 
+Most of these are open source and therefore are appealing to operator. However, running them in production is not what I would recommend.
+
+However, there are cloud-hosted Kubernetes platforms that organizations can use to run their applications.  The worldwide availability of hosted data centers can actually help you to get the most out of the distributed nature of Kubernetes. And, of course, you don’t have to worry about maintaining the cluster.
+
+So, Kubernetes in production? Yes, but for most folks I would recommend cloud-hosted solutions.
+
+
+-----------------------------
+Container Orchestration ? (from Docker tutorial)
+
+Running containers in production is tough. You dont want to log into a machine and simply run a docker run or docker-compose up. 
+Why not? Well, what happens if the containers die? How do you scale across several machines? Container orchestration solves this problem. 
+Tools like Kubernetes, Swarm, Nomad, and ECS all help solve this problem, all in slightly different ways.
+
+The general idea is that you have "managers" who receive expected state. This state might be "I want to run two instances of my web app and expose port 80"
+The managers then look at all of the machines in the cluster and delegate work to "worker" nodes. The managers watch for changes (such as a container quitting) and then work to make actual state reflect the expected state.

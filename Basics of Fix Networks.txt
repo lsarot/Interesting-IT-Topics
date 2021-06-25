@@ -1,0 +1,94 @@
+
+http://www.technology-issues.com/fixed-networks/
+
+
+CPE (módem)
+ADSL sería modem adsl
+cable sería modem para coaxial
+FTTH sería modem fibra
+
+Router conecta al BRAS usando PPP protocol y BRAS asigna IP pública
+
+
+ADSL (banda ancha sobre línea telefónica)
+
+Cable (Coaxial)
+
+FTTH (fibra óptica)
+
+
+-----------------------------------------------------------
+
+Basic connection model
+Internet --- BRAS --- CPE(módem) --- Router
+
+
+Specific to each technology:
+
+
+ADSL
+	 <--- (Red tlf fijo) --- |
+							 |
+Internet --- BRAS --- DSLAM(ADSL) ---(cable telf hogar)--- CPE (módem ADSL) --- Router 	
+//sólo admite un CPE/Router la conexión ADSL por línea telefónica
+
+
+Cable
+Internet --- BRAS ------ CMTS --- Splitter --- CPE (ONT módem FTTH) --- Router
+					 |
+ (Red tlf) --- MGW --|
+//usa fibra del CMTS hacia el operador. Coaxial hacia el CPE.
+
+
+FTTH
+Internet --- BRAS ------ OLT --- Splitter --- CPE (ONT módem FTTH) --- Router
+					 |
+ (Red tlf) --- MGW --|
+//usa fibra desde el operador hasta el CPE.
+
+
+-----------------------------------------------------------
+
+More details on FTTH model:
+
+Internet -- BRAS -- OLT(vlan,ipai,ppai,gbe) -- ODF(repartidor) -- Spplitter -- CTO -- CPE -- Router
+
+ODF Jazztel tiene ODF(Interno) -- ODF(Externo); Orange sólo ODF. (JZZ usa tech más escalable)
+
+
+La OLT es el punto donde está
+VLAN: canal virtual por donde viajarán las conexiones de N clientes de un punto a otro
+PPAI: pasarela de nuestra red a la de otro operador.. puerto que comunica nuestra red con la de otro operador
+IPAI: igual que ppai, pero para que el tercero se conecte a nuestra red Orange/Jazztel
+GBE: (Gigabit Ethernet) puede ser fibra (FTTH) propia quizás
+IpTV: cuando la tv digital usa la misma vlan que el internet, afectando el tráfico de internet que es menor
+OTT: cuando la tv digital usa una vlan distinta dedicada a sólo tv, va mejor el tráfico.
+
+
+-----------------------------------------------------------
+
+NEBA FIBRA servicio Telefónica a terceros (OLT y CTO de Telefonica, ONT también era de Telefónica)
+	El tráfico de Leo en este equipo (LAN switch) y este LAG (puerto lógico por donde entra el tráfico) es tanto
+	Para cada cliente hay 2 vlan, VLANS y VLANC
+
+
+RID: identificador lógico de un cliente, tipo IP y/o MAC.
+En red propia el RID lo inventamos nosotros
+En red Telefonica, RID coincide con la conectividad física.
+
+
+VULA es un NEBA pero nos entregan el tráfico en la cabecera óptica, abaratando los costos de prestarnos su infraestructura.
+
+
+Cuando entra el tráfico es LANSwitch, LAG, VLAN
+   Ese tráfico lo metemos en objetos de red nuestros, IES es uno de ellos. (PP.IES_JZZ)
+
+
+En NEBA se capa la velocidad a la que contrató el cliente,
+en VULA se otorga el máximo y nosotros la capamos. 
+RADIUS VULA, es el aparato que limita la velocidad y asigna el IES_JZZ
+
+La VLAN la establece Telefonica, para Orange no hay problema, para Jazztel SÍ (ya tenían sus VLANs).
+	Se hace entonces un NATeo de las VLANs de Telefonica a JAZZTEL.
+	Sólo pasa en NEBA, en VULA no había ese problema.
+

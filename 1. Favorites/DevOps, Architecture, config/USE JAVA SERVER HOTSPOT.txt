@@ -1,0 +1,21 @@
+
+http://download.oracle.com/javase/6/docs/technotes/guides/vm/server-class.html
+
+Server-Class Machine Detection
+
+Starting with J2SE 5.0, when an application starts up, the launcher can attempt to detect whether the application is running on a "server-class" machine and, if so, use the Java HotSpot Server Virtual Machine (server VM) instead of the Java HotSpot Client Virtual Machine (client VM). The aim is to improve performance even if no one configures the VM to reflect the application it's running. In general, the server VM starts up more slowly than the client VM, but over time runs more quickly.
+
+
+Note: For Java SE 6, the definition of a server-class machine is one with at least 2 CPUs and at least 2GB of physical memory. 
+
+In Java SE 6, server-class detection occurs if neither -server nor -client is specified when launching the application on an i586 or Sparc 32-bit machine running Solaris or Linux. As the following table shows, the i586 Microsoft Windows platform uses the client VM by default. The remaining Sun-supported platforms use only the server VM.
+
+**************************************
+
+USAR SERVER HOTSPOT (opciones):
+
+1. instalar JDK y no JRE, creo que usará la versión server por defecto!
+2. dejar que detecte el hardware y use server Hotspot
+3. usar java -jar -server|-client MyApp.jar       (para especificar cual Hotspot)
+
+

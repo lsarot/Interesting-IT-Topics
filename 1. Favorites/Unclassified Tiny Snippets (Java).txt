@@ -1,0 +1,1165 @@
+--------------------------------------------------------------------- INDEX | INDICE
+JAVA BITWISE OPERATIONS
+JAVA NUMERIC LITERALS _ SEPARATOR
+LABELS (not a keyword)
+CAMBIAR EL DEFAULT OUTPUT STREAM
+INTERFAZ CALLABLE (A DIF DE RUNNABLE QUE NO RETORNA OBJETO)
+LÍNEAS DE UNA EXCEPTION
+CARGAR UNA CLASE EN UN CLASS-LOADER APARTE
+FUTUROS CON UN THREAD POOL JAVA
+USAR EL FILE SYSTEM DEL SISTEMA SUBYACENTE
+SPRING USAR CONTEXT-CONFIGURATION
+GET APPLICATION .properties
+GET APPLICATION .properties - WITH SPRING HELP
+GET APPLICATION .properties - COMBINE DIF PROFILES INTO ONE YAML FILE
+GET APPLICATION .properties - AUTOMATIC HOT RELOADING SPRING OR NOT
+SPRING onApplicationReadyEventListener
+SPRING RETRIEVE IP FROM HTTP REQUEST
+PURGE COMMAND LINE ARGS JCommander|ApacheCLI|SPRINGBOOT
+AUTOMATIC RESTART AND HOT SWAPPING SPRINGBOOT APP ON DEVELOPMENT
+RUNNING SPRINGBOOT APP FROM CLI
+MAVEN POM TAG
+MAVEN SKIP TESTS
+MAVEN VERSIONING
+JAVA VERSION MANAGER
+JAVA VERSION CHANGING WITH HACKTRICK
+SETTING ENV VARS PERMANENTLY MACOS
+JVM UPLOAD PROJECT TO REPO TO DOWNLOAD AS DEPENDENCY
+Synchronized Vs ReadWriteLock
+ToString, equals, hashCode GUAVA HELPERS
+UUID JAVA GENERATOR
+RANDOM NUMBER GENERATION JAVA
+GET EPOCH TIME IN MILLIS
+SPRING HTTP REST RESPONSE WRAPPER
+BUILD A FAT JAR WITH MAVEN SHADE PLUGIN
+BUILD A FAT JAR ON NETBEANS
+SIGN APP WITH PERSONAL CERTIFICATE
+CALCULAR DÍAS SEMANAS DEL AÑO
+STRING TO BYTE ARRAY AND REVERSE
+SEND VIDEO IN CHUNKS TO SERVER (STREAMING?)
+HTTP FIRE AND FORGET WORKAROUND
+TERMINATING A SPRING BOOT APP
+CONFIGURATION ORDER IN SPRINGBOOT
+REVERSE ENGINNERING ANDROID APK
+STRING FORMATTING IN JAVA
+SPRING BEANS LAZY INITIALIZATION
+JAVA LIST INITIALIZATION
+THROW EXCEPTION WITHOUT SHOWING FULL STACKTRACE
+CURL HTTP REQUEST
+JAVA HASHMAP, LINKED HASHMAP, TREEMAP, OTHER MAPS
+SET A THREAD UncaughtExceptionHandler
+JAVA GETTING CURRENT TIME
+SPRING BOOT GET SERVER PORT ON RUNTIME
+SPRING BOOT DECLARE BEAN FOR TESTS
+OBTAIN A RANDOM NUMBER OR ALPHANUMERICAL STRING
+SPRINGBOOT - HOW TO CONFIGURE A TEST TO DEPLOY IN RANDOM PORT
+PERMGEN JAVA CONCEPT
+
+
+
+--------------------------------------------------------------------- JAVA BITWISE OPERATIONS
+
+<<, >>, >>>, &, !, etc.
+si tenemos un tipo de dato numérico, podemos mover N posiciones a la izq o derecha los números.
+int a = 4<<20
+significa, mueve 20 pos a la izq el número 4 en un tipo int (que tiene 32 bits)
+original: 00000000 00000000 00000000 00000100 -> 4
+movido:   00000000 01000000 00000000 00000000 -> 4.194.304
+          =4*1024*1024 =4*1024*1KiB =4*1MiB
+qusieron decir 4MB peroo simplificado.
+Ahora, es igual a 4*2^20. Cada 2^10 es un salto de KB a MB a GB a TB.
+Entonces, 8MB = 8<<20, 8GB = 8<<30, 2TB = 2<<40, pudiendo tener que guardar en un long o double.
+
+Sirve para otras cosas los operadores de bits.
+
+--------------------------------------------------------------------- JAVA NUMERIC LITERALS _ SEPARATOR
+
+As of Java 7, we can use _ just between digits to improve readability.
+For use on phone numbers, credit card numbers, thounsand separator, etc.
+943_44_04 = 9434404
+5___5 = 55
+
+--------------------------------------------------------------------- LABELS (not a keyword)
+
+Kind of goto, its used only for loops.
+//goto remains as keyword since Java1 but was never implemented.
+Identifies a loop to skip it if a conditions applies. (goto would be declared after my code)
+
+outer: for(;;) {
+    inner: for(;;) {
+        break outer;//notice the usage of break, not continue
+    }
+}
+
+label123:
+while(true) {
+    while (true) {
+        continue label123;//continue won't finish the loop
+    }
+}
+
+//a never referenced label. '//' wil make the url a comment.
+http://www.example.com/xyz.jsp
+while(true) {}
+
+--------------------------------------------------------------------- CAMBIAR EL DEFAULT OUTPUT STREAM
+
+PrintStream console = System.out;//tomamos el default printstream
+System.setOut(JunitParallelRunnerPrintStream);
+
+ConcurrentHashMap<String, PrintStream> map;
+
+--------------------------------------------------------------------- INTERFAZ CALLABLE (A DIF DE RUNNABLE QUE NO RETORNA OBJETO)
+
+Callable<Result> //result es de junit en este caso
+	Result call() {
+		result = JUnitCore.runClasses(testPlanClass);
+		return result;
+	}
+
+--------------------------------------------------------------------- LÍNEAS DE UNA EXCEPTION
+
+e.printStackTrace();//no retorna string
+
+//imprimir N líneas
+StackTraceElement trace[] = e.getStackTrace();
+for(int i=0 ; i<trace.length; i++) {
+  console.println("JunitParallelRunner: " + trace[i].toString());
+}
+
+//org.apache.commons:commons-lang3   (N caracteres)
+String stacktrace = ExceptionUtils.getStackTrace(e);
+logger.error("{}. Error log message.\n{}", "Hello", StringUtils.substring(ExceptionUtils.getStackTrace(e), 0, 500));
+//Core Java (<9)
+StringWriter sw = new StringWriter();   PrintWriter pw = new PrintWriter(sw);   e.printStackTrace(pw);   sw.toString()
+//Core Java (>9)
+// https://www.baeldung.com/java-9-stackwalking-api
+
+--------------------------------------------------------------------- CARGAR UNA CLASE EN UN CLASS-LOADER APARTE
+
+Class<?> c = new TestClassLoader().loadClass("class.to.load");
+
+public static class TestClassLoader extends URLClassLoader {
+	public TestClassLoader() {
+	  super(((URLClassLoader) getSystemClassLoader()).getURLs());
+	  //super.addURL(new URL("path to search for the class, could be .jar and it will manage to search inside"));
+	}
+
+	@Override
+	public Class<?> loadClass(String name) throws ClassNotFoundException {
+	  if(name.startsWith("com.classes.to.load.in.separate.spaces")) {
+	    System.out.println("JunitParallelRunner: Loading class " + name + " from TestClassLoader " + this.toString());
+	    return super.findClass(name);
+	  }
+	  return super.loadClass(name);
+	}
+}
+
+--------------------------------------------------------------------- FUTUROS CON UN THREAD POOL JAVA
+
+Future<Result> futures[] = new Future[testPlans.size()];
+ExecutorService executorService = Executors.newFixedThreadPool(maxThreads);
+CompletionService completionService = new ExecutorCompletionService(executorService);
+
+executorService.shutdownNow();//termina tareas incluso ejecutándose!
+	//se puede hacer con callable, con runnable no está implementado!
+
+//retorna Futuro asociado a ese callable, y continúa async
+futures[i] = completionService.submit(new MyCallable());
+
+//al terminar, consultamos el futuro y este envuelve resultado del callable y otra info.
+//esperamos un tiempo a que termine uno
+completedFuture = completionService.poll(MAX_WAIT_TIMES, TimeUnit.MINUTES);
+
+future[i].cancel(true);//forced cancelation
+
+Result result = completedFuture.get();//toma el resultado del callable
+
+//number of methods executed in test classes executed, in this case, one class at the time. With JUnitCore.runClasses(testPlanClass);
+result.getRunCount();
+result.getFailureCount();
+List<Failure> failures = result.getFailures();
+
+CON SPRING PODEMOS USAR ThreadPoolTaskExecutor ***
+
+--------------------------------------------------------------------- USAR EL FILE SYSTEM DEL SISTEMA SUBYACENTE
+
+private static final FileSystem fs = DefaultFileSystem.getFileSystem();
+fs.getSeparator();
+fs.normalize(pathname);
+
+--------------------------------------------------------------------- SPRING USAR CONTEXT-CONFIGURATION
+
+//nos permite establecer cómo instanciar los Beans que se inyectan en lugar de dejarlo por defecto al contenedor Spring.
+
+@Configuration
+public class TestConfig {
+    @Bean public AreaController areaController(){return new AreaController();}
+    @Bean public RectangleService rectangleService(){return new RectangleService();}
+}
+
+//usamos esto en otra clase, y los @Autowired se instanciarán desde esa otra clase.
+@ContextConfiguration(classes = {TestConfig.class})
+//dentro de la clase
+@Autowired AreaController areaController;
+
+
+@Service("myService")//sobre una clase
+
+@Resource(name = "myService")//como @Autowired y @Qualifier parece, pero para @Component, no para @Bean
+
+--------------------------------------------------------------------- GET APPLICATION .properties
+
+usar Preconditions.checkNotNull(env.getProperty("jdbc.user")) //guava
+
+* CUSTOM WAY
+
+public class PropertyLoader {
+    static {loadProperties(false);}//true: force to create new Properties() again
+    private static Properties properties;
+    public static void loadProperties(boolean force) {
+        if (properties == null || force) {
+            properties = new Properties();
+
+            Preconditions.checkNotNull(System.getenv("APP_CONFIG_LOCATION"), "environment variable not set: " + "APP_CONFIG_LOCATION");
+            Preconditions.checkNotNull(System.getenv("APP_CONFIG_FILES"), "environment variable not set: " + "APP_CONFIG_FILES");
+            //save in same or separate!
+            for (String _file : System.getenv("APP_CONFIG_FILES").trim().split(",")) {
+                try {
+                    String fileName =
+                            System.getenv("APP_CONFIG_LOCATION")
+                            + _file;
+                    fileName = System.getenv("coin_profile") == null ?
+                            fileName + ".properties" :
+                            fileName + "-" + System.getenv("coin_profile") + "[logger]" + ".properties";
+                    File file = new File(fileName);
+                    if (file.exists()) {properties.load(new FileInputStream(file));}
+                } catch (Exception e) {System.err.println("Error cargando fichero de configuración " + _file + " -> " + e);}
+            }
+            //properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("coin.properties"));
+            //properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("log4j.properties"));
+        }
+        //check for needed properties
+        for (int i = 0; i < InitialConditionsConfig.props.length; i++) {Preconditions.checkNotNull(properties.getProperty(InitialConditionsConfig.props[i]), "property not found: " + InitialConditionsConfig.props[i]);}
+    }
+    public static String getProperty(String key) {
+        if (properties == null || key == null || key.equals("")) {return "";}
+        return properties.getProperty(key, "");
+    }
+    public static String getProperty(String key, String defaultValue) {
+        if (properties == null || key == null || key.equals("")) {return "";}
+        return properties.getProperty(key, defaultValue);
+    }
+}
+
+--------------------------------------------------------------------- GET APPLICATION .properties - WITH SPRING HELP
+
+//PROBADOS EN PROYECTO BackToBasicsSpringBoot
+//https://www.baeldung.com/spring-properties-file-outside-jar
+
+--- PRECEDENCE ORDER:
+By convention, Spring Boot looks for an externalized configuration file – application.properties or application.yml – in 4 predetermined locations in the following order of precedence:
+    A /config subdirectory of the current directory
+    The current directory
+        *en estos 2 anteriores, se refiere al dir donde ejecutemos el jar empaquetado
+    A classpath /config package (en /src/main/resources/config)
+    The classpath root (en /resources directamente)
+Therefore, a property defined in application.properties and placed in the /config subdirectory of the current directory will be loaded.
+This will also override properties in other locations in case of a collision.
+--- PRECEDENCE ORDER - OTHER APPROACH:
+*** Prior to version 2.4.0:
+YAML properties were overridden by properties files in the following locations, in order of highest precedence first:
+    Profiles properties placed outside the packaged jar
+    Profiles properties packaged inside the packaged jar
+    Application properties placed outside the packaged jar
+    Application properties packaged inside the packaged jar
+PROFILE SPECIFIC FILES OVERRIDE THOSE IN /src/main/resources
+*** As of Spring Boot 2.4:
+external files always override packaged files, regardless of whether they are profile-specific or not.
+
+'--- taking properties with @Value annontation'
+@Value("${message.default.welcome:SomeDefaultValue}") //o sin el default value
+private String welcomeMessage;
+'--- taking properties from specific file and store them in variable Environment'
+*ver más en DBConfig_N_Source.java de proyecto SpringWebDemo
+//@ImportResource({"classpath:file.xml"}) ???
+@PropertySource("classpath:coin.properties")//sobre la clase
+@PropertySource("file:${HOME}/config.properties")//or specify yaml file
+@Autowired private Environment env;//variable singleton
+env.getProperty("jdbc.url");
+'--- mapping prefixed properties to class'
+//requiere análisis, permite anidar y más
+//https://stackabuse.com/spring-boot-configuring-properties/
+//https://www.baeldung.com/configuration-properties-in-spring-boot
+@EnableConfigurationProperties(KeycloakServerProperties.class)
+@ConfigurationProperties(prefix = "keycloak.server") //this was in case of application.properties file, where one uses ig. keycloak.server.name=NAME
+//@Configuration MIGHT NEED THIS!
+public class KeycloakServerProperties {
+    private String name;
+    private String environment;
+    private boolean enabled;
+    private List<String> servers = new ArrayList<>(); //note how to declare a list in the yaml example below
+    //standard getters and setters
+}
+//application.yml example
+spring:
+    config:
+        activate:
+            on-profile: prod
+name: prod-YAML
+environment: production
+enabled: true
+servers: 
+    - www.abc.com
+    - www.xyz.com
+'--- filename for specific profile'
+//also, when using a different filename, from main class in SpringBoot apps
+//https://stackabuse.com/spring-boot-configuring-properties/    cómo arrancar con un profile usando una env variable
+new SpringApplicationBuilder()
+        .main(RsocketServerApplication.class)
+        .sources(RsocketServerApplication.class)
+        .profiles(System.getenv("myappname_profile")) // "production"   references application-production.properties file
+        .run(args);
+        *en este punto todavía no tengo parámetros de ficheros .properties, debo tomarlo de otra fuente
+'--- properties file from outside of the project, using start-up command'
+We can also configure the location directly in the command line:
+    java -jar app.jar --spring.config.location=file:///Users/Leo/test_properties/jdbc.properties
+                      --spring.config.location=file:./config/    *(carpeta a nivel del .jar y buscará application.properties)
+    mvn spring-boot:run -Dspring.config.location="file:///Users/Leo/test_properties/jdbc.properties"    *no funcionó
+We can also pass a folder location where the application will search for the fileS:
+    java -jar app.jar --spring.config.name=application,jdbc --spring.config.location=file:///Users/Leo/test_properties/
+*If you have multiple files, just seperate them with a comma!
+'--- properties file from outside of the project, using environment variables' //if we cannot alter start-up command for instance
+export SPRING_CONFIG_NAME=application,jdbc
+export SPRING_CONFIG_LOCATION=file:///Users/Leo/test_properties/
+java -jar app.jar
+//default props file will still be loaded, but in case of a property collision, the environment-specific property file takes precedence.
+'--- programmatically'
+//requiere mayor análisis
+@Bean public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+    PropertySourcesPlaceholderConfigurer properties = new PropertySourcesPlaceholderConfigurer();
+    properties.setLocations(new FileSystemResource("/Users/home/conf.properties"));
+    properties.setIgnoreResourceNotFound(false);
+    return properties;
+}
+
+--------------------------------------------------------------------- GET APPLICATION .properties - COMBINE DIF PROFILES INTO ONE YAML FILE
+
+#By default, the only active profile will be 'default', unless explicitly declared
+#The enabled: true in this example does not mean anything!
+#To enable a profile we set in application.properties the following: 'spring.profiles.active=prod', might apply as 'spring.profiles.active: prod' in same application.yml, or bootstrap.[yml|properties]
+
+common propertiesal the beginning
+
+---
+spring:
+    profiles: dev # THIS IS HOW TO DEFINE A PROFILE
+spring:
+    config:
+        activate:
+            on-profile: test
+name: test-YAML
+environment: testing
+enabled: false
+servers: 
+    - www.abc.test.com
+    - www.xyz.test.com
+
+--- # //The three dashes separating the two profiles indicate the start of a new document, so all the profiles can be described in the same YAML file
+spring:
+    config:
+        activate:
+            on-profile: prod
+name: prod-YAML
+environment: production
+enabled: true
+servers: 
+    - www.abc.com
+    - www.xyz.com
+
+--------------------------------------------------------------------- GET APPLICATION .properties - AUTOMATIC HOT RELOADING SPRING OR NOT
+
+Apache Commons support: https://commons.apache.org/proper/commons-configuration/userguide/howto_reloading.html
+or Spring Cloud Config support: https://cloud.spring.io/spring-cloud-config/spring-cloud-config.html
+Si usamos custom way: un thread que llame a loadProperties cada cierto tiempo
+
+--------------------------------------------------------------------- SPRING onApplicationReadyEventListener
+
+@Bean
+ApplicationListener<ApplicationReadyEvent> onApplicationReadyEventListener(ServerProperties serverProperties, KeycloakServerProperties keycloakServerProperties) {
+    return (evt) -> {
+        Integer port = serverProperties.getPort();
+        String keycloakContextPath = keycloakServerProperties.getContextPath();
+        LOG.info("Embedded Keycloak started: http://localhost:{}{} to use keycloak", port, keycloakContextPath);
+    };
+}
+
+--------------------------------------------------------------------- SPRING RETRIEVE IP FROM HTTP REQUEST
+
+A MENOS QUE CONFÍES EN LA FUENTE, NO SACARLA DE UN HEADER.. pero en el caso de usar un Proxy, se toma del header con String ip = request.getHeader("X-FORWARDED-FOR");
+
+//## Injecting globally in controller class
+@Autowired private HttpServletRequest request;
+request.getRemoteHost();
+/**
+ This could cause issues with concurrent use of the controller across multiple threads.
+ Only singletons should be injected into @Controller instances (we inject using @Autowired) 
+ Otherwise, you must use @Scope(BeanDefinition.SCOPE_PROTOTYPE)
+ on the controller class to ensure that a new instance of the controller is made with every request.
+ This is less efficient, but is a workaround if you must inject something as a property to the controller class.
+ */
+
+//## You can get the IP address statically from the RequestContextHolder as below :
+HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+String ip = request.getRemoteAddr();
+
+//## In a Controller method
+public Response method(HttpServletRequest request) {
+    String ip = request.getRemoteAddr();
+}
+
+--------------------------------------------------------------------- PURGE COMMAND LINE ARGS JCommander|ApacheCLI|SPRINGBOOT
+
+::: JCommander :::
+The idea behind JCommander is to have a easy configurable option to provide command line parameters, their default values and so on.
+Lets say your program needs an int parameter jdbc_batch_size with default value to be 2500 with an option to override that value.
+
+public static void main(String[] args) {
+	CliOptions cli = new CliOptions();
+	JCommander cmdr = new JCommander(cli, args);
+	int jdbc_batch_size = cli.jdbc_batch_size;
+	//if you wish to override default value, you provide -batchSize 1000 via command line 
+}
+public static class CliOptions {
+	@Parameter(names = "-batchSize", description = "JDBC batch size", required=false)
+	public int jdbc_batch_size = 2500;
+	@Parameter(names = { "-c", "--config" }, description = "Sets the location of the configuration file.")
+	public String configFile;
+}
+
+::: SpringBoot :::
+<groupId>org.springframework.shell</groupId>
+<artifactId>spring-shell-starter</artifactId>
+
+
+In SpringBoot we can retrieve app parameters from anywhere with @Autowired private ApplicationArguments appArgs;
+
+--------------------------------------------------------------------- AUTOMATIC RESTART AND HOT SWAPPING SPRINGBOOT APP ON DEVELOPMENT
+
+Applications that use spring-boot-devtools dependency automatically restart whenever files on the classpath change. Although for this to work you will need to run your Spring Boot App using IDE.
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-devtools</artifactId>
+	<optional>true</optional>
+</dependency>
+
+Si es un proyecto maven no SpringBoot, tenemos una herramienta:
+	https://github.com/coder-on-deck/mavenmon
+
+--------------------------------------------------------------------- RUNNING SPRINGBOOT APP FROM CLI
+
+mvn package
+java -jar target/[* | myapp-0.0.1-SNAPSHOT].jar
+mvn spring-boot:run     (for a multimodule project add -pl modulename)
+gradle bootRun
+
+PASSING ARGUMENTS
+//https://www.baeldung.com/spring-boot-command-line-arguments
+
+Spring Boot 1.x
+We can also pass multiple parameters to our app:
+mvn spring-boot:run -Drun.arguments=--spring.main.banner-mode=off,--customArgument=custom
+Note that:
+    Arguments should be comma separated
+    Each argument should be prefixed with --
+    We can also pass configuration properties, like spring.main.banner-mode shown in the example above
+
+Spring Boot 2.x
+For Spring Boot 2.x, we can pass the arguments using -Dspring-boot.run.arguments:
+mvn spring-boot:run -Dspring-boot.run.arguments=--spring.main.banner-mode=off,--customArgument=custom
+
+OVERRIDING PROPERTIES
+Command-line arguments take precedence over application.properties values
+ie. --server.port=8085
+
+Also see in link:
+Gradle Command-Line Arguments
+Passing Command-Line Arguments to the SpringBootTest
+
+--------------------------------------------------------------------- MAVEN POM TAG
+
+<!-- tag::junit[] -->
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>
+    <scope>test</scope>
+</dependency>
+<!-- end::junit[] -->
+
+--------------------------------------------------------------------- MAVEN SKIP TESTS
+
+By default the maven-surefire-plugin executes tests in '/src/test/java/*Test.java' in the stage 'test' ig: 'mvn test', or is included within 'mvn install' lifecycle
+
+mvn package -Dmaven.test.skip=true
+
+LAS OPCIONES QUE CONTIENEN EN EL POM ALGÚN SKIP TEST, SÓLO BASTA EMPAQUETAR CON ESO,
+no hará falta al hacer mvn spring-boot:run o java -jar app.jar
+
+-----
+<properties><maven.test.skip>true</maven.test.skip></properties>
+mvn package
+-----
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>3.0.0-M1</version>
+    <configuration>
+        <skipTests>true</skipTests>
+        or
+        <excludes>
+            <exclude>**/TestMagic*.java</exclude>
+            <exclude>**/TestMessage*.java</exclude>
+        </excludes>
+    </configuration>
+</plugin>
+or without configuring the plugin
+mvn package -DskipTests
+-----
+<profiles>
+    <profile>
+        <id>xtest</id>
+        <properties>
+            <maven.test.skip>true</maven.test.skip>
+        </properties>
+    </profile>
+</profiles>
+mvn package -Pxtest
+
+--------------------------------------------------------------------- MAVEN VERSIONING
+
+release, snapshot repositories, checking policy for new updated artifacts
+https://sites.google.com/site/practicadesarrollosoft/temario/scm/versionado-en-maven
+
+--------------------------------------------------------------------- JAVA VERSION MANAGER
+
+Like Node Package Manager (npm), we have a tool for Java, to install JDKs and change with ease between java versions.
+No hace cambio global al sistema, es sobre sesión del terminal, aunque se puede setear como default cada vez que abres el terminal.
+Jabba: https://github.com/shyiko/jabba
+
+--------------------------------------------------------------------- JAVA VERSION CHANGING WITH HACKTRICK
+
+*** ITS CONFIGURED!, JUST DO ON TERMINAL:
+j11 or j8
+
+* First run '/usr/libexec/java_home -V' which will output something like the following:
+
+Matching Java Virtual Machines (3):
+1.8.0_05, x86_64:   "Java SE 8" /Library/Java/JavaVirtualMachines/jdk1.8.0_05.jdk/Contents/Home
+1.6.0_65-b14-462, x86_64:   "Java SE 6" /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+1.6.0_65-b14-462, i386: "Java SE 6" /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+
+/Library/Java/JavaVirtualMachines/jdk1.8.0_05.jdk/Contents/Home
+
+* Pick the version you want to be the default (1.6.0_65-b14-462 for arguments sake) then:
+
+export JAVA_HOME=`/usr/libexec/java_home -v 1.6.0_65-b14-462`
+
+* or you can specify just the major version, like:
+
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+
+* Now when you run java -version you will see:
+
+java version "1.6.0_65"
+Java(TM) SE Runtime Environment (build 1.6.0_65-b14-462-11M4609)
+Java HotSpot(TM) 64-Bit Server VM (build 20.65-b04-462, mixed mode)
+
+* Add the export JAVA_HOME\u2026 line to your shell\u2019s init file.
+
+* For Bash (as stated by antonyh):
+
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
+* For Fish (as stated by ormurin)
+
+set -x JAVA_HOME (/usr/libexec/java_home -d64 -v1.8)
+
+* Updating the .zshrc file should work:
+
+nano ~/.zshrc
+
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0)
+
+* Press CTRL+X to exit the editor Press Y to save your changes
+
+source ~/.zshrc
+echo $JAVA_HOME
+java -version
+
+----- HACKTRICK
+
+* Adding to the above answers, I put the following lines in my .bash_profile (or .zshrc for MacOS 10.15+) which makes it really convenient to switch (including @elektromin's comment for java 9):
+
+alias j12="export JAVA_HOME=`/usr/libexec/java_home -v 12`; java -version"
+alias j11="export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version"
+alias j10="export JAVA_HOME=`/usr/libexec/java_home -v 10`; java -version"
+alias j9="export JAVA_HOME=`/usr/libexec/java_home -v 9`; java -version"
+alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
+alias j7="export JAVA_HOME=`/usr/libexec/java_home -v 1.7`; java -version"
+
+* After inserting, execute
+$ source .bash_profile
+* I can switch to Java 8 by typing the following:
+$ j8
+java version "1.8.0_102"
+Java(TM) SE Runtime Environment (build 1.8.0_102-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.102-b14, mixed mode)
+
+--------------------------------------------------------------------- SETTING ENV VARS PERMANENTLY MACOS
+
+# to modify env vars permanently
+$ vi /private/etc/profile
+or
+$ vi /etc/profile
+# once inside, i for allowing edit, edit, esc, :wq
+# refresh env vars in terminal session
+$ source /private/etc/profile
+
+--------------------------------------------------------------------- JVM UPLOAD PROJECT TO REPO TO DOWNLOAD AS DEPENDENCY
+
+We have a tool called Jitpack https://jitpack.io/
+And also GitHub provides its own way, GitHub packages (in the github account)
+JitPack also works with other Git hosting providers. The only difference is the groupId of your artifacts:
+    BitBucket: org.bitbucket.Username:Repo:Tag
+    GitLab: com.gitlab.Username:Repo:Tag
+
+--------------------------------------------------------------------- Synchronized Vs ReadWriteLock
+
+private static final ReadWriteLock rwLock = new ReentrantReadWriteLock();
+private static final Lock readLock = rwLock.readLock();
+private static final Lock writeLock = rwLock.writeLock();
+try {
+	readLock.lock();//it will let readers in whether there is no writer in
+	writeLock.lock();
+} finally {
+	readLock.unlock();
+	writeLock.unlock();
+}
+
+--------------------------------------------------------------------- ToString, equals, hashCode GUAVA HELPERS
+
+//java.util.StringBuffer
+@Override public String toString() {
+    final StringBuffer sb = new StringBuffer("Score{");
+    sb.append("type='").append(type).append('\'');
+    sb.append(", score=").append(score);
+    sb.append('}');
+    return sb.toString();
+}
+//Guava
+@Override public String toString() {
+	return MoreObjects.toStringHelper(Employee.class)
+			.add("Name", name).add("Department", dept).add("Emp Id", emplD).toString();
+}
+@Override
+public boolean equals(Object o) {
+    if (this == o)
+        return true;
+    if (o == null || getClass() != o.getClass())
+        return false;
+    Score score1 = (Score) o;
+    return Objects.equals(type, score1.type) && Objects.equals(score, score1.score);
+}
+@Override
+public int hashCode() { return Objects.hash(type, score);}
+
+--------------------------------------------------------------------- UUID JAVA GENERATOR
+
+java.util.UUID.randomUUID().toString();
+
+--------------------------------------------------------------------- RANDOM NUMBER GENERATION JAVA
+
+ThreadLocalRandom.current().nextX(...)//Mejor performance
+new java.security.SecureRandom().nextInt()//Instances of ThreadLocalRandom are not cryptographically secure. Consider instead using java.security.SecureRandom in security-sensitive applications. Additionally, default-constructed instances do not use a cryptographically random seed unless the system property java.util.secureRandomSeed is set to true.
+Math.random();//compartido en todos los threads, es thread-safe, pero por detrás comparte una instancia de Random.class.. Mejor usar ThreadLocalRandom.current().nextX(...)
+new Random().nextInt();
+
+--------------------------------------------------------------------- GET EPOCH TIME IN MILLIS
+
+java.time.Instant.now().getEpochSecond(); //JAVA 8+
+Calendar.getInstance().getTimeInMillis();
+System.currentTimeMillis();
+Date.getTime();
+
+--------------------------------------------------------------------- SPRING HTTP REST RESPONSE WRAPPER
+
+@ResponseStatus(HttpStatus.CREATED)   //over a Post method
+//mejor usar ResponseEntity, el anterior sobreescribe
+return ResponseEntity.noContent().build();
+return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+return ResponseEntity.of(repository.find(key));
+return ResponseEntity.ok(value);
+
+--------------------------------------------------------------------- BUILD A FAT JAR WITH MAVEN SHADE PLUGIN
+
+https://maven.apache.org/plugins/maven-shade-plugin/
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>3.2.4</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                    <configuration>
+                        <transformers>
+                            <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <mainClass>hello.HelloWorld</mainClass>
+                            </transformer>
+                        </transformers>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+
+--------------------------------------------------------------------- BUILD A FAT JAR ON NETBEANS
+
+Netbeans separa el .jar de las librerías, necesitando tener la carpeta lib junto al .jar, para hacer un .jar con todo dentro hacemos esto:
+En el build.xml, al final y antes de la etiqueta de cierre del proyecto agregamos:
+<target name="package-for-store" depends="jar">
+    <!-- Change the value of this property to be the name of your JAR minus the .jar extension. It should not have spaces.
+         <property name="store.jar.name" value="MyJarName"/>
+    -->
+    <property name="store.jar.name" value="Gestionturnos_Servidorlocal_v1.0"/>
+
+    <!-- do not edit below this line -->
+    <property name="store.dir" value="store"/>
+    <property name="store.jar" value="${store.dir}/${store.jar.name}.jar"/>
+    <echo message="Packaging ${application.title} into a single JAR at ${store.jar}"/>
+    <delete dir="${store.dir}"/>
+    <mkdir dir="${store.dir}"/>
+    <jar destfile="${store.dir}/temp_final.jar" filesetmanifest="skip">
+        <zipgroupfileset dir="dist" includes="*.jar"/>
+        <zipgroupfileset dir="dist/lib" includes="*.jar"/> //COMENTAR si no se usan otras librerías pq no existe directorio lib
+
+        <manifest>
+            <attribute name="Main-Class" value="${main.class}"/> //AQUÍ se usa javafx.main.class si es un Proyecto JavaFX
+        </manifest>
+    </jar>
+
+    <zip destfile="${store.jar}">
+        <zipfileset src="${store.dir}/temp_final.jar"
+        excludes="META-INF/*.SF, META-INF/*.DSA, META-INF/*.RSA"/>
+    </zip>
+
+    <delete file="${store.dir}/temp_final.jar"/>
+</target>
+Now in files view of the project right click on build.xml file, then select Runtarget > Other Targets > package-for-store.
+
+--------------------------------------------------------------------- SIGN APP WITH PERSONAL CERTIFICATE
+
+//Esto crea un baúl de certificados personales y el certificado me con validez de 365 días
+>keytool -genkey -keystore myKeystore -alias me -validity 365
+//Si queremos añadir otro certificado (para otra app) al baúl ya existente
+>keytool -selfcert -keystore myKeystore -alias me
+//Firmamos la app .jar con el certificado me ubicado en el baúl myKeystore
+>jarsigner -keystore myKeystore Proyecto.jar me -verbose
+
+--------------------------------------------------------------------- CALCULAR DÍAS SEMANAS DEL AÑO
+
+-tomamos qué día cae el 01 enero de ese año (L,M,X,J,V,S,D)
+-con esto evaluamos desviación, suponiendo que si fuera un día lunes, desviación es cero.
+-consideramos escenario ideal, donde empieza un lunes el año.
+01 02 03 04 05 06 07
+08 09 10 11 12 13 14
+-armamos vector de vectores para cada semana
+mes actual=1
+sem1 del 1 al 7
+sem2 del 1+7=8 al 14
+sem3 del 8+7=15 al 21
+sem4 del 15+7=22 al 28
+sem5 del 22+7=29 al 35 ? (no)
+    -> mes actual del calculo tiene 31d
+    31-29=2, 2+1=3, 7-3=4
+    -> 29 al 04
+    próxima comienza en 05
+    mes actual++ (2)
+sem6 del 05 al 11
+sem7 del 12 al 18
+sem8 del 19 al 25
+sem9 del 26 al 32 ? (no)
+    -> mes actual 28d
+    28-26=2, 2+1=3, 7-3=4
+    -> 26 al 04
+    próxima comienza en 05
+    mes actual++ (3)
+sem10 del 5 al 11
+sem11 del 12 al 18
+sem12 del 19 al 25
+sem13 del 26 al 32 ? (no)
+    -> mes actual 31d
+    31-26=5, 5+1=6, 7-6=1
+    -> 26 al 01
+    próxima comienza en 02
+    mes actual++ (4)
+sem14 del 2 al 8
+...
+a todo le sumo la desviación de días en la sem 01 !
+
+--------------------------------------------------------------------- STRING TO BYTE ARRAY AND REVERSE
+https://www.baeldung.com/java-string-to-byte-array
+
+No recuerdo que haya en el link, pero:
+byte[] bytes = "AnyString".getBytes("UTF-8");
+
+--------------------------------------------------------------------- SEND VIDEO IN CHUNKS TO SERVER (STREAMING?)
+
+Android: OutOfMemoryError while uploading video - how best to chunk?
+https://stackoverflow.com/questions/2599305/android-outofmemoryerror-while-uploading-video-how-best-to-chunk/3206047#3206047
+You can not have complete video in memory in byte[]. So you should read file not to byte[] but directly to HttpUrlConnectio.getOutputStream().
+But even after that you will still get OutOfMemory because HttpUrlConnection caches all output data in memory and sends it to network only when you are complete writing.
+To override this behaviour you can use HttpUrlConnection.setChunkedStreamingMode() or HttpUrlConnection.setFixedLengthStreamingMode().
+If your server accepts stream chunks you can use setChunkedStreamingMode(). Otherwise you will have to use setFixedLengthStreamingMode. To use setFixedLengthStreamingMode you will need to know exact content length before starting streaming data, so it is a little bit tricky.
+No more OutOfMemory at this point.
+
+If you have your video in file you can choose another approach, much more simple. Use HttpClient and FileBody like that 'How to send HTTP POST request and receive response?' // stackoverflow.com/questions/3038409/how-to-send-http-post-request-and-recieve-response/3038747#3038747
+    I think they implement all the methods above and you will not have to worry about that.
+
+--------------------------------------------------------------------- HTTP FIRE AND FORGET WORKAROUND
+
+Http request-response, and http fire-and-forget(workaround):
+    https://stackoverflow.com/questions/38277471/fire-and-forget-for-http-in-java
+
+--------------------------------------------------------------------- TERMINATING A SPRING BOOT APP
+https://www.baeldung.com/spring-boot-shutdown
+
+* no usar System.exit(code), termina indebidamente!
+
+* exit(), is preferred when we need to pass an error code to another environment, say JVM for further actions
+int exitCode = SpringApplication.exit(appContext, () -> 0);
+
+* close() will work perfectly. This destroys all the beans, releases the locks, then closes the bean factory.
+ConfigurableApplicationContext appContext = SpringApplication.run(Example.class, args);
+appContext.close();
+- exit y close tienen la misma salida en consola, deben hacer lo mismo
+
+* Exposing /actuator/shutdown endpoint, or our own endpoint, to make it possible to terminate the applications externally via HTTP
+
+* Application PID gives more flexibility, as we can also start or restart the application with the use of bash script.
+directly looking for pid or registering on a file to make a script:
+SpringApplicationBuilder app = new SpringApplicationBuilder(Application.class)
+    .web(WebApplicationType.NONE);
+    app.build().addListeners(new ApplicationPidFileWriter("./bin/shutdown.pid"));
+    app.run();
+kill $(cat ./bin/shutdown.pid)
+
+
+* ejemplo de .exit() tomando el appContext inyectado.
+@Component public class ShutdownManager{
+    @Autowired private ApplicationContext appContext;
+    
+    public void initiateShutdown(int returnCode){
+        SpringApplication.exit(appContext, () -> returnCode);
+    }
+}
+
+* @PreDestroy en beans nos permite hacer algo antes de destruirlo
+
+--------------------------------------------------------------------- CONFIGURATION ORDER IN SPRINGBOOT
+
+*También podemos configurar un orden al iniciar un bean
+https://www.baeldung.com/running-setup-logic-on-startup-in-spring
+The constructor
+the @PostConstruct annotated methods
+the InitializingBean´s afterPropertiesSet() method
+the initialization method specified as init-method in XML
+
+
+Resumen:
+.@DependsOn sirve, pero no queremos ponerlo en las 10 clases que levantan beans
+.no sirvió colocando clase de configuración más arriba en los paquetes o en ruta raíz del classpath
+.no sirvió con @Order, esto sirve para beans de un mismo tipo y al agregar a una lista por ejemplo
+.no sirvió @AutoConfigureBefore, debe utilizarse de la manera que describiremos abajo
+
+fichero 'Spring Boot configuration order.txt'
+
+--------------------------------------------------------------------- REVERSE ENGINNERING ANDROID APK
+
+ONLINE
+http://www.javadecompilers.com/apk
+LOCAL
+descargamos:
+apktool   //http://ibotpeaches.github.io/Apktool/    https://ibotpeaches.github.io/Apktool/documentation/    (YA INSTALADO)
+dex2jar   //https://sourceforge.net/projects/dex2jar/
+jd-gui   //http://java-decompiler.github.io/
+Pasos:
+1.obtenemos APK   //https://www.nextpit.es/como-extraer-apk
+2.con apktool obtenemos recursos que no sean código (xml views, manifest, etc)
+    apktool instalado en usr/local/bin
+    cd /usr/local/bin
+    apktool d myAPK.apk
+    genera una carpeta con los recursos (se puede haber guardado en usr/local/bin)   //(el código estará en ficheros .smali difícil de interpretar)
+3.con dex2jar y jd-gui obtenemos código fuente
+    guardar jd-gui.jar y dex2jar (unzipped) en una misma carpeta 'folderName'
+    otorgamos todos los permisos a dicha carpeta
+        chmod -R 0777 folderName
+    creamos una copia del .apk y cambiamos la extensión a .zip
+        dentro el fichero classes.dex, lo guardamos en la carpeta dex2jar 'folderName/dex2jar'
+    cambiamos a folderName o a dex2jar
+        cd /...../folderName/dex2jar
+    ejecutamos dex2jar sobre classes.dex (mejor arrastrando los ficheros a la ventana del terminal)
+        /Users/..../folderName/dex2jar-2.0/d2j-dex2jar.sh   /Users/..../folderName/dex2jar-2.0/classes.dex 
+        se obtiene 'classes-dex2jar.jar'
+    ejecutamos jd-gui.jar con doble click
+        abrimos fichero anterior 'classes-dex2jar.jar'
+        extraemos el código fuente clase por clase  //será 95% como el original, algunas micro diferencias
+        or save all sources //got stuck (no culmina)
+            Open "jd-gui.cfg" with a text editor. "LastUri", in section "Decompilation", contains the name of the CLASS file causing the crash. A workaround is to open the JAR file and remove or change extension of this CLASS file.
+
+
+* OFUSCAR CÓDIGO CON PROGUARD O DEXGUARD
+https://developer.android.com/studio/build/shrink-code?hl=es
+
+--------------------------------------------------------------------- STRING FORMATTING IN JAVA
+https://dzone.com/articles/java-string-format-examples
+
+String output = String.format("%s = %d", "joe", 35);
+
+printf() or the format() method of System.out and System.err PrintStreams.
+System.out.printf("My name is: %s%n", "joe");
+
+StringBuilder sb = new StringBuilder();
+Formatter fmt = new Formatter(sb);
+fmt.format("PI = %f%n", Math.PI);
+fmt.format("%s", "string se concatenará al stringbuilder");
+System.out.print(sb.toString());
+
+Default formatting:
+String.format("%d", 93); // prints 93
+Specifying a width:
+String.format("|%20d|", 93); // prints:  |                  93|
+Left-justifying within the specified width:
+String.format("|%-20d|", 93); // prints: |93                  |
+Pad with zeros:
+String.format("|%020d|", 93); // prints: |00000000000000000093|
+AND MANY MORE...
+
+--------------------------------------------------------------------- SPRING BEANS LAZY INITIALIZATION
+https://www.baeldung.com/spring-boot-lazy-initialization
+
+spring.main.lazy-initialization=true
+or
+spring:
+  main:
+    lazy-initialization: true
+or
+@Lazy(false|true) when using @Bean
+
+--------------------------------------------------------------------- JAVA LIST INITIALIZATION
+
+//impl is java.util.Arrays.ArrayList   not   java.util.ArrayList
+//no se puede ampliar, usar add o addAll arroja exception
+//podemos inicializar una con new ArrayList<>(), luego lista.addAll(Arrays.asList("a","b"))
+List<String> list = Arrays.asList(new String[]{"foo", "bar"});
+List<String> list = Arrays.asList("foo", "bar");
+
+//this one is backed by the array, if we mod the array, it afects the list
+String[] array = {"foo", "bar"};
+List<String> list = Arrays.asList(array);
+
+//Java8+
+//more memory
+//there's no general contract about the mutability, serializability or thread-safety of the returned instance. 
+List<String> list = Stream.of("foo", "bar").collect(Collectors.toList());
+
+//Java9+
+//the returned instances are immutable. Beyond that, the factory methods have several advantages in space efficiency and thread safety.
+List<String> list = List.of("foo", "bar", "baz");
+Set<String> set = Set.of("foo", "bar", "baz");
+
+//do not use this one
+//'double brace initialization' (there is no such syntax in Java, is just a inner class)
+//The brevity of this syntax is tempting however it's considered an anti-pattern.
+//With the outer braces, we declare an anonymous inner class which will be a subclass of the ArrayList. 
+List<String> cities = new ArrayList() {{
+                                add("New York");
+                                add("Rio");
+                                add("Tokyo");
+                            }};
+
+--------------------------------------------------------------------- THROW EXCEPTION WITHOUT SHOWING FULL STACKTRACE
+
+//// Workaround to avoid showing full exception stacktrace on log ////
+throw new AccessDeniedWithoutLoggingException("¡Acceso denegado!");
+public static class AccessDeniedWithoutLoggingException extends AccessDeniedException {
+    public AccessDeniedWithoutLoggingException(String msg) {super(msg);}
+    @Override public synchronized Throwable fillInStackTrace() {
+        return this;
+    }
+}
+
+--------------------------------------------------------------------- CURL HTTP REQUEST
+
+curl -X GET "http://host:port/path" -H "accept: */*" -H "Authorization: Bearer mytoken" -H "Tbt: 6527465"
+
+curl -X POST "url" -H "accept: application/json" -d '{"data": "datos"}'
+
+--------------------------------------------------------------------- JAVA HASHMAP, LINKED HASHMAP, TREEMAP, OTHER MAPS
+https://www.w3resource.com/java-tutorial/java-maps.php
+
+HashMap/Hashtable (ambos sin orden, HashTable es legacy y usa synchronized en todos los métodos, HashMap no)
+LinkedHashMap (ordenado como se insertaron)
+TreeMap (ordenado por key menor a mayor)
+recomendable usar una key que implemente Comparable interface (es más ágil cuando hay posibilidad de que 2+ keys produzcan el mismo hash).
+recomendable usar params de constructor: initial
+ConcurrentHashMap
+    The table is dynamically expanded when there are too many collisions (i.e., keys that have distinct hash codes but fall into the same slot modulo the table size), with the expected average effect of maintaining roughly two bins per mapping (corresponding to a 0.75 load factor threshold for resizing).
+    There may be much variance around this average as mappings are added and removed, but overall, this maintains a commonly accepted time/space tradeoff for hash tables. However, resizing this or any other kind of hash table may be a relatively slow operation. When possible, it is a good idea to provide a size estimate as an optional initialCapacity constructor argument.
+    An additional optional loadFactor constructor argument provides a further means of customizing initial table capacity by specifying the table density to be used in calculating the amount of space to allocate for the given number of elements. Also, for compatibility with previous versions of this class, constructors may optionally specify an expected concurrencyLevel as an additional hint for internal sizing.
+    Note that using many keys with exactly the same hashCode() is a sure way to slow down performance of any hash table. To ameliorate impact, when keys are Comparable, this class may use comparison order among keys to help break ties.
+    Like Hashtable but unlike HashMap, this class does not allow null to be used as a key or value
+new ConcurrentHashMap<String,ResponseEntity>(1_000_000, 0.75f, 200);//defaults are: initial_cap: 16, load_factor: 0.75
+
+--------------------------------------------------------------------- SET A THREAD UncaughtExceptionHandler
+
+Thread.currentThread().setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+    public void uncaughtException(Thread t, Throwable e) {
+        //REFERENCES THE EXTERNAL CLASS
+        //WebSocketServer.class contains an internal class, ie. MyWorker extends Thread
+        //so we reference external class log object with:
+        WebSocketServer.this.log.error("Uncaught exception in thread {}: {}", t.getName(), e);
+    }
+});
+
+--------------------------------------------------------------------- JAVA GETTING CURRENT TIME
+
+//Java 7- Calendar & System.currentTimeMillis
+        
+System.out.println(Calendar.getInstance().getTimeInMillis());
+System.out.println(System.currentTimeMillis());
+
+//Java 8+ Instant
+
+//System.out.println(Instant.EPOCH.toEpochMilli()); // 0
+System.out.println(Instant.now().toEpochMilli());
+System.out.println(Instant.now(Clock.systemUTC()).toEpochMilli());
+Instant start = Instant.now();
+Instant finish = Instant.now();
+System.out.println("Elapsed: " + Duration.between(start, finish).toMillis());
+
+//----- Apache Commons Lang StopWatch
+
+StopWatch watch = new StopWatch();
+watch.start();
+//watch.getStartTime();
+//watch.stop();
+//watch.reset();
+//watch.split();
+//watch.unsplit();
+//watch.suspend();
+//watch.resume();
+//watch.getTime();
+//watch.getSplitTime()
+
+StopWatch watch = new StopWatch();
+watch.start();
+try { Thread.sleep(1000); } catch (Exception e) {}
+watch.split();
+try { Thread.sleep(1000); } catch (Exception e) {}
+System.out.println("Elapsed " + watch.getSplitTime());//1002
+watch.unsplit();
+watch.suspend();
+try { Thread.sleep(1000); } catch (Exception e) {}
+watch.resume();
+watch.split();
+System.out.println("Elapsed: " + watch.getSplitTime());//2005
+System.out.println("Elapsed " + (Instant.now().toEpochMilli()-watch.getStartTime()));//3005
+
+--------------------------------------------------------------------- SPRING BOOT GET SERVER PORT ON RUNTIME
+
+private int port;
+
+//---- with fixed port
+1//@LocalServerPort private int port;   (fetches local.server.port)
+2//@Autowired Environment env;   env.getProperty("server.port");
+3//@Value("${server.port}") private int port;
+4//@Autowired private ServerProperties serverProperties;   serverProperties.getPort()
+
+//---- with random port
+Spring Boot starts a ServletWebServerApplicationContext if the embedded web server starts.
+Therefore, we can get the WebServer from the context object to obtain the server information or manipulate the server:
+
+1//@Autowired private ServletWebServerApplicationContext webServerAppCtxt;   webServerAppCtxt.getWebServer().getPort()
+2//@EventListener public void onApplicationEvent(final ServletWebServerInitializedEvent event) { port = event.getWebServer().getPort(); }
+
+--------------------------------------------------------------------- SPRING BOOT DECLARE BEAN FOR TESTS
+
+//In an inner static class
+
+@TestConfiguration
+static class TestConfig {
+
+    /*@Bean
+    public RestTemplateBuilder restTemplateBuilder() {
+        return new RestTemplateBuilder()
+                .basicAuthentication("mkyong", "password")
+                .setConnectTimeout(Duration.ofSeconds(5));
+    }*/
+    
+    //@Bean (DEACTIVATED)
+    public RateLimitKeyGenerator rateLimitKeyGenerator(RateLimitProperties properties, RateLimitUtils rateLimitUtils) {
+        return new DefaultRateLimitKeyGenerator(properties, rateLimitUtils) {
+            @Override
+            public String key(final HttpServletRequest request, final Route route, final Policy policy) {
+                return super.key(request, route, policy) + "_" + request.getMethod();
+            }
+        };
+    }
+}
+
+//In a separated class and then @Import(TestConfig.class) in the test class
+
+--------------------------------------------------------------------- OBTAIN A RANDOM NUMBER OR ALPHANUMERICAL STRING
+
+org.apache.commons.lang3.RandomStringUtils.randomNumeric
+org.apache.commons.lang3.RandomStringUtils.randomAlphabetic
+
+--------------------------------------------------------------------- SPRINGBOOT - HOW TO CONFIGURE A TEST TO DEPLOY IN RANDOM PORT
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest(classes = ConfigServerApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+
+@Value("${local.server.port}") private int port = 0;
+@Test public void envPostAvailable() {
+    @SuppressWarnings("rawtypes")
+    ResponseEntity<Map> entity = new TestRestTemplate().getForEntity("http://localhost:" + port + "/admin/env", Map.class);
+    assertEquals(HttpStatus.OK, entity.getStatusCode());
+}
+
+
+import static org.assertj.core.api.BDDAssertions.*;
+then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+--------------------------------------------------------------------- PERMGEN JAVA CONCEPT
+
+PermGen (Permanent Generation) is a special heap space separated from the main memory heap.
+PermGen is indeed an area in memory where Java used to keep its loaded classes metadata and static content (static methods, primitive variables, refs to static objects).
+So, many of us have came across OOM in PermGen, if there were, for example a lot of classes.
+However it is possible to tune it in some ways, by for example specifying a max limit for the area. (ig. -XX:MaxPermSize=384m)
+Before Java 7, the String Pool was also part of this memory.
+Since Java 8, PermGen area has been replaced by MetaSpace area, which is more efficient and is unlimited by default (or more precisely - limited by amount of native memory, depending on 32 or 64 bit jvm and OS virtual memory availability).
+
+Why the name "PermGen" ?
+This permgen was named in early days of Java. Permgen mains keeps all the meta data of loaded classes. But the problem is that once a class is loaded it will remain in the JVM till JVM shutdown. So name permgen is opt for that.
+
+--------------------------------------------------------------------- 
+--------------------------------------------------------------------- 

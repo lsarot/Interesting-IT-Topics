@@ -1,0 +1,114 @@
+﻿
+
+---------------------------------------------
+---------------- REACT GUIDE ----------------
+---------------------------------------------
+
+instalar node.js, este viene con npm(node pkg manager), adicional podemos tener nvm(node version mngr, para poder utilizar varias versiones y cambiar a una u otra)
+
+npx create-react-app my-app //npm 5.2+ and higher
+cd my-app
+npm start //inicia el servidor con la aplicación
+npm run build //agrupa la app en archivos estáticos para producción (optimiza, comprime, empaqueta el código para producción, pero no se puede debugear, se usa al final)
+npm run eject
+//Elimina esta herramienta y copia las dependencias de compilación, 
+ficheros de configuración y scripts en el directorio de la aplicación. 
+Si ejecuta esto, no se puede volver atrás.
+
+
+npm init react-app my-app //is available in npm 6+
+
+
+CONSULTAR, EN LAMINAS USA:
+npm i -g create-react-app
+
+
+
+-----------------------------
+
+JSX ES UN LENGUAJE 95% PARECIDO A HTML,
+pero se traspila a JS puro que trabaja con html como la salida.
+la extensión puede ser .js o .jsx
+debe importarse si se va a llamar
+es una clase que hace extends Component //o PureComponent, ambas se importan de 'react' con import React, {Component} from 'react'
+
+un Component puede ser una clase, con sus métodos render y constructor si hace falta,
+o un stateless component, que es una fx simplemente:
+let MiComponente = ()=>{<div>hola</div>}
+
+
+//PURE COMPONENT
+para optimizar las operaciones de renderizado, si un componente hijo extiende de PureComponent,
+si se le pasan las mismas props, no se renderizará nuevamente
+
+
+DEBEMOS cambiar estos nombres en las etiquetas simplemente(en JSX):
+class: className
+for: htmlFor
+camelCase para eventos: onClick, onChange, etc
+se deben cerrar todas las etiquetas siempre, no con />, sino ie. <tag></tag>
+
+los atributos de la etiqueta son objetos JS:
+const style = {color:'blue'}
+<div style={style}></div>
+
+//this.props
+<a onClick={this.props.method}>myLink</a> //un callback a una fx pasada por parámetro al llamar al Component
+<a onClick={()=>this.props.method(param1,paramN)}>myLink</a> //sólo si la fx recibe parámetros, sino no sirve
+
+//this.state
+this.state hace referencia al objeto state del componente
+si se modifica el objeto, se llama a render nuevamente
+se modifica con this.setState({x:value, y:value}), pero este método realiza los cambios al final del flujo de todo el método
+podemos hacerlo síncrono pasando una función como segundo parámetro: this.setState({x:value}, ()=>{/**/})
+o setearlo a la fuerza, pero parece no ser lo recomendado: this.state.x=value
+
+//PropTypes
+MiComponente.defaultProps = {...}
+MiComponente.propTypes= {//sólo algunos de los que existen
+   paramX: PropTypes.func,
+   paramY: PropTypes.number,
+   time: PropTypes.shape({
+      hours: PropTypes.string,
+      minutes: PropTypes.string,
+      seconds: PropTypes.string,
+      milliseconds: PropTypes.string
+   }).isRequired
+}
+
+
+
+//REFERENCIA A NODOS HTML
+<button ref="miboton"> //accedemos con this.refs.miboton al nodo del DOM real. no el virtual
+
+//REFERENCIA A NODOS COMPONENTES REACT
+<MyComponentref="comp"/>
+this.refs.comp.unoDeSusMetodos()
+this.refs.comp.state
+
+
+//COMPONENTE CONTROLADO O NO CONTROLADO
+si usamos en un input de un form, value={this.props.valor}, es controlado por React
+si no lo usamos, o usamos defaultValue, pero usamos un ref='miref', luego accedemos con this.refs.miref.value, será no controlado
+
+
+
+//COMPONENTE VS CONTENEDOR
+componente es aquél que usamos como hijo normalmente, tiene poca o nada de lógica, se le pasa todo por props
+controlador, funje como padre de componentes, su render no tiene html sino que incluye otros componentes
+!realmente no hay diferencia a nivel de código, ambos igual extienden de Component
+
+//CICLO DE VIDA DE COMPONENTES
+MOUNTING, UPDATING, UNMOUNTING
+MOUNTING: getDefaultProps, getInitialState, componentWillMount, render, componentDidMount
+UPDATING: componentWillReceiveProps(nextProps), shouldComponentUpdate(nextProps, nextState)->boolean, componentWillUpdate(nextProps, nextState), render, componentDidUpdate(prevProps, prevState)
+UNMOUNTING: componentWillUnmount
+
+
+
+
+
+
+
+
+

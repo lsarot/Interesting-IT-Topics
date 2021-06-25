@@ -1,0 +1,105 @@
+
+/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ * :::::::::::::::::: GUIDE FOR USING TASK CORRECTLY ::::::::::::::::::
+ * ::::::::::::::::::::::::::: BY LED TEAM ::::::::::::::::::::::::::::
+ * 
+    //si necesitas poco control
+    Parallel.Invoke(() => DoSomeWork(), () => DoSomeOtherWork());
+    -------------
+    async methods are different than normal methods. Whatever you return from async methods are wrapped in a Task.
+
+    If you return no value(void) it will be wrapped in Task, If you return int it will be wrapped in Task<int> and so on.
+    If your async method needs to return int you'd mark the return type of the method as Task<int> and you'll return plain int not the Task<int>. Compiler will convert the int to Task<int> for you.
+
+    Adding the async keyword is just syntactic sugar to simplify the creation of a state machine. In essence, the compiler takes your code:
+    public async Task MethodName()
+    {
+         return;
+    }
+    And turns it into:
+    public Task MethodName()
+    {
+         return Task.FromResult<object>(null);
+    }
+
+    private async Task<int> MethodName()
+    {
+        await SomethingAsync(); // -> private static Task SomethingAsync() {return null;}
+
+        return 42;//Note we return int not Task<int> and that compiles
+    }
+    Sameway, When you return Task<object> your method's return type should be Task<Task<object>>
+
+    public async Task<Task<object>> MethodName()
+    {
+         return Task.FromResult<object>(null);//This will compile
+    }
+    Since your method is returning Task, it shouldn't return any value. Otherwise it won't compile.
+
+    public async Task MethodName()
+    {
+         await Task.CompletedTask;
+    }
+
+    Keep in mind that async method without an await statement is not async.
+
+    ----------------------------------------------------
+
+    You need to use the await keyword when use async and your function return type should be generic.
+    Here is an example with return value:
+    public async Task<object> MethodName()
+    {
+        return await Task.FromResult<object>(null);
+    }
+    Here is an example with no return value:
+    public async Task MethodName()
+    {
+        await Task.CompletedTask;
+    }
+
+    ----------------------------------------------------
+
+    public static async Task<string> MyTask()
+    {
+        //C# anonymous AsyncTask
+        return await Task.FromResult<string>(((Func<string>)(() =>
+        {
+            // your code here
+            return  "string result here";
+
+        }))());
+    }
+
+    -----------------------------------------------------
+
+    ::::::::::: RESUMEN :::::::::::
+
+    .SI EL MÉTODO NO USA async Task en su firma:
+            Task.Run(() => MyMethod());
+
+    .SI EL MÉTODO USA async Task:
+        .envolver su código así:
+	    public x method() {
+	        await Task.Run(() => { CÓDIGO... });
+	    }
+        .o no envolverlo y al final retornar await Task.CompletedTask o el tipo de retorno del método
+        .Y lo llamamos como un método normal, pero recibiendo Task: Task t = MyMethod(); //recordar que en C# métodos comienzan en mayúscula.
+            .o directamente: MyMethod().ConfigureAwait(true);
+            
+   .SI LA OPERACIÓN PUEDE TOMAR MUCHO TIEMPO (crea un nuevo Thread dedicado):
+            var taskC = new Task(() => MyLongRunningMethod(), TaskCreationOptions.LongRunning | TaskCreationOptions.PreferFairness);
+            taskC.Start();
+
+    ***** EN BASE AL TIPO DE TAREA:
+
+    //purely CPU-bound work
+    // Documentation: This method is CPU-bound.
+    void DoWork(){};
+    await Task.Run(() => DoWork());
+    
+    //mixture of CPU-bound and I/O-bound
+    // Documentation: This method is CPU-bound.
+    Task DoWorkAsync(){};
+    await Task.Run(() => DoWorkAsync());
+
+*/

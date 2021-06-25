@@ -1,0 +1,15 @@
+JMC JMissionControl (JMX)
+
+JMC (JavaMissionControl) for managing local or remote JVM (JMC is a JMX client, as JConsole, but more supported).
+
+First you need to enable the external JMX agent on the server. They disable security and authentication, so NEVER use it like this in production:
+
+-Dcom.sun.management.jmxremote.port=7091
+-Dcom.sun.management.jmxremote.authenticate=false
+-Dcom.sun.management.jmxremote.ssl=false
+
+In case it still doesn't work try adding -Djava.rmi.server.hostname=<ip>
+
+In case of firewalls, SSH-tunnelling, etc. use
+-Dcom.sun.management.jmxremote.rmi.port=[...] (mismo que port), is needed to let the client access remote RMI-objects through the tunnel using a known port instead of a random one.
+-Djava.rmi.server.hostname=[...] (localhost on ssh-tunnel) might be necessary as well.

@@ -1,0 +1,203 @@
+------------------------------------------------- ALREADY STUDIED
+Guava
+BeanValidation-JSR380
+Generics
+JUnit, Mockito, PowerMock
+Project structure
+ThreadPool Java & propio. Future (Task), Callable, ExecutorService
+JNI, JNA
+JNDI dataSource
+H2 DDBB (inMemory or file)
+Hibernate HQL/HCQL
+MyBatis
+JPA annotations
+Oracle PL/SQL
+SPRING:
+	https://spring.io/projects/
+	Spring (Standard) on Maven project
+	Spring Boot 2 features
+	Deploy Spring Boot project on external Tomcat
+	Spring Data JPA (con varias BBDD y varias con Hibernate en mismo proyecto)
+		Repository as interface or class (Hibernate), HQL/HCQL(lo más parecido a Linq de .NET)
+	Spring Security (Basic|Digest, FormLogin, OAuth2 (KeyCloak or 3rd party provider)) (OAuth SSO), JWT only, Https
+	Spring Rest
+	Spring Cache
+	Spring Shell
+	Microservices
+		Spring Cloud Netflix Eureka (discovery service) (alternatives are Apache ZooKeeper and HashiCorp Consul)
+		Spring Cloud Netflix Zuul (api gateway/proxy)
+		Spring Cloud Netflix Ribbon (load balancing) (Zuul comes with Ribbon, Ribbon may use Eureka to discover services and balance requests)
+		Spring Cloud Netflix Hystrix (fallback/circuit-breaker)
+		Spring Cloud Config (centralized configuration for every node)
+	To see:
+		Spring Roo (bullshit)
+		Spring AMQP
+		Spring Batch
+Angular (basics)
+Swagger
+Cassandra
+MongoDB
+PostgresQL (docker image)
+Docker (basics)
+Jenkins (basics)
+SonarQube (basics)
+RSockets (req-resp,fire-and-forget,req-stream,channel) (Android Oreo+)
+Logging facades & frameworks
+	Facades: SLF4J, ApacheCommonsLogging/JakartaCommonsLogging
+	Frameworks: Log4j2, Logback, java.util.Logging
+Local & distributed caching
+	Cache2k, Caffeine, Guava, JCache (local)
+	LevelDB (local with files)
+	Redis (Redisson, Lettuce)
+	Infinispan
+	Hazelcast (also distributed computing platform)
+Jitpack & GitHub_packages
+Reactive programming (Spring WebFlux)
+WebSockets (basic library, spring non reactive con stomp protocol, reactive no pude configurar)
+Spring Rest Client abstractions
+	Spring RestTemplate (TestRestTemplate) (blocking)
+	Spring Netflix FeignClient (uses RestTemplate under the hood, we create interfaces with service-names instead of service-urls)
+	Spring 5 WebClient (WebTestClient) (blocking/non-blocking reactive)
+
+
+
+------------------------------------------------- EAGER TO STUDY OR DEV
+
+Apache JMeter
+SonarCloud
+GraphQL
+ElasticSearch
+---------
+AMQP, RabbitMQ (RSockets es una tecnología más moderna, y websockets stomp es in-memory msg broker y más sencillo)
+SpringBoot 2.3 viene con feature para sondeo de nuestra app y su estado (cuando despliega con Kubernetes) //https://www.baeldung.com/spring-liveness-readiness-probes
+probar code together plugin eclipse
+Flyway / Liquibase (DDBB version control)
+OWN AUDIO CALL: USAR WEBSOCKETS Y BUFFERS PARA PASAR UN TEXTO Y LUEGO AUDIO
+SPRINGBOOT howto-embedded-web-servers //https://docs.spring.io/spring-boot/docs/2.1.9.RELEASE/reference/html/howto-embedded-web-servers.html
+Apache Kafka (distributed, replayable messaging system)
+	//Redis se puede usar con soluciones de streaming, como Apache Kafka y Amazon Kinesis.
+Python, Go, Kotlin
+
+SEND GIANT FILE TO SERVER ASYNC
+Transfer-chuncked header
+PROCESS LARGE DB TX IN BATCH
+Getting the CRC checksum of a byte array and adding it to that byte array
+ANDROID JETPACK
+Thrift (combinar lenguajes)
+Scribe
+React Native, Apache Ionic (Cordova before)
+monkeyrunner, monkey, perfectomobile.com
+
+
+
+------------------------------------------------- MISC BIG PICTURE
+
+----- NO-SQL WORLD -----
+//No todas cumplen la misma función. Las key-value son usualmente librerías de cacheo en memoria. ElasticSearch es para búsqueda a texto completo en una bbdd.
+[wide-column] Cassandra, HBase
+[document] MongoDB, (CouchBase, Membase, CouchDB), DynamoDB(aws), DocumentDB(aws), DocumentDB(azure. Before CosmosDB), ElasticSearch
+[key-value] Redis, DynamoDB(aws), Guava, Cache2k, Caffeine, MemCached, LevelDB
+[graph] Neo4j, JanusGraph
+/*Nace CouchDB, bbdd tipo documento. MemCached por otro lado es una librería de caché key-value. Membase la crean los de MemCached, pero para que tenga almacenamiento en disco (SQLite behind, and then will be CouchDB when CouchBase appears) y consultas tipo ddbb; Membase se asocia con CouchOne (los que crean CouchDB) y crean CouchBase. If we search for Membase we'll find CouchBase.
+...Membase server is memcached with persistence and very simple cluster management interface. It's strengths are the ability to do very low latency queries as well as the ability to easily add and remove servers from a cluster. Late this summer however Membase and CouchDB will be merged together to form the next version of Couchbase. So what will the new version of Couchbase look like?
+Right now in Membase the persistence layer for memcached is implemented with SQLite. After the merger of these two products CouchDB will be the new persistence layer. This means that you will get the low latency requests and great cluster management that was provided by Membase and you will also get the great document oriented model that CouchDB is known for. */
+
+
+----- FULL-TEXT search engine -----
+ElasticSearch (and Solr) are full-text search and indexing servers, both based on Lucene (library).
+ElasticSearch Uses Query DSL as language, a very simple and flexible language in JSON. Responses are also JSON only. Request are RESTful based (there are language specific libs).
+Elastic Stack (ELK Stack), ElasticSearch, Logstash, Kibana.
+	https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
+Nutch es un robot y motor de búsqueda basado en Lucene. Integra todo lo que hace falta para completar un motor de búsqueda de páginas web.
+// https://lucene.apache.org/		https://sematext.com/blog/solr-vs-elasticsearch-differences/
+USAMOS LUCENE directamente?, ElasticSearch?, Solr?
+
+
+----------------------------- DEVOPS TOOLS
+
+CONTAINERIZING APPS
+	Kubernetes, Docker Swarm //managing containers
+		Docker //containers and images
+CONTINUOS INTEGRATION/DELIVERY or DEPLOYMENT
+	Jenkins (highly configurable, free)
+	Travis (easy config, free for opensource projects)
+	TeamCity (not free)
+	Bamboo (not free)
+	Gitlab (not free)
+	Buddy (not free)
+INFRASTRUCTURE AS CODE
+	Ansible/Ansible Tower
+	Terraform
+PaaS (PLATFORM AS A SERVICE) (evol de IaaS)
+	Heroku
+CODE REVIEW (STAGING,QA,UAT,TEST env)
+	SonarQube (on-premise, free) //https://www.vogella.com/tutorials/SonarQube/article.html ; https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-jenkins/?src=sidebar
+	SonarCloud (cloud-based, free for opensource)
+	SonarLint (IDE integration, is a start point)
+
+
+Recommendation to solve manual IT management issues:
+CloudComputing (AWS,Azure,GCP)
+	InfrastructureAsCode (IaC)
+		ApplicationPerformanceManagement (APM) (Retrace,JMX)
+
+
+----------------------------- PROJECT MANAGEMENT TOOLS
+
+Todas en principio tienen una versión de pago.
+Comparando precios, Jira termina costando lo mismo que los otros.
+
+Jira (Atlassian|Free for 10u|Full project management)
+Trello (Atlassian|Free|Kanban board)
+Notion (Free for 1u|Kind of Jira)
+Quire.io (Free|Kanban board,list)
+Zenkit (Free for 1u|Kanban board,list,task dependencies on cal view)
+Asana (Free for 15u|Kanban board,list,task dependencies on cal view)
+MeisterTask (Free|Kanban board)
+KanbanFlow (Free|Kanban board)
+
+
+----------------------------- VIDEO ANIMATION TOOLS
+MySimpleShow
+RawShorts
+Renderforest
+Animaker
+Powtoon
+VideoScribe
+MotionArtist Software
+Easy sketch pro
+CrazyTalk Animator
+Animatron
+Wideo
+GoAnimate (Now Vyond)
+Biteable
+Animiz
+Toonly
+Explaindio
+
+
+------------------------------------------------- INFO CURIOSA COMPARANDO JAVA EE Y SPRING BOOT:
+
+	Jersey (RestAPi) alternative in Spring?
+
+Spring MVC does this perfectly fine, in my opinion. Just annotate your methods in your controller as the REST apis you want to use.
+
+    EJB alternative in Spring (as EJB supports remoting, each lookup call to a method is treated as a transaction, calls to EJB's method could be intercepted and it comes with state-full and stateless flavors)?
+
+There is no full alternative. There are several techniques that implement this in parts: Spring remoting for remote calls, Spring transactions as transactions, Spring AOP interceptors for intercepting calls. However, for example XA transactions on remote calls are something you don't get as such in Spring. Spring however works fine with EJBs, so if you prefer them, you can still have them and use Spring in other parts of your software.
+
+    Timer Service alternative in Spring?
+
+Spring task scheduling
+
+    Message Drive Bean alternative in Spring?
+
+Message Listener Containers
+
+    Interceptor alternative is AOP in Spring (As per my experience and that serve my purpose)
+
+There are several levels of interceptors in spring. There are handler interceptors in mvc, there are bean call interceptors like the SpringAutowiringInterceptor, and there are AOP-based interceptors that can be used in multiple layers.
+
+    JPA(entity manager) alternative in spring?
+
+Spring has multiple of these as well. It's actually quite straightforward to just use JPA with Spring-Data, it's designed to integrate to JPA. There are Spring JDBC and other data layer alternatives though if Spring Data is not what you want.

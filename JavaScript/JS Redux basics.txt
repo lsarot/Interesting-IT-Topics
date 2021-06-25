@@ -1,0 +1,259 @@
+﻿
+
+---------------------------------------------
+---------------- REDUX GUIDE ----------------
+---------------------------------------------
+
+Redux is a predictable state container for JS apps.
+It helps to develop consistent behaviour apps that runs similar in every ambient (client, server, native).
+It can be used with REACT or any other view library.
+
+npm i -S redux
+npm i -S react-redux
+npm i -D redux-devtools
+
+-----------------------------
+
+REDUX ayuda a gestionar el estado de una app: "datos externos" + "estado UI"
+
+3 MAIN PRINCIPLES:
+1-whole app state is stored in a unique state tree: store.
+2-the only way to modify the state is to trigger an action describing what changed.
+    El estado sólo es para lectura. Para modificarlo se hace un intent básicamente.
+3-to specify how state tree changes, we use pure reducers.
+
+Permite:
+.generarlo en servidor e hidratarlo en client
+.simplifica tests unitarios
+.fácil depuración. Único lugar donde checar por errores
+.programar la lógica de la app y probarla sin crear ni una sola vista
+.las acciones pueden ser guardadas en log, almacenadas e incluso reproducidas luego para test o debugging.
+
+-----------------------------
+
+createStore
+store.getState //estado actual
+store.dispatch(action) //despacha acción a través de nuestros reducers
+store.subscribe(callback) //suscribe a cambios de estado
+
+-----------------------------
+
+3 GOOG PRACTICES:
+.Action types como contantes
+.Action creators (funciones) para construir acciones
+.Modules that groups functionality (actions and reducers that handles some actions)
+
+-----------------------------
+
+
+
+
+
+
+
+
+
+GLOBAL STATE FOR GOT PROJECT
+{
+characters: [ ... ],
+familyNames: ['Lannister','Stark', ...],
+allSeasons: [1,2,3,4,5],
+filter: {
+name: 'John',
+family: '',
+aliveOnly: false,
+seasons: []
+}
+}
+
+
+CONVENCIÓN ACCIÓN *** ??? QUÉ ES ese query si sólo usamos type ?
+{
+type: 'CHANGE_FILTER', //identifica la acción
+query: {
+name: 'Tyrion'
+}
+}
+
+
+REDUCER PPAL QUE PROCESA LAS DEMÁS ACCIONES
+function filter(state={}, action){//state es el estado inicial
+switch(action.type){
+case 'CHANGE_FILTER':
+return {
+...state,
+...action.query
+}
+default:
+return state
+}
+}
+
+----------------------------- EJEMPLO CON EL CONTADOR
+
+actionTypes.js
+export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
+export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
+
+
+actions.js
+import * as actionTypes from './actionTypes.js'
+export function incrementCounter() {
+return {
+  type: actionTypes.INCREMENT_COUNTER
+}
+}
+export function decrementCounter(value) {
+return {
+  type: actionTypes.DECREMENT_COUNTER
+}
+}
+
+
+reducer.js
+import * as actionTypes from './actionTypes.js'
+export default function counter(state = 0, action) {
+switch (action.type) {
+  case actionTypes.INCREMENT_COUNTER:
+    return state + 1;
+  case actionTypes.DECREMENT_COUNTER:
+    return state - 1;
+  default:
+    return state;
+}
+}
+
+
+
+
+import { createStore } from 'redux';
+import counter from './reducer.js';
+import * as actions from './actions.js'
+import * as actionTypes from './actionTypes.js';
+
+
+//NOTAR QUE SÓLO PUEDE RECIBIR UNA FUNCIÓN QUE FILTRA TODAS LAS ACCIONES
+//pero si queremos separar por partes la app ?
+//usamos combineReducers
+let store = createStore(counter);
+
+console.log(store.getState());
+
+// Cada vez que el estado cambie, lo mostramos
+// Tenga en cuenta que subscribe() devuelve una función para anular el
+registro del listener
+store.subscribe(() => {
+   console.log(store.getState())
+});
+
+// A través del reducer
+store.dispatch({ type: actionTypes.INCREMENT_COUNTER });
+store.dispatch({ type: actionTypes.INCREMENT_COUNTER });
+store.dispatch({ type: actionTypes.DECREMENT_COUNTER });
+
+// A través de las acciones (IDEAL PQ SERÍA COMO CUANDO USAMOS ENUMS JAVA)
+store.dispatch(actions.incrementCounter());
+store.dispatch(actions.incrementCounter());
+store.dispatch(actions.decrementCounter());
+
+
+
+
+COMBINANDO REDUCERS AHORA
+
+.Podemos combinar reducers, siendo alguno de ellos a su vez la combinación de otros reducers.
+.El reducer de una aplicación completa, es la combinación de los diferentes reducers que definen el estado.
+//***CÓMO SABRÁ QUÉ REDUCER PROCESARÁ EL DISPATCH ???
+import { createStore, combineReducers } from 'redux';
+
+const initialState = {
+  characters: [],
+  filter: {}
+}
+
+//2 reducers (que deberían estar en otro fichero e importarse)
+function characters(state=[], action){ ... }
+function filter(state={}, action){ ... }
+
+const complexReducer = combineReducers({
+  characters: characters,
+  filter: filter
+})
+
+const store = createStore(complexReducer);
+store.dispatch({ type: 'SAVE_CHARACTERS', payload: [ ... ]});//qué es payload?
+console.log(store.getState().characters);
+
+-----------------------------
+
+CONECTAR REACT Y REDUX
+
+npm install -S react-redux
+
+
+import React, {Component } from 'react';
+import { Provider } from 'react-redux';
+import configureStore from './configureStore';
+import reducer from './reducer.js';
+import Counter from './Counter.jsx';
+import CounterProvider from './CounterProvider.jsx';
+
+export default class Index extends Component {
+render() {
+const store = configureStore(reducer);//configureStore es una convención, encapsula el createStore
+return (
+    <Counter store = {store}/>
+); 
+//Pasar constantemente store={ store } NO es una buena idea.
+//react-redux proporciona Provider: store  disponible para cualquier connect que tengamos "más abajo" en el árbol de componentes.
+//así que hacemos:
+<Provider store={store}>
+    <CounterProvider />
+</Provider>
+};
+};
+
+
+
+import React, { Component, Fragment} from 'react';
+import { connect } from 'react-redux';
+import * as actions from './actions.js'
+
+class Counter extends Component {
+  constructor(){...}
+  handlerClick() {
+    this.props.store.dispatch(actions.incrementCounter());
+    //SI USAMOS Provider de react-redux (para acceder desde cualquier parte al state.. mapsStateToProps):
+    this.props.dispatch(actions.incrementCounter());
+  }
+render() {
+  const { clicks } = this.props;
+  return (
+    <Fragment>
+    <button onClick={ this.handlerClick }>Has hecho click { clicks } veces</button>
+    </Fragment>
+  )
+}
+};
+
+//mapeamos variables del global state a props, en este caso state no era ni siquiera un objeto sino un valor entero.
+//entonces lo que hacemos es una fx que recibe state y devuelve un objeto donde se asigna a variable(s) determinado(s) valor(es) del state.
+//ahora props.clicks será state, o pudiera ser state.variable si fuera objeto!!
+const mapStateToProps = state => ({ clicks: state });
+export default connect(mapStateToProps)(Counter);
+
+
+-----------------------------
+
+NOS QUEDAMOS EN LA LÁMINA 48 DE LA PRESENTACIÓN !!!
+
+
+
+
+
+
+
+
+
+
+

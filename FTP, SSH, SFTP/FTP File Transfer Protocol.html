@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Protocolo de transferencia de archivos - Wikipedia, la enciclopedia libre</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Protocolo_de_transferencia_de_archivos","wgTitle":"Protocolo de transferencia de archivos","wgCurRevisionId":104856784,"wgRevisionId":104856784,"wgArticleId":1213,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Wikipedia:Páginas con enlaces mágicos de RFC","FTP","Protocolos de nivel de aplicación","Historia de Internet","Introducciones en 1980"],"wgBreakFrames":false,"wgPageContentLanguage":"es","wgPageContentModel":"wikitext","wgSeparatorTransformTable":[",\t."," \t,"],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"],"wgMonthNamesShort":["","ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"],"wgRelevantPageName":"Protocolo_de_transferencia_de_archivos","wgRelevantArticleId":1213,"wgRequestId":"WmI3YgpAAEYAAEMLHawAAAAX","wgIsProbablyEditable":true,"wgRelevantPageIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgWikiEditorEnabledModules":[],"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":true,"wgPopupsShouldSendModuleToUser":true,"wgPopupsConflictsWithNavPopupGadget":false,"wgVisualEditor":{"pageLanguageCode":"es","pageLanguageDir":"ltr","pageVariantFallbacks":"es","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"es","wgMFExpandAllSectionsUserOption":false,"wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":true},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"español","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgWikibaseItemId":"Q42283","wgScoreNoteLanguages":{"arabic":"العربية","catalan":"català","deutsch":"Deutsch","english":"English","espanol":"español","italiano":"italiano","nederlands":"Nederlands","norsk":"norsk","portugues":"português","suomi":"suomi","svenska":"svenska","vlaams":"West-Vlams"},"wgScoreDefaultNoteLanguage":"nederlands","wgCentralAuthMobileDomain":false,"wgCodeMirrorEnabled":false,"wgVisualEditorToolbarScrollOffset":0,"wgVisualEditorUnsupportedEditParams":["undo","undoafter","veswitched"],"wgEditSubmitButtonLabelPublish":true});mw.loader.state({"ext.gadget.imagenesinfobox":"ready","ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"loading","user.tokens":"loading","ext.cite.styles":"ready","wikibase.client.init":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.options@0qprsob",function($,jQuery,require,module){mw.user.options.set({"variant":"es"});});mw.loader.implement("user.tokens@1dqfd7l",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/
+
+});mw.loader.load(["ext.cite.a11y","site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.toc","mediawiki.searchSuggest","ext.gadget.a-commons-directo","ext.gadget.refToolbar","ext.centralauth.centralautologin","mmv.head","mmv.bootstrap.autostart","ext.popups","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.compactlinks","ext.uls.interface","ext.centralNotice.geoIP","ext.centralNotice.startUp","skins.vector.js"]);});</script>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=es&amp;modules=ext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector"/>
+<script async="" src="/w/load.php?debug=false&amp;lang=es&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=es&amp;modules=ext.gadget.imagenesinfobox&amp;only=styles&amp;skin=vector"/>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=es&amp;modules=site.styles&amp;only=styles&amp;skin=vector"/>
+<meta name="generator" content="MediaWiki 1.31.0-wmf.17"/>
+<meta name="referrer" content="origin-when-cross-origin"/>
+<link rel="alternate" href="android-app://org.wikipedia/http/es.m.wikipedia.org/wiki/Protocolo_de_transferencia_de_archivos"/>
+<link rel="alternate" type="application/x-wiki" title="Editar" href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit"/>
+<link rel="edit" title="Editar" href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit"/>
+<link rel="apple-touch-icon" href="/static/apple-touch/wikipedia.png"/>
+<link rel="shortcut icon" href="/static/favicon/wikipedia.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikipedia (es)"/>
+<link rel="EditURI" type="application/rsd+xml" href="//es.wikipedia.org/w/api.php?action=rsd"/>
+<link rel="license" href="//creativecommons.org/licenses/by-sa/3.0/"/>
+<link rel="canonical" href="https://es.wikipedia.org/wiki/Protocolo_de_transferencia_de_archivos"/>
+<link rel="dns-prefetch" href="//login.wikimedia.org"/>
+<link rel="dns-prefetch" href="//meta.wikimedia.org" />
+<!--[if lt IE 9]><script src="/w/load.php?debug=false&amp;lang=es&amp;modules=html5shiv&amp;only=scripts&amp;skin=vector&amp;sync=1"></script><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Protocolo_de_transferencia_de_archivos rootpage-Protocolo_de_transferencia_de_archivos skin-vector action-view">		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+			<div id="siteNotice" class="mw-body-content"><!-- CentralNotice --></div><div class="mw-indicators mw-body-content">
+</div>
+<h1 id="firstHeading" class="firstHeading" lang="es">Protocolo de transferencia de archivos</h1>			<div id="bodyContent" class="mw-body-content">
+				<div id="siteSub" class="noprint">De Wikipedia, la enciclopedia libre</div>				<div id="contentSub"></div>
+								<div id="jump-to-nav" class="mw-jump">
+					Saltar a:					<a href="#mw-head">navegación</a>, 					<a href="#p-search">búsqueda</a>
+				</div>
+				<div id="mw-content-text" lang="es" dir="ltr" class="mw-content-ltr"><div class="mw-parser-output"><div class="rellink noprint">«FTP» redirige aquí. Para otras acepciones, véase <a href="/wiki/FTP_(desambiguaci%C3%B3n)" class="mw-disambig" title="FTP (desambiguación)">FTP (desambiguación)</a>.</div>
+<table class="infobox" style="width:22.7em; line-height: 1.4em; text-align:left; padding:.23em;">
+<tr>
+<th colspan="3" class="cabecera comunicación" style="text-align:center;background-color:#DCEAEC;color:black;">Protocolo de transferencia de archivos</th>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;">Familia</th>
+<td colspan="2"><a href="/wiki/Familia_de_protocolos_de_Internet" title="Familia de protocolos de Internet">Familia de protocolos de Internet</a></td>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;">Función</th>
+<td colspan="2">Transferencia de archivos</td>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;">Puertos</th>
+<td colspan="2">20/TCP DATA Port<br />
+21/TCP Control Port</td>
+</tr>
+<tr>
+<th colspan="3" style="text-align:center;background-color:#DCEAEC;;">Ubicación en la pila de protocolos</th>
+</tr>
+<tr>
+<td colspan="3" style="text-align:center;">
+<table border="0" cellspacing="3" width="250px">
+<tr>
+<td align="center" width="30%" bgcolor="#FFCC99"><b><a href="/wiki/Capa_de_aplicaci%C3%B3n" title="Capa de aplicación">Aplicación</a></b></td>
+<td align="center" bgcolor="#9999FF"><b>FTP</b></td>
+</tr>
+<tr>
+<td align="center" width="30%" bgcolor="#FFEEBB"><i><a href="/wiki/Capa_de_transporte" title="Capa de transporte">Transporte</a></i></td>
+<td align="center" bgcolor="#EEEEFF"><a href="/wiki/Transmission_Control_Protocol" class="mw-redirect" title="Transmission Control Protocol">TCP</a></td>
+</tr>
+<tr>
+<td align="center" width="30%" bgcolor="#FFEEBB"><i><a href="/wiki/Capa_de_red" title="Capa de red">Red</a></i></td>
+<td align="center" bgcolor="#EEEEFF"><a href="/wiki/Protocolo_de_Internet" title="Protocolo de Internet">IP</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<th colspan="3" style="text-align:center;background-color:#DCEAEC;;">Estándares</th>
+</tr>
+<tr>
+<td colspan="3" style="text-align:center;">FTP: <a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc959">RFC 959</a> (<a href="/wiki/1985" title="1985">1985</a>)<br />
+Extensiones de FTP para IPv6 y NATs: <a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc2428">RFC 2428</a> (<a href="/wiki/1998" title="1998">1998</a>)</td>
+</tr>
+<tr>
+<td colspan="3" style="text-align:left;"><small>[<span class="plainlinks"><a href="https://www.wikidata.org/wiki/Q42283" class="extiw" title="d:Q42283">editar datos en Wikidata</a></span>]</small></td>
+</tr>
+</table>
+<p>El <b>Protocolo de transferencia de archivos</b> (en inglés <b>File Transfer Protocol</b> o <b>FTP</b>), es un <a href="/wiki/Protocolo_de_red" class="mw-redirect" title="Protocolo de red">protocolo de red</a> para la <a href="/wiki/Transferencia_de_archivos" title="Transferencia de archivos">transferencia de archivos</a> entre sistemas conectados a una red <a href="/wiki/Transmission_Control_Protocol" class="mw-redirect" title="Transmission Control Protocol">TCP</a> (Transmission Control Protocol), basado en la arquitectura <a href="/wiki/Cliente-servidor" title="Cliente-servidor">cliente-servidor</a>. Desde un equipo cliente se puede conectar a un servidor para descargar archivos desde él o para enviarle archivos, independientemente del sistema operativo utilizado en cada equipo.</p>
+<p>El servicio FTP es ofrecido por la capa de aplicación del modelo de capas de red <a href="/wiki/TCP/IP" class="mw-redirect" title="TCP/IP">TCP/IP</a> al usuario, utilizando normalmente el <a href="/wiki/Puerto_de_red" title="Puerto de red">puerto de red</a> 20 y el 21. Un problema básico de FTP es que está pensado para ofrecer la máxima velocidad en la conexión, pero no la máxima seguridad, ya que todo el intercambio de información, desde el login y password del usuario en el servidor hasta la transferencia de cualquier archivo, se realiza en <a href="/wiki/Texto_plano" class="mw-redirect" title="Texto plano">texto plano</a> sin ningún tipo de cifrado, con lo que un posible atacante puede capturar este tráfico, acceder al servidor y/o apropiarse de los archivos transferidos.</p>
+<p>Para solucionar este problema son de gran utilidad aplicaciones como <a href="/wiki/SCP" class="mw-redirect" title="SCP">SCP</a> y <a href="/wiki/SFTP" class="mw-redirect" title="SFTP">SFTP</a>, incluidas en el paquete <a href="/wiki/Secure_Shell" title="Secure Shell">SSH</a>, que permiten transferir archivos pero <a href="/wiki/Criptograf%C3%ADa" title="Criptografía">cifrando</a> todo el tráfico.</p>
+<p></p>
+<div id="toc" class="toc">
+<div class="toctitle" lang="es" dir="ltr" xml:lang="es">
+<h2>Índice</h2>
+</div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Historia"><span class="tocnumber">1</span> <span class="toctext">Historia</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#El_Modelo_FTP"><span class="tocnumber">2</span> <span class="toctext">El Modelo FTP</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="#Primer_buscador_de_información"><span class="tocnumber">2.1</span> <span class="toctext">Primer buscador de información</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-4"><a href="#Servidor_FTP"><span class="tocnumber">3</span> <span class="toctext">Servidor FTP</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Cliente_FTP"><span class="tocnumber">4</span> <span class="toctext">Cliente FTP</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="#Acceso_anónimo"><span class="tocnumber">4.1</span> <span class="toctext">Acceso anónimo</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Acceso_de_usuario"><span class="tocnumber">4.2</span> <span class="toctext">Acceso de usuario</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#Cliente_FTP_basado_en_Web"><span class="tocnumber">4.3</span> <span class="toctext">Cliente FTP basado en Web</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#Acceso_de_invitado"><span class="tocnumber">4.4</span> <span class="toctext">Acceso de invitado</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="#Ejemplos_de_Clientes_FTPs"><span class="tocnumber">4.5</span> <span class="toctext">Ejemplos de Clientes FTPs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-11"><a href="#Modos_de_conexión_del_cliente_FTP"><span class="tocnumber">5</span> <span class="toctext">Modos de conexión del cliente FTP</span></a>
+<ul>
+<li class="toclevel-2 tocsection-12"><a href="#Modo_activo"><span class="tocnumber">5.1</span> <span class="toctext">Modo activo</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="#Modo_pasivo"><span class="tocnumber">5.2</span> <span class="toctext">Modo pasivo</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="#Tipos_de_transferencia_de_archivos_en_FTP"><span class="tocnumber">5.3</span> <span class="toctext">Tipos de transferencia de archivos en FTP</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-15"><a href="#Comandos_FTP"><span class="tocnumber">6</span> <span class="toctext">Comandos FTP</span></a></li>
+<li class="toclevel-1 tocsection-16"><a href="#Códigos_de_respuesta_de_FTP"><span class="tocnumber">7</span> <span class="toctext">Códigos de respuesta de FTP</span></a></li>
+<li class="toclevel-1 tocsection-17"><a href="#Conexión_a_un_servidor_FTP_protegido_desde_navegador"><span class="tocnumber">8</span> <span class="toctext">Conexión a un servidor FTP protegido desde navegador</span></a></li>
+<li class="toclevel-1 tocsection-18"><a href="#Véase_también"><span class="tocnumber">9</span> <span class="toctext">Véase también</span></a></li>
+<li class="toclevel-1 tocsection-19"><a href="#Servidores_FTP"><span class="tocnumber">10</span> <span class="toctext">Servidores FTP</span></a></li>
+<li class="toclevel-1 tocsection-20"><a href="#Enlaces_externos"><span class="tocnumber">11</span> <span class="toctext">Enlaces externos</span></a></li>
+<li class="toclevel-1 tocsection-21"><a href="#Referencias"><span class="tocnumber">12</span> <span class="toctext">Referencias</span></a></li>
+</ul>
+</div>
+<p></p>
+<h2><span class="mw-headline" id="Historia">Historia</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=1" title="Editar sección: Historia">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>El protocolo FTP se empezó a utilizar en abril de 1971, publicado como el <a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc114">RFC 114</a>, antes de que existiera la pila TCP/IP. La estructura general fue establecida en 1973. Fue modificado varias veces, añadiendo nuevos comandos y funcionalidades. Al final se publicó el <a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc959">RFC 959</a> en octubre de 1985, que es la que se utiliza actualmente.<sup id="cite_ref-1" class="reference separada"><a href="#cite_note-1"><span class="corchete-llamada">[</span>1<span class="corchete-llamada">]</span></a></sup>​</p>
+<h2><span class="mw-headline" id="El_Modelo_FTP">El Modelo FTP</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=2" title="Editar sección: El Modelo FTP">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="thumb tright">
+<div class="thumbinner" style="width:402px;"><a href="/wiki/Archivo:Modelo_ftp.jpg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Modelo_ftp.jpg/400px-Modelo_ftp.jpg" width="400" height="249" class="thumbimage" srcset="//upload.wikimedia.org/wikipedia/commons/c/c5/Modelo_ftp.jpg 1.5x" data-file-width="567" data-file-height="353" /></a>
+<div class="thumbcaption">
+<div class="magnify"><a href="/wiki/Archivo:Modelo_ftp.jpg" class="internal" title="Aumentar"></a></div>
+El siguiente modelo representa el diagrama de un servicio FTP.</div>
+</div>
+</div>
+<p>En el modelo, el intérprete de protocolo (PI) de usuario inicia la conexión de control en el <a href="/wiki/Puerto_de_red" title="Puerto de red">puerto</a> 21. Las órdenes FTP estándar las genera el PI de usuario y se transmiten al proceso servidor a través de la conexión de control. Las respuestas estándar se envían desde la PI del servidor hasta la PI de usuario por la conexión de control como respuesta a las órdenes.</p>
+<p>Estas órdenes FTP especifican parámetros para la conexión de datos (puerto de datos, modo de transferencia, tipo de representación y estructura) y la naturaleza de la operación sobre el <a href="/wiki/Sistema_de_archivos" title="Sistema de archivos">sistema de archivos</a> (almacenar, recuperar, añadir, borrar, etc.). El proceso de transferencia de datos (DTP) de usuario u otro proceso en su lugar, debe esperar a que el servidor inicie la conexión al puerto de datos especificado (puerto 20 en modo activo o estándar) y transferir los datos en función de los parámetros que se hayan especificado.</p>
+<p>Vemos también en el diagrama que la comunicación entre <a href="/wiki/Cliente_(inform%C3%A1tica)" title="Cliente (informática)">cliente</a> y <a href="/wiki/Servidor" title="Servidor">servidor</a> es independiente del sistema de archivos utilizado en cada <a href="/wiki/Computadora_electr%C3%B3nica" class="mw-redirect" title="Computadora electrónica">computadora</a>, de manera que no importa que sus sistemas operativos sean distintos, porque las entidades que se comunican entre sí son los PI y los DTP, que usan el mismo protocolo estandarizado: el FTP.</p>
+<p>También hay que destacar que la conexión de datos es bidireccional, es decir, se puede usar simultáneamente para enviar y para recibir, y no tiene por qué existir todo el tiempo que dura la conexión FTP. Pero tenía en sus comienzos un problema, y era la localización de los servidores en la red. Es decir, el usuario que quería descargar algún archivo mediante trump debía conocer en qué máquina estaba ubicado. La única herramienta de búsqueda de información que existía era Gopher, con todas sus limitaciones.</p>
+<h3><span id="Primer_buscador_de_informaci.C3.B3n"></span><span class="mw-headline" id="Primer_buscador_de_información">Primer buscador de información</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=3" title="Editar sección: Primer buscador de información">editar</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Gopher significa 'lanzarse sobre' la información. Es un servicio cuyo objetivo es la localización de archivos a partir de su título. Consiste en un conjunto de menús de recursos ubicados en diferentes máquinas que están intercomunicadas. Cada máquina sirve un área de información, pero su organización interna permite que todas ellas funcionen como si se tratase de una sola máquina. El usuario navega a través de estos menús hasta localizar la información buscada, y desconoce exactamente de qué máquina está descargando dicha información. Con la llegada de Internet, los potentes motores de búsqueda dejaron el servicio Gopher, y la localización de los servidores FTP dejó de ser un problema. En la actualidad, cuando el usuario se descarga un archivo a partir de un enlace de una página web no llega ni a saber que lo está haciendo desde un servidor FTP. El servicio FTP ha evolucionado a lo largo del tiempo y hoy día es muy utilizado en Internet, en redes corporativas, Intranets, etc. Soportado por cualquier sistema operativo, existe gran cantidad de software basado en el protocolo FTP.</p>
+<h2><span class="mw-headline" id="Servidor_FTP">Servidor FTP</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=4" title="Editar sección: Servidor FTP">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Un servidor FTP es un programa especial que se ejecuta en un equipo servidor normalmente conectado a Internet (aunque puede estar conectado a otros tipos de redes, <a href="/wiki/Red_de_%C3%A1rea_local" title="Red de área local">LAN</a>, <a href="/wiki/Red_de_%C3%A1rea_metropolitana" title="Red de área metropolitana">MAN</a>, etc.). Su función es permitir el intercambio de datos entre diferentes servidores/ordenadores.</p>
+<p>Por lo general, los programas servidores FTP no suelen encontrarse en los ordenadores personales, por lo que un usuario normalmente utilizará el FTP para conectarse remotamente a uno y así intercambiar información con él.</p>
+<p>Las aplicaciones más comunes de los servidores FTP suelen ser el <a href="/wiki/Alojamiento_web" title="Alojamiento web">alojamiento web</a>, en el que sus clientes utilizan el servicio para subir sus páginas web y sus archivos correspondientes; o como servidor de backup (copia de seguridad) de los archivos importantes que pueda tener una empresa. Para ello, existen protocolos de comunicación FTP para que los datos se transmitan cifrados, como el <a href="/wiki/SFTP" class="mw-redirect" title="SFTP">SFTP</a> (<i>Secure File Transfer Protocol</i>).</p>
+<h2><span class="mw-headline" id="Cliente_FTP">Cliente FTP</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=5" title="Editar sección: Cliente FTP">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="noprint AP rellink"><span style="font-size:88%">Artículo principal:</span> <i><a href="/wiki/Cliente_FTP" title="Cliente FTP">Cliente FTP</a></i></div>
+<p>Cuando un navegador no está equipado con la función FTP, o si se quiere cargar archivos en un ordenador remoto, se necesitará utilizar un programa cliente FTP. Un cliente FTP es un programa que se instala en el ordenador del usuario, y que emplea el protocolo FTP para conectarse a un servidor FTP y transferir archivos, ya sea para descargarlos o para subirlos.</p>
+<p>Para utilizar un cliente FTP, se necesita conocer el nombre del archivo, el ordenador en que reside (servidor, en el caso de descarga de archivos), el ordenador al que se quiere transferir el archivo (en caso de querer subirlo nosotros al servidor), y la carpeta en la que se encuentra.</p>
+<p>Algunos clientes de FTP básicos en modo consola vienen integrados en los <a href="/wiki/Sistema_operativo" title="Sistema operativo">sistemas operativos</a>, incluyendo <a href="/wiki/Microsoft_Windows" title="Microsoft Windows">Microsoft Windows</a>, <a href="/wiki/DOS" title="DOS">DOS</a>, <a href="/wiki/GNU/Linux" title="GNU/Linux">GNU/Linux</a> y <a href="/wiki/Unix" title="Unix">Unix</a>. Sin embargo, hay disponibles clientes con opciones añadidas e interfaz gráfica. Aunque muchos navegadores tienen ya integrado FTP, es más confiable a la hora de conectarse con servidores FTP no anónimos utilizar un programa cliente.</p>
+<h3><span id="Acceso_an.C3.B3nimo"></span><span class="mw-headline" id="Acceso_anónimo">Acceso anónimo</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=6" title="Editar sección: Acceso anónimo">editar</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Los servidores FTP anónimos ofrecen sus servicios libremente a todos los usuarios, permiten acceder a sus archivos sin necesidad de tener un 'USER ID' o una cuenta de usuario. Es la manera más cómoda fuera del servicio web de permitir que todo el mundo tenga acceso a cierta información sin que para ello el administrador de un sistema tenga que crear una cuenta para cada usuario.</p>
+<p>Si un servidor posee servicio 'FTP anonymous' solamente con teclear la palabra «anonymous», cuando pregunte por tu usuario tendrás acceso a ese sistema. No se necesita ninguna contraseña preestablecida, aunque tendrás que introducir una sólo para ese momento, normalmente se suele utilizar la dirección de correo electrónico propia.</p>
+<p>Solamente con eso se consigue acceso a los archivos del FTP, aunque con menos privilegios que un usuario normal. Normalmente solo podrás leer y copiar los archivos que sean públicos, así indicados por el administrador del servidor al que nos queramos conectar.</p>
+<p>Normalmente, se utiliza un servidor FTP anónimo para depositar grandes archivos que no tienen utilidad si no son transferidos a la máquina del usuario, como por ejemplo programas, y se reservan los servidores de páginas web (HTTP) para almacenar información textual destinada a la lectura en línea.</p>
+<h3><span class="mw-headline" id="Acceso_de_usuario">Acceso de usuario</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=7" title="Editar sección: Acceso de usuario">editar</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Si se desea tener privilegios de acceso a cualquier parte del sistema de archivos del servidor FTP, de modificación de archivos existentes, y de posibilidad de subir nuestros propios archivos, generalmente se suele realizar mediante una cuenta de usuario. En el servidor se guarda la información de las distintas cuentas de usuario que pueden acceder a él, de manera que para iniciar una sesión FTP debemos introducir una <a href="/wiki/Autentificaci%C3%B3n" class="mw-redirect" title="Autentificación">autentificación</a> (en <a href="/wiki/Idioma_ingl%C3%A9s" title="Idioma inglés">inglés</a>: <i>login</i>) y una <a href="/wiki/Contrase%C3%B1a" title="Contraseña">contraseña</a> (en inglés: <i>password</i>) que nos identifica unívocamente.</p>
+<h3><span class="mw-headline" id="Cliente_FTP_basado_en_Web">Cliente FTP basado en Web</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=8" title="Editar sección: Cliente FTP basado en Web">editar</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Un «cliente FTP basado en Web» no es más que un cliente FTP al cual podemos acceder a través de nuestro navegador web sin necesidad de tener otra aplicación para ello. El usuario se conecta mediante HTTP a un servidor web, y el servidor web se conecta mediante FTP al servidor de archivos. El servidor web actúa de intermediario haciendo pasar la información desde el servidor FTP en los puertos 20 y 21 hacia el puerto 80 HTTP que ve el usuario.</p>
+<p>Siempre hay momentos en que nos encontramos fuera de casa, no llevamos el ordenador portátil encima y necesitamos realizar alguna tarea urgente desde un ordenador de acceso público, de un amigo, del trabajo, la universidad, etc. Lo más común es que no estén instaladas las aplicaciones que necesitamos y en muchos casos hasta carecemos de los permisos necesarios para realizar su instalación. Otras veces estamos detrás de un proxy o cortafuegos que no nos permite acceder a servidores FTP externos.</p>
+<p>Al disponer de un cliente FTP basado en Web podemos acceder al servidor FTP remoto como si estuviéramos realizando cualquier otro tipo de navegación web. A través de un cliente FTP basado en Web podrás, crear, copiar, renombrar y eliminar archivos y directorios. Cambiar permisos, editar, ver, subir y descargar archivos, así como cualquier otra función del protocolo FTP que el servidor FTP remoto permita.</p>
+<h3><span class="mw-headline" id="Acceso_de_invitado">Acceso de invitado</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=9" title="Editar sección: Acceso de invitado">editar</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>El acceso sin restricciones al servidor que proporcionan las cuentas de usuario implica problemas de seguridad, lo que ha dado lugar a un tercer tipo de acceso FTP denominado invitado (guest), que se puede contemplar como una mezcla de los dos anteriores.</p>
+<p>La idea de este mecanismo es la siguiente: se trata de permitir que cada usuario conecte a la máquina mediante su login y su password, pero evitando que tenga acceso a partes del sistema de archivos que no necesita para realizar su trabajo, de esta forma accederá a un entorno restringido, algo muy similar a lo que sucede en los accesos anónimos, pero con más privilegios.</p>
+<h3><span class="mw-headline" id="Ejemplos_de_Clientes_FTPs">Ejemplos de Clientes FTPs</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=10" title="Editar sección: Ejemplos de Clientes FTPs">editar</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Entre los varios clientes FTP que existen, se pueden mencionar los siguientes:<sup id="cite_ref-2" class="reference separada"><a href="#cite_note-2"><span class="corchete-llamada">[</span>2<span class="corchete-llamada">]</span></a></sup>​</p>
+<ul>
+<li>Free FTP Upload Manager</li>
+<li>F-&gt;IT</li>
+<li>net2ftp</li>
+<li>Web FTP.co.uk</li>
+<li>Web-Ftp</li>
+<li>Jambai FTP</li>
+<li>ftp4net</li>
+<li>PHP FTP Client</li>
+<li>Asuk PHP FTP</li>
+<li>Weeble File Manager</li>
+<li>FileZilla</li>
+</ul>
+<h2><span id="Modos_de_conexi.C3.B3n_del_cliente_FTP"></span><span class="mw-headline" id="Modos_de_conexión_del_cliente_FTP">Modos de conexión del cliente FTP</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=11" title="Editar sección: Modos de conexión del cliente FTP">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>FTP admite dos modos de conexión del cliente. Estos modos se denominan <i>activo</i> (o Estándar, o PORT, debido a que el cliente envía comandos tipo PORT al servidor por el canal de control al establecer la conexión) y <i>pasivo</i> (o PASV, porque en este caso envía comandos tipo PASV). Tanto en el modo Activo como en el modo Pasivo, el cliente establece una conexión con el servidor mediante el puerto 21, que establece el canal de control.</p>
+<h3><span class="mw-headline" id="Modo_activo">Modo activo</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=12" title="Editar sección: Modo activo">editar</a><span class="mw-editsection-bracket">]</span></span></h3>
+<div class="thumb tright">
+<div class="thumbinner" style="width:422px;"><a href="/wiki/Archivo:Activo.svg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/90/Activo.svg/420px-Activo.svg.png" width="420" height="255" class="thumbimage" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/90/Activo.svg/630px-Activo.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/9/90/Activo.svg/840px-Activo.svg.png 2x" data-file-width="807" data-file-height="490" /></a>
+<div class="thumbcaption">
+<div class="magnify"><a href="/wiki/Archivo:Activo.svg" class="internal" title="Aumentar"></a></div>
+Modo activo.</div>
+</div>
+</div>
+<p>En modo Activo, el servidor siempre crea el canal de datos en su puerto 20, mientras que en el lado del cliente el canal de datos se asocia a un puerto aleatorio mayor que el 1024. Para ello, el cliente manda un comando PORT al servidor por el canal de control indicándole ese número de puerto, de manera que el servidor pueda abrirle una conexión de datos por donde se transferirán los archivos y los listados, en el puerto especificado.</p>
+<p>Lo anterior tiene un grave problema de seguridad, y es que la máquina cliente debe estar dispuesta a aceptar cualquier conexión de entrada en un puerto superior al 1024, con los problemas que ello implica si tenemos el equipo conectado a una red insegura como Internet. De hecho, los <a href="/wiki/Cortafuegos_(inform%C3%A1tica)" title="Cortafuegos (informática)">cortafuegos</a> que se instalen en el equipo para evitar ataques seguramente rechazarán esas conexiones aleatorias. Para solucionar esto se desarrolló el modo <i>pasivo</i>.</p>
+<h3><span class="mw-headline" id="Modo_pasivo">Modo pasivo</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=13" title="Editar sección: Modo pasivo">editar</a><span class="mw-editsection-bracket">]</span></span></h3>
+<div class="thumb tright">
+<div class="thumbinner" style="width:422px;"><a href="/wiki/Archivo:Pasivo.svg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pasivo.svg/420px-Pasivo.svg.png" width="420" height="257" class="thumbimage" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pasivo.svg/630px-Pasivo.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pasivo.svg/840px-Pasivo.svg.png 2x" data-file-width="800" data-file-height="490" /></a>
+<div class="thumbcaption">
+<div class="magnify"><a href="/wiki/Archivo:Pasivo.svg" class="internal" title="Aumentar"></a></div>
+Modo pasivo.</div>
+</div>
+</div>
+<p>Cuando el cliente envía un comando PASV sobre el canal de control, el servidor FTP le indica por el canal de control, el puerto (mayor a 1024 del servidor. Ejemplo:2040) al que debe conectarse el cliente. El cliente inicia una conexión desde el puerto siguiente al puerto de control (Ejemplo: 1036) hacia el puerto del servidor especificado anteriormente (Ejemplo: 2040).<sup id="cite_ref-3" class="reference separada"><a href="#cite_note-3"><span class="corchete-llamada">[</span>3<span class="corchete-llamada">]</span></a></sup>​</p>
+<p>Antes de cada nueva transferencia tanto en el modo Activo como en el Pasivo, el cliente debe enviar otra vez un comando de control (PORT o PASV, según el modo en el que haya conectado), y el servidor recibirá esa conexión de datos en un nuevo puerto (aleatorio si es en modo pasivo o por el puerto 20 si es en modo activo).</p>
+<h3><span class="mw-headline" id="Tipos_de_transferencia_de_archivos_en_FTP">Tipos de transferencia de archivos en FTP</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=14" title="Editar sección: Tipos de transferencia de archivos en FTP">editar</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>En el protocolo FTP existen 2 tipos de transferencia en ASCII y en binarios. Es importante conocer cómo debemos transportar un archivo a lo largo de la red, si no utilizamos las opciones adecuadas podemos destruir la información del archivo. Por eso, al ejecutar la aplicación FTP, debemos acordarnos de utilizar uno de estos comandos (o poner la correspondiente opción en un programa con interfaz gráfica):</p>
+<ul>
+<li>Tipo ASCII</li>
+</ul>
+<p>Adecuado para transferir archivos que solo contengan caracteres imprimibles (archivos ASCII, no archivos resultantes de un procesador de texto), por ejemplo páginas HTML, pero no las imágenes que puedan contener. Se transforman algunos símbolos de control para mantenerlos compatibles entre diferentes sistemas, por ejemplo, si el archivo está alojado sobre un servidor linux, el salto de línea para los archivos de texto es "\n" (byte 10 en decimal). Si el cliente es un sistema Mac, el salto de línea es "\r" (byte 13 en decimal), este modo cambia estos símbolos de control para que el archivo sea legible en ambos lados, al igual que si se envía a un sistema windows, el salto de línea es "\r\n" (dos bytes, 13 y 10). Si se usa este modo en archivos que no son de texto plano, en el caso de intercambiarse entre diferentes sistemas, ese archivo quedará corrupto.</p>
+<ul>
+<li>Tipo Binario</li>
+</ul>
+<p>Este tipo es usado cuando se trata de archivos comprimidos, ejecutables para PC, imágenes, archivos de audio, entre otros.</p>
+<p>Ejemplos de cómo transferir algunos tipos de archivo dependiendo de su extensión:</p>
+<table class="wikitable">
+<tr>
+<th>Extensión de archivo</th>
+<th>Tipo de transferencia</th>
+</tr>
+<tr>
+<td>txt (texto)</td>
+<td>ascii</td>
+</tr>
+<tr>
+<td>html (página WEB)</td>
+<td>ascii</td>
+</tr>
+<tr>
+<td>doc (documento)</td>
+<td>binario</td>
+</tr>
+<tr>
+<td>ps (poscript)</td>
+<td>ascii</td>
+</tr>
+<tr>
+<td>hqx (comprimido)</td>
+<td>ascii</td>
+</tr>
+<tr>
+<td>Z (comprimido)</td>
+<td>binario</td>
+</tr>
+<tr>
+<td>ZIP (comprimido)</td>
+<td>binario</td>
+</tr>
+<tr>
+<td>ZOO (comprimido)</td>
+<td>binario</td>
+</tr>
+<tr>
+<td>Sit (comprimido)</td>
+<td>binario</td>
+</tr>
+<tr>
+<td>pit (comprimido)</td>
+<td>binario</td>
+</tr>
+<tr>
+<td>shar (comprimido)</td>
+<td>binario</td>
+</tr>
+<tr>
+<td>uu (comprimido)</td>
+<td>binario</td>
+</tr>
+<tr>
+<td>ARC (comprimido)</td>
+<td>binario</td>
+</tr>
+<tr>
+<td>tar (empaquetado)</td>
+<td>binario</td>
+</tr>
+</table>
+<p>En la red existen diversas soluciones de software que desarrolla este tipo de tecnología, los más conocidos, son <a href="/wiki/Filezilla" class="mw-redirect" title="Filezilla">Filezilla</a> (<a href="/wiki/Software_libre" title="Software libre">software libre</a>) y <a href="/w/index.php?title=CuteFTP&amp;action=edit&amp;redlink=1" class="new" title="CuteFTP (aún no redactado)">CuteFTP</a> (<a href="/wiki/Shareware" title="Shareware">shareware</a>).</p>
+<h2><span class="mw-headline" id="Comandos_FTP">Comandos FTP</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=15" title="Editar sección: Comandos FTP">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<table class="wikitable">
+<tr>
+<th>Comando y argumentos</th>
+<th>Acción que realiza</th>
+</tr>
+<tr>
+<td><b>open</b> <i>servidor</i></td>
+<td>Inicia una conexión con un servidor FTP.</td>
+</tr>
+<tr>
+<td><b>close</b> o <b>disconnect</b></td>
+<td>Finaliza una conexión FTP sin cerrar el programa cliente.</td>
+</tr>
+<tr>
+<td><b>bye</b> o <b>quit</b></td>
+<td>Finaliza una conexión FTP y la sesión de trabajo con el programa cliente.</td>
+</tr>
+<tr>
+<td><b>cd</b> <i>directorio</i></td>
+<td>Cambia el directorio de trabajo en el servidor.</td>
+</tr>
+<tr>
+<td><b>delete</b> <i>archivo</i></td>
+<td>Borra un archivo en el servidor</td>
+</tr>
+<tr>
+<td><b>mdelete</b> <i>patrón</i></td>
+<td>Borra múltiples archivos basado en un patrón que se aplica al nombre.</td>
+</tr>
+<tr>
+<td><b>dir</b></td>
+<td>Muestra el contenido del directorio en el que estamos en el servidor.</td>
+</tr>
+<tr>
+<td><b>get</b> <i>archivo</i></td>
+<td>Obtiene un archivo</td>
+</tr>
+<tr>
+<td><b>noop</b> <i>No Operation</i></td>
+<td>Se le comunica al servidor que el cliente está en modo de no operación, el servidor usualmente responde con un «ZZZ» y refresca el contador de tiempo inactivo del usuario.</td>
+</tr>
+<tr>
+<td><b>mget</b> <i>archivos</i></td>
+<td>Obtiene múltiples archivos</td>
+</tr>
+<tr>
+<td><b>hash</b></td>
+<td>Activa la impresión de caracteres # a medida que se transfieren archivos, a modo de barra de progreso.</td>
+</tr>
+<tr>
+<td><b>lcd</b> <i>directorio</i></td>
+<td>Cambia el directorio de trabajo local.</td>
+</tr>
+<tr>
+<td><b>ls</b></td>
+<td>Muestra el contenido del directorio en el servidor.</td>
+</tr>
+<tr>
+<td><b>prompt</b></td>
+<td>Activa/desactiva la confirmación por parte del usuario de la ejecución de comandos. Por ejemplo al borrar múltiples archivos.</td>
+</tr>
+<tr>
+<td><b>put</b> <i>archivo</i></td>
+<td>Envía un archivo al directorio activo del servidor.</td>
+</tr>
+<tr>
+<td><b>mput</b> <i>archivos</i></td>
+<td>Envía múltiples archivos.</td>
+</tr>
+<tr>
+<td><b>pwd</b></td>
+<td>Muestra el directorio activo en el servidor.</td>
+</tr>
+<tr>
+<td><b>rename</b> <i>archivo</i></td>
+<td>Cambia el nombre a un archivo en el servidor.</td>
+</tr>
+<tr>
+<td><b>rmdir</b> <i>directorio</i></td>
+<td>Elimina un directorio en el servidor si ese directorio está vacío.</td>
+</tr>
+<tr>
+<td><b>status</b></td>
+<td>Muestra el estado actual de la conexión.</td>
+</tr>
+<tr>
+<td><b>bin</b> o <b>binary</b></td>
+<td>Activa el modo de transferencia binario.</td>
+</tr>
+<tr>
+<td><b>ascii</b></td>
+<td>Activa el modo de transferencia en modo texto ASCII.</td>
+</tr>
+<tr>
+<td><b>!</b></td>
+<td>Permite salir a línea de comandos temporalmente sin cortar la conexión. Para volver, teclear <b>exit</b> en la línea de comandos.</td>
+</tr>
+<tr>
+<td><b>?</b> <i>nombre de comando</i></td>
+<td>Muestra la información relativa al comando.</td>
+</tr>
+<tr>
+<td><b>?</b> o <b>help</b></td>
+<td>Muestra una lista de los comandos disponibles.</td>
+</tr>
+<tr>
+<td><b>append</b> <i>nombre del archivo</i></td>
+<td>Continua una descarga que se ha cortado previamente.</td>
+</tr>
+<tr>
+<td><b>bell</b></td>
+<td>Activa/desactiva la reproducción de un sonido cuando ha terminado cualquier proceso de transferencia de archivos.</td>
+</tr>
+<tr>
+<td><b>glob</b></td>
+<td>Activa/desactiva la visualización de nombres largos de nuestro PC.</td>
+</tr>
+<tr>
+<td><b>literal</b></td>
+<td>Con esta orden se pueden ejecutar comandos del servidor de forma remota. Para saber los disponibles se utiliza: <b>literal help</b>.</td>
+</tr>
+<tr>
+<td><b>mkdir</b></td>
+<td>Crea el directorio indicado de forma remota.</td>
+</tr>
+<tr>
+<td><b>quote</b></td>
+<td>Hace la misma función que <b>literal</b>.</td>
+</tr>
+<tr>
+<td><b>send</b> <i>nombre del archivo</i></td>
+<td>Envía el archivo indicado al directorio activo del servidor.</td>
+</tr>
+<tr>
+<td><b>user</b></td>
+<td>Para cambiar nuestro nombre de usuario y contraseña sin necesidad de salir de la sesión ftp.</td>
+</tr>
+</table>
+<h2><span id="C.C3.B3digos_de_respuesta_de_FTP"></span><span class="mw-headline" id="Códigos_de_respuesta_de_FTP">Códigos de respuesta de FTP</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=16" title="Editar sección: Códigos de respuesta de FTP">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>A continuación se muestra un resumen de la respuesta de los códigos FTP que puede ser devuelto por un servidor FTP. Estos códigos se han estandarizado en <a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc959">RFC 959</a> por IETF. El código de respuesta es un valor de tres dígitos. El primer dígito se utiliza para indicar una de tres posibles resultados-el éxito, el fracaso o para indicar un error o una respuesta incompleta:</p>
+<ul>
+<li>2yz - respuesta Éxito</li>
+<li>4yz o 5yz - No hay respuesta</li>
+<li>1yz o 3yz - Un error o una respuesta incompleta</li>
+</ul>
+<p>El segundo dígito define la clase de error:</p>
+<ul>
+<li>x0z - Sintaxis. Estas respuestas se refieren a errores de sintaxis.</li>
+<li>x1z - Información. Las respuestas a las solicitudes de información.</li>
+<li>x2z - Conexiones. Respuestas en referencia al control y las conexiones de datos.</li>
+<li>x3z - Autenticación y contabilidad. Respuestas para el proceso de inicio de sesión y los procedimientos contables.</li>
+<li>x4z - No definido.</li>
+<li>x5z - Sistema de archivos. Estas respuestas transmiten códigos de estado del sistema de archivos del servidor.</li>
+</ul>
+<p>El tercer dígito del código de respuesta se utiliza para proporcionar detalles adicionales para cada una de las categorías definidas por el segundo dígito.<sup id="cite_ref-4" class="reference separada"><a href="#cite_note-4"><span class="corchete-llamada">[</span>4<span class="corchete-llamada">]</span></a></sup>​</p>
+<h2><span id="Conexi.C3.B3n_a_un_servidor_FTP_protegido_desde_navegador"></span><span class="mw-headline" id="Conexión_a_un_servidor_FTP_protegido_desde_navegador">Conexión a un servidor FTP protegido desde navegador</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=17" title="Editar sección: Conexión a un servidor FTP protegido desde navegador">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Para iniciar sesión en un servidor FTP que requiere una contraseña teclee la URL de esta forma:</p>
+<p><code>ftp://&lt;usuario&gt;:&lt;contraseña&gt;@&lt;servidor ftp&gt;/&lt;url-ruta&gt;</code></p>
+<p>Donde <code>&lt;usuario&gt;</code> es el nombre de usuario, <code>&lt;servidor ftp&gt;</code> es el servidor FTP, <code>&lt;contraseña&gt;</code> es la contraseña de acceso, y <code>&lt;url-ruta&gt;</code> es el directorio donde iniciamos sesión.</p>
+<p>Ejemplo: <code>ftp://alumno:alumnopass@ftp.example.com/public</code></p>
+<h2><span id="V.C3.A9ase_tambi.C3.A9n"></span><span class="mw-headline" id="Véase_también">Véase también</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=18" title="Editar sección: Véase también">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><a href="/wiki/Archie_(Buscador_FTP)" title="Archie (Buscador FTP)">Archie</a></li>
+<li><a href="/wiki/FTPS" title="FTPS">FTPS</a></li>
+<li><a href="/wiki/TFTP" title="TFTP">TFTP</a></li>
+<li><a href="/w/index.php?title=OFTP&amp;action=edit&amp;redlink=1" class="new" title="OFTP (aún no redactado)">OFTP</a></li>
+<li><a href="/wiki/File_eXchange_Protocol" title="File eXchange Protocol">File eXchange Protocol</a></li>
+<li><a href="/wiki/Picture_Transfer_Protocol" class="mw-redirect" title="Picture Transfer Protocol">PTP</a>, Picture Transfer Protocol</li>
+<li><a href="/wiki/MTP" title="MTP">MTP</a>, Media Transfer Protocol (una extensión del PTP)</li>
+<li><a href="/wiki/SSH_File_Transfer_Protocol" title="SSH File Transfer Protocol">SSH File Transfer Protocol</a></li>
+<li><a href="/wiki/Network_File_System" title="Network File System">Network File System</a></li>
+<li><a href="/wiki/Sistema_de_archivos" title="Sistema de archivos">Sistema de archivos</a></li>
+<li><a href="/wiki/Sistema_de_archivos_distribuido" title="Sistema de archivos distribuido">Sistema de archivos distribuido</a></li>
+</ul>
+<h2><span class="mw-headline" id="Servidores_FTP">Servidores FTP</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=19" title="Editar sección: Servidores FTP">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><a href="/wiki/Servidor_FTP" class="mw-redirect" title="Servidor FTP">Servidor FTP</a> (Lista)</li>
+<li><a href="/w/index.php?title=FileZilla_Server&amp;action=edit&amp;redlink=1" class="new" title="FileZilla Server (aún no redactado)">FileZilla Server</a> (Windows)</li>
+<li><a href="/wiki/Pure-FTPd" title="Pure-FTPd">Pure-FTPd</a> (Unix)</li>
+<li><a href="/w/index.php?title=VsFTPd&amp;action=edit&amp;redlink=1" class="new" title="VsFTPd (aún no redactado)">VsFTPd</a> (Unix)</li>
+<li><a href="/wiki/ProFTPd" title="ProFTPd">ProFTPd</a> (Unix)</li>
+</ul>
+<h2><span class="mw-headline" id="Enlaces_externos">Enlaces externos</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=20" title="Editar sección: Enlaces externos">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc959">RFC 959</a> – File Transfer Protocol</li>
+<li><a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc1579">RFC 1579</a> – Firewall Friendly FTP</li>
+<li><a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc2228">RFC 2228</a> – FTP Security Extensions</li>
+<li><a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc2428">RFC 2428</a> – FTP Extensions for <a href="/wiki/IPv6" title="IPv6">IPv6</a> and <a href="/wiki/Network_Address_Translation" class="mw-redirect" title="Network Address Translation">NATs</a></li>
+<li><a class="external mw-magiclink-rfc" rel="nofollow" href="https://tools.ietf.org/html/rfc2640">RFC 2640</a> – Internationalization of the File Transfer Protocol</li>
+</ul>
+<dl>
+<dt>Protocolo</dt>
+</dl>
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.nsftools.com/tips/RawFTP.htm">Raw FTP command list</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.eventhelix.com/RealtimeMantra/Networking/FTP.pdf">FTP Sequence Diagram</a></li>
+<li><a rel="nofollow" class="external text" href="https://servertest.online/ftp">FTP Server Test</a> (Online)</li>
+</ul>
+<h2><span class="mw-headline" id="Referencias">Referencias</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit&amp;section=21" title="Editar sección: Referencias">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="listaref" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-1"><span class="mw-cite-backlink"><a href="#cite_ref-1">↑</a></span> <span class="reference-text"><span id="CITAREF" class="citation web"><a rel="nofollow" class="external text" href="http://managefiletransfer.wordpress.com/2011/08/02/mft-b2bconsulting/">«La historia del protocolo FTP saludos 1004(y sus desventajas actuales)»</a><span class="reference-accessdate">. Consultado el 26 de junio de 2014</span>.</span><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fes.wikipedia.org%3AProtocolo+de+transferencia+de+archivos&amp;rft.btitle=La+historia+del+protocolo+FTP+saludos+1004%28y+sus+desventajas+actuales%29&amp;rft.genre=book&amp;rft_id=http%3A%2F%2Fmanagefiletransfer.wordpress.com%2F2011%2F08%2F02%2Fmft-b2bconsulting%2F&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-2"><span class="mw-cite-backlink"><a href="#cite_ref-2">↑</a></span> <span class="reference-text"><span id="CITAREFMicaela" class="citation web">Micaela. <a rel="nofollow" class="external text" href="http://www.elwebmaster.com/articulos/los-mejores-10-clientes-ftp">«Los mejores 10 clientes FTP»</a><span class="reference-accessdate">. Consultado el 27 de junio de 2014</span>.</span><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fes.wikipedia.org%3AProtocolo+de+transferencia+de+archivos&amp;rft.au=Micaela&amp;rft.aulast=Micaela&amp;rft.btitle=Los+mejores+10+clientes+FTP&amp;rft.genre=book&amp;rft_id=http%3A%2F%2Fwww.elwebmaster.com%2Farticulos%2Flos-mejores-10-clientes-ftp&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-3"><span class="mw-cite-backlink"><a href="#cite_ref-3">↑</a></span> <span class="reference-text"><span id="CITAREF" class="citation web"><a rel="nofollow" class="external text" href="http://slacksite.com/other/ftp.html#passive">«Active FTP vs. Passive FTP, a Definitive Explanation»</a> <span style="color:#555;">(en inglés)</span>.</span><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fes.wikipedia.org%3AProtocolo+de+transferencia+de+archivos&amp;rft.btitle=Active+FTP+vs.+Passive+FTP%2C+a+Definitive+Explanation&amp;rft.genre=book&amp;rft_id=http%3A%2F%2Fslacksite.com%2Fother%2Fftp.html%23passive&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-4"><span class="mw-cite-backlink"><a href="#cite_ref-4">↑</a></span> <span class="reference-text"><span id="CITAREFForouzan" class="citation libro">Forouzan, Behrouz. <i>TCP/IP Protocol Suite</i>. McGraw Hill.</span><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fes.wikipedia.org%3AProtocolo+de+transferencia+de+archivos&amp;rft.au=Forouzan%2C+Behrouz&amp;rft.aufirst=Behrouz&amp;rft.aulast=Forouzan&amp;rft.btitle=TCP%2FIP+Protocol+Suite&amp;rft.genre=book&amp;rft.pub=McGraw+Hill&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+</ol>
+</div>
+
+
+<!-- 
+NewPP limit report
+Parsed by mw1308
+Cached time: 20180117125310
+Cache expiry: 1900800
+Dynamic content: false
+CPU time usage: 0.088 seconds
+Real time usage: 0.117 seconds
+Preprocessor visited node count: 578/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 11237/2097152 bytes
+Template argument size: 708/2097152 bytes
+Highest expansion depth: 6/40
+Expensive parser function count: 0/500
+Lua time usage: 0.030/10.000 seconds
+Lua memory usage: 1.92 MB/50 MB
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%   81.084      1 -total
+ 44.05%   35.717      1 Plantilla:Ficha_de_protocolo_de_red
+ 42.84%   34.740      1 Plantilla:Listaref
+ 39.88%   32.338      1 Plantilla:Ficha
+ 32.06%   25.992      3 Plantilla:Cita_web
+  6.21%    5.032      1 Plantilla:AP
+  3.71%    3.008      1 Plantilla:Cita_libro
+  2.36%    1.910      1 Plantilla:Redirige_aquí
+-->
+</div>
+<!-- Saved in parser cache with key eswiki:pcache:idhash:1213-0!canonical and timestamp 20180117125310 and revision id 104856784
+ -->
+<noscript><img src="//es.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" alt="" title="" width="1" height="1" style="border: none; position: absolute;" /></noscript></div>					<div class="printfooter">
+						Obtenido de «<a dir="ltr" href="https://es.wikipedia.org/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;oldid=104856784">https://es.wikipedia.org/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;oldid=104856784</a>»					</div>
+				<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="/wiki/Especial:Categor%C3%ADas" title="Especial:Categorías">Categorías</a>: <ul><li><a href="/wiki/Categor%C3%ADa:FTP" title="Categoría:FTP">FTP</a></li><li><a href="/wiki/Categor%C3%ADa:Protocolos_de_nivel_de_aplicaci%C3%B3n" title="Categoría:Protocolos de nivel de aplicación">Protocolos de nivel de aplicación</a></li><li><a href="/wiki/Categor%C3%ADa:Historia_de_Internet" title="Categoría:Historia de Internet">Historia de Internet</a></li><li><a href="/wiki/Categor%C3%ADa:Introducciones_en_1980" title="Categoría:Introducciones en 1980">Introducciones en 1980</a></li></ul></div><div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Categoría oculta: <ul><li><a href="/wiki/Categor%C3%ADa:Wikipedia:P%C3%A1ginas_con_enlaces_m%C3%A1gicos_de_RFC" title="Categoría:Wikipedia:Páginas con enlaces mágicos de RFC">Wikipedia:Páginas con enlaces mágicos de RFC</a></li></ul></div></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Menú de navegación</h2>
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Herramientas personales</h3>
+						<ul>
+							<li id="pt-anonuserpage">No has accedido</li><li id="pt-anontalk"><a href="/wiki/Especial:MiDiscusi%C3%B3n" title="Discusión sobre ediciones hechas desde esta dirección IP [n]" accesskey="n">Discusión</a></li><li id="pt-anoncontribs"><a href="/wiki/Especial:MisContribuciones" title="Una lista de modificaciones hechas desde esta dirección IP [y]" accesskey="y">Contribuciones</a></li><li id="pt-createaccount"><a href="/w/index.php?title=Especial:Crear_una_cuenta&amp;returnto=Protocolo+de+transferencia+de+archivos" title="Te recomendamos crear una cuenta e iniciar sesión; sin embargo, no es obligatorio">Crear una cuenta</a></li><li id="pt-login"><a href="/w/index.php?title=Especial:Entrar&amp;returnto=Protocolo+de+transferencia+de+archivos" title="Te recomendamos iniciar sesión, aunque no es obligatorio [o]" accesskey="o">Acceder</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Espacios de nombres</h3>
+						<ul>
+							<li id="ca-nstab-main" class="selected"><span><a href="/wiki/Protocolo_de_transferencia_de_archivos" title="Ver la página de contenido [c]" accesskey="c">Artículo</a></span></li><li id="ca-talk"><span><a href="/wiki/Discusi%C3%B3n:Protocolo_de_transferencia_de_archivos" rel="discussion" title="Discusión acerca del artículo [t]" accesskey="t">Discusión</a></span></li>						</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label">
+							<span>Variantes</span>
+						</h3>
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Vistas</h3>
+						<ul>
+							<li id="ca-view" class="collapsible selected"><span><a href="/wiki/Protocolo_de_transferencia_de_archivos">Leer</a></span></li><li id="ca-edit" class="collapsible"><span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=edit" title="Editar esta página [e]" accesskey="e">Editar</a></span></li><li id="ca-history" class="collapsible"><span><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=history" title="Versiones anteriores de esta página [h]" accesskey="h">Ver historial</a></span></li>						</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 id="p-cactions-label"><span>Más</span></h3>
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Buscar</label>
+						</h3>
+						<form action="/w/index.php" id="searchform">
+							<div id="simpleSearch">
+								<input type="search" name="search" placeholder="Buscar en Wikipedia" title="Buscar en este wiki [f]" accesskey="f" id="searchInput"/><input type="hidden" value="Especial:Buscar" name="title"/><input type="submit" name="fulltext" value="Buscar" title="Busca páginas con este texto." id="mw-searchButton" class="searchButton mw-fallbackSearchButton"/><input type="submit" name="go" value="Ir" title="Ir a la página con este nombre exacto si existe" id="searchButton" class="searchButton"/>							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/Wikipedia:Portada"  title="Visitar la página principal"></a></div>
+						<div class="portal" role="navigation" id='p-navigation' aria-labelledby='p-navigation-label'>
+			<h3 id='p-navigation-label'>Navegación</h3>
+			<div class="body">
+								<ul>
+					<li id="n-mainpage-description"><a href="/wiki/Wikipedia:Portada" title="Visitar la página principal [z]" accesskey="z">Portada</a></li><li id="n-portal"><a href="/wiki/Portal:Comunidad" title="Acerca del proyecto, lo que puedes hacer, dónde encontrar información">Portal de la comunidad</a></li><li id="n-currentevents"><a href="/wiki/Portal:Actualidad" title="Encuentra información de contexto sobre acontecimientos actuales">Actualidad</a></li><li id="n-recentchanges"><a href="/wiki/Especial:CambiosRecientes" title="Lista de cambios recientes en el wiki [r]" accesskey="r">Cambios recientes</a></li><li id="n-newpages"><a href="/wiki/Especial:P%C3%A1ginasNuevas">Páginas nuevas</a></li><li id="n-randompage"><a href="/wiki/Especial:Aleatoria" title="Cargar una página al azar [x]" accesskey="x">Página aleatoria</a></li><li id="n-help"><a href="/wiki/Ayuda:Contenidos" title="El lugar para aprender">Ayuda</a></li><li id="n-sitesupport"><a href="//donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_es.wikipedia.org&amp;uselang=es" title="Apóyanos">Donaciones</a></li><li id="n-bug_in_article"><a href="/wiki/Wikipedia:Informes_de_error">Notificar un error</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-coll-print_export' aria-labelledby='p-coll-print_export-label'>
+			<h3 id='p-coll-print_export-label'>Imprimir/exportar</h3>
+			<div class="body">
+								<ul>
+					<li id="coll-create_a_book"><a href="/w/index.php?title=Especial:Libro&amp;bookcmd=book_creator&amp;referer=Protocolo+de+transferencia+de+archivos">Crear un libro</a></li><li id="coll-download-as-rdf2latex"><a href="/w/index.php?title=Especial:ElectronPdf&amp;page=Protocolo+de+transferencia+de+archivos&amp;action=show-download-screen">Descargar como PDF</a></li><li id="t-print"><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;printable=yes" title="Versión imprimible de esta página [p]" accesskey="p">Versión para imprimir</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-wikibase-otherprojects' aria-labelledby='p-wikibase-otherprojects-label'>
+			<h3 id='p-wikibase-otherprojects-label'>En otros proyectos</h3>
+			<div class="body">
+								<ul>
+					<li class="wb-otherproject-link wb-otherproject-commons"><a href="https://commons.wikimedia.org/wiki/Category:File_transfer_protocol" hreflang="en">Wikimedia Commons</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-tb' aria-labelledby='p-tb-label'>
+			<h3 id='p-tb-label'>Herramientas</h3>
+			<div class="body">
+								<ul>
+					<li id="t-whatlinkshere"><a href="/wiki/Especial:LoQueEnlazaAqu%C3%AD/Protocolo_de_transferencia_de_archivos" title="Lista de todas las páginas del wiki que enlazan aquí [j]" accesskey="j">Lo que enlaza aquí</a></li><li id="t-recentchangeslinked"><a href="/wiki/Especial:CambiosEnEnlazadas/Protocolo_de_transferencia_de_archivos" rel="nofollow" title="Cambios recientes en las páginas que enlazan con esta [k]" accesskey="k">Cambios en enlazadas</a></li><li id="t-upload"><a href="//commons.wikimedia.org/wiki/Special:UploadWizard?uselang=es" title="Subir archivos [u]" accesskey="u">Subir archivo</a></li><li id="t-specialpages"><a href="/wiki/Especial:P%C3%A1ginasEspeciales" title="Lista de todas las páginas especiales [q]" accesskey="q">Páginas especiales</a></li><li id="t-permalink"><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;oldid=104856784" title="Enlace permanente a esta versión de la página">Enlace permanente</a></li><li id="t-info"><a href="/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;action=info" title="Más información sobre esta página">Información de la página</a></li><li id="t-wikibase"><a href="https://www.wikidata.org/wiki/Special:EntityPage/Q42283" title="Enlace al elemento conectado del repositorio de datos [g]" accesskey="g">Elemento de Wikidata</a></li><li id="t-cite"><a href="/w/index.php?title=Especial:Citar&amp;page=Protocolo_de_transferencia_de_archivos&amp;id=104856784" title="Información sobre cómo citar esta página">Citar esta página</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-lang' aria-labelledby='p-lang-label'>
+			<h3 id='p-lang-label'>En otros idiomas</h3>
+			<div class="body">
+								<ul>
+					<li class="interlanguage-link interwiki-af"><a href="https://af.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (afrikáans)" lang="af" hreflang="af" class="interlanguage-link-target">Afrikaans</a></li><li class="interlanguage-link interwiki-als"><a href="https://als.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (Alemannisch)" lang="als" hreflang="als" class="interlanguage-link-target">Alemannisch</a></li><li class="interlanguage-link interwiki-ar"><a href="https://ar.wikipedia.org/wiki/%D8%A8%D8%B1%D9%88%D8%AA%D9%88%D9%83%D9%88%D9%84_%D9%86%D9%82%D9%84_%D8%A7%D9%84%D9%85%D9%84%D9%81%D8%A7%D8%AA" title="بروتوكول نقل الملفات (árabe)" lang="ar" hreflang="ar" class="interlanguage-link-target">العربية</a></li><li class="interlanguage-link interwiki-az"><a href="https://az.wikipedia.org/wiki/FTP" title="FTP (azerbaiyano)" lang="az" hreflang="az" class="interlanguage-link-target">Azərbaycanca</a></li><li class="interlanguage-link interwiki-bar"><a href="https://bar.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (Bavarian)" lang="bar" hreflang="bar" class="interlanguage-link-target">Boarisch</a></li><li class="interlanguage-link interwiki-be"><a href="https://be.wikipedia.org/wiki/FTP" title="FTP (bielorruso)" lang="be" hreflang="be" class="interlanguage-link-target">Беларуская</a></li><li class="interlanguage-link interwiki-be-x-old"><a href="https://be-x-old.wikipedia.org/wiki/FTP" title="FTP (Belarusian (Taraškievica orthography))" lang="be-x-old" hreflang="be-x-old" class="interlanguage-link-target">Беларуская (тарашкевіца)‎</a></li><li class="interlanguage-link interwiki-bg"><a href="https://bg.wikipedia.org/wiki/FTP" title="FTP (búlgaro)" lang="bg" hreflang="bg" class="interlanguage-link-target">Български</a></li><li class="interlanguage-link interwiki-bn"><a href="https://bn.wikipedia.org/wiki/%E0%A6%AB%E0%A6%BE%E0%A6%87%E0%A6%B2_%E0%A6%9F%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%B8%E0%A6%AB%E0%A6%BE%E0%A6%B0_%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A7%8B%E0%A6%9F%E0%A7%8B%E0%A6%95%E0%A6%B2" title="ফাইল ট্রান্সফার প্রোটোকল (bengalí)" lang="bn" hreflang="bn" class="interlanguage-link-target">বাংলা</a></li><li class="interlanguage-link interwiki-bs"><a href="https://bs.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (bosnio)" lang="bs" hreflang="bs" class="interlanguage-link-target">Bosanski</a></li><li class="interlanguage-link interwiki-ca"><a href="https://ca.wikipedia.org/wiki/Protocol_de_transfer%C3%A8ncia_de_fitxers" title="Protocol de transferència de fitxers (catalán)" lang="ca" hreflang="ca" class="interlanguage-link-target">Català</a></li><li class="interlanguage-link interwiki-cs"><a href="https://cs.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (checo)" lang="cs" hreflang="cs" class="interlanguage-link-target">Čeština</a></li><li class="interlanguage-link interwiki-da"><a href="https://da.wikipedia.org/wiki/FTP" title="FTP (danés)" lang="da" hreflang="da" class="interlanguage-link-target">Dansk</a></li><li class="interlanguage-link interwiki-de"><a href="https://de.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (alemán)" lang="de" hreflang="de" class="interlanguage-link-target">Deutsch</a></li><li class="interlanguage-link interwiki-el"><a href="https://el.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (griego)" lang="el" hreflang="el" class="interlanguage-link-target">Ελληνικά</a></li><li class="interlanguage-link interwiki-en"><a href="https://en.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (inglés)" lang="en" hreflang="en" class="interlanguage-link-target">English</a></li><li class="interlanguage-link interwiki-eo"><a href="https://eo.wikipedia.org/wiki/Dosiero-Transiga_Protokolo" title="Dosiero-Transiga Protokolo (esperanto)" lang="eo" hreflang="eo" class="interlanguage-link-target">Esperanto</a></li><li class="interlanguage-link interwiki-et"><a href="https://et.wikipedia.org/wiki/Failiedastusprotokoll" title="Failiedastusprotokoll (estonio)" lang="et" hreflang="et" class="interlanguage-link-target">Eesti</a></li><li class="interlanguage-link interwiki-eu"><a href="https://eu.wikipedia.org/wiki/Fitxategien_Transferentziarako_Protokoloa" title="Fitxategien Transferentziarako Protokoloa (euskera)" lang="eu" hreflang="eu" class="interlanguage-link-target">Euskara</a></li><li class="interlanguage-link interwiki-fa"><a href="https://fa.wikipedia.org/wiki/%D9%BE%D8%B1%D9%88%D8%AA%DA%A9%D9%84_%D8%A7%D9%86%D8%AA%D9%82%D8%A7%D9%84_%D9%81%D8%A7%DB%8C%D9%84" title="پروتکل انتقال فایل (persa)" lang="fa" hreflang="fa" class="interlanguage-link-target">فارسی</a></li><li class="interlanguage-link interwiki-fi"><a href="https://fi.wikipedia.org/wiki/FTP" title="FTP (finés)" lang="fi" hreflang="fi" class="interlanguage-link-target">Suomi</a></li><li class="interlanguage-link interwiki-fiu-vro"><a href="https://fiu-vro.wikipedia.org/wiki/FTP" title="FTP (Võro)" lang="fiu-vro" hreflang="fiu-vro" class="interlanguage-link-target">Võro</a></li><li class="interlanguage-link interwiki-fr"><a href="https://fr.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (francés)" lang="fr" hreflang="fr" class="interlanguage-link-target">Français</a></li><li class="interlanguage-link interwiki-ga"><a href="https://ga.wikipedia.org/wiki/FTP" title="FTP (irlandés)" lang="ga" hreflang="ga" class="interlanguage-link-target">Gaeilge</a></li><li class="interlanguage-link interwiki-gl"><a href="https://gl.wikipedia.org/wiki/FTP" title="FTP (gallego)" lang="gl" hreflang="gl" class="interlanguage-link-target">Galego</a></li><li class="interlanguage-link interwiki-gu"><a href="https://gu.wikipedia.org/wiki/%E0%AA%AB%E0%AA%BE%E0%AA%87%E0%AA%B2_%E0%AA%9F%E0%AB%8D%E0%AA%B0%E0%AA%BE%E0%AA%A8%E0%AB%8D%E0%AA%B8%E0%AB%8D%E0%AA%AB%E0%AA%B0_%E0%AA%AA%E0%AB%8D%E0%AA%B0%E0%AB%8B%E0%AA%9F%E0%AB%8B%E0%AA%95%E0%AB%8B%E0%AA%B2" title="ફાઇલ ટ્રાન્સ્ફર પ્રોટોકોલ (guyaratí)" lang="gu" hreflang="gu" class="interlanguage-link-target">ગુજરાતી</a></li><li class="interlanguage-link interwiki-he"><a href="https://he.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (hebreo)" lang="he" hreflang="he" class="interlanguage-link-target">עברית</a></li><li class="interlanguage-link interwiki-hi"><a href="https://hi.wikipedia.org/wiki/%E0%A4%B8%E0%A4%82%E0%A4%9A%E0%A4%BF%E0%A4%95%E0%A4%BE_%E0%A4%B8%E0%A5%8D%E0%A4%A5%E0%A4%BE%E0%A4%A8%E0%A4%BE%E0%A4%82%E0%A4%A4%E0%A4%B0%E0%A4%A3_%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A5%8B%E0%A4%9F%E0%A5%8B%E0%A4%95%E0%A5%89%E0%A4%B2" title="संचिका स्थानांतरण प्रोटोकॉल (hindi)" lang="hi" hreflang="hi" class="interlanguage-link-target">हिन्दी</a></li><li class="interlanguage-link interwiki-hr"><a href="https://hr.wikipedia.org/wiki/FTP" title="FTP (croata)" lang="hr" hreflang="hr" class="interlanguage-link-target">Hrvatski</a></li><li class="interlanguage-link interwiki-hu"><a href="https://hu.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (húngaro)" lang="hu" hreflang="hu" class="interlanguage-link-target">Magyar</a></li><li class="interlanguage-link interwiki-hy"><a href="https://hy.wikipedia.org/wiki/%D5%86%D5%AB%D5%B7%D6%84%D5%A5%D6%80%D5%AB_%D6%83%D5%B8%D5%AD%D5%A1%D5%B6%D6%81%D5%B4%D5%A1%D5%B6_%D5%AF%D5%A1%D5%B6%D5%AD%D5%A1%D5%A3%D5%AB%D6%80" title="Նիշքերի փոխանցման կանխագիր (armenio)" lang="hy" hreflang="hy" class="interlanguage-link-target">Հայերեն</a></li><li class="interlanguage-link interwiki-ia"><a href="https://ia.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (interlingua)" lang="ia" hreflang="ia" class="interlanguage-link-target">Interlingua</a></li><li class="interlanguage-link interwiki-id"><a href="https://id.wikipedia.org/wiki/Protokol_Transfer_Berkas" title="Protokol Transfer Berkas (indonesio)" lang="id" hreflang="id" class="interlanguage-link-target">Bahasa Indonesia</a></li><li class="interlanguage-link interwiki-is"><a href="https://is.wikipedia.org/wiki/FTP" title="FTP (islandés)" lang="is" hreflang="is" class="interlanguage-link-target">Íslenska</a></li><li class="interlanguage-link interwiki-it"><a href="https://it.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (italiano)" lang="it" hreflang="it" class="interlanguage-link-target">Italiano</a></li><li class="interlanguage-link interwiki-ja"><a href="https://ja.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (japonés)" lang="ja" hreflang="ja" class="interlanguage-link-target">日本語</a></li><li class="interlanguage-link interwiki-ka"><a href="https://ka.wikipedia.org/wiki/FTP" title="FTP (georgiano)" lang="ka" hreflang="ka" class="interlanguage-link-target">ქართული</a></li><li class="interlanguage-link interwiki-kk"><a href="https://kk.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (kazajo)" lang="kk" hreflang="kk" class="interlanguage-link-target">Қазақша</a></li><li class="interlanguage-link interwiki-ko"><a href="https://ko.wikipedia.org/wiki/%ED%8C%8C%EC%9D%BC_%EC%A0%84%EC%86%A1_%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C" title="파일 전송 프로토콜 (coreano)" lang="ko" hreflang="ko" class="interlanguage-link-target">한국어</a></li><li class="interlanguage-link interwiki-ku"><a href="https://ku.wikipedia.org/wiki/FTP" title="FTP (kurdo)" lang="ku" hreflang="ku" class="interlanguage-link-target">Kurdî</a></li><li class="interlanguage-link interwiki-ky"><a href="https://ky.wikipedia.org/wiki/FTP" title="FTP (kirguís)" lang="ky" hreflang="ky" class="interlanguage-link-target">Кыргызча</a></li><li class="interlanguage-link interwiki-lmo"><a href="https://lmo.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (Lombard)" lang="lmo" hreflang="lmo" class="interlanguage-link-target">Lumbaart</a></li><li class="interlanguage-link interwiki-lt"><a href="https://lt.wikipedia.org/wiki/FTP" title="FTP (lituano)" lang="lt" hreflang="lt" class="interlanguage-link-target">Lietuvių</a></li><li class="interlanguage-link interwiki-lv"><a href="https://lv.wikipedia.org/wiki/FTP" title="FTP (letón)" lang="lv" hreflang="lv" class="interlanguage-link-target">Latviešu</a></li><li class="interlanguage-link interwiki-mhr"><a href="https://mhr.wikipedia.org/wiki/FTP" title="FTP (Eastern Mari)" lang="mhr" hreflang="mhr" class="interlanguage-link-target">Олык марий</a></li><li class="interlanguage-link interwiki-mk"><a href="https://mk.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%BB_%D0%B7%D0%B0_%D0%BF%D1%80%D0%B5%D0%BD%D0%BE%D1%81_%D0%BD%D0%B0_%D0%BF%D0%BE%D0%B4%D0%B0%D1%82%D0%BE%D1%82%D0%B5%D0%BA%D0%B8" title="Протокол за пренос на податотеки (macedonio)" lang="mk" hreflang="mk" class="interlanguage-link-target">Македонски</a></li><li class="interlanguage-link interwiki-ml"><a href="https://ml.wikipedia.org/wiki/%E0%B4%AB%E0%B4%AF%E0%B5%BD_%E0%B4%9F%E0%B5%8D%E0%B4%B0%E0%B4%BE%E0%B5%BB%E0%B4%B8%E0%B5%8D%E2%80%8C%E0%B4%AB%E0%B5%BC_%E0%B4%AA%E0%B5%8D%E0%B4%B0%E0%B5%8B%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B5%8B%E0%B4%95%E0%B5%8B%E0%B5%BE" title="ഫയൽ ട്രാൻസ്‌ഫർ പ്രോട്ടോകോൾ (malayalam)" lang="ml" hreflang="ml" class="interlanguage-link-target">മലയാളം</a></li><li class="interlanguage-link interwiki-mn"><a href="https://mn.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (mongol)" lang="mn" hreflang="mn" class="interlanguage-link-target">Монгол</a></li><li class="interlanguage-link interwiki-ms"><a href="https://ms.wikipedia.org/wiki/Protokol_Pindahan_Fail" title="Protokol Pindahan Fail (malayo)" lang="ms" hreflang="ms" class="interlanguage-link-target">Bahasa Melayu</a></li><li class="interlanguage-link interwiki-nl"><a href="https://nl.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (neerlandés)" lang="nl" hreflang="nl" class="interlanguage-link-target">Nederlands</a></li><li class="interlanguage-link interwiki-nn"><a href="https://nn.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (noruego nynorsk)" lang="nn" hreflang="nn" class="interlanguage-link-target">Norsk nynorsk</a></li><li class="interlanguage-link interwiki-no"><a href="https://no.wikipedia.org/wiki/FTP" title="FTP (noruego)" lang="no" hreflang="no" class="interlanguage-link-target">Norsk</a></li><li class="interlanguage-link interwiki-pl"><a href="https://pl.wikipedia.org/wiki/Protok%C3%B3%C5%82_transferu_plik%C3%B3w" title="Protokół transferu plików (polaco)" lang="pl" hreflang="pl" class="interlanguage-link-target">Polski</a></li><li class="interlanguage-link interwiki-pt"><a href="https://pt.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (portugués)" lang="pt" hreflang="pt" class="interlanguage-link-target">Português</a></li><li class="interlanguage-link interwiki-ro"><a href="https://ro.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (rumano)" lang="ro" hreflang="ro" class="interlanguage-link-target">Română</a></li><li class="interlanguage-link interwiki-ru"><a href="https://ru.wikipedia.org/wiki/FTP" title="FTP (ruso)" lang="ru" hreflang="ru" class="interlanguage-link-target">Русский</a></li><li class="interlanguage-link interwiki-sco"><a href="https://sco.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (escocés)" lang="sco" hreflang="sco" class="interlanguage-link-target">Scots</a></li><li class="interlanguage-link interwiki-sh"><a href="https://sh.wikipedia.org/wiki/FTP" title="FTP (serbocroata)" lang="sh" hreflang="sh" class="interlanguage-link-target">Srpskohrvatski / српскохрватски</a></li><li class="interlanguage-link interwiki-simple"><a href="https://simple.wikipedia.org/wiki/FTP" title="FTP (Simple English)" lang="simple" hreflang="simple" class="interlanguage-link-target">Simple English</a></li><li class="interlanguage-link interwiki-sk"><a href="https://sk.wikipedia.org/wiki/Protokol_prenosu_s%C3%BAborov" title="Protokol prenosu súborov (eslovaco)" lang="sk" hreflang="sk" class="interlanguage-link-target">Slovenčina</a></li><li class="interlanguage-link interwiki-sl"><a href="https://sl.wikipedia.org/wiki/FTP" title="FTP (esloveno)" lang="sl" hreflang="sl" class="interlanguage-link-target">Slovenščina</a></li><li class="interlanguage-link interwiki-sq"><a href="https://sq.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (albanés)" lang="sq" hreflang="sq" class="interlanguage-link-target">Shqip</a></li><li class="interlanguage-link interwiki-sr"><a href="https://sr.wikipedia.org/wiki/FTP" title="FTP (serbio)" lang="sr" hreflang="sr" class="interlanguage-link-target">Српски / srpski</a></li><li class="interlanguage-link interwiki-sv"><a href="https://sv.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (sueco)" lang="sv" hreflang="sv" class="interlanguage-link-target">Svenska</a></li><li class="interlanguage-link interwiki-ta"><a href="https://ta.wikipedia.org/wiki/%E0%AE%95%E0%AF%8B%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AF%81%E0%AE%AA%E0%AF%8D_%E0%AE%AA%E0%AE%B0%E0%AE%BF%E0%AE%AE%E0%AE%BE%E0%AE%B1%E0%AF%8D%E0%AE%B1_%E0%AE%A8%E0%AF%86%E0%AE%B1%E0%AE%BF%E0%AE%AE%E0%AF%81%E0%AE%B1%E0%AF%88" title="கோப்புப் பரிமாற்ற நெறிமுறை (tamil)" lang="ta" hreflang="ta" class="interlanguage-link-target">தமிழ்</a></li><li class="interlanguage-link interwiki-tg"><a href="https://tg.wikipedia.org/wiki/FTP" title="FTP (tayiko)" lang="tg" hreflang="tg" class="interlanguage-link-target">Тоҷикӣ</a></li><li class="interlanguage-link interwiki-th"><a href="https://th.wikipedia.org/wiki/%E0%B9%80%E0%B8%AD%E0%B8%9F%E0%B8%97%E0%B8%B5%E0%B8%9E%E0%B8%B5" title="เอฟทีพี (tailandés)" lang="th" hreflang="th" class="interlanguage-link-target">ไทย</a></li><li class="interlanguage-link interwiki-tl"><a href="https://tl.wikipedia.org/wiki/FTP" title="FTP (tagalo)" lang="tl" hreflang="tl" class="interlanguage-link-target">Tagalog</a></li><li class="interlanguage-link interwiki-tr"><a href="https://tr.wikipedia.org/wiki/Dosya_aktar%C4%B1m_ileti%C5%9Fim_kural%C4%B1" title="Dosya aktarım iletişim kuralı (turco)" lang="tr" hreflang="tr" class="interlanguage-link-target">Türkçe</a></li><li class="interlanguage-link interwiki-uk"><a href="https://uk.wikipedia.org/wiki/FTP" title="FTP (ucraniano)" lang="uk" hreflang="uk" class="interlanguage-link-target">Українська</a></li><li class="interlanguage-link interwiki-ur"><a href="https://ur.wikipedia.org/wiki/%D9%81%D8%A7%D8%A6%D9%84_%D9%85%D9%86%D8%AA%D9%82%D9%84%DB%8C_%D9%BE%D8%B1%D9%88%D9%B9%D9%88%DA%A9%D9%88%D9%84" title="فائل منتقلی پروٹوکول (urdu)" lang="ur" hreflang="ur" class="interlanguage-link-target">اردو</a></li><li class="interlanguage-link interwiki-vi"><a href="https://vi.wikipedia.org/wiki/FTP" title="FTP (vietnamita)" lang="vi" hreflang="vi" class="interlanguage-link-target">Tiếng Việt</a></li><li class="interlanguage-link interwiki-yo"><a href="https://yo.wikipedia.org/wiki/File_Transfer_Protocol" title="File Transfer Protocol (yoruba)" lang="yo" hreflang="yo" class="interlanguage-link-target">Yorùbá</a></li><li class="interlanguage-link interwiki-zh"><a href="https://zh.wikipedia.org/wiki/%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" title="文件传输协议 (chino)" lang="zh" hreflang="zh" class="interlanguage-link-target">中文</a></li><li class="interlanguage-link interwiki-zh-yue"><a href="https://zh-yue.wikipedia.org/wiki/FTP" title="FTP (Cantonese)" lang="zh-yue" hreflang="zh-yue" class="interlanguage-link-target">粵語</a></li>				</ul>
+				<div class="after-portlet after-portlet-lang"><span class="wb-langlinks-edit wb-langlinks-link"><a href="https://www.wikidata.org/wiki/Special:EntityPage/Q42283#sitelinks-wikipedia" title="Editar enlaces interlingüísticos" class="wbc-editpage">Editar enlaces</a></span></div>			</div>
+		</div>
+				</div>
+		</div>
+				<div id="footer" role="contentinfo">
+						<ul id="footer-info">
+								<li id="footer-info-lastmod"> Se editó esta página por última vez el 12 ene 2018 a las 07:50.</li>
+								<li id="footer-info-copyright">El texto está disponible bajo la <a rel="license" href="//es.wikipedia.org/wiki/Wikipedia:Texto_de_la_Licencia_Creative_Commons_Atribuci%C3%B3n-CompartirIgual_3.0_Unported">Licencia Creative Commons Atribución Compartir Igual 3.0</a><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" style="display:none;"></a>;
+pueden aplicarse cláusulas adicionales. Al usar este sitio, usted acepta nuestros <a href="//wikimediafoundation.org/wiki/Terms_of_Use">términos de uso</a> y nuestra <a href="//wikimediafoundation.org/wiki/Privacy_policy">política de privacidad</a>. <br/>Wikipedia&reg; es una marca registrada de la <a href="//www.wikimediafoundation.org/">Fundación Wikimedia, Inc.</a>, una organización sin ánimo de lucro.</li>
+							</ul>
+						<ul id="footer-places">
+								<li id="footer-places-privacy"><a href="https://meta.wikimedia.org/wiki/Privacy_policy/es" class="extiw" title="m:Privacy policy/es">Normativa de privacidad</a></li>
+								<li id="footer-places-about"><a href="/wiki/Wikipedia:Acerca_de" title="Wikipedia:Acerca de">Acerca de Wikipedia</a></li>
+								<li id="footer-places-disclaimer"><a href="/wiki/Wikipedia:Limitaci%C3%B3n_general_de_responsabilidad" title="Wikipedia:Limitación general de responsabilidad">Limitación de responsabilidad</a></li>
+								<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Desarrolladores</a></li>
+								<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement/es">Declaración de cookies</a></li>
+								<li id="footer-places-mobileview"><a href="//es.m.wikipedia.org/w/index.php?title=Protocolo_de_transferencia_de_archivos&amp;mobileaction=toggle_view_mobile" class="noprint stopMobileRedirectToggle">Versión para móviles</a></li>
+							</ul>
+										<ul id="footer-icons" class="noprint">
+										<li id="footer-copyrightico">
+						<a href="https://wikimediafoundation.org/"><img src="/static/images/wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" width="88" height="31" alt="Wikimedia Foundation"/></a>					</li>
+										<li id="footer-poweredbyico">
+						<a href="//www.mediawiki.org/"><img src="/static/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" width="88" height="31"/></a>					</li>
+									</ul>
+						<div style="clear: both;"></div>
+		</div>
+		<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.088","walltime":"0.117","ppvisitednodes":{"value":578,"limit":1000000},"ppgeneratednodes":{"value":0,"limit":1500000},"postexpandincludesize":{"value":11237,"limit":2097152},"templateargumentsize":{"value":708,"limit":2097152},"expansiondepth":{"value":6,"limit":40},"expensivefunctioncount":{"value":0,"limit":500},"entityaccesscount":{"value":1,"limit":400},"timingprofile":["100.00%   81.084      1 -total"," 44.05%   35.717      1 Plantilla:Ficha_de_protocolo_de_red"," 42.84%   34.740      1 Plantilla:Listaref"," 39.88%   32.338      1 Plantilla:Ficha"," 32.06%   25.992      3 Plantilla:Cita_web","  6.21%    5.032      1 Plantilla:AP","  3.71%    3.008      1 Plantilla:Cita_libro","  2.36%    1.910      1 Plantilla:Redirige_aquí"]},"scribunto":{"limitreport-timeusage":{"value":"0.030","limit":"10.000"},"limitreport-memusage":{"value":2017622,"limit":52428800}},"cachereport":{"origin":"mw1308","timestamp":"20180117125310","ttl":1900800,"transientcontent":false}}});});</script><script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":94,"wgHostname":"mw1275"});});</script>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+KPIs & OKRs
+
+http://clearpointstrategy.com/okrs-vs-kpis/
+
+
+KPI: Key Performance Indicator
+(indicador de desempeño sobre el tiempo)
+
+
+OKR: Objective and Key Results
+(objective is tied to key results)
+3-5 company main goals
+	3-5 key results per goal
+
+
+
+OKR es un marco de trabajo estratégico, 
+KPIs son mediciones dentro de un marco de trabajo.
+
+Sometimes KPIs are same than Key results used in OKR!
+
+
+KPIs per industry examples:
+
+.Retail: revenue per sq-ft, same store sales, sales per employee.
+.Tech: monthly recurring revenue, ticket resolution time.
+.Health care: patient wait time, avg. treatment charge
+
+
+OKR example: (deben tocar la línea de lo imposible)
+
+-Become market leaders in our industry
+.KeyResult1: record of 100$MM in revenue
+.KR2: increase staff by 40% (un KPI de esto puede ser contar nro de empleados.. uno es un resultado, KPI una medida)
+.KR3: increase market cap enough to enter S&P500

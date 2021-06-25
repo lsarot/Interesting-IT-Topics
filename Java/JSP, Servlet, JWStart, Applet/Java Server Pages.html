@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>JavaServer Pages - Wikipedia, la enciclopedia libre</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"JavaServer_Pages","wgTitle":"JavaServer Pages","wgCurRevisionId":102888266,"wgRevisionId":102888266,"wgArticleId":48056,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Wikipedia:Artículos con datos locales","Wikipedia:Artículos con datos por trasladar a Wikidata","Tecnologías Java EE","Frameworks para aplicaciones web"],"wgBreakFrames":false,"wgPageContentLanguage":"es","wgPageContentModel":"wikitext","wgSeparatorTransformTable":[",\t."," \t,"],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"],"wgMonthNamesShort":["","ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"],"wgRelevantPageName":"JavaServer_Pages","wgRelevantArticleId":48056,"wgRequestId":"WmTrbgpAMFsAAHWxSXoAAAAJ","wgIsProbablyEditable":true,"wgRelevantPageIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgWikiEditorEnabledModules":[],"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":true,"wgPopupsShouldSendModuleToUser":true,"wgPopupsConflictsWithNavPopupGadget":false,"wgVisualEditor":{"pageLanguageCode":"es","pageLanguageDir":"ltr","pageVariantFallbacks":"es","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"es","wgMFExpandAllSectionsUserOption":false,"wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":true},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"español","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgWikibaseItemId":"Q183169","wgScoreNoteLanguages":{"arabic":"العربية","catalan":"català","deutsch":"Deutsch","english":"English","espanol":"español","italiano":"italiano","nederlands":"Nederlands","norsk":"norsk","portugues":"português","suomi":"suomi","svenska":"svenska","vlaams":"West-Vlams"},"wgScoreDefaultNoteLanguage":"nederlands","wgCentralAuthMobileDomain":false,"wgCodeMirrorEnabled":false,"wgVisualEditorToolbarScrollOffset":0,"wgVisualEditorUnsupportedEditParams":["undo","undoafter","veswitched"],"wgEditSubmitButtonLabelPublish":true});mw.loader.state({"ext.gadget.imagenesinfobox":"ready","ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"loading","user.tokens":"loading","ext.pygments":"ready","wikibase.client.init":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.options@0qprsob",function($,jQuery,require,module){mw.user.options.set({"variant":"es"});});mw.loader.implement("user.tokens@1dqfd7l",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/
+
+});mw.loader.load(["site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.toc","mediawiki.searchSuggest","ext.gadget.a-commons-directo","ext.gadget.refToolbar","ext.centralauth.centralautologin","ext.popups","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.compactlinks","ext.uls.interface","ext.centralNotice.geoIP","ext.centralNotice.startUp","skins.vector.js"]);});</script>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=es&amp;modules=ext.pygments%2CwikimediaBadges%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector"/>
+<script async="" src="/w/load.php?debug=false&amp;lang=es&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=es&amp;modules=ext.gadget.imagenesinfobox&amp;only=styles&amp;skin=vector"/>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=es&amp;modules=site.styles&amp;only=styles&amp;skin=vector"/>
+<meta name="generator" content="MediaWiki 1.31.0-wmf.17"/>
+<meta name="referrer" content="origin-when-cross-origin"/>
+<link rel="alternate" href="android-app://org.wikipedia/http/es.m.wikipedia.org/wiki/JavaServer_Pages"/>
+<link rel="alternate" type="application/x-wiki" title="Editar" href="/w/index.php?title=JavaServer_Pages&amp;action=edit"/>
+<link rel="edit" title="Editar" href="/w/index.php?title=JavaServer_Pages&amp;action=edit"/>
+<link rel="apple-touch-icon" href="/static/apple-touch/wikipedia.png"/>
+<link rel="shortcut icon" href="/static/favicon/wikipedia.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikipedia (es)"/>
+<link rel="EditURI" type="application/rsd+xml" href="//es.wikipedia.org/w/api.php?action=rsd"/>
+<link rel="license" href="//creativecommons.org/licenses/by-sa/3.0/"/>
+<link rel="canonical" href="https://es.wikipedia.org/wiki/JavaServer_Pages"/>
+<link rel="dns-prefetch" href="//login.wikimedia.org"/>
+<link rel="dns-prefetch" href="//meta.wikimedia.org" />
+<!--[if lt IE 9]><script src="/w/load.php?debug=false&amp;lang=es&amp;modules=html5shiv&amp;only=scripts&amp;skin=vector&amp;sync=1"></script><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-JavaServer_Pages rootpage-JavaServer_Pages skin-vector action-view">		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+			<div id="siteNotice" class="mw-body-content"><!-- CentralNotice --></div><div class="mw-indicators mw-body-content">
+</div>
+<h1 id="firstHeading" class="firstHeading" lang="es">JavaServer Pages</h1>			<div id="bodyContent" class="mw-body-content">
+				<div id="siteSub" class="noprint">De Wikipedia, la enciclopedia libre</div>				<div id="contentSub"></div>
+								<div id="jump-to-nav" class="mw-jump">
+					Saltar a:					<a href="#mw-head">navegación</a>, 					<a href="#p-search">búsqueda</a>
+				</div>
+				<div id="mw-content-text" lang="es" dir="ltr" class="mw-content-ltr"><div class="mw-parser-output"><table class="infobox" style="width:22.7em; line-height: 1.4em; text-align:left; padding:.23em;">
+<tr>
+<th colspan="3" class="cabecera informática" style="text-align:center;background-color:#DCEAEC;color:black;">JavaServer Pages:EME</th>
+</tr>
+<tr>
+<td colspan="3" style="text-align:center;"><a rel="nofollow" class="external free" href="http://java.sun.com/products/jsp/">http://java.sun.com/products/jsp/</a></td>
+</tr>
+<tr>
+<th colspan="3" style="text-align:center;background-color:#DCEAEC;">Información general</th>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;">Desarrollador(es)</th>
+<td colspan="2"><a href="/wiki/Sun_Microsystems" title="Sun Microsystems">Sun Microsystems</a></td>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;"><a href="/wiki/Fases_del_desarrollo_de_software" title="Fases del desarrollo de software">Última versión estable</a></th>
+<td colspan="2">2.3</td>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;"><a href="/wiki/Anexo:G%C3%A9neros_de_software" title="Anexo:Géneros de software">Género</a></th>
+<td colspan="2"><a href="/wiki/Formato_de_archivo" title="Formato de archivo">formato de archivo</a> y Template processor</td>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;"><a href="/wiki/Lenguaje_de_programaci%C3%B3n" title="Lenguaje de programación">Programado en</a></th>
+<td colspan="2"><a href="/wiki/Lenguaje_de_programaci%C3%B3n_Java" class="mw-redirect" title="Lenguaje de programación Java">Java</a></td>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;"><a href="/wiki/Sistema_operativo" title="Sistema operativo">Sistema operativo</a></th>
+<td colspan="2"><a href="/wiki/M%C3%A1quina_virtual_Java" title="Máquina virtual Java">Máquina virtual Java</a></td>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;"><a href="/wiki/Plataforma_(inform%C3%A1tica)" title="Plataforma (informática)">Plataforma</a></th>
+<td colspan="2"><a href="/wiki/Java_(lenguaje_de_programaci%C3%B3n)" title="Java (lenguaje de programación)">Java</a></td>
+</tr>
+<tr>
+<th scope="row" style="text-align:left;"><a href="/wiki/Licencia_de_software" title="Licencia de software">Licencia</a></th>
+<td colspan="2"><i><b>?</b></i></td>
+</tr>
+<tr>
+<td colspan="3" style="text-align:left;"><small>[<span class="plainlinks"><a href="https://www.wikidata.org/wiki/Q183169" class="extiw" title="d:Q183169">editar datos en Wikidata</a></span>]</small></td>
+</tr>
+</table>
+<p><b>JavaServer Pages</b> (JSP) es una tecnología que ayuda a los desarrolladores de software a crear páginas web dinámicas basadas en <a href="/wiki/HTML" title="HTML">HTML</a> y <a href="/wiki/XML" class="mw-redirect" title="XML">XML</a>, entre otros tipos de documentos. JSP es similar a <a href="/wiki/PHP" title="PHP">PHP</a>, pero usa el lenguaje de programación <a href="/wiki/Java_(lenguaje_de_programaci%C3%B3n)" title="Java (lenguaje de programación)">Java</a>.</p>
+<p>Para desplegar y correr JavaServer Pages, se requiere un servidor web compatible con contenedores <a href="/wiki/Servlet" class="mw-redirect" title="Servlet">servlet</a> como <a href="/wiki/Apache_Tomcat" class="mw-redirect" title="Apache Tomcat">Apache Tomcat</a> o <a href="/wiki/Jetty" title="Jetty">Jetty</a>.</p>
+<p>TagLibs -&gt; JSP -&gt; Servidor Aplicaciones (Servlets) -&gt; Cliente (Navegador)</p>
+<p>El rendimiento de una página JSP es el mismo que tendría el servlet equivalente, ya que el código es compilado como cualquier otra clase Java. A su vez, la máquina virtual compilará dinámicamente a código de máquina las partes de la aplicación que lo requieran. Esto hace que JSP tenga un buen desempeño y sea más eficiente que otras tecnologías web que ejecutan el código de una manera puramente interpretada.</p>
+<p>La principal ventaja de <b>JSP</b> frente a otros lenguajes es que el lenguaje Java es un lenguaje de propósito general que excede el mundo web y que es apto para crear clases que manejen lógica de negocio y acceso a datos de una manera prolija. Esto permite separar en niveles las aplicaciones web, dejando la parte encargada de generar el documento HTML en el archivo JSP.</p>
+<p>Otra ventaja es que JSP hereda la portabilidad de Java, y es posible ejecutar las aplicaciones en múltiples plataformas sin cambios. Es común incluso que los desarrolladores trabajen en una plataforma y que la aplicación termine siendo ejecutada en otra.</p>
+<p>Los servlets y Java Server Pages (JSPs) son dos métodos de creación de páginas web dinámicas en servidor usando el lenguaje Java. En ese sentido son similares a otros métodos o lenguajes tales como el <a href="/wiki/PHP" title="PHP">PHP</a>, <a href="/wiki/Active_Server_Pages" title="Active Server Pages">ASP</a> o los <a href="/wiki/Interfaz_de_entrada_com%C3%BAn" title="Interfaz de entrada común">CGIs</a>, programas que generan páginas web en el servidor. Sin embargo, se diferencian de ellos en otras cosas.</p>
+<p>Para empezar, los JSPs y servlets se ejecutan en una máquina virtual Java, lo cual permite que, en principio, se puedan usar en cualquier tipo de ordenador, siempre que exista una máquina virtual Java para él. Cada servlet (o JSP, a partir de ahora lo usaremos de forma indistinta) se ejecuta en su propio hilo, es decir, en su propio contexto; pero no se comienza a ejecutar cada vez que recibe una petición, sino que persiste de una petición a la siguiente, de forma que no se pierde tiempo en invocarlo (cargar programa + <a href="/wiki/Int%C3%A9rprete_(inform%C3%A1tica)" title="Intérprete (informática)">intérprete</a>). Su persistencia le permite también hacer una serie de cosas de forma más eficiente: conexión a bases de datos y manejo de sesiones, por ejemplo.</p>
+<p>Las JSPs son en realidad una forma alternativa de crear servlets ya que el código JSP se traduce a código de servlet Java la primera vez que se le invoca y en adelante es el código del nuevo servlet el que se ejecuta produciendo como salida el código HTML que compone la página web de respuesta.</p>
+<p></p>
+<div id="toc" class="toc">
+<div class="toctitle" lang="es" dir="ltr" xml:lang="es">
+<h2>Índice</h2>
+</div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Descripción"><span class="tocnumber">1</span> <span class="toctext">Descripción</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Ejemplo_de_documento_JSP"><span class="tocnumber">2</span> <span class="toctext">Ejemplo de documento JSP</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Sintaxis"><span class="tocnumber">3</span> <span class="toctext">Sintaxis</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Variables_implícitas"><span class="tocnumber">3.1</span> <span class="toctext">Variables implícitas</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Directivas"><span class="tocnumber">3.2</span> <span class="toctext">Directivas</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#Declaraciones"><span class="tocnumber">3.3</span> <span class="toctext">Declaraciones</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Scriptlets"><span class="tocnumber">3.4</span> <span class="toctext">Scriptlets</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#Expresiones"><span class="tocnumber">3.5</span> <span class="toctext">Expresiones</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#Etiquetas"><span class="tocnumber">3.6</span> <span class="toctext">Etiquetas</span></a>
+<ul>
+<li class="toclevel-3 tocsection-10"><a href="#Etiquetas_JSP"><span class="tocnumber">3.6.1</span> <span class="toctext">Etiquetas JSP</span></a></li>
+<li class="toclevel-3 tocsection-11"><a href="#Etiquetas_JSTL"><span class="tocnumber">3.6.2</span> <span class="toctext">Etiquetas JSTL</span></a></li>
+<li class="toclevel-3 tocsection-12"><a href="#Etiquetas_Struts_TagLib"><span class="tocnumber">3.6.3</span> <span class="toctext">Etiquetas Struts TagLib</span></a></li>
+<li class="toclevel-3 tocsection-13"><a href="#Etiquetas_personalizadas"><span class="tocnumber">3.6.4</span> <span class="toctext">Etiquetas personalizadas</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-14"><a href="#Véase_también"><span class="tocnumber">4</span> <span class="toctext">Véase también</span></a></li>
+<li class="toclevel-1 tocsection-15"><a href="#Enlaces_externos"><span class="tocnumber">5</span> <span class="toctext">Enlaces externos</span></a></li>
+</ul>
+</div>
+<p></p>
+<h2><span id="Descripci.C3.B3n"></span><span class="mw-headline" id="Descripción">Descripción</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=JavaServer_Pages&amp;action=edit&amp;section=1" title="Editar sección: Descripción">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>JSP puede ser visto como una abstracción de alto nivel de los servlets Java. Las JavaServer Pages son traducidas a servlets en tiempo real; cada servlet es guardado en caché y rehusado hasta que la JSP original es modificada. Dicho en otras palabras un JSP son páginas java para un ambiente web.</p>
+<h2><span class="mw-headline" id="Ejemplo_de_documento_JSP">Ejemplo de documento JSP</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=JavaServer_Pages&amp;action=edit&amp;section=2" title="Editar sección: Ejemplo de documento JSP">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Ejemplo de código de una página JSP:</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr">
+<pre>
+<span class="k">&lt;%@</span> <span class="n">page</span> <span class="n">errorPage</span><span class="o">=</span><span class="s">"myerror.jsp"</span> <span class="k">%&gt;</span>
+<span class="k">&lt;%@</span> <span class="n">page</span> <span class="n">import</span><span class="o">=</span><span class="s">"com.foo.bar"</span> <span class="k">%&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="k">&lt;%!</span> <span class="kt">int</span> <span class="n">serverInstanceVariable</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span><span class="k">%&gt;</span>
+…
+<span class="k">&lt;%!</span> <span class="kt">int</span> <span class="n">localStackBasedVariable</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span><span class="k">%&gt;</span>
+…
+</pre></div>
+<p><br /></p>
+<div class="mw-highlight mw-content-ltr" dir="ltr">
+<pre>
+JSP
+</pre></div>
+<p><br />
+Ejemplo de una compilación o "salida" JSP:</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr">
+<pre>
+package jsp_servlet;
+import java.util.*;
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.jsp.*;
+import javax.servlet.jsp.tagext.*;
+import com.foo.bar; //importado como resultado de <span class="k">&lt;%@</span> <span class="n">page</span> <span class="n">import</span><span class="o">=</span><span class="s">"com.foo.bar"</span> <span class="k">%&gt;</span>
+import …
+class _myservlet implements javax.servlet.Servlet, javax.servlet.jsp.HttpJspPage {
+	//insertado como
+	//resultado de <span class="k">&lt;%!</span> <span class="kt">int</span> <span class="n">serverInstanceVariable</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span><span class="k">%&gt;</span>
+	int serverInstanceVariable = 1; 
+	…
+	public void _jspService( javax.servlet.http.HttpServletRequest request,
+		javax.servlet.http.HttpServletResponse response )
+		throws javax.servlet.ServletException,
+		java.io.IOException
+	{
+		javax.servlet.ServletConfig config = ...;//obtener la configuración del servlet
+		Object page = this;
+		PageContext pageContext = …;//obtener el contexto de la página para esta petición 
+		javax.servlet.jsp.JspWriter out = pageContext.getOut();
+		HttpSession session = request.getSession( true );
+		…
+</pre></div>
+<p>Para ejecutar las páginas JSP, se necesita un servidor Web con un contenedor Web que cumpla con las especificaciones de JSP y de Servlet. <a href="/wiki/Tomcat" title="Tomcat">Tomcat</a> 5 es una completa implementación de referencia para las especificaciones Java Servlet 2.2 y JSP 1.1.</p>
+<h2><span class="mw-headline" id="Sintaxis">Sintaxis</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=JavaServer_Pages&amp;action=edit&amp;section=3" title="Editar sección: Sintaxis">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<h3><span id="Variables_impl.C3.ADcitas"></span><span class="mw-headline" id="Variables_implícitas">Variables implícitas</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=JavaServer_Pages&amp;action=edit&amp;section=4" title="Editar sección: Variables implícitas">editar</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Las páginas JSP incluyen ciertas variables privilegiadas sin necesidad de declararlas ni configurarlas:</p>
+<table class="wikitable">
+<tr align="center">
+<th>Variable</th>
+<th>Clase</th>
+</tr>
+<tr>
+<td><code>pageContext</code></td>
+<td><code>javax.servlet.jsp.PageContext</code></td>
+</tr>
+<tr>
+<td><code>request</code></td>
+<td><code>javax.servlet.http.HttpServletRequest</code></td>
+</tr>
+<tr>
+<td><code>response</code></td>
+<td><code>javax.servlet.http.HttpServletResponse</code></td>
+</tr>
+<tr>
+<td><code>session</code></td>
+<td><code>javax.servlet.http.HttpSession</code></td>
+</tr>
+<tr>
+<td><code>config</code></td>
+<td><code>javax.servlet.ServletConfig</code></td>
+</tr>
+<tr>
+<td><code>application</code></td>
+<td><code>javax.servlet.ServletContext</code></td>
+</tr>
+<tr>
+<td><code>out</code></td>
+<td><code>javax.servlet.jsp.JspWriter</code></td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td><code>java.lang.Object</code></td>
+</tr>
+<tr>
+<td><code>exception</code></td>
+<td><code>java.lang.Exception</code></td>
+</tr>
+</table>
+<h3><span class="mw-headline" id="Directivas">Directivas</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=JavaServer_Pages&amp;action=edit&amp;section=5" title="Editar sección: Directivas">editar</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Son etiquetas a partir de las cuales se genera información que puede ser utilizada por el motor de JSP. No producen una salida visible al usuario sino que configura cómo se ejecutará la página JSP.</p>
+<p>Su sintaxis es:</p>
+<pre>
+<code> &lt;%@ directiva atributo="valor" %&gt;
+</code>
+</pre>
+<p>Las directivas disponibles son:</p>
+<ul>
+<li><code><b>include</b></code>: Incluye el contenido de un fichero en la página mediante el atributo <i>file</i>.</li>
+</ul>
+<dl>
+<dd>
+<dl>
+<dd><code>&lt;%@ include file="cabecera.html"&#160;%&gt;</code></dd>
+</dl>
+</dd>
+</dl>
+<ul>
+<li><code><b>taglib</b></code>: Importa bibliotecas de etiquetas (Tag Libraries)</li>
+</ul>
+<dl>
+<dd>
+<dl>
+<dd><code>&lt;%@ taglib uri="/tags/struts-html" prefix="html"&#160;%&gt;</code></dd>
+</dl>
+</dd>
+</dl>
+<ul>
+<li><code><b>page</b></code>: Especifica atributos relacionados con la página a procesar. Los atributos son:</li>
+</ul>
+<dl>
+<dd>
+<table class="wikitable">
+<tr align="center">
+<th>Atributo</th>
+<th>Sintaxis</th>
+<th>Utilización</th>
+</tr>
+<tr>
+<td><code>import</code></td>
+<td><code>&lt;%@ page import="class; class"&#160;%&gt;</code></td>
+<td>Importa clases y paquetes Java para ser utilizadas dentro del fichero JSP.</td>
+</tr>
+<tr>
+<td><code>session</code></td>
+<td><code>&lt;%@ page session="false"&#160;%&gt;</code></td>
+<td>Especifica si utiliza los datos contenidos en sesión; por defecto "true".</td>
+</tr>
+<tr>
+<td><code>contentType</code></td>
+<td><code>&lt;%@ page contentType="class; class"&#160;%&gt;</code></td>
+<td>Especifica el tipo MIME del objeto "response"; por defecto "text/html; charset=ISO-8859-1".</td>
+</tr>
+<tr>
+<td><code>buffer</code></td>
+<td><code>&lt;%@ page buffer="12KB"&#160;%&gt;</code></td>
+<td>Buffer utilizado por el objeto writer "out"; puede tomar el valor de "none"; por defecto "8KB".</td>
+</tr>
+<tr>
+<td><code>errorPage</code></td>
+<td><code>&lt;%@ page errorPage="/path_to_error_page"&#160;%&gt;</code></td>
+<td>Especifica la ruta de la página de error que será invocada en caso de producirse una excepción durante la ejecución de este fichero JSP.</td>
+</tr>
+<tr>
+<td><code>isErrorPage</code></td>
+<td><code>&lt;%@ page isErrorPage="true"&#160;%&gt;</code></td>
+<td>Determina si este fichero JSP es una página que maneja excepciones. Únicamente a este tipo de páginas pueden acceder a la variable implícita "exception", que contiene la excepción que provocó la llamada a la página de error.</td>
+</tr>
+</table>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Declaraciones">Declaraciones</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=JavaServer_Pages&amp;action=edit&amp;section=6" title="Editar sección: Declaraciones">editar</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Nos permiten declarar variables, funciones y datos estáticos.</p>
+<pre>
+<code> &lt;%! int maxAlumnosClase = 30; %&gt;
+</code>
+</pre>
+<h3><span class="mw-headline" id="Scriptlets">Scriptlets</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=JavaServer_Pages&amp;action=edit&amp;section=7" title="Editar sección: Scriptlets">editar</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Los scriptlets son partes de código Java incrustadas entre los elementos estáticos de la página....</p>
+<pre>
+<code> &lt;% ... código Java ... %&gt;
+</code>
+</pre>
+<h3><span class="mw-headline" id="Expresiones">Expresiones</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=JavaServer_Pages&amp;action=edit&amp;section=8" title="Editar sección: Expresiones">editar</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Las expresiones se evalúan dentro de la servlet. No deben acabar en ";".</p>
+<pre>
+<code> &lt;%= maxAlumnosClase + 1%&gt;
+</code>
+</pre>
+<p>El siguiente ejemplo pondría como título de la página el atributo "titulo" contenido en el objeto request:</p>
+<pre>
+<code> &lt;%
+   String titulo = "";
+   if (request.getAttribute("titulo") != null) {
+     titulo = (String) request.getAttribute ("titulo");
+   }
+ %&gt;
+ ...
+ &lt;title&gt;&lt;%=titulo%&gt;&lt;/title&gt;
+ ....
+</code>
+</pre>
+<h3><span class="mw-headline" id="Etiquetas">Etiquetas</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=JavaServer_Pages&amp;action=edit&amp;section=9" title="Editar sección: Etiquetas">editar</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Etiquetas JSP para simplificar el código y dar mayor funcionalidad.</p>
+<p>Desarrollar sitios web utilizando etiquetas presenta ciertas ventajas como:</p>
+<ul>
+<li>facilitar el aprendizaje.</li>
+<li>facilitar el mantenimiento.</li>
+<li>fomentar la modularidad y la reutilización.</li>
+<li>simplificar el código y reducir el número de líneas necesarias.</li>
+</ul>
+<p>Su sintaxis sería:</p>
+<pre>
+<code> &lt;%@ taglib uri="/taglib/lycka" prefix="lycka" %&gt;
+ ...
+ &lt;lycka:hola/&gt;
+ ...
+</code>
+</pre>
+<p>A la hora de generar el código Java de la Servlet, esta etiqueta <b>hola</b> será interpretada por el Servidor de Aplicaciones como perteneciente a la biblioteca de etiquetas (Tag Library) <b>lycka</b>. Esta biblioteca estará identificada en el fichero descriptor de nuestra aplicación (web.xml) con el nombre de recurso (URI) <b>/taglib/lycka</b>.</p>
+<pre>
+<code> &lt;taglib-uri&gt;/taglib/lycka&lt;/taglib-uri&gt;
+ &lt;taglib-location&gt;/WEB-INF/tags/lycka.tld&lt;/taglib-location&gt;
+</code>
+</pre>
+<p>Una implementación de este fichero descriptor, /WEB-INF/tags/<b>lycka.tld</b> podría ser:</p>
+<pre>
+<code> &lt;?xml version="1.0" encoding="ISO-8859-1" ?&gt;
+ &lt;!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" 
+    "<a rel="nofollow" class="external free" href="http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd</a>"&gt;
+ 
+ &lt;taglib&gt;
+   &lt;tlibversion&gt;1.0&lt;/tlibversion&gt;
+   &lt;jspversion&gt;1.1&lt;/jspversion&gt;
+   &lt;shortname&gt;simp&lt;/shortname&gt;
+   &lt;uri&gt;<a rel="nofollow" class="external free" href="http://www.hachisvertas.net/jcs/taglibs/lycka">http://www.hachisvertas.net/jcs/taglibs/lycka</a>&lt;/uri&gt;
+   &lt;info&gt;A simple sample tag library&lt;/info&gt;
+ 
+   &lt;tag&gt;
+     &lt;name&gt;hola&lt;/name&gt;
+     &lt;tagclass&gt;org.lcyka.taglibs.miEtiqueta&lt;/tagclass&gt;
+     &lt;bodycontent&gt;empty&lt;/bodycontent&gt;
+     &lt;info&gt;Alaba la belleza de mi gata.&lt;/info&gt;
+   &lt;/tag&gt;
+ &lt;/taglib&gt;
+</code>
+</pre>
+<p>Y por fin, el servidor de aplicaciones sustituirá la etiqueta por su código Java asociado, <b>org.lcyka.taglibs.miEtiqueta</b>:</p>
+<pre>
+<code> package org.lcyka.taglibs;
+ import ...;
+ public class miEtiqueta extends TagSupport {
+   public int doStartTag {
+     try {
+       pageContext.getOut().print("Mi gata es preciosa");
+     } catch (IOException ioe) {
+     }
+     return SKIP_BODY;
+   }
+</code>
+</pre>
+<p>Y finalmente el <b>navegador</b> mostraría:</p>
+<pre>
+ Mi gata es preciosa
+</pre>
+<h4><span class="mw-headline" id="Etiquetas_JSP">Etiquetas JSP</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=JavaServer_Pages&amp;action=edit&amp;section=10" title="Editar sección: Etiquetas JSP">editar</a><span class="mw-editsection-bracket">]</span></span></h4>
+<p>Son las etiquetas pertenecientes a la especificación JSP. Proporcionan una funcionalidad básica.</p>
+<p>Un primer grupo de etiquetas proporciona funcionalidad a nivel de la página de una manera muy simple:</p>
+<ul>
+<li><b>&lt;jsp:forward&gt;</b>, redirige la request a otra URL</li>
+<li><b>&lt;jsp:include&gt;</b>, incluye el texto de un fichero dentro de la página</li>
+<li><b>&lt;jsp:plugin&gt;</b>, descarga un plugin de Java (una applet o un Bean).</li>
+</ul>
+<p>Un segundo grupo permite manipular componentes JavaBean sin conocimientos de Java.</p>
+<ul>
+<li><b>&lt;jsp:useBean&gt;</b>, permite manipular un <a href="/wiki/Bean_(inform%C3%A1tica)" title="Bean (informática)">Bean</a> (si no existe, se creará el Bean), especificando su ámbito (scope), la clase y el tipo.</li>
+<li><b>&lt;jsp:getProperty&gt;</b>, obtiene la propiedad especificada de un bean previamente declarado y la escribe en el objeto response.</li>
+<li><b>&lt;jsp:setProperty&gt;</b>, establece el valor de una propiedad de un bean previamente declarado.</li>
+</ul>
+<h4><span class="mw-headline" id="Etiquetas_JSTL">Etiquetas JSTL</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=JavaServer_Pages&amp;action=edit&amp;section=11" title="Editar sección: Etiquetas JSTL">editar</a><span class="mw-editsection-bracket">]</span></span></h4>
+<p>Son proporcionadas por Sun dentro de la distribución de <a href="/wiki/JSTL" class="mw-redirect" title="JSTL">JSTL</a>.</p>
+<ul>
+<li><b>core</b>, iteraciones, condicionales, manipulación de URL y otras funciones generales.</li>
+<li><b>xml</b>, para la manipulación de XML y para XML-Transformation.</li>
+<li><b>sql</b>, para gestionar conexiones a bases de datos.</li>
+<li><b>i18n</b>, para la internacionalización y formateo de las cadenas de caracteres como cifras.</li>
+</ul>
+<h4><span class="mw-headline" id="Etiquetas_Struts_TagLib">Etiquetas Struts TagLib</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=JavaServer_Pages&amp;action=edit&amp;section=12" title="Editar sección: Etiquetas Struts TagLib">editar</a><span class="mw-editsection-bracket">]</span></span></h4>
+<p>Distribuidas por <a rel="nofollow" class="external text" href="https://web.archive.org/web/20070624063648/http://struts.apache.org/1.x/struts-taglib/index.html">Apache</a> para funcionar junto con el Framework de Struts.</p>
+<ul>
+<li><b>PHP</b></li>
+<li><b>Bean</b></li>
+<li><b>HTML</b></li>
+<li><b>Logic</b></li>
+<li><b>Nested</b></li>
+<li><b>vjgp</b></li>
+</ul>
+<h4><span class="mw-headline" id="Etiquetas_personalizadas">Etiquetas personalizadas</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=JavaServer_Pages&amp;action=edit&amp;section=13" title="Editar sección: Etiquetas personalizadas">editar</a><span class="mw-editsection-bracket">]</span></span></h4>
+<p>Anteriormente hemos visto un ejemplo para crear una etiqueta personalizada almacenada en nuestra propia biblioteca de etiquetas.</p>
+<p>Para desarrollar etiquetas personalizadas, utilizaremos la API de las bibliotecas de etiquetas (Tag Libraries).</p>
+<p>La API de las Servlet de Java es:</p>
+<pre>
+<code> javax.servlet.*
+</code>
+</pre>
+<p>La API de JSP extiende de esta API,</p>
+<pre>
+<code> javax.servlet.jsp.*
+</code>
+</pre>
+<p>Finalmente, la API de las bibliotecas de etiquetas (Tag Libraries) extiende de esta última,</p>
+<pre>
+<code> javax.servlet.jsp.tagext.*
+</code>
+</pre>
+<p>Lo más relevante de esta API son:</p>
+<ul>
+<li>Las <a href="/wiki/Interfaz_(Java)" title="Interfaz (Java)">interfaces</a>
+<ul>
+<li>Tag, que todas las etiquetas deben implementar.</li>
+<li>BodyTag, extiende a la anterior y define métodos adicionales para inspeccionar el cuerpo de una etiqueta.</li>
+</ul>
+</li>
+<li>Las clases
+<ul>
+<li>BodyContent, un manejador (handler) para leer y escribir en el cuerpo de una etiqueta.</li>
+<li>BodyTagSupport, que implementa la interfaz BodyTag.</li>
+<li>TagAttributeInfo, para obtener la información de los atributos de la etiqueta declarados en el TLD.</li>
+<li>TagData, que contiene los valores de los atributos.</li>
+<li>TagExtraInfo, para especificar información extra de una etiqueta, como las variables que introduce en el código o los atributos que serán validados.</li>
+<li>TagInfo, basado en la información de la TLD.</li>
+<li>TagLibraryInfo, representa la información de una TLD.</li>
+<li>TagSupport, implementa la interfaz Tag.</li>
+<li>VariableInfo, contiene información como el tipo y ámbito de las variables creadas o modificadas por la etiqueta.</li>
+</ul>
+</li>
+</ul>
+<p>Podemos encontrar una descripción más detallada en <a rel="nofollow" class="external free" href="http://java.sun.com/j2ee/sdk_1.3/techdocs/api/javax/servlet/jsp/tagext/package-summary.html">http://java.sun.com/j2ee/sdk_1.3/techdocs/api/javax/servlet/jsp/tagext/package-summary.html</a></p>
+<p>Otro ejemplo de etiqueta podría ser el siguiente código Java:</p>
+<pre>
+<code> package org.lycka.taglibs;
+ import ...;
+ public class LowerCaseTag extends BodyTagSupport {
+   public int doAfterBody() throws JspException {
+     try {
+       BodyContent body = getBodyContent();
+       JspWriter writer = body.getEnclosingWriter();
+       String bodyString = body.getString();
+       if ( bodyString != null ) {
+         writer.print( bodyString.toLowerCase());
+       }
+     } catch(IOException ioe) {
+       throw new JspException("Error: IOException while writing to the user");
+     }
+     return SKIP_BODY;
+   }
+ }
+</code>
+</pre>
+<p>Al encontrar el inicio de la etiqueta, el runtime primero se invocará el método doStart() una vez instanciada la clase. Puede devolver uno de los siguientes valores:</p>
+<ul>
+<li>SKIP_BODY, no procesa el contenido del cuerpo de la etiqueta.</li>
+<li>EVAL_BODY_INCLUDE , evalúa el cuerpo de la etiqueta.</li>
+<li>EVAL_BODY_TAG , evalúa el cuerpo de la etiqueta y lanza el resultado a otro stream almacenado en una propiedad de la etiqueta.</li>
+</ul>
+<p>El método doAfterBody() después de procesar el cuerpo de la etiqueta.</p>
+<p>Finalmente se invocará el método doEndTag(). Puede devolver:</p>
+<ul>
+<li>EVAL_PAGE, para seguir procesando la página JSP</li>
+<li>SKIP_PAGE, para dejar de procesar la página JSP, para por ejemplo redirigir la página</li>
+</ul>
+<p>Declarado en el descriptor de la biblioteca como</p>
+<pre>
+<code> &lt;tag&gt;
+   &lt;name&gt;lowercase&lt;/name&gt;
+   &lt;tagclass&gt;org.lycka.taglibs.LowerCaseTag&lt;/tagclass&gt;
+   &lt;bodycontent&gt;JSP&lt;/bodycontent&gt;
+   &lt;info&gt;Put body in lowercase.&lt;/info&gt;
+ &lt;/tag&gt;
+</code>
+</pre>
+<p>Utilizado en la página JSP</p>
+<pre>
+<code> &lt;%@ taglib uri="/taglib/lycka" prefix="lycka" %&gt;
+ ...
+ &lt;lycka:lowercase&gt;Esto es un EJEMPLO&lt;/lycka:lowercase&gt;
+</code>
+</pre>
+<p>Y su salida sería</p>
+<pre>
+ esto es un ejemplo
+</pre>
+<h2><span id="V.C3.A9ase_tambi.C3.A9n"></span><span class="mw-headline" id="Véase_también">Véase también</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=JavaServer_Pages&amp;action=edit&amp;section=14" title="Editar sección: Véase también">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><a href="/wiki/Tomcat" title="Tomcat">Tomcat</a></li>
+<li><a href="/wiki/Sun_Microsystems" title="Sun Microsystems">Sun Microsystems</a></li>
+<li><a href="/wiki/Servidor_HTTP_Apache" title="Servidor HTTP Apache">Servidor HTTP Apache</a></li>
+<li><a href="/wiki/GlassFish" title="GlassFish">GlassFish</a></li>
+</ul>
+<h2><span class="mw-headline" id="Enlaces_externos">Enlaces externos</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=JavaServer_Pages&amp;action=edit&amp;section=15" title="Editar sección: Enlaces externos">editar</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="http://www.sun.com">Sun Microsystem</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.oracle.com/technetwork/java/jsp-138432.html">Página oficial de JSP</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.apache.org/">Apache</a></li>
+<li><a rel="nofollow" class="external text" href="http://tomcat.apache.org/">Tomcat</a></li>
+<li><a rel="nofollow" class="external text" href="http://soaagenda.com/journal/articulos/plantillas-base-java-y-jsp/">Estándares programación JSP</a></li>
+</ul>
+
+
+<!-- 
+NewPP limit report
+Parsed by mw1319
+Cached time: 20180121182256
+Cache expiry: 1900800
+Dynamic content: false
+CPU time usage: 0.200 seconds
+Real time usage: 0.551 seconds
+Preprocessor visited node count: 1865/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 7122/2097152 bytes
+Template argument size: 578/2097152 bytes
+Highest expansion depth: 22/40
+Expensive parser function count: 0/500
+Lua time usage: 0.124/10.000 seconds
+Lua memory usage: 2.17 MB/50 MB
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  227.438      1 Plantilla:Ficha_de_software
+100.00%  227.438      1 -total
+ 97.18%  221.021      1 Plantilla:Ficha
+ 71.02%  161.527     13 Plantilla:Propiedad
+ 11.35%   25.810      1 Plantilla:Y-e
+  8.28%   18.843      3 Plantilla:Reemplazar
+  7.93%   18.033      1 Plantilla:Desenlazar
+-->
+</div>
+<!-- Saved in parser cache with key eswiki:pcache:idhash:48056-0!canonical and timestamp 20180121182256 and revision id 102888266
+ -->
+<noscript><img src="//es.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" alt="" title="" width="1" height="1" style="border: none; position: absolute;" /></noscript></div>					<div class="printfooter">
+						Obtenido de «<a dir="ltr" href="https://es.wikipedia.org/w/index.php?title=JavaServer_Pages&amp;oldid=102888266">https://es.wikipedia.org/w/index.php?title=JavaServer_Pages&amp;oldid=102888266</a>»					</div>
+				<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="/wiki/Especial:Categor%C3%ADas" title="Especial:Categorías">Categorías</a>: <ul><li><a href="/wiki/Categor%C3%ADa:Tecnolog%C3%ADas_Java_EE" title="Categoría:Tecnologías Java EE">Tecnologías Java EE</a></li><li><a href="/wiki/Categor%C3%ADa:Frameworks_para_aplicaciones_web" title="Categoría:Frameworks para aplicaciones web">Frameworks para aplicaciones web</a></li></ul></div><div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Categorías ocultas: <ul><li><a href="/wiki/Categor%C3%ADa:Wikipedia:Art%C3%ADculos_con_datos_locales" title="Categoría:Wikipedia:Artículos con datos locales">Wikipedia:Artículos con datos locales</a></li><li><a href="/wiki/Categor%C3%ADa:Wikipedia:Art%C3%ADculos_con_datos_por_trasladar_a_Wikidata" title="Categoría:Wikipedia:Artículos con datos por trasladar a Wikidata">Wikipedia:Artículos con datos por trasladar a Wikidata</a></li></ul></div></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Menú de navegación</h2>
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Herramientas personales</h3>
+						<ul>
+							<li id="pt-anonuserpage">No has accedido</li><li id="pt-anontalk"><a href="/wiki/Especial:MiDiscusi%C3%B3n" title="Discusión sobre ediciones hechas desde esta dirección IP [n]" accesskey="n">Discusión</a></li><li id="pt-anoncontribs"><a href="/wiki/Especial:MisContribuciones" title="Una lista de modificaciones hechas desde esta dirección IP [y]" accesskey="y">Contribuciones</a></li><li id="pt-createaccount"><a href="/w/index.php?title=Especial:Crear_una_cuenta&amp;returnto=JavaServer+Pages" title="Te recomendamos crear una cuenta e iniciar sesión; sin embargo, no es obligatorio">Crear una cuenta</a></li><li id="pt-login"><a href="/w/index.php?title=Especial:Entrar&amp;returnto=JavaServer+Pages" title="Te recomendamos iniciar sesión, aunque no es obligatorio [o]" accesskey="o">Acceder</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Espacios de nombres</h3>
+						<ul>
+							<li id="ca-nstab-main" class="selected"><span><a href="/wiki/JavaServer_Pages" title="Ver la página de contenido [c]" accesskey="c">Artículo</a></span></li><li id="ca-talk"><span><a href="/wiki/Discusi%C3%B3n:JavaServer_Pages" rel="discussion" title="Discusión acerca del artículo [t]" accesskey="t">Discusión</a></span></li>						</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label">
+							<span>Variantes</span>
+						</h3>
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Vistas</h3>
+						<ul>
+							<li id="ca-view" class="collapsible selected"><span><a href="/wiki/JavaServer_Pages">Leer</a></span></li><li id="ca-edit" class="collapsible"><span><a href="/w/index.php?title=JavaServer_Pages&amp;action=edit" title="Editar esta página [e]" accesskey="e">Editar</a></span></li><li id="ca-history" class="collapsible"><span><a href="/w/index.php?title=JavaServer_Pages&amp;action=history" title="Versiones anteriores de esta página [h]" accesskey="h">Ver historial</a></span></li>						</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 id="p-cactions-label"><span>Más</span></h3>
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Buscar</label>
+						</h3>
+						<form action="/w/index.php" id="searchform">
+							<div id="simpleSearch">
+								<input type="search" name="search" placeholder="Buscar en Wikipedia" title="Buscar en este wiki [f]" accesskey="f" id="searchInput"/><input type="hidden" value="Especial:Buscar" name="title"/><input type="submit" name="fulltext" value="Buscar" title="Busca páginas con este texto." id="mw-searchButton" class="searchButton mw-fallbackSearchButton"/><input type="submit" name="go" value="Ir" title="Ir a la página con este nombre exacto si existe" id="searchButton" class="searchButton"/>							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/Wikipedia:Portada"  title="Visitar la página principal"></a></div>
+						<div class="portal" role="navigation" id='p-navigation' aria-labelledby='p-navigation-label'>
+			<h3 id='p-navigation-label'>Navegación</h3>
+			<div class="body">
+								<ul>
+					<li id="n-mainpage-description"><a href="/wiki/Wikipedia:Portada" title="Visitar la página principal [z]" accesskey="z">Portada</a></li><li id="n-portal"><a href="/wiki/Portal:Comunidad" title="Acerca del proyecto, lo que puedes hacer, dónde encontrar información">Portal de la comunidad</a></li><li id="n-currentevents"><a href="/wiki/Portal:Actualidad" title="Encuentra información de contexto sobre acontecimientos actuales">Actualidad</a></li><li id="n-recentchanges"><a href="/wiki/Especial:CambiosRecientes" title="Lista de cambios recientes en el wiki [r]" accesskey="r">Cambios recientes</a></li><li id="n-newpages"><a href="/wiki/Especial:P%C3%A1ginasNuevas">Páginas nuevas</a></li><li id="n-randompage"><a href="/wiki/Especial:Aleatoria" title="Cargar una página al azar [x]" accesskey="x">Página aleatoria</a></li><li id="n-help"><a href="/wiki/Ayuda:Contenidos" title="El lugar para aprender">Ayuda</a></li><li id="n-sitesupport"><a href="//donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_es.wikipedia.org&amp;uselang=es" title="Apóyanos">Donaciones</a></li><li id="n-bug_in_article"><a href="/wiki/Wikipedia:Informes_de_error">Notificar un error</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-coll-print_export' aria-labelledby='p-coll-print_export-label'>
+			<h3 id='p-coll-print_export-label'>Imprimir/exportar</h3>
+			<div class="body">
+								<ul>
+					<li id="coll-create_a_book"><a href="/w/index.php?title=Especial:Libro&amp;bookcmd=book_creator&amp;referer=JavaServer+Pages">Crear un libro</a></li><li id="coll-download-as-rdf2latex"><a href="/w/index.php?title=Especial:ElectronPdf&amp;page=JavaServer+Pages&amp;action=show-download-screen">Descargar como PDF</a></li><li id="t-print"><a href="/w/index.php?title=JavaServer_Pages&amp;printable=yes" title="Versión imprimible de esta página [p]" accesskey="p">Versión para imprimir</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-wikibase-otherprojects' aria-labelledby='p-wikibase-otherprojects-label'>
+			<h3 id='p-wikibase-otherprojects-label'>En otros proyectos</h3>
+			<div class="body">
+								<ul>
+					<li class="wb-otherproject-link wb-otherproject-commons"><a href="https://commons.wikimedia.org/wiki/Category:JavaServer_Pages" hreflang="en">Wikimedia Commons</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-tb' aria-labelledby='p-tb-label'>
+			<h3 id='p-tb-label'>Herramientas</h3>
+			<div class="body">
+								<ul>
+					<li id="t-whatlinkshere"><a href="/wiki/Especial:LoQueEnlazaAqu%C3%AD/JavaServer_Pages" title="Lista de todas las páginas del wiki que enlazan aquí [j]" accesskey="j">Lo que enlaza aquí</a></li><li id="t-recentchangeslinked"><a href="/wiki/Especial:CambiosEnEnlazadas/JavaServer_Pages" rel="nofollow" title="Cambios recientes en las páginas que enlazan con esta [k]" accesskey="k">Cambios en enlazadas</a></li><li id="t-upload"><a href="//commons.wikimedia.org/wiki/Special:UploadWizard?uselang=es" title="Subir archivos [u]" accesskey="u">Subir archivo</a></li><li id="t-specialpages"><a href="/wiki/Especial:P%C3%A1ginasEspeciales" title="Lista de todas las páginas especiales [q]" accesskey="q">Páginas especiales</a></li><li id="t-permalink"><a href="/w/index.php?title=JavaServer_Pages&amp;oldid=102888266" title="Enlace permanente a esta versión de la página">Enlace permanente</a></li><li id="t-info"><a href="/w/index.php?title=JavaServer_Pages&amp;action=info" title="Más información sobre esta página">Información de la página</a></li><li id="t-wikibase"><a href="https://www.wikidata.org/wiki/Special:EntityPage/Q183169" title="Enlace al elemento conectado del repositorio de datos [g]" accesskey="g">Elemento de Wikidata</a></li><li id="t-cite"><a href="/w/index.php?title=Especial:Citar&amp;page=JavaServer_Pages&amp;id=102888266" title="Información sobre cómo citar esta página">Citar esta página</a></li>				</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-lang' aria-labelledby='p-lang-label'>
+			<h3 id='p-lang-label'>En otros idiomas</h3>
+			<div class="body">
+								<ul>
+					<li class="interlanguage-link interwiki-ar"><a href="https://ar.wikipedia.org/wiki/%D8%B5%D9%81%D8%AD%D8%A7%D8%AA_%D8%AE%D8%A7%D8%AF%D9%85_%D8%AC%D8%A7%D9%81%D8%A7" title="صفحات خادم جافا (árabe)" lang="ar" hreflang="ar" class="interlanguage-link-target">العربية</a></li><li class="interlanguage-link interwiki-bg"><a href="https://bg.wikipedia.org/wiki/Java_server_pages" title="Java server pages (búlgaro)" lang="bg" hreflang="bg" class="interlanguage-link-target">Български</a></li><li class="interlanguage-link interwiki-ca"><a href="https://ca.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (catalán)" lang="ca" hreflang="ca" class="interlanguage-link-target">Català</a></li><li class="interlanguage-link interwiki-cs"><a href="https://cs.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (checo)" lang="cs" hreflang="cs" class="interlanguage-link-target">Čeština</a></li><li class="interlanguage-link interwiki-da"><a href="https://da.wikipedia.org/wiki/JSP" title="JSP (danés)" lang="da" hreflang="da" class="interlanguage-link-target">Dansk</a></li><li class="interlanguage-link interwiki-de"><a href="https://de.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (alemán)" lang="de" hreflang="de" class="interlanguage-link-target">Deutsch</a></li><li class="interlanguage-link interwiki-en"><a href="https://en.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (inglés)" lang="en" hreflang="en" class="interlanguage-link-target">English</a></li><li class="interlanguage-link interwiki-eo"><a href="https://eo.wikipedia.org/wiki/JSP" title="JSP (esperanto)" lang="eo" hreflang="eo" class="interlanguage-link-target">Esperanto</a></li><li class="interlanguage-link interwiki-fa"><a href="https://fa.wikipedia.org/wiki/%D8%AC%DB%8C%E2%80%8C%D8%A7%D8%B3%E2%80%8C%D9%BE%DB%8C" title="جی‌اس‌پی (persa)" lang="fa" hreflang="fa" class="interlanguage-link-target">فارسی</a></li><li class="interlanguage-link interwiki-fi"><a href="https://fi.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (finés)" lang="fi" hreflang="fi" class="interlanguage-link-target">Suomi</a></li><li class="interlanguage-link interwiki-fr"><a href="https://fr.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (francés)" lang="fr" hreflang="fr" class="interlanguage-link-target">Français</a></li><li class="interlanguage-link interwiki-gl"><a href="https://gl.wikipedia.org/wiki/Java_Server_Pages" title="Java Server Pages (gallego)" lang="gl" hreflang="gl" class="interlanguage-link-target">Galego</a></li><li class="interlanguage-link interwiki-he"><a href="https://he.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (hebreo)" lang="he" hreflang="he" class="interlanguage-link-target">עברית</a></li><li class="interlanguage-link interwiki-hr"><a href="https://hr.wikipedia.org/wiki/JSP" title="JSP (croata)" lang="hr" hreflang="hr" class="interlanguage-link-target">Hrvatski</a></li><li class="interlanguage-link interwiki-hu"><a href="https://hu.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (húngaro)" lang="hu" hreflang="hu" class="interlanguage-link-target">Magyar</a></li><li class="interlanguage-link interwiki-ia"><a href="https://ia.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (interlingua)" lang="ia" hreflang="ia" class="interlanguage-link-target">Interlingua</a></li><li class="interlanguage-link interwiki-id"><a href="https://id.wikipedia.org/wiki/JSP" title="JSP (indonesio)" lang="id" hreflang="id" class="interlanguage-link-target">Bahasa Indonesia</a></li><li class="interlanguage-link interwiki-it"><a href="https://it.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (italiano)" lang="it" hreflang="it" class="interlanguage-link-target">Italiano</a></li><li class="interlanguage-link interwiki-ja"><a href="https://ja.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (japonés)" lang="ja" hreflang="ja" class="interlanguage-link-target">日本語</a></li><li class="interlanguage-link interwiki-kk"><a href="https://kk.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (kazajo)" lang="kk" hreflang="kk" class="interlanguage-link-target">Қазақша</a></li><li class="interlanguage-link interwiki-ko"><a href="https://ko.wikipedia.org/wiki/%EC%9E%90%EB%B0%94%EC%84%9C%EB%B2%84_%ED%8E%98%EC%9D%B4%EC%A7%80" title="자바서버 페이지 (coreano)" lang="ko" hreflang="ko" class="interlanguage-link-target">한국어</a></li><li class="interlanguage-link interwiki-lt"><a href="https://lt.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (lituano)" lang="lt" hreflang="lt" class="interlanguage-link-target">Lietuvių</a></li><li class="interlanguage-link interwiki-lv"><a href="https://lv.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (letón)" lang="lv" hreflang="lv" class="interlanguage-link-target">Latviešu</a></li><li class="interlanguage-link interwiki-ml"><a href="https://ml.wikipedia.org/wiki/%E0%B4%9C%E0%B4%BE%E0%B4%B5%E0%B4%B8%E0%B5%86%E0%B5%BC%E2%80%8C%E0%B4%B5%E0%B5%BC_%E0%B4%AA%E0%B5%86%E0%B4%AF%E0%B5%8D%E0%B4%9C%E0%B4%B8%E0%B5%8D" title="ജാവസെർ‌വർ പെയ്ജസ് (malayalam)" lang="ml" hreflang="ml" class="interlanguage-link-target">മലയാളം</a></li><li class="interlanguage-link interwiki-nl"><a href="https://nl.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (neerlandés)" lang="nl" hreflang="nl" class="interlanguage-link-target">Nederlands</a></li><li class="interlanguage-link interwiki-nn"><a href="https://nn.wikipedia.org/wiki/JSP" title="JSP (noruego nynorsk)" lang="nn" hreflang="nn" class="interlanguage-link-target">Norsk nynorsk</a></li><li class="interlanguage-link interwiki-no"><a href="https://no.wikipedia.org/wiki/JSP" title="JSP (noruego)" lang="no" hreflang="no" class="interlanguage-link-target">Norsk</a></li><li class="interlanguage-link interwiki-pl"><a href="https://pl.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (polaco)" lang="pl" hreflang="pl" class="interlanguage-link-target">Polski</a></li><li class="interlanguage-link interwiki-pt"><a href="https://pt.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (portugués)" lang="pt" hreflang="pt" class="interlanguage-link-target">Português</a></li><li class="interlanguage-link interwiki-ru"><a href="https://ru.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (ruso)" lang="ru" hreflang="ru" class="interlanguage-link-target">Русский</a></li><li class="interlanguage-link interwiki-simple"><a href="https://simple.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (Simple English)" lang="simple" hreflang="simple" class="interlanguage-link-target">Simple English</a></li><li class="interlanguage-link interwiki-sk"><a href="https://sk.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (eslovaco)" lang="sk" hreflang="sk" class="interlanguage-link-target">Slovenčina</a></li><li class="interlanguage-link interwiki-sl"><a href="https://sl.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (esloveno)" lang="sl" hreflang="sl" class="interlanguage-link-target">Slovenščina</a></li><li class="interlanguage-link interwiki-sv"><a href="https://sv.wikipedia.org/wiki/Java_Server_Pages" title="Java Server Pages (sueco)" lang="sv" hreflang="sv" class="interlanguage-link-target">Svenska</a></li><li class="interlanguage-link interwiki-ta"><a href="https://ta.wikipedia.org/wiki/%E0%AE%9C%E0%AE%BE%E0%AE%B5%E0%AE%BE_%E0%AE%9A%E0%AE%B0%E0%AF%8D%E0%AE%B5%E0%AE%B0%E0%AF%8D_%E0%AE%AA%E0%AF%87%E0%AE%9C%E0%AE%B8%E0%AF%8D" title="ஜாவா சர்வர் பேஜஸ் (tamil)" lang="ta" hreflang="ta" class="interlanguage-link-target">தமிழ்</a></li><li class="interlanguage-link interwiki-te"><a href="https://te.wikipedia.org/wiki/%E0%B0%9C%E0%B0%BE%E0%B0%B5%E0%B0%BE_%E0%B0%B8%E0%B0%B0%E0%B1%8D%E0%B0%B5%E0%B0%B0%E0%B1%8D_%E0%B0%AA%E0%B1%87%E0%B0%9C%E0%B1%80%E0%B0%B2%E0%B1%81" title="జావా సర్వర్ పేజీలు (telugu)" lang="te" hreflang="te" class="interlanguage-link-target">తెలుగు</a></li><li class="interlanguage-link interwiki-th"><a href="https://th.wikipedia.org/wiki/%E0%B9%80%E0%B8%88%E0%B9%80%E0%B8%AD%E0%B8%AA%E0%B8%9E%E0%B8%B5" title="เจเอสพี (tailandés)" lang="th" hreflang="th" class="interlanguage-link-target">ไทย</a></li><li class="interlanguage-link interwiki-tr"><a href="https://tr.wikipedia.org/wiki/JavaServer_Pages" title="JavaServer Pages (turco)" lang="tr" hreflang="tr" class="interlanguage-link-target">Türkçe</a></li><li class="interlanguage-link interwiki-uk"><a href="https://uk.wikipedia.org/wiki/JSP" title="JSP (ucraniano)" lang="uk" hreflang="uk" class="interlanguage-link-target">Українська</a></li><li class="interlanguage-link interwiki-vi"><a href="https://vi.wikipedia.org/wiki/JSP" title="JSP (vietnamita)" lang="vi" hreflang="vi" class="interlanguage-link-target">Tiếng Việt</a></li><li class="interlanguage-link interwiki-zh"><a href="https://zh.wikipedia.org/wiki/JSP" title="JSP (chino)" lang="zh" hreflang="zh" class="interlanguage-link-target">中文</a></li>				</ul>
+				<div class="after-portlet after-portlet-lang"><span class="wb-langlinks-edit wb-langlinks-link"><a href="https://www.wikidata.org/wiki/Special:EntityPage/Q183169#sitelinks-wikipedia" title="Editar enlaces interlingüísticos" class="wbc-editpage">Editar enlaces</a></span></div>			</div>
+		</div>
+				</div>
+		</div>
+				<div id="footer" role="contentinfo">
+						<ul id="footer-info">
+								<li id="footer-info-lastmod"> Se editó esta página por última vez el 26 oct 2017 a las 23:07.</li>
+								<li id="footer-info-copyright">El texto está disponible bajo la <a rel="license" href="//es.wikipedia.org/wiki/Wikipedia:Texto_de_la_Licencia_Creative_Commons_Atribuci%C3%B3n-CompartirIgual_3.0_Unported">Licencia Creative Commons Atribución Compartir Igual 3.0</a><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" style="display:none;"></a>;
+pueden aplicarse cláusulas adicionales. Al usar este sitio, usted acepta nuestros <a href="//wikimediafoundation.org/wiki/Terms_of_Use">términos de uso</a> y nuestra <a href="//wikimediafoundation.org/wiki/Privacy_policy">política de privacidad</a>. <br/>Wikipedia&reg; es una marca registrada de la <a href="//www.wikimediafoundation.org/">Fundación Wikimedia, Inc.</a>, una organización sin ánimo de lucro.</li>
+							</ul>
+						<ul id="footer-places">
+								<li id="footer-places-privacy"><a href="https://meta.wikimedia.org/wiki/Privacy_policy/es" class="extiw" title="m:Privacy policy/es">Normativa de privacidad</a></li>
+								<li id="footer-places-about"><a href="/wiki/Wikipedia:Acerca_de" title="Wikipedia:Acerca de">Acerca de Wikipedia</a></li>
+								<li id="footer-places-disclaimer"><a href="/wiki/Wikipedia:Limitaci%C3%B3n_general_de_responsabilidad" title="Wikipedia:Limitación general de responsabilidad">Limitación de responsabilidad</a></li>
+								<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Desarrolladores</a></li>
+								<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement/es">Declaración de cookies</a></li>
+								<li id="footer-places-mobileview"><a href="//es.m.wikipedia.org/w/index.php?title=JavaServer_Pages&amp;mobileaction=toggle_view_mobile" class="noprint stopMobileRedirectToggle">Versión para móviles</a></li>
+							</ul>
+										<ul id="footer-icons" class="noprint">
+										<li id="footer-copyrightico">
+						<a href="https://wikimediafoundation.org/"><img src="/static/images/wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" width="88" height="31" alt="Wikimedia Foundation"/></a>					</li>
+										<li id="footer-poweredbyico">
+						<a href="//www.mediawiki.org/"><img src="/static/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" width="88" height="31"/></a>					</li>
+									</ul>
+						<div style="clear: both;"></div>
+		</div>
+		<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.200","walltime":"0.551","ppvisitednodes":{"value":1865,"limit":1000000},"ppgeneratednodes":{"value":0,"limit":1500000},"postexpandincludesize":{"value":7122,"limit":2097152},"templateargumentsize":{"value":578,"limit":2097152},"expansiondepth":{"value":22,"limit":40},"expensivefunctioncount":{"value":0,"limit":500},"entityaccesscount":{"value":1,"limit":400},"timingprofile":["100.00%  227.438      1 Plantilla:Ficha_de_software","100.00%  227.438      1 -total"," 97.18%  221.021      1 Plantilla:Ficha"," 71.02%  161.527     13 Plantilla:Propiedad"," 11.35%   25.810      1 Plantilla:Y-e","  8.28%   18.843      3 Plantilla:Reemplazar","  7.93%   18.033      1 Plantilla:Desenlazar"]},"scribunto":{"limitreport-timeusage":{"value":"0.124","limit":"10.000"},"limitreport-memusage":{"value":2272997,"limit":52428800}},"cachereport":{"origin":"mw1319","timestamp":"20180121182256","ttl":1900800,"transientcontent":false}}});});</script><script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":79,"wgHostname":"mw1256"});});</script>
+	</body>
+</html>
